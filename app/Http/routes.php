@@ -22,6 +22,7 @@ Route::get('provider', 'ProviderController@index');
 Route::get('subject', 'SubjectController@index');
 
 Route::get('collection', 'CollectionController@index');
+Route::get('dataset', 'DatasetController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

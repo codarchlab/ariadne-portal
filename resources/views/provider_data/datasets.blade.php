@@ -8,33 +8,32 @@
             <div class="col-md-12">
                 <div class="box box-warning">
                     <div class="box-header">
-                        <i class='fa fa-tag'></i>
-                        <h3 class="box-title">Ariadne subjects</h3>
+                        <i class='fa fa-file'></i>
+                        <h3 class="box-title">Datasets</h3>
                     </div><!-- /.box-header -->
 
+                    @include("provider_data._provider_selection_box")
+                    
                     <div class="box-body">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Collections</th>
-                                    <th>Datasets</th>
-                                    <th>Databases</th>
-                                    <th>GIS</th>
+                                    <th>ID</th>
+                                    <th>Provider</th>
+                                    <th>Name</th>                                    
                                 </tr>   
                             </thead>
                             <tbody>
-                               @foreach ($subjects as $subject)
+                                @foreach ($datasets as $dataset)
                                 <tr>
-                                   <th>{{ $subject->name }}</th>
-                                   <td>{{ $subject->collections }}</td>
-                                   <td>{{ $subject->datasets }}</td>
-                                   <td>{{ $subject->databases }}</td>
-                                   <td>{{ $subject->gis }}</td>
+                                    <td>{{ $dataset->id }}</td>
+                                    <td>{{ $dataset->provider }}</td>
+                                    <td>{{ $dataset->name }}</td>                                                                        
                                 </tr>
-                               @endforeach
+                                @endforeach
                             </tbody>
                         </table>
+                        <?php echo $datasets->render(); ?>
                     </div>
                 </div>
             </div>
