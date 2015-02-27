@@ -17,11 +17,11 @@ Route::get('about', 'WelcomeController@about');
 Route::get('home', 'HomeController@index');
 
 
-Route::get('providers', 'ProviderController@index');
+Route::get('provider', 'ProviderController@index');
 
-Route::get('subjects', 'SubjectController@index');
+Route::get('subject', 'SubjectController@index');
 
-Route::get('collections', 'CollectionController@index');
+Route::get('collection', 'CollectionController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
