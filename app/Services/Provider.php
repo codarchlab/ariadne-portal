@@ -3,10 +3,14 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Services\Utils;
-use App\Services\AriadneType;
 
 class Provider {
 
+    /**
+     * Get statistics for each provider
+     * 
+     * @return Array list of prividers with statistics
+     */
     public static function statistics() {
         $users = explode(',', getenv('PROVIDERS'));
 
@@ -43,6 +47,21 @@ class Provider {
                 ->pluck('name');
         
         return $name;
+    }
+    
+    /**
+     * Get list of providers
+     * 
+     * @return Array list of providers
+     */
+    public static function getList(){
+        $users = explode(',', getenv('PROVIDERS'));
+        $providers = DB::table('users')
+                        ->select('name')                
+                        ->whereIn('id', $users)
+                        ->get();
+        
+        return $providers;
     }
     
 }
