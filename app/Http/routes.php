@@ -28,7 +28,7 @@ Route::get('dataset', 'DatasetController@index');
 Route::get('dataset/{id}', 'DatasetController@show');
 
 Route::get('agent', 'AgentController@index');
-Route::get('anget/{id}', 'AgentController@show');
+Route::get('agent/{id}', 'AgentController@show');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
