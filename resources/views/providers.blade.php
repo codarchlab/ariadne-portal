@@ -20,11 +20,13 @@
                                     <th>Collections</th>
                                     <th>Datasets</th>
                                     <th>Databases</th>
+                                    <?php if($full): ?>
                                     <th>GIS</th>
                                     <th>Metadata Schemas</th>
                                     <th>Services</th>
                                     <th>Vocabularies</th>
                                     <th>Foaf agents</th>
+                                    <?php endif;?>
                                 </tr>   
                             </thead>
                             <tbody>
@@ -34,11 +36,13 @@
                                     <td>{{ $provider->collections }}</td>
                                     <td>{{ $provider->datasets }}</td>
                                     <td>{{ $provider->databases }}</td>
+                                    <?php if($full): ?>
                                     <td>{{ $provider->gis }}</td>
                                     <td>{{ $provider->schemas }}</td>
                                     <td>{{ $provider->services }}</td>
                                     <td>{{ $provider->vocabularies }}</td>
                                     <td>{{ $provider->foaf }}</td>
+                                    <?php endif;?>
                                 </tr>
                                 @endforeach
                             </tbody>
