@@ -31,4 +31,21 @@ class Utils {
             case 'gis': return 3;
         }
     }
+
+    public static function getDataResourceTypeName($id)
+    {
+        switch($id){
+            case 0: return 'collection';
+            case 1: return 'dataset';
+            case 2: return 'database';
+            case 3: return 'gis';
+        }
+    }    
+    
+    public static function removePrefix($string){
+        $string = str_replace("dct:", "", $string);
+        $string = str_replace("dct_", "", $string);
+        $string = str_replace("dcat:", "", $string);
+        return $string;
+    }
 }

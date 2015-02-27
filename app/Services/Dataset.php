@@ -21,5 +21,9 @@ class Dataset {
 
         return $datasets;
     }
+    
+    public static function get($id){
+        return DataResource::get($id);
+    }
 
 }

@@ -35,7 +35,9 @@ class DatasetController extends Controller {
      * @return Response
      */
     public function show($id) {
-
+        $dataset = Dataset::get($id);
+        
+        dd($dataset);
     }
 
 }
