@@ -21,6 +21,8 @@ Route::get('providers', 'ProviderController@index');
 
 Route::get('subjects', 'SubjectController@index');
 
+Route::get('collections', 'CollectionController@index');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

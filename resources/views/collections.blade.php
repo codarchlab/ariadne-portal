@@ -9,36 +9,26 @@
                 <div class="box box-warning">
                     <div class="box-header">
                         <i class='fa fa-file'></i>
-                        <h3 class="box-title">Information for each provider</h3>
+                        <h3 class="box-title">Collections</h3>
                     </div><!-- /.box-header -->
 
+                    @include("_provider_selection_box")
+                    
                     <div class="box-body">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>Collections</th>
-                                    <th>Datasets</th>
-                                    <th>Databases</th>
-                                    <th>GIS</th>
-                                    <th>Metadata Schemas</th>
-                                    <th>Services</th>
-                                    <th>Vocabularies</th>
-                                    <th>Foaf agents</th>
+                                    <th>ID</th>
+                                    <th>Provider</th>
+                                    <th>Name</th>                                    
                                 </tr>   
                             </thead>
                             <tbody>
-                                @foreach ($providers as $provider)
+                                @foreach ($collections as $collection)
                                 <tr>
-                                    <td>{{ $provider->name }}</td>
-                                    <td>{{ $provider->collections }}</td>
-                                    <td>{{ $provider->datasets }}</td>
-                                    <td>{{ $provider->databases }}</td>
-                                    <td>{{ $provider->gis }}</td>
-                                    <td>{{ $provider->schemas }}</td>
-                                    <td>{{ $provider->services }}</td>
-                                    <td>{{ $provider->vocabularies }}</td>
-                                    <td>{{ $provider->foaf }}</td>
+                                    <td>{{ $collection->id }}</td>
+                                    <td>{{ $collection->provider }}</td>
+                                    <td>{{ $collection->name }}</td>                                                                        
                                 </tr>
                                 @endforeach
                             </tbody>

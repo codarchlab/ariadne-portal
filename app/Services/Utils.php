@@ -21,5 +21,14 @@ class Utils {
                 ->whereRaw('DataResourceID IN (SELECT id FROM DataResource WHERE type= ? AND cr_uid IN  ( '.$users.' ))', array($type))
                 ->count();
     }
-
+    
+    public static function getDataResourceType($type)
+    {
+        switch($type){
+            case 'collection': return 0;
+            case 'dataset': return 1;
+            case 'database': return 2;
+            case 'gis': return 3;
+        }
+    }
 }

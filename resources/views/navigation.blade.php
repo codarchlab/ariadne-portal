@@ -54,8 +54,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li>
-                                    <a href="index.php?op=data_summary&table=DataResource&type=0">
+                               <li{{ (Request::is('collections') ? ' class=active' : '') }}>
+                                    <a href="{{ action('CollectionController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-picture-o"></i> <span>Collections</span>
                                     </a>

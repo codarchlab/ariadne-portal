@@ -3,13 +3,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Services\Utils;
-
-abstract class AriadneType {
-    const collection = 0;
-    const dataset = 1;
-    const database = 2;
-    const gis = 3;
-}
+use App\Services\AriadneType;
 
 class Provider {
 
@@ -23,10 +17,10 @@ class Provider {
                 ->get();
 
         foreach ($providers as &$provider) {
-            $provider->collections = Utils::getTableCount("DataResource", $provider->id, AriadneType::collection);
-            $provider->datasets = Utils::getTableCount("DataResource", $provider->id, AriadneType::dataset);
-            $provider->databases = Utils::getTableCount("DataResource", $provider->id, AriadneType::database);
-            $provider->gis = Utils::getTableCount("DataResource", $provider->id, AriadneType::gis);
+            $provider->collections = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('collection'));
+            $provider->datasets = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('dataset'));
+            $provider->databases = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('database'));
+            $provider->gis = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('gis'));
             $provider->schemas = Utils::getTableCount("MetadataSchema", $provider->id);
             $provider->services = Utils::getTableCount("ARIADNEService", $provider->id);
             $provider->vocabularies = Utils::getTableCount("Vocabulary", $provider->id);
@@ -35,4 +29,20 @@ class Provider {
         return $providers;
     }
 
+    /**
+     * Get name for a provider
+     *
+     * @param int $id ID of provider
+     * @return string Name of provider
+     */
+    public static function getName($id) {
+        
+        $name = DB::table('users')
+                ->select('users.name')                
+                ->where('users.id', $id)
+                ->pluck('name');
+        
+        return $name;
+    }
+    
 }

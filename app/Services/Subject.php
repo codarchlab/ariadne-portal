@@ -17,10 +17,10 @@ class Subject {
                 ->get();
         
         foreach($subjects as &$subject){
-            $subject->collections = Utils::getSubjectCount($subject->id, 0);
-            $subject->datasets = Utils::getSubjectCount($subject->id, 1);
-            $subject->databases = Utils::getSubjectCount($subject->id, 2);
-            $subject->gis = Utils::getSubjectCount($subject->id, 3);
+            $subject->collections = Utils::getSubjectCount($subject->id, Utils::getDataResourceType('collection'));
+            $subject->datasets = Utils::getSubjectCount($subject->id, Utils::getDataResourceType('dataset'));
+            $subject->databases = Utils::getSubjectCount($subject->id, Utils::getDataResourceType('database'));
+            $subject->gis = Utils::getSubjectCount($subject->id, Utils::getDataResourceType('gis'));
         }
 
         return $subjects;
