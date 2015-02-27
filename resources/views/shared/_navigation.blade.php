@@ -9,7 +9,7 @@
                     <ul class="sidebar-menu">
 
                         <li>
-                            <a href="index.php?op=home">
+                            <a href="{{ action('WelcomeController@index') }}">
                                 <i class="fa fa-home"></i> <span>Home</span>
                             </a>
                         </li>
