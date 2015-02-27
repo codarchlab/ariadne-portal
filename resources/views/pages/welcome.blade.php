@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p>
-                                    <a href="/providers" class="btn btn-sm btn-primary pull-right">More</a>
+                                    <a href="{{ action('ProviderController@index') }}" class="btn btn-sm btn-primary pull-right">More</a>
                                 </p> 
                             </div>
                         </div>	

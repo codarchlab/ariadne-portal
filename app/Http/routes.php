@@ -24,6 +24,8 @@ Route::get('subject', 'SubjectController@index');
 Route::get('collection', 'CollectionController@index');
 Route::get('collection/{id}', 'CollectionController@show');
 
+Route::get('dataset', 'DatasetController@index');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
