@@ -28,13 +28,13 @@ class DataResource {
                         ->get();
         
         $resource->properties = array();
-        
+        $resource->spatial = array();
         foreach($properties as $property) {
             $key = Utils::removePrefix($property->propertyName);
             switch($key){
                 case 'spatial':
                     $gis =  DB::table('gis')->where('id', $property->propertyValue)->first();
-                    $resource->properties[$key][$gis->id] = $gis;
+                    $resource->spatial[$gis->id] = $gis;
                     break;
                 case 'temporal':
                     $temporal =  DB::table('temporal')->where('id', $property->propertyValue)->first();
