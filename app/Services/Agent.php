@@ -21,6 +21,12 @@ class Agent {
         foreach($properties as $property){
             $key = Utils::removePrefix($property->propertyName);
             
+            if($agent->type == 0){
+                $agent->type = 'Agent';
+            }else if($agent->type == 1){
+                $agent->type = 'Organisation';
+            }
+            
             $agent->properties[$key] = $property->propertyValue;
         }
         
