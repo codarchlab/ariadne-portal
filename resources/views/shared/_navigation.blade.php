@@ -42,7 +42,7 @@
                             </a>
                         </li>
 
-                        <li{{ (Request::is('providers') ? ' class=active' : '') }}>
+                        <li{{ (Request::is('provider') ? ' class=active' : '') }}>
                             <a href="{{ action('ProviderController@index') }}">
                                 <i class="fa fa-users"></i> <span>Provider info</span>
                             </a>
@@ -54,14 +54,14 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li{{ (Request::is('collections') ? ' class=active' : '') }}>
+                               <li{{ (Request::is('collection') ? ' class=active' : '') }}>
                                     <a href="{{ action('CollectionController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-picture-o"></i> <span>Collections</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="index.php?op=data_summary&table=DataResource&type=1">
+                               <li{{ (Request::is('dataset') ? ' class=active' : '') }}>
+                                    <a href="{{ action('DatasetController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-archive"></i> <span>Datasets</span>
                                     </a>
