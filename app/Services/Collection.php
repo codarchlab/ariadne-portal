@@ -6,6 +6,11 @@ use App\Services\Provider;
 
 class Collection {
 
+    /**
+     * Get all collections
+     *
+     * @return Array of all collections
+     */
     public static function all() {
 
         $collections = DB::table('DataResource')
@@ -19,5 +24,18 @@ class Collection {
         }
         return $collections;
     }
-
+    
+    /**
+     * Get a specific collection
+     *
+     * @param int $id ID of collection
+     * @return A collection object
+     */
+    public static function get($id){
+        
+        $collection = DB::table('DataResource')
+                ->where('id', $id)
+                ->first();
+        return $collection;
+    }
 }
