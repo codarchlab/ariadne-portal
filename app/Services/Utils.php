@@ -46,6 +46,7 @@ class Utils {
         $string = str_replace("dct:", "", $string);
         $string = str_replace("dct_", "", $string);
         $string = str_replace("dcat:", "", $string);
+        $string = str_replace("foaf:", "", $string);
         return $string;
     }
 }

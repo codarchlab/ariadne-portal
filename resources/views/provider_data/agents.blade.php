@@ -9,7 +9,7 @@
                 <div class="box box-warning">
                     <div class="box-header">
                         <i class='fa fa-file'></i>
-                        <h3 class="box-title">Datasets</h3>
+                        <h3 class="box-title">foaf Agents</h3>
                     </div><!-- /.box-header -->
 
                     @include("provider_data._provider_selection_box")
@@ -24,16 +24,16 @@
                                 </tr>   
                             </thead>
                             <tbody>
-                                @foreach ($datasets as $dataset)
+                                @foreach ($agents as $agent)
                                 <tr>
-                                    <td>{{ $dataset->id }}</td>
-                                    <td>{{ $dataset->provider }}</td>
-                                    <td><a href="{{ action('DatasetController@show', $dataset->id) }}">{{ $dataset->name }}</a></td>                                                                        
+                                    <td>{{ $agent->id }}</td>
+                                    <td>{{ $agent->provider }}</td>
+                                    <td><a href="{{ action('AgentController@show', $agent->id) }}">{{ $agent->name }}</a></td>                                                                        
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <?php echo $datasets->render(); ?>
+                        <?php echo $agents->render(); ?>
                     </div>
                 </div>
             </div>

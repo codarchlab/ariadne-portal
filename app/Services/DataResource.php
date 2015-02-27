@@ -7,7 +7,7 @@ use App\Services\Utils;
 class DataResource {
 
     /**
-     * Loads the DataResource object an alla properties
+     * Loads the DataResource object and all properties
      * @param Integer $id Database-Id of the DataResoruce 
      * @return Object complete object with all properties loaded
      */

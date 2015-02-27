@@ -96,8 +96,8 @@
                                         <i class="fa fa-file-text-o"></i> <span>Vocabularies</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="index.php?op=data_summary&table=foafAgent">
+                               <li{{ (Request::is('agent') ? ' class=active' : '') }}>
+                                    <a href="{{ action('AgentController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-user"></i> <span>Agents</span>
                                     </a>
