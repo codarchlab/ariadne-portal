@@ -16,12 +16,23 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th></th>
-
+                                    <th>Name</th>
+                                    <th>Collections</th>
+                                    <th>Datasets</th>
+                                    <th>Databases</th>
+                                    <th>GIS</th>
                                 </tr>   
                             </thead>
                             <tbody>
-
+                               <?php foreach($subjects as $subject): ?>
+                                <tr>
+                                   <th><?php print $subject->name;?></th>
+                                   <td><?php print $subject->collections;?></td>
+                                   <td><?php print $subject->datasets;?></td>
+                                   <td><?php print $subject->databases;?></td>
+                                   <td><?php print $subject->gis;?></td>
+                                </tr>
+                               <?php endforeach;?>
                             </tbody>
                         </table>
                     </div>
