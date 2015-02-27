@@ -30,7 +30,26 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-12">
-                                
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Collections</th>
+                                            <th>Datasets</th>
+                                            <th>Databases</th>
+                                        </tr>   
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($providers as $provider)
+                                        <tr>
+                                            <td>{{ $provider->name }}</td>
+                                            <td>{{ $provider->collections }}</td>
+                                            <td>{{ $provider->datasets }}</td>
+                                            <td>{{ $provider->databases }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>                                
                             </div>	
                         </div>	<!-- // row -->	
                         <br/>

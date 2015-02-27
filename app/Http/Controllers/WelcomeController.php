@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use App\Services\Provider;
 
 class WelcomeController extends Controller {
     /*
@@ -31,7 +32,8 @@ class WelcomeController extends Controller {
      * @return Response
      */
     public function index() {
-        return view('welcome');
+        $providers = Provider::statistics();
+        return view('welcome')->with('providers', $providers);
     }
     
     /**
@@ -41,6 +43,6 @@ class WelcomeController extends Controller {
      */
     public function about()
     {
-            return view('about');
+        return view('about');
     }    
 }
