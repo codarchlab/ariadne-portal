@@ -12,7 +12,7 @@
                         <h3 class="box-title">Collections</h3>
                     </div><!-- /.box-header -->
 
-                    @include("_provider_selection_box")
+                    @include("provider_data._provider_selection_box")
                     
                     <div class="box-body">
                         <table class="table table-hover">

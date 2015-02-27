@@ -24,7 +24,7 @@ class SubjectController extends Controller {
      */
     public function index() {
         $subjects = Subject::statistics();
-        return view('subjects')->with('subjects', $subjects);
+        return view('ariadne_subject.subjects')->with('subjects', $subjects);
     }
 
 }

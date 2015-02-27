@@ -67,7 +67,7 @@
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left">        
 
-            @include('navigation')
+            @include('shared._navigation')
 
             @yield('content')
 

@@ -33,7 +33,7 @@ class WelcomeController extends Controller {
      */
     public function index() {
         $providers = Provider::statistics();
-        return view('welcome')->with('providers', $providers);
+        return view('pages.welcome')->with('providers', $providers);
     }
     
     /**
@@ -43,6 +43,6 @@ class WelcomeController extends Controller {
      */
     public function about()
     {
-        return view('about');
+        return view('pages.about');
     }    
 }
