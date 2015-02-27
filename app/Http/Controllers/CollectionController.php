@@ -21,7 +21,7 @@ class CollectionController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return View
      */
     public function index() {
         $collections = Collection::all();
@@ -32,10 +32,11 @@ class CollectionController extends Controller {
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return View
      */
     public function show($id) {
-
+        $collection = Collection::get($id);
+        //return view('provider_data.collection')->with('collection', $collection);
     }
 
 }
