@@ -16,7 +16,6 @@ Route::get('about', 'WelcomeController@about');
 
 Route::get('home', 'HomeController@index');
 
-
 Route::get('provider', 'ProviderController@index');
 Route::get('provider/{id}/collection', 'ProviderController@collection');
 Route::get('provider/{id}/dataset', 'ProviderController@dataset');
@@ -35,10 +34,13 @@ Route::get('collection/{id}', 'CollectionController@show');
 Route::get('dataset', 'DatasetController@index');
 Route::get('dataset/{id}', 'DatasetController@show');
 
+Route::get('gis', 'GisController@index');
+Route::get('gis/{id}', 'GisController@show');
+
 Route::get('agent', 'AgentController@index');
 Route::get('agent/{id}', 'AgentController@show');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);

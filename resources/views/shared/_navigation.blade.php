@@ -72,8 +72,8 @@
                                         <i class="fa fa-cloud"></i> <span>Databases</span>
                                     </a>
                                 </li>	
-                                <li>
-                                    <a href="index.php?op=data_summary&table=DataResource&type=3">
+                               <li{{ (Request::is('gis') ? ' class=active' : '') }}>
+                                    <a href="{{ action('GisController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-globe"></i> <span>GIS</span>
                                     </a>

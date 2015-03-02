@@ -4,33 +4,33 @@ namespace App\Services;
 use Illuminate\Support\Facades\DB;
 use App\Services\Utils;
 
-class Dataset {
+class Gis {
 
     /**
-     * Get all dataset (paged)
-     * @return Array information for each dataset
+     * Get all gis (paged)
+     * @return Array information for each gis entry
      */
     public static function all($provider = null) {
         $query = DB::table('DataResource')
                 ->select('id', 'name', 'cr_uid')
                 ->orderBy('id')
-                ->where('type', Utils::getDataResourceType('dataset'));
+                ->where('type', Utils::getDataResourceType('gis'));
         
         if($provider){
             $query->where('cr_uid', $provider);
         }
 
-        $datasets = $query->paginate(15);
+        $giss = $query->paginate(15);
         
-        foreach($datasets as &$dataset){
-            $dataset->provider = Provider::getName($dataset->cr_uid);
+        foreach($giss as &$gis){
+            $gis->provider = Provider::getName($gis->cr_uid);
         }
 
-        return $datasets;
+        return $giss;
     }
     
     public static function get($id){
-        $dataset = DataResource::get($id);
-        return $dataset;
+        $gis = DataResource::get($id);
+        return $gis;
     }
 }

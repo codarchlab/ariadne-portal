@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Config;
 use App\Services\Provider;
 use \App\Services\Collection;
 use \App\Services\Dataset;
+use \App\Services\Gis;
 use \App\Services\Agent;
 
 class ProviderController extends Controller {
@@ -47,7 +48,8 @@ class ProviderController extends Controller {
     }
     
     public function gis($id){
-        
+        $giss = Gis::all($id);
+        return view('provider_data.giss')->with('giss', $giss);            
     }
     
     public function schema($id){
