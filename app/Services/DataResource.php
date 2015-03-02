@@ -34,7 +34,7 @@ class DataResource {
             switch($key){
                 case 'spatial':
                     $gis =  DB::table('gis')->where('id', $property->propertyValue)->first();
-                    $resource->spatial[$gis->id] = $gis;
+                    $resource->spatial[] = $gis;
                     break;
                 case 'temporal':
                     $temporal =  DB::table('temporal')->where('id', $property->propertyValue)->first();
