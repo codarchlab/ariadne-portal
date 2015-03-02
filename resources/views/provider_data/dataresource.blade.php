@@ -32,7 +32,7 @@
                         @if (isset($resource->temporal))
                         <li><a href="#tab_temporal" data-toggle="tab">Temporal</a></li>.
                         @endif
-                        @if (isset($resource->spatial))                       
+                        @if (count($resource->spatial) != 0)                       
                         <li><a href="#tab_spatial" data-toggle="tab">Spatial</a></li>
                         @endif
                     </ul>
@@ -375,7 +375,7 @@
 
                         @endif
 
-                        @if (isset($resource->spatial))
+                        @if (count($resource->spatial) != 0)
                         <div class="tab-pane" id="tab_spatial">
                             <div class="row" style="padding: 14px;">
                                 <div class="col-md-4">
@@ -453,7 +453,7 @@
     </section>
 </aside>
 
-@if (isset($resource->spatial))
+@if (count($resource->spatial) != 0)
 
     <script type="text/javascript">
         $(document).ready(function () {

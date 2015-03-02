@@ -36,8 +36,7 @@ class DatasetController extends Controller {
      */
     public function show($id) {
         $dataset = Dataset::get($id);
-        
-        dd($dataset);
+        return view('provider_data.dataresource')->with('resource', $dataset);
     }
 
 }
