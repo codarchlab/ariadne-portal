@@ -42,10 +42,30 @@
                                     <tbody>
                                         @foreach ($providers as $provider)
                                         <tr>
-                                            <td>{{ $provider->name }}</td>
-                                            <td>{{ $provider->collections }}</td>
-                                            <td>{{ $provider->datasets }}</td>
-                                            <td>{{ $provider->databases }}</td>
+                                            <th>
+                                                {{ $provider->name }}
+                                            </th>   
+                                            <td>
+                                                @if($provider->collections > 0)
+                                                    <a href="{{ action('ProviderController@collection', $provider->id) }}">{{ $provider->collections }}</a>
+                                                @else
+                                                    {{ $provider->collections }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($provider->datasets > 0)
+                                                    <a href="{{ action('ProviderController@dataset', $provider->id) }}">{{ $provider->datasets }}</a>
+                                                @else
+                                                    {{ $provider->datasets }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($provider->databases > 0)
+                                                    <a href="{{ action('ProviderController@database', $provider->id) }}">{{ $provider->databases }}</a>
+                                                @else
+                                                    {{ $provider->databases }}
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

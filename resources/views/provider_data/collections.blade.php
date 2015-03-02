@@ -33,6 +33,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <?php echo $collections->render(); ?>
                     </div>
                 </div>
             </div>

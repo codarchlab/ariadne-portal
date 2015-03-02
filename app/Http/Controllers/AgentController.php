@@ -36,9 +36,8 @@ class AgentController extends Controller {
      */
     public function show($id) {
         $agent = Agent::get($id);
-        //dd($agent);
+
         return view('provider_data.agent')->with('agent', $agent);
-        
     }
 
 }

@@ -7,7 +7,7 @@
                 <div class="box box-primary">
                     <div class="box-header" title="">
                         <h3 class="box-title">{{ $agent->name }}</h3>
-                        <div class="box-tools pull-right">Added: {{ $agent->cr_tstamp }}</div>
+                        <div class="box-tools pull-right">Added: {{ date('Y-m-d', strtotime($agent->cr_tstamp)) }}</div>
                     </div>
                     <div class='box-body'>
                         <div class="row" style="padding: 14px;">
@@ -50,7 +50,7 @@
                             </div>
                             @endif
                         </div>
-                    </div>					
+                    </div>
                 </div>
             </div>
         </div>

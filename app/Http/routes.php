@@ -18,6 +18,14 @@ Route::get('home', 'HomeController@index');
 
 
 Route::get('provider', 'ProviderController@index');
+Route::get('provider/{id}/collection', 'ProviderController@collection');
+Route::get('provider/{id}/dataset', 'ProviderController@dataset');
+Route::get('provider/{id}/database', 'ProviderController@database');
+Route::get('provider/{id}/gis', 'ProviderController@gis');
+Route::get('provider/{id}/schema', 'ProviderController@schema');
+Route::get('provider/{id}/service', 'ProviderController@service');
+Route::get('provider/{id}/vocabulary', 'ProviderController@vocabulary');
+Route::get('provider/{id}/agent', 'ProviderController@agent');
 
 Route::get('subject', 'SubjectController@index');
 

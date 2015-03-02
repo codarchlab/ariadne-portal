@@ -11,14 +11,18 @@ class Collection {
      *
      * @return Array of all collections
      */
-    public static function all() {
+    public static function all($provider = null) {
 
-        $collections = DB::table('DataResource')
+        $query = DB::table('DataResource')
                 ->select('id', 'name', 'cr_uid')
                 ->orderBy('id')
-                ->where('type', Utils::getDataResourceType('collection'))
-                ->get();
+                ->where('type', Utils::getDataResourceType('collection'));
+        if($provider){
+            $query->where('cr_uid', $provider);
+        }
 
+        $collections = $query->paginate(15);
+        
         foreach ($collections as &$collection) {
             $collection->provider = Provider::getName($collection->cr_uid);
         }

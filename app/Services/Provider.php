@@ -54,7 +54,7 @@ class Provider {
      * 
      * @return Array list of providers
      */
-    public static function getList(){
+    public static function all(){
         $users = explode(',', getenv('PROVIDERS'));
         $providers = DB::table('users')
                         ->select('name')                
