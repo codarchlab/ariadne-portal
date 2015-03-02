@@ -50,4 +50,11 @@ class Utils {
         $string = str_replace(":", "", $string);
         return $string;
     }
+    
+    public static function contains($string, array $array){
+        foreach($array as $item) {
+            if (stripos($string, $item) !== false) return true;
+        }
+        return false;
+    }
 }

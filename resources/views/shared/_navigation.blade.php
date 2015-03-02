@@ -48,7 +48,7 @@
                             </a>
                         </li> 
 
-                        <li class="treeview" >
+                        <li class="treeview{{ App\Services\Utils::contains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent')) ? ' active' : '' }}" >
                             <a href="#">
                                 <i class="fa fa-list"></i> <span>Provider data</span>
                                 <i class="fa fa-angle-left pull-right"></i>
