@@ -28,7 +28,7 @@
                                 <tr>
                                     <td>{{ $collection->id }}</td>
                                     <td>{{ $collection->provider }}</td>
-                                    <td>{{ $collection->name }}</td>                                                                        
+                                    <td><a href="{{ action('CollectionController@show', $collection->id) }}">{{ $collection->name }}</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

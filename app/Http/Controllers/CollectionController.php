@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\Collection;
-use Illuminate\Http\Request;
+use App\Services\DataResource;
 
 class CollectionController extends Controller {
 
@@ -35,8 +34,8 @@ class CollectionController extends Controller {
      * @return View
      */
     public function show($id) {
-        $collection = Collection::get($id);
-        //return view('provider_data.collection')->with('collection', $collection);
+        $collection = DataResource::get($id);
+        return view('provider_data.dataresource')->with('resource', $collection);
     }
 
 }
