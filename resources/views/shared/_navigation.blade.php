@@ -111,8 +111,8 @@
                             </a>
                         </li>                        
 
-                        <li>
-                            <a href="/about">
+                        <li{{ (Request::is('about') ? ' class=active' : '') }}>
+                            <a href={{ action('WelcomeController@about') }}">
                                 <i class="fa fa-question-circle"></i> <span>About</span>
                             </a>
                         </li>
