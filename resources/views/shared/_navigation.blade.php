@@ -66,8 +66,8 @@
                                         <i class="fa fa-archive"></i> <span>Datasets</span>
                                     </a>
                                 </li>								
-                                <li>
-                                    <a href="index.php?op=data_summary&table=DataResource&type=2">
+                                <li {{ (Request::is('database') ? ' class=active' : '') }}>
+                                    <a href="{{ action('DatabaseController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-cloud"></i> <span>Databases</span>
                                     </a>

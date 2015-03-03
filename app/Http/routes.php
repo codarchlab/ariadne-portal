@@ -34,6 +34,9 @@ Route::get('collection/{id}', 'CollectionController@show');
 Route::get('dataset', 'DatasetController@index');
 Route::get('dataset/{id}', 'DatasetController@show');
 
+Route::get('database', 'DatabaseController@index');
+Route::get('database/{id}', 'DatabaseController@show');
+
 Route::get('gis', 'GisController@index');
 Route::get('gis/{id}', 'GisController@show');
 
