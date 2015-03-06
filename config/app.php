@@ -197,6 +197,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+                'Utils'      => 'App\Services\Utils',
                 'Debugbar' => 'Barryvdh\Debugbar\Facade',
 	],
 
