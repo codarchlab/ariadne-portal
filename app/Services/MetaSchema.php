@@ -28,7 +28,23 @@ class MetaSchema {
          
        foreach($properties as $property) {
             $key = Utils::removePrefix($property->propertyName);
-            $metaschema->properties[$key][] = $property->propertyValue;
+            switch($key){
+                case 'creator':
+                case 'owner':
+                case 'publisher':
+                case 'legalResponsible':
+                case 'scientificResponsible':
+                case 'technicalResponsible':
+                    if(is_numeric($property->propertyValue)){
+                        $agent = DB::table('foafAgent')->where('id', $property->propertyValue)->pluck('name');
+                        $metaschema->properties[$key][] = $agent;
+                    }else{
+                        $metaschema->properties[$key][] = $property->propertyValue;
+                    }
+                    break;
+                default:
+                    $metaschema->properties[$key][] = $property->propertyValue;
+            }
        }
         
        return $metaschema;

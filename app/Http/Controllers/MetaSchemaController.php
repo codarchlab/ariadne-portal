@@ -36,7 +36,7 @@ class MetaSchemaController extends Controller {
      */
     public function show($id) {
         $metaSchema = MetaSchema::get($id);
-
+        //dd($metaSchema);
         return view('provider_data.metaSchema')->with('metaSchema', $metaSchema);
     }
 

@@ -98,7 +98,7 @@
                                 <div class="col-md-12">
                                     <b>Language</b>
                                     @foreach($resource->properties['language'] as $value)
-                                    <p>{{ $value }}</p>
+                                    <p>{{ $value }} <img src='../img/language/{{ $value }}.png' style='height: 24px;'/></p>
                                     @endforeach
                                 </div>
                                 @endif
