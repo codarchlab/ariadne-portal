@@ -40,6 +40,9 @@ Route::get('database/{id}', 'DatabaseController@show');
 Route::get('gis', 'GisController@index');
 Route::get('gis/{id}', 'GisController@show');
 
+Route::get('metaSchema', 'MetaSchemaController@index');
+Route::get('metaSchema/{id}', 'MetaSchemaController@show');
+
 Route::get('agent', 'AgentController@index');
 Route::get('agent/{id}', 'AgentController@show');
 

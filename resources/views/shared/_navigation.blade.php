@@ -78,8 +78,8 @@
                                         <i class="fa fa-globe"></i> <span>GIS</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="index.php?op=data_summary&table=MetadataSchema">
+                                <li {{ (Request::is('metaSchema') ? ' class=active' : '') }}>
+                                    <a href="{{ action('MetaSchemaController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-square-o"></i> <span>Metadata Schemas</span>
                                     </a>
