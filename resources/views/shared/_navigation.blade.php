@@ -105,7 +105,7 @@
                             </ul>
                         </li>    						
 
-                        <li{{ (Request::is('subjects') ? ' class=active' : '') }}>
+                        <li{{ (Request::is('subject') ? ' class=active' : '') }}>
                             <a href="{{ action('SubjectController@index') }}">
                                 <i class="fa fa-tag "></i> <span>Ariadne subject</span>
                             </a>

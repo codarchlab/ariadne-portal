@@ -9,7 +9,7 @@
                 <div class="box box-warning">
                     <div class="box-header">
                         <i class='fa fa-file'></i>
-                        <h3 class="box-title">Databases</h3>
+                        <h3 class="box-title">Vocabularies</h3>
                     </div><!-- /.box-header -->
 
                     @include("provider_data._provider_selection_box")
@@ -24,16 +24,16 @@
                                 </tr>   
                             </thead>
                             <tbody>
-                                @foreach ($databases as $database)
+                                @foreach ($vocabularies as $vocabulary)
                                 <tr>
-                                    <td>{{ $database->id }}</td>
-                                    <td>{{ $database->provider }}</td>
-                                    <td><a href="{{ action('DatabaseController@show', $database->id) }}">{{ $database->name }}</a></td>
+                                    <td>{{ $vocabulary->id }}</td>
+                                    <td>{{ $vocabulary->provider }}</td>
+                                    <td><a href="{{ action('VocabularyController@show', $vocabulary->id) }}">{{ $vocabulary->name }}</a></td>                                                                        
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <?php echo $databases->render(); ?>
+                        <?php echo $vocabularies->render(); ?>
                     </div>
                 </div>
             </div>
