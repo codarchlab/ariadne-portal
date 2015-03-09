@@ -22,14 +22,14 @@
                         @if (isset($resource->properties['keyword']) || isset($resource->properties['subject']) || isset($resource->properties['ariadne-subject']))                        
                         <li><a href="#tab_subjects" data-toggle="tab">Subjects</a></li>
                         @endif
-                        @if (isset($resource->properties['accesspolicy']) || isset($resource->properties['accessrights']) || isset($resource->properties['rights']))      
+                        @if (isset($resource->properties['accessPolicy']) || isset($resource->properties['accessRights']) || isset($resource->properties['rights']))      
                         <li><a href="#tab_rights" data-toggle="tab">Rights</a></li>
                         @endif
                         @if (isset($resource->properties['creator']) || isset($resource->properties['owner']) || isset($resource->properties['publisher']) ||
                         isset($resource->properties['legalResponsible']) || isset($resource->properties['scientificResponsible']) || isset($resource->properties['technicalResponsible']))                          
                         <li><a href="#tab_ownership" data-toggle="tab">Ownership</a></li>
                         @endif
-                        @if (isset($resource->temporal))
+                        @if (isset($resource->properties['temporal']))
                         <li><a href="#tab_temporal" data-toggle="tab">Temporal</a></li>.
                         @endif
                         @if (count($resource->spatial) != 0)                       
@@ -112,20 +112,20 @@
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['accrualperiodicity']))
+                                @if (isset($resource->properties['accrualPeriodicity']))
                                 <div class="col-md-12">
                                     <b>Accrual Periodicity</b>
-                                    @foreach($resource->properties['accrualperiodicity'] as $value)
+                                    @foreach($resource->properties['accrualPeriodicity'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['landing_page']))
+                                @if (isset($resource->properties['landingPage']))
                                 <div class="col-md-12">
                                     <b>URL</b>
-                                    @foreach($resource->properties['landing_page'] as $value)
-                                    <p>{{ $value }}</p>
+                                    @foreach($resource->properties['landingPage'] as $value)
+                                    <p><a href="{{ $value }}">{{ $value }}</a></p>
                                     @endforeach
                                 </div>
                                 @endif
@@ -179,23 +179,23 @@
 
                         @endif
 
-                        @if (isset($resource->properties['accesspolicy']) || isset($resource->properties['accessrights']) || isset($resource->properties['rights']))      
+                        @if (isset($resource->properties['accessPolicy']) || isset($resource->properties['accessRights']) || isset($resource->properties['rights']))      
 
                         <div class="tab-pane" id="tab_rights">
                             <div class="row" style="padding: 14px;">
-                                @if (isset($resource->properties['accesspolicy']))
+                                @if (isset($resource->properties['accessPolicy']))
                                 <div class="col-md-12">
                                     <b>Access Policy</b>
-                                    @foreach($resource->properties['accesspolicy'] as $value)
+                                    @foreach($resource->properties['accessPolicy'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['accessrights']))
+                                @if (isset($resource->properties['accessRights']))
                                 <div class="col-md-12">
                                     <b>Access Rights</b>
-                                    @foreach($resource->properties['accessrights'] as $value)
+                                    @foreach($resource->properties['accessRights'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
@@ -280,21 +280,21 @@
 
                         @endif
 
-                        @if (isset($resource->temporal))
+                        @if (isset($resource->properties['temporal']))
 
                         <div class="tab-pane" id="tab_temporal">
                             <div class="row" style="padding: 14px;">
                                 <div class="col-md-12">
 
-                                    @foreach ($resource->temporal as $temporal)
+                                    @foreach ($resource->properties['temporal'] as $temporal)
 
-                                    @if (!empty($temporal->periodname))                                            
+                                    @if (!empty($temporal->period_name))                                            
                                     <div class='row' style='margin-bottom:8px;'>
                                         <div class='col-md-2'>
                                             <b>Period Name</b>
                                         </div>
                                         <div class='col-md-10'>
-                                            <p> {{  $temporal->periodname }}</p>
+                                            <p> {{  $temporal->period_name }}</p>
                                         </div>
                                     </div>
                                     @endif

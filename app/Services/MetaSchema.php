@@ -35,6 +35,7 @@ class MetaSchema {
                 case 'legalResponsible':
                 case 'scientificResponsible':
                 case 'technicalResponsible':
+                case 'usedby':
                     if(is_numeric($property->propertyValue)){
                         $agent = DB::table('foafAgent')->where('id', $property->propertyValue)->pluck('name');
                         $metaschema->properties[$key][] = $agent;
