@@ -109,7 +109,7 @@ return [
 	*/
 
 	'providers' => [
-
+                
 		/*
 		 * Laravel Framework Service Providers...
 		 */
@@ -136,6 +136,11 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
+                /*
+                 * Laravel debugbarDebug
+                 */
+                'Barryvdh\Debugbar\ServiceProvider',
+            
 		/*
 		 * Application Service Providers...
 		 */
@@ -159,7 +164,7 @@ return [
 	*/
 
 	'aliases' => [
-
+                
 		'App'       => 'Illuminate\Support\Facades\App',
 		'Artisan'   => 'Illuminate\Support\Facades\Artisan',
 		'Auth'      => 'Illuminate\Support\Facades\Auth',
@@ -192,7 +197,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-
+                'Utils'      => 'App\Services\Utils',
+                'Debugbar' => 'Barryvdh\Debugbar\Facade',
 	],
 
 ];
