@@ -47,6 +47,8 @@ class Utils {
         $string = str_replace("dct_", "", $string);
         $string = str_replace("dcat:", "", $string);
         $string = str_replace("foaf:", "", $string);
+        $string = str_replace("dbpedia-owl:", "", $string);
+        $string = str_replace("rdfs:", "", $string);
         $string = str_replace(":", "", $string);
         return $string;
     }

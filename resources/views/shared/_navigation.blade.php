@@ -48,7 +48,7 @@
                             </a>
                         </li> 
 
-                        <li class="treeview{{ App\Services\Utils::contains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent', 'metaSchema')) ? ' active' : '' }}" >
+                        <li class="treeview{{ App\Services\Utils::contains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent', 'metaSchema', 'service')) ? ' active' : '' }}" >
                             <a href="#">
                                 <i class="fa fa-list"></i> <span>Provider data</span>
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -84,8 +84,8 @@
                                         <i class="fa fa-square-o"></i> <span>Metadata Schemas</span>
                                     </a>
                                 </li>	
-                                <li>
-                                    <a href="index.php?op=data_summary&table=ARIADNEService">
+                                <li {{ (Request::is('service') ? ' class=active' : '') }}>
+                                    <a href="{{ action('ServiceController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-gears"></i> <span>Services</span>
                                     </a>

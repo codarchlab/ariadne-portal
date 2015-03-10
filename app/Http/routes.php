@@ -43,6 +43,9 @@ Route::get('gis/{id}', 'GisController@show');
 Route::get('metaSchema', 'MetaSchemaController@index');
 Route::get('metaSchema/{id}', 'MetaSchemaController@show');
 
+Route::get('service', 'ServiceController@index');
+Route::get('service/{id}', 'ServiceController@show');
+
 Route::get('agent', 'AgentController@index');
 Route::get('agent/{id}', 'AgentController@show');
 
