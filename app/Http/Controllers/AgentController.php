@@ -36,8 +36,9 @@ class AgentController extends Controller {
      */
     public function show($id) {
         $agent = Agent::get($id);
-
-        return view('provider_data.agent')->with('agent', $agent);
+        $conncectDRs = Agent::connectedDR($id);
+        //dd($conncectDRs);    
+        return view('provider_data.agent')->with('agent', $agent)->with('conncectDRs', $conncectDRs);
     }
 
 }

@@ -60,5 +60,30 @@ class DataResource {
         
         return $resource;
     }
+    
+     /**
+     * Get name for a Dataresource
+     *
+     * @param int $id ID of Dataresource
+     * @return string Name of Dataresource
+     */
+    public static function getName($id) {
+        
+        $name = DB::table('DataResource')
+                ->select('DataResource.name')                
+                ->where('DataResource.id', $id)
+                ->pluck('name');
+        
+        return $name;
+    }
 
+    public static function getType($id) {
+        
+        $type = DB::table('DataResource')
+                ->select('DataResource.type')                
+                ->where('DataResource.id', $id)
+                ->pluck('type');
+        
+        return $type;
+    }
 }

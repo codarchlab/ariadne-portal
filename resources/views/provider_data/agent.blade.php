@@ -49,6 +49,27 @@
                                 <p><a href="{{ $agent->properties['homepage'] }}">{{ $agent->properties['homepage'] }}</a></p>			
                             </div>
                             @endif
+                            
+                            @if(isset($conncectDRs[0]->name))
+                            <div class="col-md-12">
+                                <b>Relations to Data Resources</b>
+                                 @foreach($conncectDRs as $conncectDR)
+                                    @if($conncectDR->type == 0)
+                                    <p><a href="{{ action('CollectionController@show', $conncectDR->DataResourceId) }}">{{ $conncectDR->name }}</a></p>
+                                    @endif
+                                    @if($conncectDR->type == 1)
+                                    <p><a href="{{ action('DatasetController@show', $conncectDR->DataResourceId) }}">{{ $conncectDR->name }}</a></p>
+                                    @endif
+                                    @if($conncectDR->type == 2)
+                                    <p><a href="{{ action('DatabaseController@show', $conncectDR->DataResourceId) }}">{{ $conncectDR->name }}</a></p>
+                                    @endif
+                                    @if($conncectDR->type == 3)
+                                    <p><a href="{{ action('GisController@index', $conncectDR->DataResourceId) }}">{{ $conncectDR->name }}</a></p>
+                                    @endif
+                                 @endforeach		
+                            </div>
+                          @endif
+                          
                         </div>
                     </div>
                 </div>

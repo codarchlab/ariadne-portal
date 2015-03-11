@@ -52,5 +52,20 @@ class Agent {
 
         return $agents;
     }
+    
+    public static function connectedDR($id) {
+        $conncectDRs = DB::table('DataResourceProperties')
+                        ->distinct()
+                        ->select('DataResourceId')
+                        ->where('propertyValue', $id)
+                        ->whereIn('propertyName', ['dct:creator', 'dct:publisher',':owner',':technicalResponsible',':scientificResponsible',':legalResponsible'])
+                        ->get();
+        foreach ($conncectDRs as $conncectDR) {
+            $conncectDR->name = DataResource::getName($conncectDR->DataResourceId);
+            $conncectDR->type = DataResource::getType($conncectDR->DataResourceId);
+        }
+
+        return $conncectDRs;
+    }
 
 }
