@@ -8,6 +8,10 @@ class Vocabulary {
 
     public static function get($id) {
         $vocabulary = DB::table('Vocabulary')->where('id', $id)->first();
+        
+        $vocabulary->agent_name = DB::table('foafAgent')
+                ->where('id', $vocabulary->agent_id)
+                ->pluck('name');
 
         $vocabulary->properties = array();
 
@@ -16,11 +20,8 @@ class Vocabulary {
             $key = Utils::removePrefix($property->propertyName);
             switch($key){
                 case 'creator':
-                case 'owner':
                 case 'publisher':
-                case 'legalResponsible':
-                case 'scientificResponsible':
-                case 'technicalResponsible':
+                case 'usedby':
                     if(is_numeric($property->propertyValue)){
                         $agent = DB::table('foafAgent')->where('id', $property->propertyValue)->pluck('name');
                         $vocabulary->properties[$key][] = $agent;

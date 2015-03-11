@@ -46,6 +46,9 @@ Route::get('metaSchema/{id}', 'MetaSchemaController@show');
 Route::get('service', 'ServiceController@index');
 Route::get('service/{id}', 'ServiceController@show');
 
+Route::get('vocabulary', 'VocabularyController@index');
+Route::get('vocabulary/{id}', 'VocabularyController@show');
+
 Route::get('agent', 'AgentController@index');
 Route::get('agent/{id}', 'AgentController@show');
 

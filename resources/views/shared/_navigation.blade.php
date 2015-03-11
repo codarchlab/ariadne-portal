@@ -48,7 +48,7 @@
                             </a>
                         </li> 
 
-                        <li class="treeview{{ App\Services\Utils::contains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent', 'metaSchema', 'service')) ? ' active' : '' }}" >
+                        <li class="treeview{{ App\Services\Utils::contains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent', 'metaSchema', 'service', 'vocabulary')) ? ' active' : '' }}" >
                             <a href="#">
                                 <i class="fa fa-list"></i> <span>Provider data</span>
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -90,8 +90,8 @@
                                         <i class="fa fa-gears"></i> <span>Services</span>
                                     </a>
                                 </li>	
-                                <li>
-                                    <a href="index.php?op=data_summary&table=Vocabulary">
+                                <li {{ (Request::is('vocabulary') ? ' class=active' : '') }}>
+                                    <a href="{{ action('VocabularyController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-file-text-o"></i> <span>Vocabularies</span>
                                     </a>
