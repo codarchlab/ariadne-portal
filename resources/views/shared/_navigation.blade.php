@@ -112,9 +112,17 @@
                         </li>                        
 
                         <li{{ (Request::is('about') ? ' class=active' : '') }}>
-                            <a href={{ action('WelcomeController@about') }}">
+                            <a href="{{ action('WelcomeController@about') }}">
                                 <i class="fa fa-question-circle"></i> <span>About</span>
                             </a>
+                        </li>
+                        
+                        <li >
+                            <a href="http://www.dcu.gr" target="_blank"><img style="max-width:150px;" src="{{ asset('img/dcu_logo_footer.png') }}" class="img-responsive" /></a>
+                        </li>
+                        
+                        <li >
+                            <a href="http://snd.gu.se" target="_blank"><img style="max-width:150px;" src="{{ asset('img/English_SND.png') }}" class="img-responsive" /></a>
                         </li>
 
                     </ul>

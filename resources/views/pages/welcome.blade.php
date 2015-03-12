@@ -15,9 +15,17 @@
                     </div>
                     <div class="box-body">
                         <p>
-                            The portal
+                            ARIADNE brings together and integrates existing archaeological research data infrastructures 
+                            so that researchers can use the various distributed datasets and new and powerful technologies 
+                            as an integral component of the archaeological research methodology.  There is now a large 
+                            availability of archaeological digital datasets that, together, span different periods, 
+                            domains and regions; more are continuously created as a result of the increasing use of IT.  
+                            These are the accumulated outcome of the research of individuals, teams and institutions, but 
+                            form a vast and fragmented corpus and their potential has been constrained by difficult access 
+                            and non-homogenous perspectives.
                         </p>
-                        <div class="quote">{{ Inspiring::quote() }}</div>
+                        <a href='http://www.ariadne-infrastructure.eu/' target='blank'>Visit Ariadne infrastructure</a>	
+                       
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
