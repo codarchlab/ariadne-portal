@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\Gis;
 use Illuminate\Http\Request;
+use App\Services\Utils;
 
 class GisController extends Controller {
 
@@ -37,6 +38,11 @@ class GisController extends Controller {
     public function show($id) {
         $gis = Gis::get($id);
         return view('provider_data.dataresource')->with('resource', $gis);
+    }
+    
+    public function subject($subjectId) {
+        $giss = Utils::allSubject($subjectId,2);
+        return view('provider_data.giss')->with('giss', $giss);
     }
 
 }

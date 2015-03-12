@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\Dataset;
 use Illuminate\Http\Request;
+use App\Services\Utils;
 
 class DatasetController extends Controller {
 
@@ -39,4 +40,9 @@ class DatasetController extends Controller {
         return view('provider_data.dataresource')->with('resource', $dataset);
     }
 
+    public function subject($subjectId) {
+        $datasets = Utils::allSubject($subjectId,1);
+        return view('provider_data.datasets')->with('datasets', $datasets);
+    }
+    
 }

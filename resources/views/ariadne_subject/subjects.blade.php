@@ -26,11 +26,27 @@
                             <tbody>
                                @foreach ($subjects as $subject)
                                 <tr>
-                                   <th>{{ $subject->name }}</th>
+                                   <th>{{ $subject->name }}</th>  
+                                   @if ($subject->collections > 0)
+                                   <td><a href="{{ action('CollectionController@subject', $subject->id) }}">{{ $subject->collections }}</a></td>
+                                   @else
                                    <td>{{ $subject->collections }}</td>
+                                   @endif
+                                   @if ($subject->datasets > 0)
+                                   <td><a href="{{ action('DatasetController@subject', $subject->id) }}">{{ $subject->datasets }}</a></td>
+                                   @else
                                    <td>{{ $subject->datasets }}</td>
+                                   @endif
+                                   @if ($subject->databases > 0)
+                                   <td><a href="{{ action('DatabaseController@subject', $subject->id) }}">{{ $subject->databases }}</a></td>
+                                   @else
                                    <td>{{ $subject->databases }}</td>
+                                   @endif
+                                   @if ($subject->gis > 0)
+                                   <td><a href="{{ action('GisController@subject', $subject->id) }}">{{ $subject->gis }}</a></td>
+                                   @else
                                    <td>{{ $subject->gis }}</td>
+                                   @endif
                                 </tr>
                                @endforeach
                             </tbody>

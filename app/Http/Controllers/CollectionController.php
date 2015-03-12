@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Services\Collection;
 use App\Services\DataResource;
+use App\Services\Utils;
 
 class CollectionController extends Controller {
 
@@ -38,4 +39,9 @@ class CollectionController extends Controller {
         return view('provider_data.dataresource')->with('resource', $collection);
     }
 
+    public function subject($subjectId) {
+        $collections = Utils::allSubject($subjectId,0);
+       // dd($collections);
+        return view('provider_data.collections')->with('collections', $collections);
+    }
 }

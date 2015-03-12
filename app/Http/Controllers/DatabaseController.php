@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Services\Database;
 use App\Services\DataResource;
+use App\Services\Utils;
 
 class DatabaseController extends Controller {
 
@@ -38,4 +39,8 @@ class DatabaseController extends Controller {
         return view('provider_data.dataresource')->with('resource', $database);
     }
 
+    public function subject($subjectId) {
+        $databases = Utils::allSubject($subjectId,2);
+        return view('provider_data.databases')->with('databases', $databases);
+    }
 }

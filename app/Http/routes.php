@@ -30,15 +30,19 @@ Route::get('subject', 'SubjectController@index');
 
 Route::get('collection', 'CollectionController@index');
 Route::get('collection/{id}', 'CollectionController@show');
+Route::get('collection/{id}/subject', 'CollectionController@subject');
 
 Route::get('dataset', 'DatasetController@index');
 Route::get('dataset/{id}', 'DatasetController@show');
+Route::get('dataset/{id}/subject', 'DatasetController@subject');
 
 Route::get('database', 'DatabaseController@index');
 Route::get('database/{id}', 'DatabaseController@show');
+Route::get('database/{id}/subject', 'DatabaseController@subject');
 
 Route::get('gis', 'GisController@index');
 Route::get('gis/{id}', 'GisController@show');
+Route::get('gis/{id}/subject', 'GisController@subject');
 
 Route::get('metaSchema', 'MetaSchemaController@index');
 Route::get('metaSchema/{id}', 'MetaSchemaController@show');

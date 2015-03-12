@@ -1,5 +1,6 @@
 <?php namespace App\Services;
 use Illuminate\Support\Facades\DB;
+use App\Services\Provider;
 
 class Utils {
 
@@ -58,5 +59,27 @@ class Utils {
             if (stripos($string, $item) !== false) return true;
         }
         return false;
+    }
+    
+    public static function allSubject($subjectId,$type) {
+
+        $drs =  DB::table('DataResourceIndexes')
+                        ->select('DataResourceID')
+                        ->where('ariadne_subject', $subjectId)
+                        ->lists('DataResourceID');
+                        
+        $query = DB::table('DataResource')
+                ->select('id', 'name', 'cr_uid')                
+                ->whereIn('id', $drs)
+                ->where('type', $type)
+                ->orderBy('id');
+                
+                
+        $objects = $query->paginate(15);
+        
+        foreach ($objects as &$object) {
+            $object->provider = Provider::getName($object->cr_uid);
+        }
+        return $objects;
     }
 }
