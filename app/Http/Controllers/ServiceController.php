@@ -36,7 +36,7 @@ class ServiceController extends Controller {
      */
     public function show($id) {
         $service = Service::get($id);
-        //dd($metaSchema);
+        //dd($service);
         return view('provider_data.service')->with('service', $service);
     }
 

@@ -21,7 +21,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li>
-                                    <a href="index.php?op=browse&type=datasets">
+                                    <a href="{{ action('SearchController@index', 1) }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-archive"></i> <span>Datasets</span>
                                     </a>
