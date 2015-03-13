@@ -9,6 +9,10 @@ use \App\Services\Collection;
 use \App\Services\Dataset;
 use \App\Services\Gis;
 use \App\Services\Agent;
+use \App\Services\Database;
+use \App\Services\MetaSchema;
+use \App\Services\Service;
+use \App\Services\Vocabulary;
 
 class ProviderController extends Controller {
 
@@ -44,7 +48,8 @@ class ProviderController extends Controller {
     }
     
     public function database($id){
-        
+        $databases = Database::all($id);
+        return view('provider_data.databases')->with('databases', $databases);        
     }
     
     public function gis($id){
@@ -53,15 +58,18 @@ class ProviderController extends Controller {
     }
     
     public function schema($id){
-        
+        $metaSchemas = MetaSchema::all($id);
+        return view('provider_data.metaSchemas')->with('metaSchemas', $metaSchemas);
     }
 
     public function service($id){
-        
+        $services = Service::all($id);
+        return view('provider_data.services')->with('services', $services);
     }
     
     public function vocabulary($id){
-        
+        $vocabularies = Vocabulary::all($id);
+        return view('provider_data.vocabularies')->with('vocabularies', $vocabularies);
     }
     
     public function agent($id){
