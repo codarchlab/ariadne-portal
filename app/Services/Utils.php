@@ -61,25 +61,20 @@ class Utils {
         return false;
     }
     
-    public static function allSubject($subjectId,$type) {
-
-        $drs =  DB::table('DataResourceIndexes')
-                        ->select('DataResourceID')
-                        ->where('ariadne_subject', $subjectId)
-                        ->lists('DataResourceID');
-                        
-        $query = DB::table('DataResource')
-                ->select('id', 'name', 'cr_uid')                
-                ->whereIn('id', $drs)
-                ->where('type', $type)
-                ->orderBy('id');
-                
-                
-        $objects = $query->paginate(15);
+    public static function allSubject($subjectId, $type) {
+                   
+        $dataResourcesQuery = DB::table('DataResource')
+                            ->select('DataResource.id', 'DataResource.name', 'DataResource.cr_uid')                
+                            ->join('DataResourceIndexes', 'DataResourceIndexes.DataResourceID', '=', 'DataResource.id')
+                            ->where('DataResource.type', $type)
+                            ->where('DataResourceIndexes.ariadne_subject', $subjectId)
+                            ->orderBy('id');
+         
+        $dataResources = $dataResourcesQuery->paginate(15);
         
-        foreach ($objects as &$object) {
-            $object->provider = Provider::getName($object->cr_uid);
+        foreach ($dataResources as &$dataResource) {
+            $dataResource->provider = Provider::getName($dataResource->cr_uid);
         }
-        return $objects;
+        return $dataResources;
     }
 }
