@@ -41,6 +41,16 @@ class Utils {
             case 2: return 'database';
             case 3: return 'gis';
         }
+    } 
+    
+    public static function getDataResourceTypeNameIdent($id)
+    {
+        switch($id){
+            case 0: return 'coll';
+            case 1: return 'dat';
+            case 2: return 'dat';
+            case 3: return 'gis';
+        }
     }    
     
     public static function removePrefix($string){

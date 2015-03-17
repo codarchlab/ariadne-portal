@@ -22,7 +22,10 @@ class SearchController extends Controller {
     public function index($typeId) {
         $type= SimpleSearch::getType($typeId);
         //dd($type);
-        return view('search.simpleSearch')->with('type', $type);
+        
+        $drs= SimpleSearch::getDataResources('arcaeol');
+        //dd($drs);
+        return view('search.simpleSearch')->with('type', $type)->with('drs', $drs);
     }
 
    
