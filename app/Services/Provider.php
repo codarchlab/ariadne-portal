@@ -21,14 +21,14 @@ class Provider {
                 ->get();
 
         foreach ($providers as &$provider) {
-            $provider->collections = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('collection'));
-            $provider->datasets = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('dataset'));
-            $provider->databases = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('database'));
-            $provider->gis = Utils::getTableCount("DataResource", $provider->id, Utils::getDataResourceType('gis'));
-            $provider->schemas = Utils::getTableCount("MetadataSchema", $provider->id);
-            $provider->services = Utils::getTableCount("ARIADNEService", $provider->id);
-            $provider->vocabularies = Utils::getTableCount("Vocabulary", $provider->id);
-            $provider->foaf = Utils::getTableCount("foafAgent", $provider->id);
+            $provider->collections = Utils::getTableCountByUser("DataResource", $provider->id, Utils::getDataResourceType('collection'));
+            $provider->datasets = Utils::getTableCountByUser("DataResource", $provider->id, Utils::getDataResourceType('dataset'));
+            $provider->databases = Utils::getTableCountByUser("DataResource", $provider->id, Utils::getDataResourceType('database'));
+            $provider->gis = Utils::getTableCountByUser("DataResource", $provider->id, Utils::getDataResourceType('gis'));
+            $provider->schemas = Utils::getTableCountByUser("MetadataSchema", $provider->id);
+            $provider->services = Utils::getTableCountByUser("ARIADNEService", $provider->id);
+            $provider->vocabularies = Utils::getTableCountByUser("Vocabulary", $provider->id);
+            $provider->foaf = Utils::getTableCountByUser("foafAgent", $provider->id);
         }
         return $providers;
     }

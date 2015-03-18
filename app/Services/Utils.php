@@ -4,7 +4,7 @@ use App\Services\Provider;
 
 class Utils {
 
-    public static function getTableCount($table, $user_id, $type = 0) {
+    public static function getTableCountByUser($table, $user_id, $type = 0) {
         $query = DB::table($table)->where('cr_uid', $user_id);
 
         if ($table == 'DataResource') {
@@ -80,7 +80,7 @@ class Utils {
                             ->where('DataResourceIndexes.ariadne_subject', $subjectId)
                             ->orderBy('id')
                             ->paginate(15);
-         
+        
         foreach ($dataResources as &$dataResource) {
             $dataResource->provider = Provider::getName($dataResource->cr_uid);
         }
