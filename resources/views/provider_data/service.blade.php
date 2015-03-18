@@ -9,7 +9,7 @@
                 <div class="box box-primary">
                     <div class="box-header" title="">
                         <h3 class="box-title">{{ $service->name }}</h3>
-                        <div class="box-tools pull-right">Added: {{ date("d-m-Y", strtotime($service->cr_tstamp)) }}</div>
+                        <div class="box-tools pull-right">Added: {{ date("Y-m-d", strtotime($service->cr_tstamp)) }}</div>
                     </div>
                 </div>
             </div>
