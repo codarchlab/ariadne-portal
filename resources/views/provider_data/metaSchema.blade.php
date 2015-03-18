@@ -9,7 +9,7 @@
                 <div class="box box-primary">
                     <div class="box-header" title="">
                         <h3 class="box-title">{{ $metaSchema->name }}</h3>
-                        <div class="box-tools pull-right">Added: {{ date("d-m-Y", strtotime($metaSchema->cr_tstamp)) }}</div>
+                        <div class="box-tools pull-right">Added: {{ date("Y-m-d", strtotime($metaSchema->cr_tstamp)) }}</div>
                     </div>
                 </div>
             </div>
