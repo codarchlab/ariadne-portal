@@ -73,15 +73,14 @@ class Utils {
     
     public static function allSubject($subjectId, $type) {
                    
-        $dataResourcesQuery = DB::table('DataResource')
+        $dataResources = DB::table('DataResource')
                             ->select('DataResource.id', 'DataResource.name', 'DataResource.cr_uid')                
                             ->join('DataResourceIndexes', 'DataResourceIndexes.DataResourceID', '=', 'DataResource.id')
                             ->where('DataResource.type', $type)
                             ->where('DataResourceIndexes.ariadne_subject', $subjectId)
-                            ->orderBy('id');
+                            ->orderBy('id')
+                            ->paginate(15);
          
-        $dataResources = $dataResourcesQuery->paginate(15);
-        
         foreach ($dataResources as &$dataResource) {
             $dataResource->provider = Provider::getName($dataResource->cr_uid);
         }
