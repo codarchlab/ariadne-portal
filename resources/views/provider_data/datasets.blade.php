@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="box box-warning">
                     <div class="box-header">
-                        <i class='fa fa-file'></i>
+                        <i class="fa fa-file"></i>
                         <h3 class="box-title">Datasets</h3>
                     </div><!-- /.box-header -->
 
