@@ -135,6 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+                'Illuminate\Html\HtmlServiceProvider',
 
                 /*
                  * Laravel debugbarDebug
@@ -199,6 +200,8 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
                 'Utils'      => 'App\Services\Utils',
                 'Debugbar' => 'Barryvdh\Debugbar\Facade',
+                'Form'      => 'Illuminate\Html\FormFacade',
+                'Html'      => 'Illuminate\Html\HtmlFacade',
 	],
 
 ];

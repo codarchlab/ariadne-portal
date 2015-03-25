@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Services\SimpleSearch;
+use Request;
 
 class SearchController extends Controller {
 
@@ -28,5 +29,15 @@ class SearchController extends Controller {
         return view('search.simpleSearch')->with('type', $type)->with('drs', $drs);
     }
 
-   
+    /**
+      * Display a listing of the services.
+      *
+      * @return Response
+      */
+     public function search() {
+         
+         $input = Request::all();
+         
+         //TODO Process search string and return results
+     }
 }

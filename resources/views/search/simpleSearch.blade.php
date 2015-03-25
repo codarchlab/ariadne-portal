@@ -16,16 +16,19 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
 
+                    {!! Form::open(array("action" => "SearchController@search")) !!}
+                    
                         <!-- search form -->
-                        <form id="searchform" action="#" method="POST" >
-                        <input type="hidden" name="search_type" id="search_type" value="{{ $type['id'] }}" />
-                                <div class="input-group">
-                                        <input type="text" id="q" name="q" class="form-control" placeholder="Search for {{ $type['name'] }}...">
-                                        <span class="input-group-btn">
-                                                <div name='search' id='searchbtn' class="btn btn-flat" style="border:1px #c0c0c0 solid;"><i class="fa fa-search"></i></div>
-                                        </span>
-                                </div>
-                        </form>
+                        {!! Form::hidden("search_type", $type['id'], array("id" => "search_type")) !!}
+                        
+                        <div class="input-group">
+                            {!! Form::text("q", null, array("id" => "q", "class" => "form-control", "placeholder" => "Search for ".$type["name"]."...")) !!}
+                            <span class="input-group-btn">
+                                {!! Form::submit("Search", array("class" => "btn btn-flat form-control", "style" => "border:1px #c0c0c0 solid;")) !!}
+                            </span>
+                        </div>
+                        
+                    {!! Form::close() !!}
 
 
                 </div>
