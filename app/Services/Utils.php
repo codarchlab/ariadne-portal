@@ -22,6 +22,15 @@ class Utils {
          return $users;
     }
     
+    public static function getUserProvider($user_id) {
+        $provider = DB::table('users')
+                ->select('users.provider_id')                
+                ->where('users.id', $user_id)
+                ->pluck('provider_id');
+        
+        return $provider; 
+    }    
+    
     public static function getTableCountByUsers($table, $users, $type = 0) {
         $total = 0;
         foreach ($users as &$user) {

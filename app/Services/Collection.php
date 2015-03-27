@@ -23,9 +23,15 @@ class Collection {
         }
 
         $collections = $query->paginate(15);
-        
-        foreach ($collections as &$collection) {
-            $collection->provider = Provider::getProviderName($provider);
+        if($provider){
+            foreach ($collections as &$collection) {
+                $collection->provider = Provider::getProviderName($provider);
+            }
+        }
+        else{
+           foreach ($collections as &$collection) {
+                $collection->provider = Provider::getProviderName(Utils::getUserProvider($collection->cr_uid));              
+            } 
         }
         return $collections;
     }
