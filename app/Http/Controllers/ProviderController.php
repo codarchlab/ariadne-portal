@@ -31,7 +31,7 @@ class ProviderController extends Controller {
      * @return Response
      */
     public function index() {
-        $providers = Provider::statistics();
+        $providers = Provider::statistics2();
         return view('provider_info.providers')
                 ->with('providers', $providers)
                 ->with('full', true);
