@@ -11,21 +11,27 @@ class Gis {
      * @return Array information for each gis entry
      */
     public static function all($provider = null) {
+        $users =  Utils::getUsersByProviderInList($provider);
+        
         $query = DB::table('DataResource')
                 ->select('id', 'name', 'cr_uid')
                 ->orderBy('id')
                 ->where('type', Utils::getDataResourceType('gis'));
-        
         if($provider){
-            $query->where('cr_uid', $provider);
+            $query->whereIn('cr_uid', $users);
         }
 
         $giss = $query->paginate(15);
-        
-        foreach($giss as &$gis){
-            $gis->provider = Provider::getName($gis->cr_uid);
+        if($provider){
+            foreach ($giss as &$gis) {
+                $gis->provider = Provider::getProviderName($provider);
+            }
         }
-
+        else{
+           foreach ($giss as &$gis) {
+                $gis->provider = Provider::getProviderName(Utils::getUserProvider($gis->cr_uid));              
+            } 
+        }
         return $giss;
     }
     

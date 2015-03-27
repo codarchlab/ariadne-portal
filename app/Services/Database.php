@@ -13,18 +13,26 @@ class Database {
      */
     public static function all($provider = null) {
 
+        $users =  Utils::getUsersByProviderInList($provider);
+        
         $query = DB::table('DataResource')
                 ->select('id', 'name', 'cr_uid')
                 ->orderBy('id')
                 ->where('type', Utils::getDataResourceType('database'));
         if($provider){
-            $query->where('cr_uid', $provider);
+            $query->whereIn('cr_uid', $users);
         }
 
         $databases = $query->paginate(15);
-        
-        foreach ($databases as &$database) {
-            $database->provider = Provider::getName($database->cr_uid);
+        if($provider){
+            foreach ($databases as &$database) {
+                $database->provider = Provider::getProviderName($provider);
+            }
+        }
+        else{
+           foreach ($databases as &$database) {
+                $database->provider = Provider::getProviderName(Utils::getUserProvider($database->cr_uid));              
+            } 
         }
         return $databases;
     }
