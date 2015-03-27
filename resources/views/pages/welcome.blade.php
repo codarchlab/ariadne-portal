@@ -41,7 +41,8 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th></th>
+                                            <th>Country</th>
+                                            <th>Name</th>
                                             <th>Collections</th>
                                             <th>Datasets</th>
                                             <th>Databases</th>
@@ -51,6 +52,9 @@
                                         @foreach ($providers as $provider)
                                             @if($provider->datasets > 0 || $provider->collections > 0 || $provider->databases > 0)
                                             <tr>
+                                                <td>
+                                                    <img src='img/language/{{ $provider->flag }}.png' style='height: 24px;'/>
+                                                </td>
                                                 <th>
                                                     {{ $provider->name }}
                                                 </th>   

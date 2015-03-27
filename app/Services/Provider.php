@@ -41,7 +41,7 @@ class Provider {
     public static function statistics2() {
        
         $providers = DB::table('providers')
-                ->select('providers.id', 'providers.name')
+                ->select('providers.id', 'providers.name','providers.flag')
                 ->orderBy('providers.name')
                 ->get();
        
