@@ -12,19 +12,20 @@ class Collection {
      * @return Array of all collections
      */
     public static function all($provider = null) {
-
+        $users =  Utils::getUsersByProviderInList($provider);
+       
         $query = DB::table('DataResource')
                 ->select('id', 'name', 'cr_uid')
                 ->orderBy('id')
                 ->where('type', Utils::getDataResourceType('collection'));
         if($provider){
-            $query->where('cr_uid', $provider);
+            $query->whereIn('cr_uid', $users);
         }
 
         $collections = $query->paginate(15);
         
         foreach ($collections as &$collection) {
-            $collection->provider = Provider::getName($collection->cr_uid);
+            $collection->provider = Provider::getProviderName($provider);
         }
         return $collections;
     }

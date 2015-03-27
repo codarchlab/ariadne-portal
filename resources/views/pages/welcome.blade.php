@@ -49,32 +49,34 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($providers as $provider)
-                                        <tr>
-                                            <th>
-                                                {{ $provider->name }}
-                                            </th>   
-                                            <td>
-                                                @if($provider->collections > 0)
-                                                    <a href="{{ action('ProviderController@collection', $provider->id) }}">{{ $provider->collections }}</a>
-                                                @else
-                                                    {{ $provider->collections }}
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($provider->datasets > 0)
-                                                    <a href="{{ action('ProviderController@dataset', $provider->id) }}">{{ $provider->datasets }}</a>
-                                                @else
-                                                    {{ $provider->datasets }}
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($provider->databases > 0)
-                                                    <a href="{{ action('ProviderController@database', $provider->id) }}">{{ $provider->databases }}</a>
-                                                @else
-                                                    {{ $provider->databases }}
-                                                @endif
-                                            </td>
-                                        </tr>
+                                            @if($provider->datasets > 0 || $provider->collections > 0 || $provider->databases > 0)
+                                            <tr>
+                                                <th>
+                                                    {{ $provider->name }}
+                                                </th>   
+                                                <td>
+                                                    @if($provider->collections > 0)
+                                                        <a href="{{ action('ProviderController@collection', $provider->id) }}">{{ $provider->collections }}</a>
+                                                    @else
+                                                        {{ $provider->collections }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($provider->datasets > 0)
+                                                        <a href="{{ action('ProviderController@dataset', $provider->id) }}">{{ $provider->datasets }}</a>
+                                                    @else
+                                                        {{ $provider->datasets }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($provider->databases > 0)
+                                                        <a href="{{ action('ProviderController@database', $provider->id) }}">{{ $provider->databases }}</a>
+                                                    @else
+                                                        {{ $provider->databases }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>                                

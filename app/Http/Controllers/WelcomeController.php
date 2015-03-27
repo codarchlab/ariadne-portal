@@ -32,7 +32,7 @@ class WelcomeController extends Controller {
      * @return Response
      */
     public function index() {
-        $providers = Provider::statistics();
+        $providers = Provider::statistics2();
         return view('pages.welcome')->with('providers', $providers);
     }
     

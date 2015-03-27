@@ -4,6 +4,32 @@ use App\Services\Provider;
 
 class Utils {
 
+   public static function getUsersByProvider($provider_id) {
+         $users = DB::table('users')
+                ->select('id')
+                ->where('provider_id', $provider_id)
+                ->get();
+
+         return $users;
+    }
+    
+    public static function getUsersByProviderInList($provider_id) {
+         $users = DB::table('users')
+                ->select('id')
+                ->where('provider_id', $provider_id)
+                ->lists('id');
+
+         return $users;
+    }
+    
+    public static function getTableCountByUsers($table, $users, $type = 0) {
+        $total = 0;
+        foreach ($users as &$user) {
+            $total += Utils::getTableCountByUser($table, $user->id, $type);
+        }     
+        return $total;
+    }
+    
     public static function getTableCountByUser($table, $user_id, $type = 0) {
         $query = DB::table($table)->where('cr_uid', $user_id);
 
