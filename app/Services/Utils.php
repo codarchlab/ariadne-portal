@@ -117,7 +117,8 @@ class Utils {
                             ->paginate(15);
         
         foreach ($dataResources as &$dataResource) {
-            $dataResource->provider = Provider::getName($dataResource->cr_uid);
+            //$dataResource->provider = Provider::getName($dataResource->cr_uid);
+            $dataResource->provider = Provider::getProviderName(Utils::getUserProvider($dataResource->cr_uid));  
         }
         return $dataResources;
     }
