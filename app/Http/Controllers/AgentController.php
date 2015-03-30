@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\Agent;
 use Illuminate\Http\Request;
+use App\Services\Utils;
 
 class AgentController extends Controller {
 
@@ -25,7 +26,8 @@ class AgentController extends Controller {
      */
     public function index() {
         $agents= Agent::all();
-        return view('provider_data.agents')->with('agents', $agents);
+        $providers = Utils::getProviders();
+        return view('provider_data.agents')->with('agents', $agents)->with('providers', $providers);
     }
 
     /**

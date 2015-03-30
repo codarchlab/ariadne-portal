@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\MetaSchema;
 use Illuminate\Http\Request;
+use App\Services\Utils;
 
 class MetaSchemaController extends Controller {
 
@@ -25,7 +26,8 @@ class MetaSchemaController extends Controller {
      */
     public function index() {
         $metaSchemas= MetaSchema::all();
-        return view('provider_data.metaSchemas')->with('metaSchemas', $metaSchemas);
+        $providers = Utils::getProviders();
+        return view('provider_data.metaSchemas')->with('metaSchemas', $metaSchemas)->with('providers', $providers);
     }
 
     /**

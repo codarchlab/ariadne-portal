@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\Service;
 use Illuminate\Http\Request;
+use App\Services\Utils;
 
 class ServiceController extends Controller {
 
@@ -25,7 +26,8 @@ class ServiceController extends Controller {
      */
     public function index() {
         $services= Service::all();
-        return view('provider_data.services')->with('services', $services);
+        $providers = Utils::getProviders();
+        return view('provider_data.services')->with('services', $services)->with('providers', $providers);
     }
 
     /**

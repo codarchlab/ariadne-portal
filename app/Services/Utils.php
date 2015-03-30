@@ -122,4 +122,12 @@ class Utils {
         }
         return $dataResources;
     }
+    
+    public static function getProviders() {
+         $users = DB::table('providers')
+                ->select('id','name')            
+                ->get();
+
+         return $users;
+    }
 }

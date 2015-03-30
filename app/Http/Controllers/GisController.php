@@ -26,7 +26,8 @@ class GisController extends Controller {
      */
     public function index() {
         $giss = Gis::all();
-        return view('provider_data.giss')->with('giss', $giss);
+        $providers = Utils::getProviders();
+        return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers);
     }
 
     /**
@@ -42,7 +43,8 @@ class GisController extends Controller {
     
     public function subject($subjectId) {
         $giss = Utils::allSubject($subjectId,2);
-        return view('provider_data.giss')->with('giss', $giss);
+        $providers = Utils::getProviders();
+        return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers);
     }
 
 }

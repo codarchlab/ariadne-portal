@@ -25,7 +25,8 @@ class CollectionController extends Controller {
      */
     public function index() {
         $collections = Collection::all();
-        return view('provider_data.collections')->with('collections', $collections);
+        $providers = Utils::getProviders();
+        return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);
     }
 
     /**
@@ -41,7 +42,8 @@ class CollectionController extends Controller {
 
     public function subject($subjectId) {
         $collections = Utils::allSubject($subjectId,0);
+        $providers = Utils::getProviders();
        // dd($collections);
-        return view('provider_data.collections')->with('collections', $collections);
+        return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);
     }
 }

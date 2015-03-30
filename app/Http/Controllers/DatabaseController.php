@@ -25,7 +25,8 @@ class DatabaseController extends Controller {
      */
     public function index() {
         $databases = Database::all();
-        return view('provider_data.databases')->with('databases', $databases);
+        $providers = Utils::getProviders();
+        return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers);
     }
 
     /**
@@ -41,6 +42,7 @@ class DatabaseController extends Controller {
 
     public function subject($subjectId) {
         $databases = Utils::allSubject($subjectId,2);
-        return view('provider_data.databases')->with('databases', $databases);
+        $providers = Utils::getProviders();
+        return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers);
     }
 }

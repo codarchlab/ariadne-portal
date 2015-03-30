@@ -26,7 +26,8 @@ class DatasetController extends Controller {
      */
     public function index() {
         $datasets = Dataset::all();
-        return view('provider_data.datasets')->with('datasets', $datasets);
+        $providers = Utils::getProviders();
+        return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers);
     }
 
     /**
@@ -42,7 +43,8 @@ class DatasetController extends Controller {
 
     public function subject($subjectId) {
         $datasets = Utils::allSubject($subjectId,1);
-        return view('provider_data.datasets')->with('datasets', $datasets);
+        $providers = Utils::getProviders();
+        return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers);
     }
     
 }

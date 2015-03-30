@@ -7,6 +7,9 @@
                 </br>
                 <select name="search_query" class="form-control" style='display:inline; width: 70%;'>
                     <option value='0'>-</option>
+                    @foreach ($providers as $provider)
+                    <option value='{{ $provider->id }}'>{{ $provider->name }}</option>
+                    @endforeach
                     <?php
                     /*
                     $results = $db->query("SELECT * FROM `users` WHERE `id` IN " . $providers);

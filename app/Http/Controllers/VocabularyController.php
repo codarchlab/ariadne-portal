@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\Vocabulary;
 use Illuminate\Http\Request;
+use App\Services\Utils;
 
 class VocabularyController extends Controller {
 
@@ -25,7 +26,8 @@ class VocabularyController extends Controller {
      */
     public function index() {
         $vocabularies= Vocabulary::all();
-        return view('provider_data.vocabularies')->with('vocabularies', $vocabularies);
+        $providers = Utils::getProviders();
+        return view('provider_data.vocabularies')->with('vocabularies', $vocabularies)->with('providers', $providers);
     }
 
     /**
