@@ -38,19 +38,27 @@ class Agent {
      * @return Array paginated list of agents
      */
     public static function all($provider = null) {
-        $query = DB::table('foafAgent');
-
+        $users =  Utils::getUsersByProviderInList($provider);
+        
+        $query = DB::table('foafAgent')
+                ->select('id', 'name', 'cr_uid')
+                ->orderBy('id');
         if($provider){
-            $query->where('cr_uid', $provider);
+            $query->whereIn('cr_uid', $users);
         }
 
         $agents = $query->paginate(15);
-        
-        foreach ($agents as &$agent) {
-            $agent->provider = Provider::getName($agent->cr_uid);
+        if($provider){
+            foreach ($agents as &$agent) {
+                $agent->provider = Provider::getProviderName($provider);
+            }
         }
-
-        return $agents;
+        else{
+           foreach ($agents as &$agent) {
+                $agent->provider = Provider::getProviderName(Utils::getUserProvider($agent->cr_uid));              
+            } 
+        }
+        return $agents;   
     }
     
     public static function connectedDR($id) {

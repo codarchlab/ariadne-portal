@@ -52,18 +52,26 @@ class Service {
      * @return Array paginated list of services
      */
     public static function all($provider = null) {
-        $query = DB::table('ARIADNEService');
-
+        $users =  Utils::getUsersByProviderInList($provider);
+        
+        $query = DB::table('ARIADNEService')
+                ->select('id', 'name', 'cr_uid')
+                ->orderBy('id');
         if($provider){
-            $query->where('cr_uid', $provider);
+            $query->whereIn('cr_uid', $users);
         }
 
         $services = $query->paginate(15);
-        
-        foreach ($services as &$service) {
-            $service->provider = Provider::getName($service->cr_uid);
+        if($provider){
+            foreach ($services as &$service) {
+                $service->provider = Provider::getProviderName($provider);
+            }
         }
-
+        else{
+           foreach ($services as &$service) {
+                $service->provider = Provider::getProviderName(Utils::getUserProvider($service->cr_uid));              
+            } 
+        }
         return $services;
     }
 

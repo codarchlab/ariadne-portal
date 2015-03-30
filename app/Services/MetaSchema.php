@@ -58,18 +58,26 @@ class MetaSchema {
      * @return Array paginated list of metadata schemas
      */
     public static function all($provider = null) {
-        $query = DB::table('MetadataSchema');
-
+        $users =  Utils::getUsersByProviderInList($provider);
+        
+        $query = DB::table('MetadataSchema')
+                ->select('id', 'name', 'cr_uid')
+                ->orderBy('id');
         if($provider){
-            $query->where('cr_uid', $provider);
+            $query->whereIn('cr_uid', $users);
         }
 
         $metaschemas = $query->paginate(15);
-        
-        foreach ($metaschemas as &$metaschema) {
-            $metaschema->provider = Provider::getName($metaschema->cr_uid);
+        if($provider){
+            foreach ($metaschemas as &$metaschema) {
+                $metaschema->provider = Provider::getProviderName($provider);
+            }
         }
-
+        else{
+           foreach ($metaschemas as &$metaschema) {
+                $metaschema->provider = Provider::getProviderName(Utils::getUserProvider($metaschema->cr_uid));              
+            } 
+        }
         return $metaschemas;
     }
 

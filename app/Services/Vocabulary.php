@@ -38,18 +38,26 @@ class Vocabulary {
     }
 
     public static function all($provider = null) {
-        $query = DB::table('Vocabulary');
-
+        $users =  Utils::getUsersByProviderInList($provider);
+        
+        $query = DB::table('Vocabulary')
+                ->select('id', 'name', 'cr_uid')
+                ->orderBy('id');
         if($provider){
-            $query->where('cr_uid', $provider);
+            $query->whereIn('cr_uid', $users);
         }
 
         $vocabularies = $query->paginate(15);
-        
-        foreach ($vocabularies as &$vocabulary) {
-            $vocabulary->provider = Provider::getName($vocabulary->cr_uid);
+        if($provider){
+            foreach ($vocabularies as &$vocabulary) {
+                $vocabulary->provider = Provider::getProviderName($provider);
+            }
         }
-
-        return $vocabularies;        
+        else{
+           foreach ($vocabularies as &$vocabulary) {
+                $vocabulary->provider = Provider::getProviderName(Utils::getUserProvider($vocabulary->cr_uid));              
+            } 
+        }
+        return $vocabularies;     
     }
 }
