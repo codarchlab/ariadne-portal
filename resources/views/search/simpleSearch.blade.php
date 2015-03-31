@@ -16,11 +16,12 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <!-- search form -->
-                {!! Form::open(array("action" => "SearchController@search")) !!}
-                    {!! Form::hidden("search_type", $type, array("id" => "search_type")) !!}
-
+                {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}
+                    @if($type != null)
+                    {!! Form::hidden("type", $type, array("id" => "search_type")) !!}
+                    @endif
                     <div class="input-group">
-                        {!! Form::text("q", null, array("id" => "q", "class" => "form-control", "placeholder" => "Search for ".$type."...")) !!}
+                        {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "placeholder" => "Search for ".$type."...")) !!}
                         <span class="input-group-btn">
                             {!! Form::submit("Search", array("class" => "btn btn-flat form-control", "style" => "border:1px #c0c0c0 solid;")) !!}
                         </span>

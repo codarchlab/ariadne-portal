@@ -31,8 +31,11 @@ class SearchController extends Controller {
     public function search() {
         $type = null;
         $input = Request::all();
-         
-        $query = array('match' => array('title' => $input['q']));
+        if(Request::has('q')){
+            $query = array('match' => array('title' => $input['q']));
+        }else{
+            $query = array('match' => array('title' => '*'));
+        }
         $result = ElasticSearch::search($query);
 
         return view('search.simpleSearch')
