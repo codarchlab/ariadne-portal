@@ -49,19 +49,17 @@ class ElasticSearch {
     
     public static function search($query, $index = null, $type = null){
         $perPage = Request::input('perPage', 10);
-        $from = $perPage * (Request::input('page', 1)-1);
+        $from = $perPage * (Request::input('page', 1) - 1);
         
         $searchParams = array(
             'body' => $query,
             'size' => $perPage,
             'from' => $from
         );
-
-        //dd($searchParams);
         
         if($type){
             $searchParams['index'] = $index;
-        }        
+        }
         
         if($type){
             $searchParams['type'] = $type;
@@ -72,14 +70,12 @@ class ElasticSearch {
         $queryResponse = $client->search($searchParams);
         
         $paginator = new LengthAwarePaginator(
-            $queryResponse['hits']['hits'],
-            $queryResponse['hits']['total'],
-            10,
-            Paginator::resolveCurrentPage(),
-            ['path' => Paginator::resolveCurrentPath()]);
+                            $queryResponse['hits']['hits'],
+                            $queryResponse['hits']['total'],
+                            $perPage,
+                            Paginator::resolveCurrentPage(),
+                            ['path' => Paginator::resolveCurrentPath()]
+                        );
         return $paginator;
-        dd($paginator);
-        
-        return $queryResponse['hits'];
     }
 }
