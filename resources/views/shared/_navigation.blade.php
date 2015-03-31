@@ -48,7 +48,7 @@
                             </a>
                         </li> 
 
-                        <li class="treeview{{ Utils::contains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent', 'metaSchema', 'service', 'vocabulary')) ? ' active' : '' }}" >
+                        <li class="treeview{{ Utils::containsAndNotContains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent', 'metaSchema', 'service', 'vocabulary'), 'search') ? ' active' : '' }}" >
                             <a href="#">
                                 <i class="fa fa-list"></i> <span>Provider data</span>
                                 <i class="fa fa-angle-left pull-right"></i>

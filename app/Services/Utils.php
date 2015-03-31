@@ -106,6 +106,13 @@ class Utils {
         return false;
     }
     
+    public static function containsAndNotContains($string, array $array, $stringNeg){
+        foreach($array as $item) {
+            if (stripos($string, $item) !== false && stripos($string, $stringNeg) == false) return true;
+        }
+        return false;
+    }
+    
     public static function allSubject($subjectId, $type) {
                    
         $dataResources = DB::table('DataResource')
