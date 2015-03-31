@@ -32,7 +32,17 @@ class SearchController extends Controller {
         $input = Request::all();
         if(Request::has('q')){
             $query = ['query'=>
-                          ['match' => ['title' => $input['q']]]
+                          ['multi_match' => [
+                              'query' => $input['q'],
+                              'type' => 'most_fields',
+                              'fields' => [
+                                            'title', 
+                                            'dcat:keyword', 
+                                            'ariadne:subject',
+                                            'dcterms:description',
+                                            'dcat:creator'
+                                          ]
+                          ]]
                      ];
         }else{
             $query = ['query'=>
@@ -57,7 +67,17 @@ class SearchController extends Controller {
         
         if(Request::has('q')){
             $query = ['query'=>
-                          ['match' => ['title' => $input['q']]]
+                          ['multi_match' => [
+                              'query' => $input['q'],
+                              'type' => 'most_fields',
+                              'fields' => [
+                                            'title', 
+                                            'dcat:keyword', 
+                                            'ariadne:subject',
+                                            'dcterms:description',
+                                            'dcat:creator'
+                                          ]
+                          ]]
                      ];
         }else{
             $query = ['query'=>
