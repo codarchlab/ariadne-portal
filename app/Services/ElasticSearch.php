@@ -10,6 +10,11 @@ class ElasticSearch {
 
     private static $client = NULL;
     
+    /**
+     * Get a client to perform rest request to Elastic Search
+     * 
+     * @return Object Elastic Search client
+     */
     private static function getClient() {
         if ( is_null( self::$client ) ){
             $params = array();
@@ -47,6 +52,14 @@ class ElasticSearch {
         }
     }
     
+    /**
+     * Performs a paginated search against Elastic Search
+     * 
+     * @param Array $query Array containing the elastic search query
+     * @param string $index Index to search in (optional)
+     * @param string $type Type of document to search for (optional)
+     * @return LengthAwarePaginator paginated result of the search
+     */
     public static function search($query, $index = null, $type = null){
         $perPage = Request::input('perPage', 10);
         $from = $perPage * (Request::input('page', 1) - 1);
@@ -57,7 +70,7 @@ class ElasticSearch {
             'from' => $from
         );
         
-        if($type){
+        if($index){
             $searchParams['index'] = $index;
         }
         
