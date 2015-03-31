@@ -31,6 +31,10 @@
             </div>
             <div class="col-md-3"></div>
         </div>
+        <div>
+            <p><strong>Total:</strong> {{ $hits->total() }}</p>
+            {!! $hits->appends(['q' => Request::input('q')])->render() !!}
+        </div>
         <div class="row">
             <div class="col-md-12" id="search_results_box">
                 <div class='row'><div class='col-md-12'><hr/></div></div>
@@ -76,9 +80,7 @@
             </div>
         </div>
         <div class="row">
-                <div class="col-md-12" id="search_results_more" p="1" style="display:none;">
-                        <center><div class="btn btn-primary btn-sm"> more results </div></center>
-                </div>
+            {!! $hits->appends(['q' => Request::input('q')])->render() !!}
         </div>
    </section>             
 </aside>

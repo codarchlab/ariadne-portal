@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Services\SimpleSearch;
+
 use App\Services\ElasticSearch;
 use Utils;
 use Request;
@@ -29,22 +29,20 @@ class SearchController extends Controller {
      }    
     
     public function search() {
-        $type = null;
         $input = Request::all();
         if(Request::has('q')){
-            $query = array(
-                            'match' => array('title' => $input['q']),
-                            'match' => array('dcat:keyword' => $input['q']),
-                     );
+            $query = ['query'=>
+                          ['match' => ['title' => $input['q']]]
+                     ];
         }else{
             $query = array('match' => array('title' => '*'));
         }
-        $result = ElasticSearch::search($query);
+        
+        $hits = ElasticSearch::search($query);
 
         return view('search.simpleSearch')
-                ->with('type', $type)
-                ->with('total', $result['total'])
-                ->with('hits', $result['hits']);
+                ->with('type', null)
+                ->with('hits', $hits);
      }     
      
     /**
@@ -56,20 +54,18 @@ class SearchController extends Controller {
         $input = Request::all();
         
         if(Request::has('q')){
-            $query = array(
-                            'match' => array('title' => $input['q']),
-                            'match' => array('dcat:keyword' => $input['q']),
-                     );
+            $query = ['query'=>
+                          ['match' => ['title' => $input['q']]]
+                     ];
         }else{
             $query = array('match' => array('title' => '*'));
         }
         
-        $result = ElasticSearch::search($query, 'dataresources', $type);
-
+        $hits = ElasticSearch::search($query, 'dataresources', $type);
+        
         return view('search.simpleSearch')
                 ->with('type', $type)
-                ->with('total', $result['total'])
-                ->with('hits', $result['hits']);
+                ->with('hits', $hits);
     }
 
 
