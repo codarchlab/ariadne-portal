@@ -35,7 +35,9 @@ class SearchController extends Controller {
                           ['match' => ['title' => $input['q']]]
                      ];
         }else{
-            $query = array('match' => array('title' => '*'));
+            $query = ['query'=>
+                          ['match' => ['title' => '*']]
+                     ];
         }
         
         $hits = ElasticSearch::search($query);
@@ -58,7 +60,9 @@ class SearchController extends Controller {
                           ['match' => ['title' => $input['q']]]
                      ];
         }else{
-            $query = array('match' => array('title' => '*'));
+            $query = ['query'=>
+                          ['match' => ['title' => '*']]
+                     ];
         }
         
         $hits = ElasticSearch::search($query, 'dataresources', $type);
