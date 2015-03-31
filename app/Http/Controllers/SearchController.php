@@ -32,7 +32,10 @@ class SearchController extends Controller {
         $type = null;
         $input = Request::all();
         if(Request::has('q')){
-            $query = array('match' => array('title' => $input['q']));
+            $query = array(
+                            'match' => array('title' => $input['q']),
+                            'match' => array('dcat:keyword' => $input['q']),
+                     );
         }else{
             $query = array('match' => array('title' => '*'));
         }
@@ -53,7 +56,10 @@ class SearchController extends Controller {
         $input = Request::all();
         
         if(Request::has('q')){
-            $query = array('match' => array('title' => $input['q']));
+            $query = array(
+                            'match' => array('title' => $input['q']),
+                            'match' => array('dcat:keyword' => $input['q']),
+                     );
         }else{
             $query = array('match' => array('title' => '*'));
         }
