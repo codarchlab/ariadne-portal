@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "64a2add058c5dab287f29ec6f3d7adba",
+    "hash": "97d70a5404881777662b15854419fea3",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -277,6 +277,158 @@
             "time": "2014-12-20 21:24:13"
         },
         {
+            "name": "elasticsearch/elasticsearch",
+            "version": "v1.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elastic/elasticsearch-php.git",
+                "reference": "a273a9583e1859e02d0676faaabe577b12427ff1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/a273a9583e1859e02d0676faaabe577b12427ff1",
+                "reference": "a273a9583e1859e02d0676faaabe577b12427ff1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "guzzle/guzzle": "~3.0",
+                "monolog/monolog": "~1.11",
+                "php": ">=5.3.9",
+                "pimple/pimple": "~3.0",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1",
+                "cpliakas/git-wrapper": "~1.0",
+                "mikey179/vfsstream": "~1.2",
+                "mockery/mockery": "dev-master@dev",
+                "phpunit/phpunit": "3.7.*",
+                "satooshi/php-coveralls": "dev-master",
+                "symfony/yaml": "2.4.3 as 2.4.2",
+                "twig/twig": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Elasticsearch": "src/",
+                    "Elasticsearch\\Tests": "tests/",
+                    "Elasticsearch\\Benchmarks": "benchmarks/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2"
+            ],
+            "authors": [
+                {
+                    "name": "Zachary Tong"
+                }
+            ],
+            "description": "PHP Client for Elasticsearch",
+            "keywords": [
+                "client",
+                "elasticsearch",
+                "search"
+            ],
+            "time": "2015-03-02 16:32:23"
+        },
+        {
+            "name": "guzzle/guzzle",
+            "version": "v3.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle3.git",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-error-response": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.3",
+                "monolog/monolog": "~1.0",
+                "phpunit/phpunit": "3.7.*",
+                "psr/log": "~1.0",
+                "symfony/class-loader": "~2.1",
+                "zendframework/zend-cache": "2.*,<2.3",
+                "zendframework/zend-log": "2.*,<2.3"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2015-03-18 18:23:50"
+        },
+        {
             "name": "illuminate/html",
             "version": "v5.0.0",
             "source": {
@@ -510,16 +662,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.20",
+            "version": "v5.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "419d3f485ce7946cace4325ef19a30e1d5543951"
+                "reference": "59219f7afb60be05d74ce01fcb5d2440f7a1b13d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/419d3f485ce7946cace4325ef19a30e1d5543951",
-                "reference": "419d3f485ce7946cace4325ef19a30e1d5543951",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/59219f7afb60be05d74ce01fcb5d2440f7a1b13d",
+                "reference": "59219f7afb60be05d74ce01fcb5d2440f7a1b13d",
                 "shasum": ""
             },
             "require": {
@@ -632,20 +784,20 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-03-24 13:36:37"
+            "time": "2015-03-28 16:56:59"
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "51cd7cd7ee0defbaafc6ec0d3620110a5d71e11a"
+                "reference": "3c2400a99ccc3be6884d40361890010449c6b447"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/51cd7cd7ee0defbaafc6ec0d3620110a5d71e11a",
-                "reference": "51cd7cd7ee0defbaafc6ec0d3620110a5d71e11a",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3c2400a99ccc3be6884d40361890010449c6b447",
+                "reference": "3c2400a99ccc3be6884d40361890010449c6b447",
                 "shasum": ""
             },
             "require": {
@@ -655,7 +807,7 @@
                 "ext-fileinfo": "*",
                 "league/phpunit-coverage-listener": "~1.1",
                 "mockery/mockery": "~0.9",
-                "phpspec/phpspec": "~2.0.0",
+                "phpspec/phpspec": "~2.0",
                 "phpspec/prophecy-phpunit": "~1.0",
                 "phpunit/phpunit": "~4.1",
                 "predis/predis": "~1.0",
@@ -715,7 +867,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-03-10 11:04:14"
+            "time": "2015-03-29 14:01:43"
         },
         {
             "name": "maximebf/debugbar",
@@ -983,6 +1135,52 @@
             "time": "2015-03-24 19:10:28"
         },
         {
+            "name": "pimple/pimple",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silexphp/Pimple.git",
+                "reference": "876bf0899d01feacd2a2e83f04641e51350099ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/876bf0899d01feacd2a2e83f04641e51350099ef",
+                "reference": "876bf0899d01feacd2a2e83f04641e51350099ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
+            "homepage": "http://pimple.sensiolabs.org",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "time": "2014-07-24 09:48:15"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1022,16 +1220,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.4.3",
+            "version": "v0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "b5dd7660c0ef38e96cd8cd8fa924b6be0e53906a"
+                "reference": "489816db71649bd95b416e3ed9062d40528ab0ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/b5dd7660c0ef38e96cd8cd8fa924b6be0e53906a",
-                "reference": "b5dd7660c0ef38e96cd8cd8fa924b6be0e53906a",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/489816db71649bd95b416e3ed9062d40528ab0ac",
+                "reference": "489816db71649bd95b416e3ed9062d40528ab0ac",
                 "shasum": ""
             },
             "require": {
@@ -1089,7 +1287,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2015-03-17 15:17:33"
+            "time": "2015-03-26 18:43:54"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2123,21 +2321,22 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.3.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "9ca52329bcdd1500de24427542577ebf3fc2f1c9"
+                "reference": "8724cd239f8ef4c046f55a3b18b4d91cc7f3e4c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9ca52329bcdd1500de24427542577ebf3fc2f1c9",
-                "reference": "9ca52329bcdd1500de24427542577ebf3fc2f1c9",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/8724cd239f8ef4c046f55a3b18b4d91cc7f3e4c5",
+                "reference": "8724cd239f8ef4c046f55a3b18b4d91cc7f3e4c5",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.2",
-                "phpdocumentor/reflection-docblock": "~2.0"
+                "doctrine/instantiator": "^1.0.2",
+                "phpdocumentor/reflection-docblock": "~2.0",
+                "sebastian/comparator": "~1.1"
             },
             "require-dev": {
                 "phpspec/phpspec": "~2.0"
@@ -2145,7 +2344,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.4.x-dev"
                 }
             },
             "autoload": {
@@ -2169,7 +2368,7 @@
                 }
             ],
             "description": "Highly opinionated mocking framework for PHP 5.3+",
-            "homepage": "http://phpspec.org",
+            "homepage": "https://github.com/phpspec/prophecy",
             "keywords": [
                 "Double",
                 "Dummy",
@@ -2178,7 +2377,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2014-11-17 16:23:49"
+            "time": "2015-03-27 19:31:25"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2426,16 +2625,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.5.0",
+            "version": "4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5b578d3865a9128b9c209b011fda6539ec06e7a5"
+                "reference": "d6429b0995b24a2d9dfe5587ee3a7071c1161af4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5b578d3865a9128b9c209b011fda6539ec06e7a5",
-                "reference": "5b578d3865a9128b9c209b011fda6539ec06e7a5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d6429b0995b24a2d9dfe5587ee3a7071c1161af4",
+                "reference": "d6429b0995b24a2d9dfe5587ee3a7071c1161af4",
                 "shasum": ""
             },
             "require": {
@@ -2445,8 +2644,8 @@
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "php": ">=5.3.3",
-                "phpspec/prophecy": "~1.3.1",
-                "phpunit/php-code-coverage": "~2.0",
+                "phpspec/prophecy": "~1.3,>=1.3.1",
+                "phpunit/php-code-coverage": "~2.0,>=2.0.11",
                 "phpunit/php-file-iterator": "~1.3.2",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "~1.0.2",
@@ -2494,7 +2693,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-02-05 15:51:19"
+            "time": "2015-03-29 09:24:05"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
