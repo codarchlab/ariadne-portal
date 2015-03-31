@@ -50,7 +50,14 @@ class SearchController extends Controller {
      * @return Response
      */
     public function byType($type) {
-        $query = array('match' => array('title' => 'historical'));
+        $input = Request::all();
+        
+        if(Request::has('q')){
+            $query = array('match' => array('title' => $input['q']));
+        }else{
+            $query = array('match' => array('title' => '*'));
+        }
+        
         $result = ElasticSearch::search($query, 'dataresources', $type);
 
         return view('search.simpleSearch')

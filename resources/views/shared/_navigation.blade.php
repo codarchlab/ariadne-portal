@@ -20,14 +20,14 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li {{ (Request::is('search/1') ? ' class=active' : '') }}>
-                                    <a href="{{ action('SearchController@index', 1) }}">
+                                <li {{ (Request::is('search/dataset') ? ' class=active' : '') }}>
+                                    <a href="{{ action('SearchController@byType', 'dataset') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-archive"></i> <span>Datasets</span>
                                     </a>
                                 </li>
-                                <li {{ (Request::is('search/0') ? ' class=active' : '') }}>
-                                    <a href="{{ action('SearchController@index', 0) }}">
+                                <li {{ (Request::is('search/collection') ? ' class=active' : '') }}>
+                                    <a href="{{ action('SearchController@byType', 'collection') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-picture-o"></i> <span>Collections</span>
                                     </a>
