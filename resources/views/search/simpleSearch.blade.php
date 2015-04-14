@@ -6,7 +6,7 @@
     <section class="content-header">
         <h1>
             Search
-            <small>Here you can search all available {{ $type }} </small>
+            <small>Here you can search all available data resources </small>
         </h1>
         <hr>
     </section>
@@ -15,14 +15,10 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <!-- search form -->
-                @if($type)
-                    {!! Form::open(array("url" => action("SearchController@byType", $type), "method" => "GET")) !!}
-                @else
-                    {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}
-                @endif
+                <!-- search form -->                
+                    {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}                
                     <div class="input-group">
-                        {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "placeholder" => "Search for ".$type."...")) !!}
+                        {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "placeholder" => "Search for data resource...")) !!}
                         <span class="input-group-btn">
                             {!! Form::submit("Search", array("class" => "btn btn-flat form-control", "style" => "border:1px #c0c0c0 solid;")) !!}
                         </span>
@@ -53,6 +49,10 @@
                                             <a href="{{ action('DatabaseController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
                                         @elseif($hit['_type'] == 'dataset')
                                             <a href="{{ action('DatasetController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                        @elseif($hit['_type'] == 'gis')
+                                            <a href="{{ action('GisController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                        @elseif($hit['_type'] == 'collection')
+                                            <a href="{{ action('CollectionController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>                                            
                                         @endif   
                                     </div>
                                 </div></br>

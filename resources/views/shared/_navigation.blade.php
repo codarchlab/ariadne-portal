@@ -14,26 +14,11 @@
                             </a>
                         </li>
 
-                        <li class="treeview {{ Utils::contains(Request::url(), array('search')) ? ' active' : '' }}" " >
-                            <a href="index.php?op=browse">
+                         <li{{ (Request::is('search') ? ' class=active' : '') }}>
+                            <a href="{{ action('SearchController@index') }}">
                                 <i class="fa fa-search"></i> <span>Search</span>
-                                <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
-                                <li {{ (Request::is('search/dataset') ? ' class=active' : '') }}>
-                                    <a href="{{ action('SearchController@byType', 'dataset') }}">
-                                        <i class="fa fa-angle-double-right"></i>
-                                        <i class="fa fa-archive"></i> <span>Datasets</span>
-                                    </a>
-                                </li>
-                                <li {{ (Request::is('search/collection') ? ' class=active' : '') }}>
-                                    <a href="{{ action('SearchController@byType', 'collection') }}">
-                                        <i class="fa fa-angle-double-right"></i>
-                                        <i class="fa fa-picture-o"></i> <span>Collections</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        </li> 
 
 
                         <li>

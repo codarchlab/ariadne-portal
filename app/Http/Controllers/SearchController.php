@@ -17,15 +17,8 @@ class SearchController extends Controller {
         $this->middleware('guest');
     }
 
-    public function index() {
-        $type = Utils::getDataResourceType(1);
-        $input = Request::all();
-         
-        $dataResources= SimpleSearch::getDataResources('arcaeol');
-
-        return view('search.simpleSearch')
-                ->with('type', $type)
-                ->with('drs', $dataResources);
+    public function index() {                 
+        return view('search.simpleSearch');
      }    
     
     public function search() {
