@@ -91,4 +91,21 @@ class ElasticSearch {
                         );
         return $paginator;
     }
+    
+    public static function ariadneSubject($query, $index, $type){
+
+        $searchParams = array(
+            'body' => $query
+        );
+        
+        $searchParams['index'] = $index;
+        $searchParams['type'] = $type;
+   
+        $client = self::getClient();
+        
+        $queryResponse = $client->search($searchParams);
+        
+        //return $queryResponse;
+        return $queryResponse['hits']['total'];
+    }
 }
