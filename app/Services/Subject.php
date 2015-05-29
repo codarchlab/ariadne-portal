@@ -35,7 +35,13 @@ class Subject {
         
         foreach($subjects as &$subject){
             $query = ['query'=>
-                  ['match' => ['ariadne:subject' => $subject->name]]
+                ['match' => 
+                    ['ariadne:subject' => [
+                            'query' => $subject->name,
+                            'cutoff_frequency' => 0.001
+                        ]
+                    ]
+                ]
              ];
  
             $subject->collections = ElasticSearch::ariadneSubject($query, 'dataresources', 'collection');
