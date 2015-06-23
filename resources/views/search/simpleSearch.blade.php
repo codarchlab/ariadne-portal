@@ -52,7 +52,9 @@
                                         @elseif($hit['_type'] == 'gis')
                                             <a href="{{ action('GisController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
                                         @elseif($hit['_type'] == 'collection')
-                                            <a href="{{ action('CollectionController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>                                            
+                                            <a href="{{ action('CollectionController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                        @else
+                                            <a href="#{{ $hit['_type'] }}">{{ $hit['_source']['title'] }}</a>
                                         @endif   
                                     </div>
                                 </div></br>
@@ -65,7 +67,9 @@
                                     <div class='col-md-10'>
                                         type: <b>{{ $hit['_type'] }}</b><br/>
                                         
-                                        subject: <b>{{ $hit['_source']['ariadne:subject'] }}</b> <br/>
+                                        @if(array_key_exists('subject', $hit['_source']))
+                                        {{ $hit['_source']['subject'] }}
+                                        @endif
                                         
                                     </div>
                                     <div class='col-md-2 pull-right'>         

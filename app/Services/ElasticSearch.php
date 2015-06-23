@@ -81,7 +81,7 @@ class ElasticSearch {
         $client = self::getClient();
         
         $queryResponse = $client->search($searchParams);
-        
+        //dd($queryResponse);
         $paginator = new LengthAwarePaginator(
                             $queryResponse['hits']['hits'],
                             $queryResponse['hits']['total'],
@@ -89,6 +89,10 @@ class ElasticSearch {
                             Paginator::resolveCurrentPage(),
                             ['path' => Paginator::resolveCurrentPath()]
                         );
+        $paginator->aggregations = array();
+        if($queryResponse['aggregations']){
+            $paginator->aggregations = $queryResponse['aggregations'];
+        }
         return $paginator;
     }
     

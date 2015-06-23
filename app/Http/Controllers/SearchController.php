@@ -24,27 +24,23 @@ class SearchController extends Controller {
     public function search() {
         $input = Request::all();
         if(Request::has('q')){
-            $query = ['query'=>
-                          ['multi_match' => [
-                              'query' => $input['q'],
-                              'type' => 'most_fields',
-                              'fields' => [
-                                            'title', 
-                                            'dcat:keyword', 
-                                            'ariadne:subject',
-                                            'dcterms:description',
-                                            'dcat:creator'
-                                          ]
-                          ]]
-                     ];
+            $query = ['query' => [
+                            'match' => ['_all' => $input['q']]
+                        ],
+                        'aggregations' => [
+                            'keyword'  => ['terms' => ['field' => 'keyword']],
+                            'rights'   => ['terms' => ['field' => 'rights']],
+                            'language' => ['terms' => ['field' => 'language']]
+                        ] 
+                    ];
         }else{
             $query = ['query'=>
-                          ['match' => ['title' => '*']]
+                          'match' => ['_all' => '*']
                      ];
         }
         
         $hits = ElasticSearch::search($query);
-
+        
         return view('search.simpleSearch')
                 ->with('type', null)
                 ->with('hits', $hits);
@@ -65,10 +61,10 @@ class SearchController extends Controller {
                               'type' => 'most_fields',
                               'fields' => [
                                             'title', 
-                                            'dcat:keyword', 
-                                            'ariadne:subject',
-                                            'dcterms:description',
-                                            'dcat:creator'
+                                            'keyword', 
+                                            'subject',
+                                            'description',
+                                            'creator'
                                           ]
                           ]]
                      ];
@@ -79,6 +75,8 @@ class SearchController extends Controller {
         }
         
         $hits = ElasticSearch::search($query, 'dataresources', $type);
+        
+        
         
         return view('search.simpleSearch')
                 ->with('type', $type)
