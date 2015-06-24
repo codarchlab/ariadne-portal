@@ -34,8 +34,9 @@ class SearchController extends Controller {
                         ] 
                     ];
         }else{
-            $query = ['query'=>
+            $query = ['query'=> [
                           'match' => ['_all' => '*']
+                        ]
                      ];
         }
         
