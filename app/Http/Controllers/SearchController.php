@@ -41,7 +41,8 @@ class SearchController extends Controller {
         }
         
         $hits = ElasticSearch::search($query);
-        
+        //dd($hits);
+        debug("aggregations", $hits->aggregations);
         return view('search.simpleSearch')
                 ->with('type', null)
                 ->with('hits', $hits);
