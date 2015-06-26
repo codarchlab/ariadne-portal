@@ -34,20 +34,14 @@ class Subject {
                 ->get();
         
         foreach($subjects as &$subject){
-            $query = ['query'=>
-                ['match' => 
-                    ['ariadne:subject' => [
-                            'query' => $subject->name,
-                            'cutoff_frequency' => 0.001
-                        ]
-                    ]
-                ]
-             ];
+             $query = ['query'=>
+                          ['match' => ['archaeologicalResourceType' => $subject->name]]
+                     ];
  
-            $subject->collections = ElasticSearch::ariadneSubject($query, 'dataresources', 'collection');
-            $subject->datasets = ElasticSearch::ariadneSubject($query, 'dataresources', 'dataset');
-            $subject->databases = ElasticSearch::ariadneSubject($query, 'dataresources', 'database');
-            $subject->gis = ElasticSearch::ariadneSubject($query, 'dataresources', 'gis');
+            $subject->collections = ElasticSearch::ariadneSubject($query, 'resource', 'collection');
+            $subject->datasets = ElasticSearch::ariadneSubject($query, 'resource', 'dataset');
+            $subject->databases = ElasticSearch::ariadneSubject($query, 'resource', 'database');
+            $subject->gis = ElasticSearch::ariadneSubject($query, 'resource', 'gis');
         }
 
         return $subjects;
