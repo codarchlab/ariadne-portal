@@ -17,7 +17,7 @@ Route::get('about', 'WelcomeController@about');
 Route::get('home', 'HomeController@index');
 
 Route::get('search', 'SearchController@index');
-Route::get('search', 'SearchController@search');
+Route::get('search', ['as'=> 'search', 'uses' => 'SearchController@search']);
 Route::get('search/{type}', 'SearchController@byType');
 
 Route::get('provider', 'ProviderController@index');

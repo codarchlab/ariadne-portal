@@ -27,68 +27,77 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-        <div>
-            <p><strong>Total:</strong> {{ $hits->total() }}</p>
-            {!! $hits->appends(['q' => Request::input('q')])->render() !!}
-        </div>
         <div class="row">
             <div class="col-md-3">
                 @foreach($hits->aggregations as $key => $aggregation)
                 @if(count($aggregation['buckets']) > 0)
                 <h3>{{ $key }}</h3>
-                <ul class="list-group">
+                <div class="list-group">
                   @foreach($aggregation['buckets'] as $bucket)
-                  <li class="list-group-item">
-                    <span class="badge">{{ $bucket['doc_count'] }}</span>
-                    {{ $bucket['key'] }}
-                  </li>
+                  
+                  @if(Utils::keyValueActive($key, $bucket['key']))
+                  <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" class="list-group-item active">
+                        <span class="badge">{{ $bucket['doc_count'] }}</span>
+                        {{ $bucket['key'] }}
+                  </a>                  
+                  @else
+                  <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item">
+                        <span class="badge">{{ $bucket['doc_count'] }}</span>
+                        {{ $bucket['key'] }}
+                  </a>
+                  @endif
                   @endforeach
-                </ul>
+                </div>
                 @endif
                 @endforeach
             </div>
             <div class="col-md-8" id="search_results_box">
-                <div class='row'><div class='col-md-12'><hr/></div></div>
+                <div class="row">
+                    <p><strong>Total:</strong> {{ $hits->total() }}</p>
+                    {!! $hits->appends(['q' => Request::input('q')])->render() !!}
+                </div>              
+                <div class="row"><div class="col-md-8"><hr/></div></div>
                 @foreach($hits as $hit)
 
-                    <div class='col-md-6'>
-                        <div class='box box-primary' id='dataresource_item' item_id='{{ $hit['_id'] }}'>
-                            <div class='box-body'>
-                                <div class='row'>
-                                    <div class='col-md-2'>
-                                        <img src='{{ asset("img/monument.png") }}' height='50' border='0'> 
+                    <div class="col-md-6">
+                        <div class="box box-primary" id="dataresource_item" item_id="{{ $hit['_id'] }}">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="{{ asset("img/monument.png") }}" height="50" border="0"> 
                                     </div>
-                                    <div class='col-md-10'>
-                                        <!--<a href='#' id='dr_item_href' item_id='{{ $hit['_id'] }}' data-toggle='modal' data-target='#item-modal'>{{ $hit['_source']['title'] }}</a>-->
-                                        @if($hit['_type'] == 'database')
-                                            <a href="{{ action('DatabaseController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
-                                        @elseif($hit['_type'] == 'dataset')
-                                            <a href="{{ action('DatasetController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
-                                        @elseif($hit['_type'] == 'gis')
-                                            <a href="{{ action('GisController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
-                                        @elseif($hit['_type'] == 'collection')
-                                            <a href="{{ action('CollectionController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                    <div class="col-md-10">
+                                        @if(array_key_exists('title', $hit['_source']))
+                                            @if($hit['_type'] == 'database')
+                                                <a href="{{ action('DatabaseController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                            @elseif($hit['_type'] == 'dataset')
+                                                <a href="{{ action('DatasetController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                            @elseif($hit['_type'] == 'gis')
+                                                <a href="{{ action('GisController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                            @elseif($hit['_type'] == 'collection')
+                                                <a href="{{ action('CollectionController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                            @endif
                                         @else
-                                            <a href="#{{ $hit['_type'] }}">{{ $hit['_source']['title'] }}</a>
+                                            <a href="#{{ $hit['_type'] }} {{ $hit['_id'] }}">[Title missing]</a>                                  
                                         @endif   
+                                        </a>
                                     </div>
                                 </div></br>
-                                <div class='row'>
-                                    <div class='col-md-12'>
+                                <div class="row">
+                                    <div class="col-md-12">
                                     <br/><br/>
                                     </div>
                                 </div>
-                                <div class='row'>
-                                    <div class='col-md-10'>
+                                <div class="row">
+                                    <div class="col-md-10">
                                         type: <b>{{ $hit['_type'] }}</b><br/>
                                         
                                         @if(array_key_exists('subject', $hit['_source']))
                                         {{ $hit['_source']['subject'] }}
                                         @endif
-                                        
                                     </div>
-                                    <div class='col-md-2 pull-right'>         
-                                        <br/><br/><a href='#' id='dr_item_href' item_id='{{ $hit['_id']  }}' data-toggle='modal' data-target='#item-modal'>more...</a>
+                                    <div class="col-md-2 pull-right">         
+                                        <br/><br/><a href="#" id="dr_item_href" item_id="{{ $hit['_id']  }}" data-toggle="modal" data-target="#item-modal">more...</a>
                                     </div>
                                 </div>
                             </div>

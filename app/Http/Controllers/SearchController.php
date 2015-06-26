@@ -27,12 +27,14 @@ class SearchController extends Controller {
             $query = ['query' => [
                             'match' => ['_all' => $input['q']]
                         ],
-                        'aggregations' => [
+                        'aggs' => [
                             'subject'  => ['terms' => ['field' => 'subject']],
                             'keyword'  => ['terms' => ['field' => 'keyword']],
+                            'archaeologicalResourceType'  => ['terms' => ['field' => 'archaeologicalResourceType']],
+                            'publisher'=> ['terms' => ['field' => 'publisher.name']],
                             'rights'   => ['terms' => ['field' => 'rights']],
                             'language' => ['terms' => ['field' => 'language']]
-                        ] 
+                        ]
                     ];
         }else{
             $query = ['query'=> [
