@@ -32,7 +32,22 @@
             {!! $hits->appends(['q' => Request::input('q')])->render() !!}
         </div>
         <div class="row">
-            <div class="col-md-12" id="search_results_box">
+            <div class="col-md-3">
+                @foreach($hits->aggregations as $key => $aggregation)
+                @if(count($aggregation['buckets']) > 0)
+                <h3>{{ $key }}</h3>
+                <ul class="list-group">
+                  @foreach($aggregation['buckets'] as $bucket)
+                  <li class="list-group-item">
+                    <span class="badge">{{ $bucket['doc_count'] }}</span>
+                    {{ $bucket['key'] }}
+                  </li>
+                  @endforeach
+                </ul>
+                @endif
+                @endforeach
+            </div>
+            <div class="col-md-8" id="search_results_box">
                 <div class='row'><div class='col-md-12'><hr/></div></div>
                 @foreach($hits as $hit)
 

@@ -28,6 +28,7 @@ class SearchController extends Controller {
                             'match' => ['_all' => $input['q']]
                         ],
                         'aggregations' => [
+                            'subject'  => ['terms' => ['field' => 'subject']],
                             'keyword'  => ['terms' => ['field' => 'keyword']],
                             'rights'   => ['terms' => ['field' => 'rights']],
                             'language' => ['terms' => ['field' => 'language']]
