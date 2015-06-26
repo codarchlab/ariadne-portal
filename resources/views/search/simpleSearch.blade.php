@@ -29,6 +29,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
+                @if(isset($hits->aggregations))
                 @foreach($hits->aggregations as $key => $aggregation)
                 @if(count($aggregation['buckets']) > 0)
                 <h3>{{ $key }}</h3>
@@ -50,6 +51,7 @@
                 </div>
                 @endif
                 @endforeach
+                @endif
             </div>
             <div class="col-md-8" id="search_results_box">
                 <div class="row">

@@ -90,7 +90,7 @@ class ElasticSearch {
                             ['path' => Paginator::resolveCurrentPath()]
                         );
         $paginator->aggregations = array();
-        if($queryResponse['aggregations']){
+        if(array_key_exists('aggregations', $queryResponse)){
             $paginator->aggregations = $queryResponse['aggregations'];
         }
         return $paginator;
