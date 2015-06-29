@@ -36,9 +36,7 @@ class SearchController extends Controller {
                 ];
         
         if(Request::has('q')){
-            $q = ['query_string' => [
-                                'query' => $input['q'],
-                            ]];
+            $q = ['query_string' => ['query' => $input['q']]];
             $query['query']['bool']['must'][] = $q;
             $query['aggs'] = $aggs;
         }else{
@@ -51,15 +49,15 @@ class SearchController extends Controller {
                $field = $agg['terms']['field'];
 
                foreach($values as $value){
-                    $a = [];
-                    $a[$field] = $value;
-                    $query['query']['bool']['must'][] = ['match'=>$a];
+                    $fieldQuery = [];
+                    $fieldQuery[$field] = $value;
+                    $query['query']['bool']['must'][] = ['match'=>$fieldQuery];
                }
                
            }
        }       
         debug($query);
-        $hits = ElasticSearch::search($query);
+        $hits = ElasticSearch::search($query, "resource");
         //dd($hits);
         debug("aggregations", $hits->aggregations);
         return view('search.simpleSearch')

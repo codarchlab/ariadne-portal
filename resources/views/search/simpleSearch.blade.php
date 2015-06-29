@@ -38,7 +38,7 @@
                   
                   @if(Utils::keyValueActive($key, $bucket['key']))
                   <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" class="list-group-item active">
-                        <span class="badge">{{ $bucket['doc_count'] }}</span>
+                      <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
                         {{ $bucket['key'] }}
                   </a>                  
                   @else
