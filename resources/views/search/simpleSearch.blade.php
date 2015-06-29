@@ -56,7 +56,7 @@
             <div class="col-md-8" id="search_results_box">
                 <div class="row">
                     <p><strong>Total:</strong> {{ $hits->total() }}</p>
-                    {!! $hits->appends(['q' => Request::input('q')])->render() !!}
+                    {!! $hits->appends(Input::all())->render() !!}
                 </div>              
                 <div class="row"><div class="col-md-8"><hr/></div></div>
                 @foreach($hits as $hit)
@@ -110,7 +110,7 @@
             </div>
         </div>
         <div class="row">
-            {!! $hits->appends(['q' => Request::input('q')])->render() !!}
+            {!! $hits->appends(Input::all())->render() !!}
         </div>
    </section>             
 </aside>
