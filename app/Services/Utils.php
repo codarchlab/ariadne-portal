@@ -150,7 +150,7 @@ class Utils {
     public static function addKeyValue($key, $value) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments)){
-            $arguments[$key] = $arguments[$key].",".$value;
+            $arguments[$key] = $arguments[$key]."|".$value;
         } else {
             $arguments[$key] = $value;
         }
@@ -169,7 +169,7 @@ class Utils {
         if(array_key_exists($key, $arguments)){
             if($arguments[$key] == $value){
                 unset($arguments[$key]);
-            } else if(strpos(urldecode($arguments[$key]), ',') !== FALSE){
+            } else if(strpos(urldecode($arguments[$key]), '|') !== FALSE){
                 $values = explode(',', urldecode($arguments[$key]));
                 if(($index = array_search($value, $values)) !== false) {
                     unset($values[$index]);
@@ -189,8 +189,8 @@ class Utils {
      */
     public static function getArgumentValues($key) {
         $arguments = Input::all();
-        if(array_key_exists($key, $arguments) && strpos(urldecode($arguments[$key]), ',') !== FALSE){
-            return explode(',', urldecode($arguments[$key]));
+        if(array_key_exists($key, $arguments) && strpos(urldecode($arguments[$key]), '|') !== FALSE){
+            return explode('|', urldecode($arguments[$key]));
         }else{
             return array($arguments[$key]);
         }
@@ -207,7 +207,7 @@ class Utils {
     public static function keyValueActive($key, $value) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments)){
-            $values = explode(",", $arguments[$key]);
+            $values = explode("|", $arguments[$key]);
             return in_array($value, $values);
         } 
         return false;

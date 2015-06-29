@@ -34,13 +34,11 @@ class SearchController extends Controller {
                 ];
         
         if(Request::has('q')){
-            $query = ['query' => [
-                            'match' => [
-                                '_all' => $input['q'],
-                            ]
-                        ],
-                        'aggs' => $aggs
-                    ];
+            $q = ['query_string' => [
+                                'query' => $input['q'],
+                            ]];
+            $query['query']['bool']['must'][] = $q;
+            $query['aggs'] = $aggs;
         }else{
             $query = ['aggs' => $aggs];
         }
@@ -49,15 +47,19 @@ class SearchController extends Controller {
                $values = Utils::getArgumentValues($key);
                
                $field = $agg['terms']['field'];
-               
-               $query['query']['filtered']['filter']['bool']['must']['term'][$field] = $values;
+
+               foreach($values as $value){
+                    $a = [];
+                    $a[$field] = $value;
+                    $query['query']['bool']['must'][] = ['match'=>$a];
+               }
                
            }
        }       
         debug($query);
         $hits = ElasticSearch::search($query);
         //dd($hits);
-        //debug("aggregations", $hits->aggregations);
+        debug("aggregations", $hits->aggregations);
         return view('search.simpleSearch')
                 ->with('type', null)
                 ->with('hits', $hits);
