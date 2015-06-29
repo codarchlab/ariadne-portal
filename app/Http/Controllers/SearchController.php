@@ -26,11 +26,13 @@ class SearchController extends Controller {
         
         $aggs = [
                     'subject'  => ['terms' => ['field' => 'subject']],
+                    'type'  => ['terms' => ['field' => '_type']],
                     'keyword'  => ['terms' => ['field' => 'keyword']],
                     'archaeologicalResourceType'  => ['terms' => ['field' => 'archaeologicalResourceType']],
                     'publisher'=> ['terms' => ['field' => 'publisher.name']],
                     'rights'   => ['terms' => ['field' => 'rights']],
-                    'language' => ['terms' => ['field' => 'language']]
+                    'language' => ['terms' => ['field' => 'language']],
+                    'issued' => ['terms' => ['field' => 'issued']]
                 ];
         
         if(Request::has('q')){
