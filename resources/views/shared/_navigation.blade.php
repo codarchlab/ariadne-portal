@@ -22,7 +22,7 @@
 
 
                         <li>
-                            <a href="index.php?op=map">
+                            <a href="{{ action('MapController@index') }}">
                                 <i class="fa fa-map-marker"></i> <span>Map based search</span>
                             </a>
                         </li>

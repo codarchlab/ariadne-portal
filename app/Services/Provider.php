@@ -3,6 +3,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Services\Utils;
+use App\Services\ElasticSearch;
 
 class Provider {
 
@@ -39,6 +40,33 @@ class Provider {
      * @return Array list of providers with statistics
      */
     public static function statistics2() {
+       
+        $providers = DB::table('providers')
+                ->select('providers.id', 'providers.name','providers.flag')
+                ->orderBy('providers.name')
+                ->get();
+       
+        foreach ($providers as &$provider) {
+            $provider->users = Utils::getUsersByProvider($provider->id);
+            $provider->collections = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('collection'));
+            $provider->datasets = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('dataset'));
+            $provider->databases = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('database'));
+            $provider->gis = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('gis'));
+            $provider->schemas = Utils::getTableCountByUsers("MetadataSchema", $provider->users);
+            $provider->services = Utils::getTableCountByUsers("ARIADNEService", $provider->users);
+            $provider->vocabularies = Utils::getTableCountByUsers("Vocabulary", $provider->users);
+            $provider->foaf = Utils::getTableCountByUsers("foafAgent", $provider->users);
+        }
+        
+        return $providers;
+    }
+    
+    /**
+     * Get statistics for each provider with new providers table and through ElasticSearch
+     * 
+     * @return Array list of providers with statistics
+     */
+    public static function statistics2withES() {
        
         $providers = DB::table('providers')
                 ->select('providers.id', 'providers.name','providers.flag')

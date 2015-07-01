@@ -32,6 +32,8 @@ Route::get('provider/{id}/agent', 'ProviderController@agent');
 
 Route::get('subject', 'SubjectController@index');
 
+Route::get('map', 'MapController@index');
+
 Route::get('collection', 'CollectionController@index');
 Route::get('collection/{id}', 'CollectionController@show');
 Route::get('collection/{id}/subject', 'CollectionController@subject');

@@ -112,4 +112,36 @@ class ElasticSearch {
         //return $queryResponse;
         return $queryResponse['hits']['total'];
     }
+    
+    public static function mapPointsCount($query, $index){
+
+        $searchParams = array(
+            'body' => $query
+        );
+        
+        $searchParams['index'] = $index;
+   
+        $client = self::getClient();
+        
+        $queryResponse = $client->search($searchParams);
+        
+        //return $queryResponse;
+        return $queryResponse['hits']['total'];
+    }
+    
+    public static function mapPoints($query, $index){
+
+        $searchParams = array(
+            'body' => $query
+        );
+        
+        $searchParams['index'] = $index;
+   
+        $client = self::getClient();
+        
+        $queryResponse = $client->search($searchParams);
+        
+        //return $queryResponse;
+        return $queryResponse['hits']['hits'];
+    }
 }
