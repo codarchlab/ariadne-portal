@@ -45,13 +45,11 @@
                 var markers = [];
                 <?php 
                 foreach ($points as &$point) {
-
-                    //$placename = $point['_source']['spatial'][0]['placeName'];    
-                    $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $point['_source']['spatial'][0]['placeName']);    
-                       
-                    //$placename = 'todo';    
-                    $lon 	= $point['_source']['spatial'][0]['lat'];      
-                    $lat 	= $point['_source']['spatial'][0]['lon'];    
+                    foreach ($point['_source']['spatial'] as &$spatial) {
+                        //$placename = $point['_source']['spatial'][0]['placeName'];    
+                        $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); 
+                        $lon 	= $spatial['lat'];      
+                        $lat 	= $spatial['lon'];    
                     
                 ?>		
 
@@ -81,7 +79,7 @@
 
                 markers.push(marker);
 
-                <?php  }?>
+                    <?php } }?>
 
                 for (var i = 0; i < markers.length; i++) {
                     var marker = markers[i];
