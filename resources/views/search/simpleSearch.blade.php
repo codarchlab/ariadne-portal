@@ -23,6 +23,13 @@
                             {!! Form::submit("Search", array("class" => "btn btn-flat form-control", "style" => "border:1px #c0c0c0 solid;")) !!}
                         </span>
                     </div>
+                    @if(isset($hits->aggregations))
+                        @foreach($hits->aggregations as $key => $aggregation)
+                        @if(Input::get($key))
+                        {!! Form::hidden($key, Input::get($key)) !!}
+                        @endif
+                        @endforeach
+                    @endif
                 {!! Form::close() !!}
             </div>
             <div class="col-md-3"></div>
@@ -59,6 +66,7 @@
                     {!! $hits->appends(Input::all())->render() !!}
                 </div>              
                 <div class="row"><div class="col-md-8"><hr/></div></div>
+                <div>
                 @foreach($hits as $hit)
 
                     <div class="col-md-6">
@@ -109,11 +117,13 @@
                     </div>						
 
                 @endforeach
+                </div>
+                <div class="row">
+                    {!! $hits->appends(Input::all())->render() !!}
+                </div>
             </div>
         </div>
-        <div class="row">
-            {!! $hits->appends(Input::all())->render() !!}
-        </div>
+
    </section>             
 </aside>
 @endsection
