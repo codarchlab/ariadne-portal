@@ -38,10 +38,10 @@ class Subject {
                           ['match' => ['archaeologicalResourceType' => $subject->name]]
                      ];
  
-            $subject->collections = ElasticSearch::ariadneSubject($query, 'resource', 'collection');
-            $subject->datasets = ElasticSearch::ariadneSubject($query, 'resource', 'dataset');
-            $subject->databases = ElasticSearch::ariadneSubject($query, 'resource', 'database');
-            $subject->gis = ElasticSearch::ariadneSubject($query, 'resource', 'gis');
+            $subject->collections = ElasticSearch::countHits($query, 'resource', 'collection');
+            $subject->datasets = ElasticSearch::countHits($query, 'resource', 'dataset');
+            $subject->databases = ElasticSearch::countHits($query, 'resource', 'database');
+            $subject->gis = ElasticSearch::countHits($query, 'resource', 'gis');
         }
 
         return $subjects;

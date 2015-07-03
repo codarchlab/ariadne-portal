@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\DB;
 use App\Services\Provider;
 use Illuminate\Support\Facades\Input;
+use App\Services\ElasticSearch;
 
 class Utils {
 
@@ -137,6 +138,24 @@ class Utils {
                 ->get();
 
          return $users;
+    }
+    
+    public static function getProvidersES() {
+        $query = ['query'=>
+                          ['match_all' => []]
+                     ];
+        $providers =  ElasticSearch::allHits($query,'common','providers');
+        
+        return $providers;
+    }
+    
+    public static function getProviderName($p_id) {
+        $query = ['query'=>
+                          ['match' => ['id' => $p_id]]
+                     ];
+        $provider =  ElasticSearch::allHits($query,'common','providers');
+        
+        return $provider[0]['_source']['acronym'];
     }
     
     
