@@ -13,6 +13,20 @@ return [
     
         'elastic_search_host' => env('ELASTIC_SEARCH_HOST'),
     
+    
+        'aggregations' => [
+                    'type'  => ['terms' => ['field' => '_type']],
+                    'archaeologicalResourceType'  => ['terms' => ['field' => 'archaeologicalResourceType']],
+                    'subject'  => ['terms' => ['field' => 'subject']],
+                    'keyword'  => ['terms' => ['field' => 'keyword']],
+                    'contributor'=> ['terms' => ['field' => 'contributor.name']],
+                    'publisher'=> ['terms' => ['field' => 'publisher.name']],
+                    'spatial'=> ['terms' => ['field' => 'spatial.placeName']],
+                    'rights'   => ['terms' => ['field' => 'rights']],
+                    'language' => ['terms' => ['field' => 'language']],
+                    'issued' => ['terms' => ['field' => 'issued']]
+                ],
+    
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode

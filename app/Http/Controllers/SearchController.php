@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ElasticSearch;
 use Utils;
 use Request;
+use Illuminate\Support\Facades\Config;
 
 class SearchController extends Controller {
 
@@ -24,18 +25,7 @@ class SearchController extends Controller {
     public function search() {
         $input = Request::all();
         
-        $aggregations = [
-                    'type'  => ['terms' => ['field' => '_type']],
-                    'archaeologicalResourceType'  => ['terms' => ['field' => 'archaeologicalResourceType']],
-                    'subject'  => ['terms' => ['field' => 'subject']],
-                    'keyword'  => ['terms' => ['field' => 'keyword']],
-                    'contributor'=> ['terms' => ['field' => 'contributor.name']],
-                    'publisher'=> ['terms' => ['field' => 'publisher.name']],
-                    'spatial'=> ['terms' => ['field' => 'spatial.placeName']],
-                    'rights'   => ['terms' => ['field' => 'rights']],
-                    'language' => ['terms' => ['field' => 'language']],
-                    'issued' => ['terms' => ['field' => 'issued']]
-                ];
+        $aggregations = Config::get('app.aggregations');
         
         if(Request::has('q')){
             $q = ['query_string' => ['query' => $input['q']]];
@@ -57,16 +47,15 @@ class SearchController extends Controller {
                }
                
            }
-       }       
-        debug($query);
+        }       
+
         $hits = ElasticSearch::search($query, "resource");
-        //dd($hits);
-        debug("hits", $hits);
+
         return view('search.simpleSearch')
                 ->with('type', null)
                 ->with('aggregations', $aggregations)
                 ->with('hits', $hits);
-     }     
+     }
      
     /**
      * Display a listing of the services.
