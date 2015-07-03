@@ -37,11 +37,11 @@
         <div class="row">
             <div class="col-md-3">
                 @if(isset($hits->aggregations))
-                @foreach($hits->aggregations as $key => $aggregation)
-                @if(count($aggregation['buckets']) > 0)
-                <h3>{{ $key }}</h3>
+                @foreach($aggregations as $key => $aggregation)
+                @if(count($hits->aggregations[$key]['buckets']) > 0)
+                <h3>{{ ucfirst($key) }}</h3>
                 <div class="list-group">
-                  @foreach($aggregation['buckets'] as $bucket)
+                  @foreach($hits->aggregations[$key]['buckets'] as $bucket)
                   
                   @if(Utils::keyValueActive($key, $bucket['key']))
                   <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" class="list-group-item active">
@@ -66,14 +66,14 @@
                     {!! $hits->appends(Input::all())->render() !!}
                 </div>              
                 <div class="row"><div class="col-md-8"><hr/></div></div>
-                <div>
+                <div class="row">
                 @foreach($hits as $hit)
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="box box-primary" id="dataresource_item" item_id="{{ $hit['_id'] }}">
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <img src="{{ asset("img/monument.png") }}" height="50" border="0"> 
                                     </div>
                                     <div class="col-md-10">
@@ -97,6 +97,9 @@
                                 </div></br>
                                 <div class="row">
                                     <div class="col-md-12">
+                                        @if(array_key_exists('description', $hit['_source']))
+                                            {{ str_limit($hit['_source']['description'], 170) }}
+                                        @endif
                                     <br/><br/>
                                     </div>
                                 </div>
@@ -107,9 +110,6 @@
                                         @if(array_key_exists('subject', $hit['_source']))
                                         {{ $hit['_source']['subject'] }}
                                         @endif
-                                    </div>
-                                    <div class="col-md-2 pull-right">         
-                                        <br/><br/><a href="#" id="dr_item_href" item_id="{{ $hit['_id']  }}" data-toggle="modal" data-target="#item-modal">more...</a>
                                     </div>
                                 </div>
                             </div>
