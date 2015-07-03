@@ -24,11 +24,12 @@ class SearchController extends Controller {
     public function search() {
         $input = Request::all();
         
-        $aggs = [
-                    'subject'  => ['terms' => ['field' => 'subject']],
+        $aggregations = [
                     'type'  => ['terms' => ['field' => '_type']],
-                    'keyword'  => ['terms' => ['field' => 'keyword']],
                     'archaeologicalResourceType'  => ['terms' => ['field' => 'archaeologicalResourceType']],
+                    'subject'  => ['terms' => ['field' => 'subject']],
+                    'keyword'  => ['terms' => ['field' => 'keyword']],
+                    'contributor'=> ['terms' => ['field' => 'contributor.name']],
                     'publisher'=> ['terms' => ['field' => 'publisher.name']],
                     'spatial'=> ['terms' => ['field' => 'spatial.placeName']],
                     'rights'   => ['terms' => ['field' => 'rights']],
@@ -39,15 +40,15 @@ class SearchController extends Controller {
         if(Request::has('q')){
             $q = ['query_string' => ['query' => $input['q']]];
             $query['query']['bool']['must'][] = $q;
-            $query['aggs'] = $aggs;
+            $query['aggs'] = $aggregations;
         }else{
-            $query = ['aggs' => $aggs];
+            $query = ['aggs' => $aggregations];
         }
-        foreach($aggs as $key => $agg){
+        foreach($aggregations as $key => $aggregation){
            if(!empty($input[$key])){
                $values = Utils::getArgumentValues($key);
                
-               $field = $agg['terms']['field'];
+               $field = $aggregation['terms']['field'];
 
                foreach($values as $value){
                     $fieldQuery = [];
@@ -60,9 +61,10 @@ class SearchController extends Controller {
         debug($query);
         $hits = ElasticSearch::search($query, "resource");
         //dd($hits);
-        debug("aggregations", $hits->aggregations);
+        debug("hits", $hits);
         return view('search.simpleSearch')
                 ->with('type', null)
+                ->with('aggregations', $aggregations)
                 ->with('hits', $hits);
      }     
      
