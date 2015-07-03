@@ -96,14 +96,14 @@ class ElasticSearch {
         return $paginator;
     }
     
-    public static function ariadneSubject($query, $index, $type){
+    public static function countHits($query, $index, $type=null){
 
         $searchParams = array(
             'body' => $query
         );
         
         $searchParams['index'] = $index;
-        $searchParams['type'] = $type;
+        if ($type) $searchParams['type'] = $type;
    
         $client = self::getClient();
         
@@ -113,29 +113,15 @@ class ElasticSearch {
         return $queryResponse['hits']['total'];
     }
     
-    public static function mapPointsCount($query, $index){
-
-        $searchParams = array(
-            'body' => $query
-        );
-        
-        $searchParams['index'] = $index;
-   
-        $client = self::getClient();
-        
-        $queryResponse = $client->search($searchParams);
-        
-        //return $queryResponse;
-        return $queryResponse['hits']['total'];
-    }
     
-    public static function mapPoints($query, $index){
+    public static function allHits($query, $index, $type=null){
 
         $searchParams = array(
             'body' => $query
         );
         
         $searchParams['index'] = $index;
+        if ($type) $searchParams['type'] = $type;
    
         $client = self::getClient();
         
@@ -143,5 +129,38 @@ class ElasticSearch {
         
         //return $queryResponse;
         return $queryResponse['hits']['hits'];
+    }
+    
+    public static function allResourcePaginated($query, $index, $type=null){
+        
+        $perPage = Request::input('perPage', 15);
+        $from = $perPage * (Request::input('page', 1) - 1);
+        
+        $searchParams = array(
+            'body' => $query,
+            'size' => $perPage,
+            'from' => $from
+        );
+        
+        $searchParams['index'] = $index;
+        if ($type) $searchParams['type'] = $type;
+   
+        $client = self::getClient();
+        
+        $queryResponse = $client->search($searchParams);
+        
+        foreach ($queryResponse['hits']['hits'] as &$obj) {
+            $obj['_source']['providerAcro'] = Utils::getProviderName($obj['_source']['providerId']);
+        }
+        
+        $paginator = new LengthAwarePaginator(
+                            $queryResponse['hits']['hits'],
+                            $queryResponse['hits']['total'],
+                            $perPage,
+                            Paginator::resolveCurrentPage(),
+                            ['path' => Paginator::resolveCurrentPath()]
+                        );
+       
+        return $paginator;
     }
 }

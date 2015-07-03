@@ -9,14 +9,14 @@ class Map {
         $size_query = ['filter'=>
                           ['exists' => ['field' => 'lat']]
                      ];
-        $points_size = Elasticsearch::mapPointsCount($size_query, 'resource');
+        $points_size = Elasticsearch::countHits($size_query, 'resource');
         
         $query= ['size' => $points_size,
                 'filter'=>
                           ['exists' => ['field' => 'lat']]
                      ];
        
-        $points = Elasticsearch::mapPoints($query, 'resource');
+        $points = Elasticsearch::allHits($query, 'resource');
                          
         return $points;
     }
