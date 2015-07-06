@@ -140,6 +140,11 @@ class Utils {
          return $users;
     }
     
+    /**
+     * Return all providers from ES index common/providers/
+     * 
+     * @return Array
+     */
     public static function getProvidersES() {
         $query = ['query'=>
                           ['match_all' => []]
@@ -149,6 +154,12 @@ class Utils {
         return $providers;
     }
     
+     /**
+     * Return provider name
+     * 
+     * @param int $p_id
+     * @return string
+     */
     public static function getProviderName($p_id) {
         $query = ['query'=>
                           ['match' => ['id' => $p_id]]
@@ -158,6 +169,19 @@ class Utils {
         return $provider[0]['_source']['acronym'];
     }
     
+     /**
+     * Return all providers from ES index common/providers/
+     * 
+     * @return Array
+     */
+    public static function geAriadneSubjectsES() {
+        $query = ['query'=>
+                          ['match_all' => []]
+                     ];
+        $aSubjects =  ElasticSearch::allHits($query,'common','archaeologicalResourceType');
+        
+        return $aSubjects;
+    }
     
     /**
      * Adds a value to a new parameter or adds it to the list of an existing

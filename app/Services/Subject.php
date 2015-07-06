@@ -28,20 +28,22 @@ class Subject {
     }
     
     public static function statisticsWithES() {
-        $subjects = DB::table('ariadne_subject')
+        /*$subjects = DB::table('ariadne_subject')
                 ->select('ariadne_subject.id', 'ariadne_subject.name')
                 ->orderBy('ariadne_subject.name')
-                ->get();
+                ->get();*/
         
+        $subjects = Utils::geAriadneSubjectsES();        
+               
         foreach($subjects as &$subject){
              $query = ['query'=>
-                          ['match' => ['archaeologicalResourceType' => $subject->name]]
+                          ['match' => ['archaeologicalResourceType' => $subject['_source']['name']]]
                      ];
  
-            $subject->collections = ElasticSearch::countHits($query, 'resource', 'collection');
-            $subject->datasets = ElasticSearch::countHits($query, 'resource', 'dataset');
-            $subject->databases = ElasticSearch::countHits($query, 'resource', 'database');
-            $subject->gis = ElasticSearch::countHits($query, 'resource', 'gis');
+            $subject['collections'] = ElasticSearch::countHits($query, 'resource', 'collection');
+            $subject['datasets'] = ElasticSearch::countHits($query, 'resource', 'dataset');
+            $subject['databases'] = ElasticSearch::countHits($query, 'resource', 'database');
+            $subject['gis'] = ElasticSearch::countHits($query, 'resource', 'gis');
         }
 
         return $subjects;

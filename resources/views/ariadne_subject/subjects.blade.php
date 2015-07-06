@@ -26,26 +26,26 @@
                             <tbody>
                                @foreach ($subjects as $subject)
                                 <tr>
-                                   <th>{{ $subject->name }}</th>  
-                                   @if ($subject->collections > 0)
-                                   <td><a href="{{ action('CollectionController@subject', $subject->id) }}">{{ $subject->collections }}</a></td>
+                                   <th>{{ $subject['_source']['name'] }}</th>  
+                                   @if ($subject['collections'] > 0)
+                                   <td><a href="{{ action('CollectionController@subject', $subject['_id']) }}">{{ $subject['collections'] }}</a></td>
                                    @else
-                                   <td>{{ $subject->collections }}</td>
+                                   <td>{{ $subject['collections'] }}</td>
                                    @endif
-                                   @if ($subject->datasets > 0)
-                                   <td><a href="{{ action('DatasetController@subject', $subject->id) }}">{{ $subject->datasets }}</a></td>
+                                   @if ($subject['datasets'] > 0)
+                                   <td><a href="{{ action('DatasetController@subject', $subject['_id']) }}">{{ $subject['datasets'] }}</a></td>
                                    @else
-                                   <td>{{ $subject->datasets }}</td>
+                                   <td>{{ $subject['datasets'] }}</td>
                                    @endif
-                                   @if ($subject->databases > 0)
-                                   <td><a href="{{ action('DatabaseController@subject', $subject->id) }}">{{ $subject->databases }}</a></td>
+                                   @if ($subject['databases'] > 0)
+                                   <td><a href="{{ action('DatabaseController@subject', $subject['_id']) }}">{{ $subject['databases'] }}</a></td>
                                    @else
-                                   <td>{{ $subject->databases }}</td>
+                                   <td>{{ $subject['databases'] }}</td>
                                    @endif
-                                   @if ($subject->gis > 0)
-                                   <td><a href="{{ action('GisController@subject', $subject->id) }}">{{ $subject->gis }}</a></td>
+                                   @if ($subject['gis'] > 0)
+                                   <td><a href="{{ action('GisController@subject', $subject['_id']) }}">{{ $subject['gis'] }}</a></td>
                                    @else
-                                   <td>{{ $subject->gis }}</td>
+                                   <td>{{ $subject['gis'] }}</td>
                                    @endif
                                 </tr>
                                @endforeach
