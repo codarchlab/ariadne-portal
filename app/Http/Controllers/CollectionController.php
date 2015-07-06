@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Collection;
 use App\Services\DataResource;
 use App\Services\Utils;
+use App\Services\Subject;
 
 class CollectionController extends Controller {
 
@@ -43,10 +44,11 @@ class CollectionController extends Controller {
         return view('provider_data.dataresource')->with('resource', $collection);
     }
 
-    public function subject($subjectId) {
-        $collections = Utils::allSubject($subjectId,0);
-        $providers = Utils::getProviders();
+    public function subject($subjectName) {
+        $collections = Subject::resourceWithSubject($subjectName,"collection");
+        $providers = Utils::getProvidersES();
        // dd($collections);
+       debug($collections);
         return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);
     }
 }

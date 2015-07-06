@@ -28,10 +28,6 @@ class Subject {
     }
     
     public static function statisticsWithES() {
-        /*$subjects = DB::table('ariadne_subject')
-                ->select('ariadne_subject.id', 'ariadne_subject.name')
-                ->orderBy('ariadne_subject.name')
-                ->get();*/
         
         $subjects = Utils::geAriadneSubjectsES();        
                
@@ -44,9 +40,22 @@ class Subject {
             $subject['datasets'] = ElasticSearch::countHits($query, 'resource', 'dataset');
             $subject['databases'] = ElasticSearch::countHits($query, 'resource', 'database');
             $subject['gis'] = ElasticSearch::countHits($query, 'resource', 'gis');
+            $subject['textualDocument'] = ElasticSearch::countHits($query, 'resource', 'textualDocument');
         }
 
         return $subjects;
+    }
+    
+    public static function resourceWithSubject($subjectName,$type) {
+         
+        
+        $query = ['query'=>
+                     ['match' => ['archaeologicalResourceType' => $subjectName]]
+                ];
+               
+        $resources = ElasticSearch::allResourcePaginated($query, 'resource', $type);
+              
+        return $resources;
     }
 
 }
