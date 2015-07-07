@@ -42,19 +42,21 @@
                 <h3>{{ ucfirst($key) }}</h3>
                 <div class="list-group">
                   @foreach($hits->aggregations[$key]['buckets'] as $bucket)
-                  @if(Utils::keyValueActive($key, $bucket['key']))
-                  <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" class="list-group-item active">
-                      <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
-                        {{ $bucket['key'] }}
-                  </a>
-                  @endif
+                    @if(Utils::keyValueActive($key, $bucket['key']))
+                    <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" class="list-group-item active">
+                        <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
+                          {{ $bucket['key'] }}
+                    </a>
+                    @endif
                   @endforeach
                   
                   @foreach($hits->aggregations[$key]['buckets'] as $bucket)
-                  <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item">
-                        <span class="badge">{{ $bucket['doc_count'] }}</span>
-                        {{ $bucket['key'] }}
-                  </a>
+                    @if(Utils::keyValueActive($key, $bucket['key']) == false)
+                    <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item">
+                          <span class="badge">{{ $bucket['doc_count'] }}</span>
+                          {{ $bucket['key'] }}
+                    </a>
+                    @endif
                   @endforeach                  
                   
                 </div>
