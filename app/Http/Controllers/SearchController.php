@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Config;
 use App\Services\ElasticSearch;
 use Utils;
 use Request;
-use Illuminate\Support\Facades\Config;
 
 class SearchController extends Controller {
 
@@ -48,7 +48,6 @@ class SearchController extends Controller {
                     $fieldQuery[$field] = $value;
                     $query['query']['bool']['must'][] = ['match' => $fieldQuery];
                }
-               
            }
         }       
 
@@ -60,42 +59,4 @@ class SearchController extends Controller {
                 ->with('hits', $hits);
      }
      
-    /**
-     * Display a listing of the services.
-     *
-     * @return Response
-     */
-    public function byType($type) {
-        $input = Request::all();
-        
-        if(Request::has('q')){
-            $query = ['query'=>
-                          ['multi_match' => [
-                              'query' => $input['q'],
-                              'type' => 'most_fields',
-                              'fields' => [
-                                            'title', 
-                                            'keyword', 
-                                            'subject',
-                                            'description',
-                                            'creator'
-                                          ]
-                          ]]
-                     ];
-        }else{
-            $query = ['query'=>
-                          ['match' => ['title' => '*']]
-                     ];
-        }
-        
-        $hits = ElasticSearch::search($query, 'dataresources', $type);
-        
-        
-        
-        return view('search.simpleSearch')
-                ->with('type', $type)
-                ->with('hits', $hits);
-    }
-
-
 }
