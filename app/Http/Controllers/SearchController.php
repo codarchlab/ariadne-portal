@@ -22,20 +22,16 @@ class SearchController extends Controller {
         return view('search.simpleSearch');
     }    
     
-    public function search() {
-        $input = Request::all();
-        
-        $aggregations = Config::get('app.aggregations');
+    public function search() {                
+        $query = ['aggregations' => Config::get('app.aggregations')];
         
         if(Request::has('q')){
-            $q = ['query_string' => ['query' => $input['q']]];
+            $q = ['query_string' => ['query' => Request::get('q')]];
             $query['query']['bool']['must'][] = $q;
-            $query['aggs'] = $aggregations;
-        }else{
-            $query = ['aggs' => $aggregations];
         }
-        foreach($aggregations as $key => $aggregation){
-           if(!empty($input[$key])){
+        
+        foreach($query['aggregations'] as $key => $aggregation){
+           if(Request::has($key)){
                $values = Utils::getArgumentValues($key);
                
                $field = $aggregation['terms']['field'];
@@ -43,17 +39,17 @@ class SearchController extends Controller {
                foreach($values as $value){
                     $fieldQuery = [];
                     $fieldQuery[$field] = $value;
-                    $query['query']['bool']['must'][] = ['match'=>$fieldQuery];
+                    $query['query']['bool']['must'][] = ['match' => $fieldQuery];
                }
                
            }
         }       
 
-        $hits = ElasticSearch::search($query, "resource");
+        $hits = ElasticSearch::search($query, 'resource');
 
         return view('search.simpleSearch')
                 ->with('type', null)
-                ->with('aggregations', $aggregations)
+                ->with('aggregations', $query['aggregations'])
                 ->with('hits', $hits);
      }
      
