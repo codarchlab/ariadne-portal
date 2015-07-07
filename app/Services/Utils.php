@@ -213,10 +213,10 @@ class Utils {
             if($arguments[$key] == $value){
                 unset($arguments[$key]);
             } else if(strpos(urldecode($arguments[$key]), '|') !== FALSE){
-                $values = explode(',', urldecode($arguments[$key]));
+                $values = explode('|', urldecode($arguments[$key]));
                 if(($index = array_search($value, $values)) !== false) {
                     unset($values[$index]);
-                    $arguments[$key] = implode(',', $values);
+                    $arguments[$key] = implode('|', $values);
                 }
             }
             

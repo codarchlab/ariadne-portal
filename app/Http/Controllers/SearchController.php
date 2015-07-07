@@ -22,6 +22,13 @@ class SearchController extends Controller {
         return view('search.simpleSearch');
     }    
     
+    /**
+     * Performs a faceted search depending on the GET-values
+     * Eg ?q=dig&keyword=england does a free text search for dig in
+     * resources where the keyword england exists
+     * 
+     * @return View rendered pagination for search results
+     */
     public function search() {                
         $query = ['aggregations' => Config::get('app.aggregations')];
         
