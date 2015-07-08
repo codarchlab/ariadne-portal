@@ -13,40 +13,6 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">               
-                {!! Form::open(array("action" => "SearchController@search", "method" => "GET", "class" => "form-inline")) !!}            
-
-                    {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "style" => "width:60%", "placeholder" => "Search for resources...")) !!}
-
-                    @if(isset($hits->aggregations))
-                        @foreach($hits->aggregations as $key => $aggregation)
-                            @if(Input::get($key))
-                                {!! Form::hidden($key, Input::get($key)) !!}
-                            @endif
-                        @endforeach
-                    @endif
-                                        
-                    {!! Form::submit("Search", array("class" => "btn btn-primary")) !!}
-                {!! Form::close() !!}
-                <div class="row">
-                @foreach($aggregations as $key => $aggregation)
-                    @if(Input::has($key))
-                        @foreach(Utils::getArgumentValues($key) as $value)
-                            @if(Utils::keyValueActive($key, $value))
-                            <a href="{{ route('search', Utils::removeKeyValue($key, $value)) }}" style="margin-right: 4px" class="label label-info">
-                                <span class="text-info">{{ ucfirst($key) }}:</span> {{ $value }} 
-                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </a> 
-                            @endif
-                        @endforeach
-                    @endif
-                @endforeach
-                </div>
-            </div>
-
-        </div>
-        <div class="row">
             <div class="col-md-2">
 
             @foreach($aggregations as $key => $aggregation)
@@ -78,6 +44,39 @@
             @endforeach
             </div>
             <div class="col-md-8" id="search_results_box">
+                <div class="row">
+                    <div class="col-md-8">               
+                        {!! Form::open(array("action" => "SearchController@search", "method" => "GET", "class" => "form-inline")) !!}            
+
+                            {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "style" => "width:60%", "placeholder" => "Search for resources...")) !!}
+
+                            @if(isset($hits->aggregations))
+                                @foreach($hits->aggregations as $key => $aggregation)
+                                    @if(Input::get($key))
+                                        {!! Form::hidden($key, Input::get($key)) !!}
+                                    @endif
+                                @endforeach
+                            @endif
+
+                            {!! Form::submit("Search", array("class" => "btn btn-primary")) !!}
+                        {!! Form::close() !!}
+                        <div class="row">
+                        @foreach($aggregations as $key => $aggregation)
+                            @if(Input::has($key))
+                                @foreach(Utils::getArgumentValues($key) as $value)
+                                    @if(Utils::keyValueActive($key, $value))
+                                    <a href="{{ route('search', Utils::removeKeyValue($key, $value)) }}" style="margin-right: 4px" class="label label-info">
+                                        <span class="text-info">{{ ucfirst($key) }}:</span> {{ $value }} 
+                                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </a> 
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                        </div>
+                    </div>
+
+                </div>                
                 <div class="row">
                     <p><strong>Total:</strong> {{ $hits->total() }}</p>
                     {!! $hits->appends(Input::all())->render() !!}
