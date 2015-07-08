@@ -96,6 +96,7 @@
                                         <img src="{{ asset("img/monument.png") }}" height="50" border="0"> 
                                     </div>
                                     <div class="col-md-10">
+                                        <div class="row">
                                         @if(array_key_exists('title', $hit['_source']))
                                             @if($hit['_type'] == 'database')
                                                 <a href="{{ action('DatabaseController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
@@ -112,14 +113,10 @@
                                             <a href="#{{ $hit['_type'] }} {{ $hit['_id'] }}">[Title missing]</a>                                  
                                         @endif   
                                         </a>
-                                    </div>
-                                </div></br>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                        </div>
                                         @if(array_key_exists('description', $hit['_source']))
-                                            {{ str_limit($hit['_source']['description'], 170) }}
+                                            {{ str_limit($hit['_source']['description'], 290) }}
                                         @endif
-                                    <br/><br/>
                                     </div>
                                 </div>
                                 <div class="row">
