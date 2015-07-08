@@ -13,8 +13,8 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <!-- search form -->                
                 {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}                
                 <div class="input-group">
@@ -38,7 +38,7 @@
                             @foreach($hits->aggregations[$key]['buckets'] as $bucket)
                                 @if(Utils::keyValueActive($key, $bucket['key']))
                                 <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" style="margin-right: 4px" class="label label-info">
-                                    <strong>{{ ucfirst($key) }}:</strong>{{ $bucket['key'] }} 
+                                    <span class="text-info">{{ ucfirst($key) }}:</span> {{ $bucket['key'] }} 
                                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </a> 
                                 @endif
@@ -51,11 +51,11 @@
 
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 @if(isset($hits->aggregations))
                 @foreach($aggregations as $key => $aggregation)
                 @if(count($hits->aggregations[$key]['buckets']) > 0)
-                <h3>{{ ucfirst($key) }}</h3>
+                <h4>{{ ucfirst($key) }}</h4>
                 <div class="list-group">
                   @foreach($hits->aggregations[$key]['buckets'] as $bucket)
                     @if(Utils::keyValueActive($key, $bucket['key']))
