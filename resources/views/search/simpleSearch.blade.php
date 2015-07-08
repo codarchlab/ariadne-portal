@@ -14,70 +14,68 @@
     <section class="content">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <!-- search form -->                
+            <div class="col-md-8">               
                 {!! Form::open(array("action" => "SearchController@search", "method" => "GET", "class" => "form-inline")) !!}            
 
-                    {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "style"=>"width:60%", "placeholder" => "Search for resource...")) !!}
+                    {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "style" => "width:60%", "placeholder" => "Search for resources...")) !!}
 
                     @if(isset($hits->aggregations))
                         @foreach($hits->aggregations as $key => $aggregation)
-                        @if(Input::get($key))
-                        {!! Form::hidden($key, Input::get($key)) !!}
-                        @endif
+                            @if(Input::get($key))
+                                {!! Form::hidden($key, Input::get($key)) !!}
+                            @endif
                         @endforeach
                     @endif
                                         
                     {!! Form::submit("Search", array("class" => "btn btn-primary")) !!}
                 {!! Form::close() !!}
                 <div class="row">
-                @if(isset($hits->aggregations))
-                    @foreach($aggregations as $key => $aggregation)
-                        @if(count($hits->aggregations[$key]['buckets']) > 0)
-                            @foreach($hits->aggregations[$key]['buckets'] as $bucket)
-                                @if(Utils::keyValueActive($key, $bucket['key']))
-                                <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" style="margin-right: 4px" class="label label-info">
-                                    <span class="text-info">{{ ucfirst($key) }}:</span> {{ $bucket['key'] }} 
-                                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </a> 
-                                @endif
-                            @endforeach
-                        @endif
-                    @endforeach
-                @endif
+                @foreach($aggregations as $key => $aggregation)
+                    @if(Input::has($key))
+                        @foreach(Utils::getArgumentValues($key) as $value)
+                            @if(Utils::keyValueActive($key, $value))
+                            <a href="{{ route('search', Utils::removeKeyValue($key, $value)) }}" style="margin-right: 4px" class="label label-info">
+                                <span class="text-info">{{ ucfirst($key) }}:</span> {{ $value }} 
+                              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a> 
+                            @endif
+                        @endforeach
+                    @endif
+                @endforeach
                 </div>
             </div>
 
         </div>
         <div class="row">
             <div class="col-md-2">
-                @if(isset($hits->aggregations))
-                @foreach($aggregations as $key => $aggregation)
-                @if(count($hits->aggregations[$key]['buckets']) > 0)
+
+            @foreach($aggregations as $key => $aggregation)
+                @if(count($hits->aggregations[$key]['buckets']) > 0 || Input::has($key))
                 <h4>{{ ucfirst($key) }}</h4>
                 <div class="list-group">
-                  @foreach($hits->aggregations[$key]['buckets'] as $bucket)
-                    @if(Utils::keyValueActive($key, $bucket['key']))
-                    <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" class="list-group-item active">
-                        <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
-                          {{ $bucket['key'] }}
-                    </a>
-                    @endif
-                  @endforeach
+                  @if(Input::has($key))
+                    @foreach(Utils::getArgumentValues($key) as $value)
+                      @if(Utils::keyValueActive($key, $value))
+                        <a href="{{ route('search', Utils::removeKeyValue($key, $value)) }}" class="list-group-item active">
+                            <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
+                              {{ $value }}
+                        </a>
+                      @endif
+                    @endforeach
+                  @endif
                   
                   @foreach($hits->aggregations[$key]['buckets'] as $bucket)
                     @if(Utils::keyValueActive($key, $bucket['key']) == false)
-                    <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item">
-                          <span class="badge">{{ $bucket['doc_count'] }}</span>
-                          {{ $bucket['key'] }}
-                    </a>
+                        <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item">
+                              <span class="badge">{{ $bucket['doc_count'] }}</span>
+                              {{ $bucket['key'] }}
+                        </a>
                     @endif
                   @endforeach                  
                   
                 </div>
                 @endif
-                @endforeach
-                @endif
+            @endforeach
             </div>
             <div class="col-md-8" id="search_results_box">
                 <div class="row">
