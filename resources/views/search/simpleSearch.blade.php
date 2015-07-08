@@ -16,20 +16,19 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <!-- search form -->                
-                {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}                
-                <div class="input-group">
-                    {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "placeholder" => "Search for data resource...")) !!}
-                    <span class="input-group-btn">
-                        {!! Form::submit("Search", array("class" => "btn btn-flat form-control", "style" => "border:1px #c0c0c0 solid;")) !!}
-                    </span>
-                </div>
-                @if(isset($hits->aggregations))
-                    @foreach($hits->aggregations as $key => $aggregation)
-                    @if(Input::get($key))
-                    {!! Form::hidden($key, Input::get($key)) !!}
+                {!! Form::open(array("action" => "SearchController@search", "method" => "GET", "class" => "form-inline")) !!}            
+
+                    {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "style"=>"width:60%", "placeholder" => "Search for resource...")) !!}
+
+                    @if(isset($hits->aggregations))
+                        @foreach($hits->aggregations as $key => $aggregation)
+                        @if(Input::get($key))
+                        {!! Form::hidden($key, Input::get($key)) !!}
+                        @endif
+                        @endforeach
                     @endif
-                    @endforeach
-                @endif
+                                        
+                    {!! Form::submit("Search", array("class" => "btn btn-primary")) !!}
                 {!! Form::close() !!}
                 <div class="row">
                 @if(isset($hits->aggregations))
