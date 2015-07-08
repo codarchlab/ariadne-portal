@@ -16,23 +16,39 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <!-- search form -->                
-                    {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}                
-                    <div class="input-group">
-                        {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "placeholder" => "Search for data resource...")) !!}
-                        <span class="input-group-btn">
-                            {!! Form::submit("Search", array("class" => "btn btn-flat form-control", "style" => "border:1px #c0c0c0 solid;")) !!}
-                        </span>
-                    </div>
-                    @if(isset($hits->aggregations))
-                        @foreach($hits->aggregations as $key => $aggregation)
-                        @if(Input::get($key))
-                        {!! Form::hidden($key, Input::get($key)) !!}
-                        @endif
-                        @endforeach
+                {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}                
+                <div class="input-group">
+                    {!! Form::text("q", Request::input('q'), array("id" => "q", "class" => "form-control", "placeholder" => "Search for data resource...")) !!}
+                    <span class="input-group-btn">
+                        {!! Form::submit("Search", array("class" => "btn btn-flat form-control", "style" => "border:1px #c0c0c0 solid;")) !!}
+                    </span>
+                </div>
+                @if(isset($hits->aggregations))
+                    @foreach($hits->aggregations as $key => $aggregation)
+                    @if(Input::get($key))
+                    {!! Form::hidden($key, Input::get($key)) !!}
                     @endif
+                    @endforeach
+                @endif
                 {!! Form::close() !!}
+                <div class="row">
+                @if(isset($hits->aggregations))
+                    @foreach($aggregations as $key => $aggregation)
+                        @if(count($hits->aggregations[$key]['buckets']) > 0)
+                            @foreach($hits->aggregations[$key]['buckets'] as $bucket)
+                                @if(Utils::keyValueActive($key, $bucket['key']))
+                                <a href="{{ route('search', Utils::removeKeyValue($key, $bucket['key'])) }}" style="margin-right: 4px" class="label label-info">
+                                    <strong>{{ ucfirst($key) }}:</strong>{{ $bucket['key'] }} 
+                                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </a> 
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
+                @endif
+                </div>
             </div>
-            <div class="col-md-3"></div>
+
         </div>
         <div class="row">
             <div class="col-md-3">
