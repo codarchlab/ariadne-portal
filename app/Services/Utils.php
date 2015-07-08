@@ -197,6 +197,11 @@ class Utils {
         } else {
             $arguments[$key] = $value;
         }
+        
+        if(array_key_exists('page', $arguments)){
+            unset($arguments['page']);
+        }
+        
         return $arguments;
     }
  
@@ -221,6 +226,11 @@ class Utils {
             }
             
         }
+        
+        if(array_key_exists('page', $arguments)){
+            unset($arguments['page']);
+        }
+        
         return $arguments;
     }    
     
