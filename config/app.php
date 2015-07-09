@@ -16,7 +16,7 @@ return [
         /* Aggregations used for filtering in the search */
         'elastic_search_aggregations' => [
             'type' => ['terms' => ['field' => '_type']],
-            'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType']],
+            'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name']],
             'subject' => ['terms' => ['field' => 'subject']],
             'keyword' => ['terms' => ['field' => 'keyword']],
             'contributor' => ['terms' => ['field' => 'contributor.name']],
