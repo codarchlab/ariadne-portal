@@ -50,33 +50,33 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($providers as $provider)
-                                            @if($provider->datasets > 0 || $provider->collections > 0 || $provider->databases > 0)
+                                            @if($provider['datasets'] > 0 || $provider['collections'] > 0 || $provider['databases'] > 0)
                                             <tr>
                                                 <td>
-                                                    <img src='img/language/{{ $provider->flag }}.png' style='height: 24px;'/>
+                                                    <img src='img/language/{{ $provider['_source']['flag'] }}.png' style='height: 24px;'/>
                                                 </td>
                                                 <th>
-                                                    {{ $provider->name }}
+                                                    {{ $provider['_source']['acronym'] }}
                                                 </th>   
                                                 <td>
-                                                    @if($provider->collections > 0)
-                                                        <a href="{{ action('ProviderController@collection', $provider->id) }}">{{ $provider->collections }}</a>
+                                                    @if($provider['collections'] > 0)
+                                                        <a href="{{ action('ProviderController@collection', $provider['_id']) }}">{{ $provider['collections'] }}</a>
                                                     @else
-                                                        {{ $provider->collections }}
+                                                        {{ $provider['collections'] }}
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($provider->datasets > 0)
-                                                        <a href="{{ action('ProviderController@dataset', $provider->id) }}">{{ $provider->datasets }}</a>
+                                                    @if($provider['datasets'] > 0)
+                                                        <a href="{{ action('ProviderController@dataset', $provider['_id']) }}">{{ $provider['datasets'] }}</a>
                                                     @else
-                                                        {{ $provider->datasets }}
+                                                        {{ $provider['datasets'] }}
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($provider->databases > 0)
-                                                        <a href="{{ action('ProviderController@database', $provider->id) }}">{{ $provider->databases }}</a>
+                                                    @if($provider['databases'] > 0)
+                                                        <a href="{{ action('ProviderController@database', $provider['_id']) }}">{{ $provider['databases'] }}</a>
                                                     @else
-                                                        {{ $provider->databases }}
+                                                        {{ $provider['databases'] }}
                                                     @endif
                                                 </td>
                                             </tr>

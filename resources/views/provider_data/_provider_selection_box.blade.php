@@ -8,7 +8,7 @@
                 <select name="search_query" class="form-control" style='display:inline; width: 70%;'>
                     <option value='0'>-</option>
                     @foreach ($providers as $provider)
-
+                        <option value='{{$provider['_id']}}'>{{$provider['_source']['acronym']}} </option>
                     @endforeach                    
                 </select> 
                 <button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>

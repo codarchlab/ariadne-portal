@@ -68,21 +68,19 @@ class Provider {
      */
     public static function statistics2withES() {
        
-        $providers = DB::table('providers')
-                ->select('providers.id', 'providers.name','providers.flag')
-                ->orderBy('providers.name')
-                ->get();
+        $providers = Utils::getProvidersES();
        
         foreach ($providers as &$provider) {
-            $provider->users = Utils::getUsersByProvider($provider->id);
-            $provider->collections = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('collection'));
-            $provider->datasets = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('dataset'));
-            $provider->databases = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('database'));
-            $provider->gis = Utils::getTableCountByUsers("DataResource", $provider->users, Utils::getDataResourceType('gis'));
-            $provider->schemas = Utils::getTableCountByUsers("MetadataSchema", $provider->users);
-            $provider->services = Utils::getTableCountByUsers("ARIADNEService", $provider->users);
-            $provider->vocabularies = Utils::getTableCountByUsers("Vocabulary", $provider->users);
-            $provider->foaf = Utils::getTableCountByUsers("foafAgent", $provider->users);
+            $query = ['query'=>
+                          ['match' => ['providerId' => $provider['_source']['id']]]
+                     ];
+ 
+            $provider['collections'] = ElasticSearch::countHits($query, 'resource', 'collection');
+            $provider['datasets'] = ElasticSearch::countHits($query, 'resource', 'dataset');
+            $provider['databases'] = ElasticSearch::countHits($query, 'resource', 'database');
+            $provider['gis'] = ElasticSearch::countHits($query, 'resource', 'gis');
+            $provider['textualDocument'] = ElasticSearch::countHits($query, 'resource', 'textualDocument');
+           
         }
         
         return $providers;

@@ -32,15 +32,15 @@ class ProviderController extends Controller {
      * @return Response
      */
     public function index() {
-        $providers = Provider::statistics2();
+        $providers = Provider::statistics2withES();
         return view('provider_info.providers')
                 ->with('providers', $providers)
-                ->with('full', true);
+                ->with('full', false);
     }
     
     public function collection($id){
-        $collections = Collection::all($id);
-        $providers = Utils::getProviders();
+        $collections = Collection::allES($id);
+        $providers = Utils::getProvidersES();
         return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);
     }
     
