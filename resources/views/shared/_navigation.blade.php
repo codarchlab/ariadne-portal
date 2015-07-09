@@ -63,6 +63,7 @@
                                         <i class="fa fa-globe"></i> <span>GIS</span>
                                     </a>
                                 </li>
+                                <!--
                                 <li {{ (Request::is('metaSchema') ? ' class=active' : '') }}>
                                     <a href="{{ action('MetaSchemaController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
@@ -86,7 +87,7 @@
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-user"></i> <span>Agents</span>
                                     </a>
-                                </li>								
+                                </li>-->								
                             </ul>
                         </li>    						
 

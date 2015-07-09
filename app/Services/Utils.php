@@ -183,6 +183,22 @@ class Utils {
         return $aSubjects;
     }
     
+    public static function allESwithType($provider = null,$type) {
+
+        $query = ['query'=>
+                          ['match_all' => []]
+                     ];
+        
+        if ($provider) {
+             $query = ['query'=>
+                          ['match' => ['providerId' => $provider]]
+                     ];
+        }       
+        $collections = ElasticSearch::allResourcePaginated($query, 'resource', $type);
+              
+        return $collections;
+    }
+    
     /**
      * Adds a value to a new parameter or adds it to the list of an existing
      * 

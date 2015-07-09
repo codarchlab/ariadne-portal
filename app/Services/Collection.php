@@ -36,21 +36,6 @@ class Collection {
         return $collections;
     }
     
-    public static function allES($provider = null) {
-
-        $query = ['query'=>
-                          ['match_all' => []]
-                     ];
-        
-        if ($provider) {
-             $query = ['query'=>
-                          ['match' => ['providerId' => $provider]]
-                     ];
-        }       
-        $collections = ElasticSearch::allResourcePaginated($query, 'resource', 'collection');
-              
-        return $collections;
-    }
     
     /**
      * Get a specific collection

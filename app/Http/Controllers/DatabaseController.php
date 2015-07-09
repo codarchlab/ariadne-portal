@@ -24,8 +24,10 @@ class DatabaseController extends Controller {
      * @return View
      */
     public function index() {
-        $databases = Database::all();
-        $providers = Utils::getProviders();
+        //$databases = Database::all();
+        //$providers = Utils::getProviders();
+        $databases = Utils::allESwithType(null,'database');
+        $providers = Utils::getProvidersES();
         return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers);
     }
 

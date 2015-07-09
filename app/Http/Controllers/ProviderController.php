@@ -39,26 +39,28 @@ class ProviderController extends Controller {
     }
     
     public function collection($id){
-        $collections = Collection::allES($id);
+        $collections = Utils::allESwithType($id,'collection');
         $providers = Utils::getProvidersES();
         return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);
     }
     
     public function dataset($id){
-        $datasets = Dataset::all($id);
-        $providers = Utils::getProviders();
+        $datasets = Utils::allESwithType($id,'dataset');
+        $providers = Utils::getProvidersES();
         return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers);        
     }
     
     public function database($id){
-        $databases = Database::all($id);
-        $providers = Utils::getProviders();
+        //$databases = Database::all($id);
+        $databases = Utils::allESwithType($id,'database');
+        $providers = Utils::getProvidersES();
         return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers);        
     }
     
     public function gis($id){
-        $giss = Gis::all($id);
-        $providers = Utils::getProviders();
+       // $giss = Gis::all($id);
+        $giss = Utils::allESwithType($id,'gis');
+        $providers = Utils::getProvidersES();
         return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers);            
     }
     

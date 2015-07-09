@@ -25,8 +25,10 @@ class DatasetController extends Controller {
      * @return Response
      */
     public function index() {
-        $datasets = Dataset::all();
-        $providers = Utils::getProviders();
+        //$datasets = Dataset::all();
+        //$providers = Utils::getProviders();
+        $datasets = Utils::allESwithType(null,'dataset');
+        $providers = Utils::getProvidersES();
         return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers);
     }
 

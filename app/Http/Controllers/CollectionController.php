@@ -27,7 +27,7 @@ class CollectionController extends Controller {
     public function index() {
         //$collections = Collection::all();
         //$providers = Utils::getProviders();
-        $collections = Collection::allES();
+        $collections = Utils::allESwithType(null,'collection');
         $providers = Utils::getProvidersES();
         //dd($collections);
         return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);

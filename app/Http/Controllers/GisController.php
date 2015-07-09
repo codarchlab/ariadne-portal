@@ -25,8 +25,10 @@ class GisController extends Controller {
      * @return Response
      */
     public function index() {
-        $giss = Gis::all();
-        $providers = Utils::getProviders();
+        //$giss = Gis::all();
+        //$providers = Utils::getProviders();
+        $giss = Utils::allESwithType(null,'gis');
+        $providers = Utils::getProvidersES();
         return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers);
     }
 
