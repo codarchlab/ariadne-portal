@@ -44,8 +44,8 @@ class CollectionController extends Controller {
         return view('provider_data.dataresource')->with('resource', $collection);
     }
 
-    public function subject($subjectName) {
-        $collections = Subject::resourceWithSubject($subjectName,"collection");
+    public function subject($subjectId) {
+        $collections = Subject::resourceWithSubject($subjectId,"collection");
         $providers = Utils::getProvidersES();
        // dd($collections);
        debug($collections);

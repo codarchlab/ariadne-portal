@@ -33,7 +33,7 @@ class Subject {
                
         foreach($subjects as &$subject){
              $query = ['query'=>
-                          ['match' => ['archaeologicalResourceType' => $subject['_source']['name']]]
+                          ['match' => ['archaeologicalResourceType.name' => $subject['_source']['name']]]
                      ];
  
             $subject['collections'] = ElasticSearch::countHits($query, 'resource', 'collection');
@@ -46,11 +46,11 @@ class Subject {
         return $subjects;
     }
     
-    public static function resourceWithSubject($subjectName,$type) {
+    public static function resourceWithSubject($subjectId,$type) {
          
         
         $query = ['query'=>
-                     ['match' => ['archaeologicalResourceType' => $subjectName]]
+                     ['match' => ['archaeologicalResourceType.id' => $subjectId]]
                 ];
                
         $resources = ElasticSearch::allResourcePaginated($query, 'resource', $type);
