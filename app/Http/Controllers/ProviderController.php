@@ -41,57 +41,57 @@ class ProviderController extends Controller {
     public function collection($id){
         $collections = Utils::allESwithType($id,'collection');
         $providers = Utils::getProvidersES();
-        return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);
+        return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers)->with('provider_id', $id);
     }
     
     public function dataset($id){
         $datasets = Utils::allESwithType($id,'dataset');
         $providers = Utils::getProvidersES();
-        return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers);        
+        return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers)->with('provider_id', $id);        
     }
     
     public function database($id){
         //$databases = Database::all($id);
         $databases = Utils::allESwithType($id,'database');
         $providers = Utils::getProvidersES();
-        return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers);        
+        return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers)->with('provider_id', $id);        
     }
     
     public function gis($id){
        // $giss = Gis::all($id);
         $giss = Utils::allESwithType($id,'gis');
         $providers = Utils::getProvidersES();
-        return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers);            
+        return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers)->with('provider_id', $id);            
     }
     
     public function textualDocument($id){
        // $giss = Gis::all($id);
         $textualDocuments = Utils::allESwithType($id,'textualDocument');
         $providers = Utils::getProvidersES();
-        return view('provider_data.textualDocuments')->with('textualDocuments', $textualDocuments)->with('providers', $providers);            
+        return view('provider_data.textualDocuments')->with('textualDocuments', $textualDocuments)->with('providers', $providers)->with('provider_id', $id);            
     }
     
     public function schema($id){
         $metaSchemas = MetaSchema::all($id);
         $providers = Utils::getProviders();
-        return view('provider_data.metaSchemas')->with('metaSchemas', $metaSchemas)->with('providers', $providers);
+        return view('provider_data.metaSchemas')->with('metaSchemas', $metaSchemas)->with('providers', $providers)->with('provider_id', $id);
     }
 
     public function service($id){
         $services = Service::all($id);
         $providers = Utils::getProviders();
-        return view('provider_data.services')->with('services', $services)->with('providers', $providers);
+        return view('provider_data.services')->with('services', $services)->with('providers', $providers)->with('provider_id', $id);
     }
     
     public function vocabulary($id){
         $vocabularies = Vocabulary::all($id);
         $providers = Utils::getProviders();
-        return view('provider_data.vocabularies')->with('vocabularies', $vocabularies)->with('providers', $providers);
+        return view('provider_data.vocabularies')->with('vocabularies', $vocabularies)->with('providers', $providers)->with('provider_id', $id);
     }
     
     public function agent($id){
         $agents = Agent::all($id);
         $providers = Utils::getProviders();
-        return view('provider_data.agents')->with('agents', $agents)->with('providers', $providers);           
+        return view('provider_data.agents')->with('agents', $agents)->with('providers', $providers)->with('provider_id', $id);           
     }
 }
