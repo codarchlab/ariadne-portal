@@ -79,7 +79,7 @@ class Provider {
             $provider['datasets'] = ElasticSearch::countHits($query, 'resource', 'dataset');
             $provider['databases'] = ElasticSearch::countHits($query, 'resource', 'database');
             $provider['gis'] = ElasticSearch::countHits($query, 'resource', 'gis');
-            $provider['textualDocument'] = ElasticSearch::countHits($query, 'resource', 'textualDocument');
+            $provider['textualDocuments'] = ElasticSearch::countHits($query, 'resource', 'textualDocument');
            
         }
         

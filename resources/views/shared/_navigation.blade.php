@@ -33,7 +33,7 @@
                             </a>
                         </li> 
 
-                        <li class="treeview{{ Utils::containsAndNotContains(Request::url(), array('dataset', 'collection', 'database', 'gis', 'agent', 'metaSchema', 'service', 'vocabulary'), 'search') ? ' active' : '' }}" >
+                        <li class="treeview{{ Utils::containsAndNotContains(Request::url(), array('dataset','textualDocument', 'collection', 'database', 'gis', 'agent', 'metaSchema', 'service', 'vocabulary'), 'search') ? ' active' : '' }}" >
                             <a href="#">
                                 <i class="fa fa-list"></i> <span>Provider data</span>
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -61,6 +61,12 @@
                                     <a href="{{ action('GisController@index') }}">
                                         <i class="fa fa-angle-double-right"></i>
                                         <i class="fa fa-globe"></i> <span>GIS</span>
+                                    </a>
+                                </li>
+                               <li{{ (Request::is('textualDocument') ? ' class=active' : '') }}>
+                                    <a href="{{ action('TextualDocumentController@index') }}">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <i class="fa fa-file"></i> <span>Textual Documents</span>
                                     </a>
                                 </li>
                                 <!--

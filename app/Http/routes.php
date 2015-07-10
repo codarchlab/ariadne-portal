@@ -28,6 +28,7 @@ Route::get('provider/{id}/schema', 'ProviderController@schema');
 Route::get('provider/{id}/service', 'ProviderController@service');
 Route::get('provider/{id}/vocabulary', 'ProviderController@vocabulary');
 Route::get('provider/{id}/agent', 'ProviderController@agent');
+Route::get('provider/{id}/textualDocument', 'ProviderController@textualDocument');
 
 Route::get('subject', 'SubjectController@index');
 
@@ -48,6 +49,10 @@ Route::get('database/{id}/subject', 'DatabaseController@subject');
 Route::get('gis', 'GisController@index');
 Route::get('gis/{id}', 'GisController@show');
 Route::get('gis/{id}/subject', 'GisController@subject');
+
+Route::get('textualDocument', 'TextualDocumentController@index');
+Route::get('textualDocument/{id}', 'TextualDocumentController@show');
+Route::get('textualDocument/{id}/subject', 'TextualDocumentController@subject');
 
 Route::get('metaSchema', 'MetaSchemaController@index');
 Route::get('metaSchema/{id}', 'MetaSchemaController@show');

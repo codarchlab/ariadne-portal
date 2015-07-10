@@ -46,11 +46,12 @@
                                             <th>Collections</th>
                                             <th>Datasets</th>
                                             <th>Databases</th>
+                                            <th>Textual Documents</th>
                                         </tr>   
                                     </thead>
                                     <tbody>
                                         @foreach ($providers as $provider)
-                                            @if($provider['datasets'] > 0 || $provider['collections'] > 0 || $provider['databases'] > 0)
+                                            @if($provider['datasets'] > 0 || $provider['collections'] > 0 || $provider['databases'] > 0 || $provider['textualDocument'] > 0)
                                             <tr>
                                                 <td>
                                                     <img src='img/language/{{ $provider['_source']['flag'] }}.png' style='height: 24px;'/>
@@ -77,6 +78,13 @@
                                                         <a href="{{ action('ProviderController@database', $provider['_id']) }}">{{ $provider['databases'] }}</a>
                                                     @else
                                                         {{ $provider['databases'] }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($provider['textualDocuments'] > 0)
+                                                        <a href="{{ action('ProviderController@textualDocument', $provider['_id']) }}">{{ $provider['textualDocuments'] }}</a>
+                                                    @else
+                                                        {{ $provider['textualDocuments'] }}
                                                     @endif
                                                 </td>
                                             </tr>

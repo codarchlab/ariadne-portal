@@ -49,7 +49,7 @@
                                    <td>{{ $subject['gis'] }}</td>
                                    @endif
                                    @if ($subject['textualDocument'] > 0)
-                                   <td><a href="{{ action('GisController@subject', $subject['_id']) }}">{{ $subject['textualDocument'] }}</a></td>
+                                   <td><a href="{{ action('TextualDocumentController@subject', $subject['_id']) }}">{{ $subject['textualDocument'] }}</a></td>
                                    @else
                                    <td>{{ $subject['textualDocument'] }}</td>
                                    @endif

@@ -20,6 +20,7 @@
                                     <th>Collections</th>
                                     <th>Datasets</th>
                                     <th>Databases</th>
+                                    <th>Textual Documents</th>
                                     <?php if($full): ?>
                                     <th>GIS</th>
                                     <th>Metadata Schemas</th>
@@ -50,9 +51,16 @@
                                         </td>
                                         <td>
                                             @if($provider['databases'] > 0)
-                                                <a href="{{ action('ProviderController@database', $provider['_id']) }}">{{ $provider-['databases'] }}</a>
+                                                <a href="{{ action('ProviderController@database', $provider['_id']) }}">{{ $provider['databases'] }}</a>
                                             @else
                                                 {{ $provider['databases'] }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($provider['textualDocuments'] > 0)
+                                                <a href="{{ action('ProviderController@textualDocument', $provider['_id']) }}">{{ $provider['textualDocuments'] }}</a>
+                                            @else
+                                                {{ $provider['textualDocuments'] }}
                                             @endif
                                         </td>
                                         <?php if($full): ?>

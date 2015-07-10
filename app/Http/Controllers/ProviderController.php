@@ -64,6 +64,13 @@ class ProviderController extends Controller {
         return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers);            
     }
     
+    public function textualDocument($id){
+       // $giss = Gis::all($id);
+        $textualDocuments = Utils::allESwithType($id,'textualDocument');
+        $providers = Utils::getProvidersES();
+        return view('provider_data.textualDocuments')->with('textualDocuments', $textualDocuments)->with('providers', $providers);            
+    }
+    
     public function schema($id){
         $metaSchemas = MetaSchema::all($id);
         $providers = Utils::getProviders();
