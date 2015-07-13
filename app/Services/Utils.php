@@ -199,6 +199,15 @@ class Utils {
         return $collections;
     }
     
+    public static function getSubjectName($subjectId) {
+        $query = ['query'=>
+                          ['match' => ['_id' => $subjectId]]
+                     ];
+        $provider =  ElasticSearch::allHits($query,'common','archaeologicalResourceType');
+        
+        return $provider[0]['_source']['name'];
+    }
+    
     /**
      * Adds a value to a new parameter or adds it to the list of an existing
      * 

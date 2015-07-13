@@ -47,8 +47,9 @@ class CollectionController extends Controller {
     public function subject($subjectId) {
         $collections = Subject::resourceWithSubject($subjectId,"collection");
         $providers = Utils::getProvidersES();
+        $subjectName = Utils::getSubjectName($subjectId);
        // dd($collections);
        debug($collections);
-        return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers);
+        return view('provider_data.collections')->with('collections', $collections)->with('providers', $providers)->with('subjectName', $subjectName)->with('subjectId', $subjectId);
     }
 }

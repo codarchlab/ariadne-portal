@@ -46,7 +46,8 @@ class GisController extends Controller {
     public function subject($subjectId) {
         $giss = Utils::allSubject($subjectId,2);
         $providers = Utils::getProviders();
-        return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers);
+        $subjectName = Utils::getSubjectName($subjectId);
+        return view('provider_data.giss')->with('giss', $giss)->with('providers', $providers)->with('subjectName', $subjectName)->with('subjectId', $subjectId);
     }
 
 }

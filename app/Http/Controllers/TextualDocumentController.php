@@ -47,8 +47,9 @@ class TextualDocumentController extends Controller {
     public function subject($subjectId) {
         $textualDocuments = Subject::resourceWithSubject($subjectId,"textualDocument");
         $providers = Utils::getProvidersES();
+        $subjectName = Utils::getSubjectName($subjectId);
        // dd($collections);
        debug($textualDocuments);
-        return view('provider_data.textualDocuments')->with('textualDocuments', $textualDocuments)->with('providers', $providers);
+        return view('provider_data.textualDocuments')->with('textualDocuments', $textualDocuments)->with('providers', $providers)->with('subjectName', $subjectName)->with('subjectId', $subjectId);
     }
 }

@@ -1,17 +1,33 @@
     <div class="pull-right box-tools">
         <?php 
-            if (isset($collections)) $action = "CollectionController@index"; 
-            else if (isset($databases)) $action = "DatabaseController@index"; 
-            else if (isset($agents)) $action = "AgentController@index"; 
-            else if (isset($giss)) $action = "GisController@index"; 
-            else if (isset($metaSchemas)) $action = "MetaSchemaController@index"; 
-            else if (isset($services)) $action = "ServiceController@index"; 
-            else if (isset($textualDocuments)) $action = "TextualDocumentController@index"; 
-            else if (isset($vocabularies)) $action = "VocabularyController@index"; 
-            else if (isset($datasets)) $action = "DatasetController@index"; 
+            if (isset($collections)) {
+                if (Utils::contains(Request::url(),array('subject'))) $action = action("CollectionController@subject", $subjectId); 
+                else $action = action('CollectionController@index'); 
+            }
+            else if (isset($databases)) {
+                if (Utils::contains(Request::url(),array('subject'))) $action = action("DatabaseController@subject", $subjectId); 
+                else $action = action("DatabaseController@index"); 
+            }
+            else if (isset($datasets)) {
+                if (Utils::contains(Request::url(),array('subject'))) $action = action("DatasetController@subject", $subjectId); 
+                else $action = action("DatasetController@index"); 
+            }
+            else if (isset($textualDocuments)) {
+                if (Utils::contains(Request::url(),array('subject'))) $action = action("TextualDocumentController@subject", $subjectId); 
+                else $action = action("TextualDocumentController@index"); 
+            }                        
+            else if (isset($giss))  {
+                if (Utils::contains(Request::url(),array('subject'))) $action = action("GisController@subject", $subjectId); 
+                else $action = action("GisController@index"); 
+            }                  
+            else if (isset($agents))  $action = action("AgentController@index"); 
+            else if (isset($metaSchemas)) $action = action("MetaSchemaController@index");             
+            else if (isset($services)) $action = action("ServiceController@index");           
+            else if (isset($vocabularies)) $action = action("VocabularyController@index");             
+
             else $action="#";
         ?>
-        <form name='search' method='POST' action='{{ action($action) }}' style='display:inline;' >   
+        <form name='search' method='POST' action='{{ $action }}' style='display:inline;' >   
             <div class="col-xs-12  pull-right">
                 <label>Select Provider</label>
                 </br>

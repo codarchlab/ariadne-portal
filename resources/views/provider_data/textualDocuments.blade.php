@@ -9,7 +9,11 @@
                 <div class="box box-warning">
                     <div class="box-header">
                         <i class='fa fa-file'></i>
-                        <h3 class="box-title">Textual Documents</h3>                   
+                         <?php
+                            if (Utils::contains(Request::url(),array('subject'))) $with = 'with '.$subjectName; 
+                            else $with='';
+                        ?>
+                        <h3 class="box-title">Textual Documents {{ $with }}</h3>                   
                         @include("provider_data._provider_selection_box")
                     </div><!-- /.box-header -->
                     

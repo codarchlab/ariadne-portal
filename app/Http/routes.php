@@ -38,26 +38,31 @@ Route::get('collection', 'CollectionController@index');
 Route::post('collection', 'CollectionController@index');
 Route::get('collection/{id}', 'CollectionController@show');
 Route::get('collection/{id}/subject', 'CollectionController@subject');
+Route::post('collection/{id}/subject', 'CollectionController@subject');
 
 Route::get('dataset', 'DatasetController@index');
 Route::post('dataset', 'DatasetController@index');
 Route::get('dataset/{id}', 'DatasetController@show');
 Route::get('dataset/{id}/subject', 'DatasetController@subject');
+Route::post('dataset/{id}/subject', 'DatasetController@subject');
 
 Route::get('database', 'DatabaseController@index');
 Route::post('database', 'DatabaseController@index');
 Route::get('database/{id}', 'DatabaseController@show');
 Route::get('database/{id}/subject', 'DatabaseController@subject');
+Route::post('database/{id}/subject', 'DatabaseController@subject');
 
 Route::get('gis', 'GisController@index');
 Route::post('gis', 'GisController@index');
 Route::get('gis/{id}', 'GisController@show');
 Route::get('gis/{id}/subject', 'GisController@subject');
+Route::post('gis/{id}/subject', 'GisController@subject');
 
 Route::get('textualDocument', 'TextualDocumentController@index');
 Route::post('textualDocument', 'TextualDocumentController@index');
 Route::get('textualDocument/{id}', 'TextualDocumentController@show');
 Route::get('textualDocument/{id}/subject', 'TextualDocumentController@subject');
+Route::post('textualDocument/{id}/subject', 'TextualDocumentController@subject');
 
 Route::get('metaSchema', 'MetaSchemaController@index');
 Route::post('metaSchema', 'MetaSchemaController@index');

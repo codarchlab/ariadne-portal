@@ -46,7 +46,8 @@ class DatasetController extends Controller {
     public function subject($subjectId) {
         $datasets = Utils::allSubject($subjectId,1);
         $providers = Utils::getProviders();
-        return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers);
+        $subjectName = Utils::getSubjectName($subjectId);
+        return view('provider_data.datasets')->with('datasets', $datasets)->with('providers', $providers)->with('subjectName', $subjectName)->with('subjectId', $subjectId);
     }
     
 }

@@ -45,6 +45,7 @@ class DatabaseController extends Controller {
     public function subject($subjectId) {
         $databases = Utils::allSubject($subjectId,2);
         $providers = Utils::getProviders();
-        return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers);
+        $subjectName = Utils::getSubjectName($subjectId);
+        return view('provider_data.databases')->with('databases', $databases)->with('providers', $providers)->with('subjectName', $subjectName)->with('subjectId', $subjectId);
     }
 }
