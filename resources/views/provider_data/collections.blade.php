@@ -9,10 +9,10 @@
                 <div class="box box-warning">
                     <div class="box-header">
                         <i class='fa fa-file'></i>
-                        <h3 class="box-title">Collections</h3>
+                        <?php if (Request::input('subject')) ?>
+                        <h3 class="box-title">Collections</h3>                 
+                        @include("provider_data._provider_selection_box")                        
                     </div><!-- /.box-header -->
-
-                    @include("provider_data._provider_selection_box")
                     
                     <div class="box-body">
                         <table class="table table-hover">
