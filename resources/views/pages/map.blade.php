@@ -48,8 +48,8 @@
                     foreach ($point['_source']['spatial'] as &$spatial) {
                         //$placename = $point['_source']['spatial'][0]['placeName'];    
                         $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); 
-                        $lon 	= $spatial['lat'];      
-                        $lat 	= $spatial['lon'];                       
+                        $lon 	= $spatial['location']['lat'];      
+                        $lat 	= $spatial['location']['lon'];                       
                 ?>		
 
                 var myLatlng = new google.maps.LatLng(<?php echo $lat; ?>,<?php echo $lon; ?>);
