@@ -7,32 +7,30 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header" title="">
-                        <h3 class="box-title">{{ $resource->name }}</h3>
-                        <div class="box-tools pull-right">Added: {{ date("Y-m-d", strtotime($resource->cr_tstamp)) }}</div>
+                        <h3 class="box-title">{{ $resource['_source']['title'] }}</h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <input type="hidden" value="{{ $resource->id }}" name="id" />
+                <input type="hidden" value="{{ $resource['_id'] }}" name="id" />
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_general" data-toggle="tab">General</a></li>
-                        @if (isset($resource->properties['keyword']) || isset($resource->properties['subject']) || isset($resource->properties['ariadne-subject']))                        
+                        @if (isset($resource['_source']['keyword']))                        
                         <li><a href="#tab_subjects" data-toggle="tab">Subjects</a></li>
                         @endif
-                        @if (isset($resource->properties['accessPolicy']) || isset($resource->properties['accessRights']) || isset($resource->properties['rights']))      
+                        @if (isset($resource['_source']['rights']))      
                         <li><a href="#tab_rights" data-toggle="tab">Rights</a></li>
                         @endif
-                        @if (isset($resource->properties['creator']) || isset($resource->properties['owner']) || isset($resource->properties['publisher']) ||
-                        isset($resource->properties['legalResponsible']) || isset($resource->properties['scientificResponsible']) || isset($resource->properties['technicalResponsible']))                          
+                        @if (isset($resource['_source']['creator']) || isset($resource['_source']['publisher']) || isset($resource['_source']['contributor']))                          
                         <li><a href="#tab_ownership" data-toggle="tab">Ownership</a></li>
                         @endif
-                        @if (isset($resource->properties['temporal']))
-                        <li><a href="#tab_temporal" data-toggle="tab">Temporal</a></li>.
+                        @if (isset($resource['_source']['temporal']))
+                        <li><a href="#tab_temporal" data-toggle="tab">Temporal</a></li>
                         @endif
-                        @if (count($resource->spatial) != 0)                       
+                        @if (count($resource['_source']['temporal']) != 0)                       
                         <li><a href="#tab_spatial" data-toggle="tab">Spatial</a></li>
                         @endif
                     </ul>
@@ -41,134 +39,91 @@
                             <div class="row" style="padding: 14px;">
                                 <div class="col-md-12">
                                     <b>Identifier</b>
-                                    <p>dat: {{ $resource->id }}</p>
+                                    <p>dat: {{ $resource['_id'] }}</p>
                                 </div>
 
-                                @if (isset($resource->properties['originalId']))
+                                @if (isset($resource['_source']['originalId']))
                                 <div class="col-md-12">
                                     <b>Other Identifiers</b>
-                                    @foreach($resource->properties['originalId'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
+                                    <p>{{ $resource['_source']['originalId'] }}</p>
                                 </div>
                                 @endif
 
-                                @if (!empty($resource->name))
+                                @if (!empty($resource['_source']['title']))
                                 <div class="col-md-12">
                                     <b>Title</b>
-                                    <p>{{ $resource->name }}</p>
+                                    <p>{{ $resource['_source']['title'] }}</p>
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['description']))
+                                @if (isset($resource['_source']['description']))
                                 <div class="col-md-12">
                                     <b>Description</b>
-                                    @foreach($resource->properties['description'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
+                                    <p>{{ $resource['_source']['description'] }}</p>
                                 </div>
                                 @endif
 
-                                @if (!empty($resource->agent_name))
-                                <div class="col-md-12">
-                                    <b>Agent</b>
-                                    <p>{{ $resource->agent_name }}</p>
-                                </div>
-                                @endif
 
-                                @if (isset($resource->properties['issued']))
+                                @if (isset($resource['_source']['issued']))
                                 <div class="col-md-12">
                                     <b>Issued</b>
-                                    @foreach($resource->properties['issued'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
+                                    <p>{{ $resource['_source']['issued'] }}</p>
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['modified']))
-                                <div class="col-md-12">
-                                    <b>Modified</b>
-                                    @foreach($resource->properties['modified'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
-                                </div>
-                                @endif
 
-                                @if (isset($resource->properties['language']))
+                                @if (isset($resource['_source']['language']))
                                 <div class="col-md-12">
                                     <b>Language</b>
-                                    @foreach($resource->properties['language'] as $value)
-                                    <p>{{ $value }} <img src='../img/language/{{ $value }}.png' style='height: 24px;'/></p>
-                                    @endforeach
+                                    <p>{{ $resource['_source']['issued'] }} <img src='../img/language/{{ $resource['_source']['issued'] }}.png' style='height: 24px;'/></p>
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['extent']))
-                                <div class="col-md-12">
-                                    <b>Extent</b>
-                                    @foreach($resource->properties['extent'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
-                                </div>
-                                @endif
 
-                                @if (isset($resource->properties['accrualPeriodicity']))
-                                <div class="col-md-12">
-                                    <b>Accrual Periodicity</b>
-                                    @foreach($resource->properties['accrualPeriodicity'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
-                                </div>
-                                @endif
-
-                                @if (isset($resource->properties['landingPage']))
+                                @if (isset($resource['_source']['landingPage']))
                                 <div class="col-md-12">
                                     <b>URL</b>
-                                    @foreach($resource->properties['landingPage'] as $value)
-                                    <p><a href="{{ $value }}">{{ $value }}</a></p>
-                                    @endforeach
+                                    <p><a href="{{ $resource['_source']['landingPage'] }}">{{ $resource['_source']['landingPage'] }}</a></p>
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['audience']))
+                                @if (isset($resource['_source']['audience']))
                                 <div class="col-md-12">
                                     <b>Audience</b>
-                                    @foreach($resource->properties['audience'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
+                                    <p>{{ $resource['_source']['audience'] }}</p>
                                 </div>
                                 @endif
 
                             </div>
                         </div>
 
-                        @if (isset($resource->properties['keyword']) || isset($resource->properties['subject']) || isset($resource->properties['ariadne-subject']))  
+                        @if (isset($resource['_source']['keyword']) || isset($resource['_source']['subject']) || isset($resource['_source']['ariadne_subject']))  
 
                         <div class="tab-pane" id="tab_subjects">
                             <div class="row" style="padding: 14px;">
 
-                                @if (isset($resource->properties['ariadne_subject']))
+                                @if (isset($resource['_source']['ariadne_subject']))
                                 <div class="col-md-12">
                                     <b>Ariadne Subject</b>
-                                    @foreach($resource->properties['ariadne_subject'] as $value)
+                                    @foreach($resource['_source']['ariadne_subject'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['subject']))
+                                @if (isset($resource['_source']['subject']))
                                 <div class="col-md-12">
                                     <b>Other subject</b>
-                                    @foreach($resource->properties['subject'] as $value)
+                                    @foreach($resource['_source']['subject'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['keyword']))
+                                @if (isset($resource['_source']['keyword']))
                                 <div class="col-md-12">
                                     <b>Keywords</b>
-                                    @foreach($resource->properties['keyword'] as $value)
+                                    @foreach($resource['_source']['keyword'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
@@ -179,32 +134,32 @@
 
                         @endif
 
-                        @if (isset($resource->properties['accessPolicy']) || isset($resource->properties['accessRights']) || isset($resource->properties['rights']))      
+                        @if (isset($resource['_source']['accessPolicy']) || isset($resource['_source']['accessRights']) || isset($resource['_source']['rights']))      
 
                         <div class="tab-pane" id="tab_rights">
                             <div class="row" style="padding: 14px;">
-                                @if (isset($resource->properties['accessPolicy']))
+                                @if (isset($resource['_source']['accessPolicy']))
                                 <div class="col-md-12">
                                     <b>Access Policy</b>
-                                    @foreach($resource->properties['accessPolicy'] as $value)
+                                    @foreach($resource['_source']['accessPolicy'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['accessRights']))
+                                @if (isset($resource['_source']['accessRights']))
                                 <div class="col-md-12">
                                     <b>Access Rights</b>
-                                    @foreach($resource->properties['accessRights'] as $value)
+                                    @foreach($resource['_source']['accessRights'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
                                 @endif
 
-                                @if (isset($resource->properties['rights'])) 
+                                @if (isset($resource['_source']['rights'])) 
                                 <div class="col-md-12">
                                     <b>Other rights</b>
-                                    @foreach($resource->properties['rights'] as $value)
+                                    @foreach($resource['_source']['rights'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
@@ -215,61 +170,61 @@
 
                         @endif
 
-                        @if (isset($resource->properties['creator']) || isset($resource->properties['owner']) || isset($resource->properties['publisher']) ||
-                        isset($resource->properties['legalResponsible']) || isset($resource->properties['scientificResponsible']) || isset($resource->properties['technicalResponsible']))           
+                        @if (isset($resource['_source']['creator']) || isset($resource['_source']['owner']) || isset($resource['_source']['publisher']) ||
+                        isset($resource['_source']['legalResponsible']) || isset($resource['_source']['scientificResponsible']) || isset($resource['_source']['technicalResponsible']))           
 
                         <div class="tab-pane" id="tab_ownership">
                             <div class="row" style="padding: 14px;">
 
-                                @if (isset($resource->properties['creator'])) 
+                                @if (isset($resource['_source']['creator'])) 
                                 <div class="col-md-12">
                                     <b>Creator</b>
-                                    @foreach($resource->properties['creator'] as $value)
-                                    <p>{{ $value }}</p>
+                                    @foreach($resource['_source']['creator'] as $value)
+                                    <p>{{ $value['name'] }}</p>
                                     @endforeach
                                 </div>
                                 @endif   
 
-                                @if (isset($resource->properties['owner'])) 
+                                @if (isset($resource['_source']['owner'])) 
                                 <div class="col-md-12">
                                     <b>Owner</b>
-                                    @foreach($resource->properties['owner'] as $value)
-                                    <p>{{ $value }}</p>
+                                    @foreach($resource['_source']['owner'] as $value)
+                                    <p>{{ $value['name'] }}</p>
                                     @endforeach
                                 </div>
                                 @endif   
 
-                                @if (isset($resource->properties['publisher'])) 
+                                @if (isset($resource['_source']['publisher'])) 
                                 <div class="col-md-12">
                                     <b>Publisher</b>
-                                    @foreach($resource->properties['publisher'] as $value)
-                                    <p>{{ $value }}</p>
+                                    @foreach($resource['_source']['publisher'] as $value)
+                                    <p>{{ $value['name'] }}</p>
                                     @endforeach
                                 </div>
                                 @endif      
 
-                                @if (isset($resource->properties['legalResponsible'])) 
+                                @if (isset($resource['_source']['legalResponsible'])) 
                                 <div class="col-md-12">
                                     <b>Legal Responsible</b>
-                                    @foreach($resource->properties['legalResponsible'] as $value)
-                                    <p>{{ $value }}</p>
+                                    @foreach($resource['_source']['legalResponsible'] as $value)
+                                    <p>{{ $value['name'] }}</p>
                                     @endforeach
                                 </div>
                                 @endif                                    
 
-                                @if (isset($resource->properties['scientificResponsible'])) 
+                                @if (isset($resource['_source']['scientificResponsible'])) 
                                 <div class="col-md-12">
                                     <b>Scientific Responsible</b>
-                                    @foreach($resource->properties['scientificResponsible'] as $value)
-                                    <p>{{ $value }}</p>
+                                    @foreach($resource['_source']['scientificResponsible'] as $value)
+                                    <p>{{ $value['name'] }}</p>
                                     @endforeach
                                 </div>
                                 @endif  
 
-                                @if (isset($resource->properties['technicalResponsible'])) 
+                                @if (isset($resource['_source']['technicalResponsible'])) 
                                 <div class="col-md-12">
                                     <b>Technical Responsible</b>
-                                    @foreach($resource->properties['technicalResponsible'] as $value)
+                                    @foreach($resource['_source']['technicalResponsible'] as $value)
                                     <p>{{ $value }}</p>
                                     @endforeach
                                 </div>
@@ -280,21 +235,21 @@
 
                         @endif
 
-                        @if (isset($resource->properties['temporal']))
+                        @if (isset($resource['_source']['temporal']))
 
                         <div class="tab-pane" id="tab_temporal">
                             <div class="row" style="padding: 14px;">
                                 <div class="col-md-12">
 
-                                    @foreach ($resource->properties['temporal'] as $temporal)
+                                    @foreach ($resource['_source']['temporal'] as $temporal)
 
-                                    @if (!empty($temporal->period_name))                                            
+                                    @if (!empty($temporal['period_name']))                                            
                                     <div class='row' style='margin-bottom:8px;'>
                                         <div class='col-md-2'>
                                             <b>Period Name</b>
                                         </div>
                                         <div class='col-md-10'>
-                                            <p> {{  $temporal->period_name }}</p>
+                                            <p> {{  $temporal['period_name'] }}</p>
                                         </div>
                                     </div>
                                     @endif
@@ -375,69 +330,49 @@
 
                         @endif
 
-                        @if (count($resource->spatial) != 0)
+                        @if (count($resource['_source']['spatial']) != 0)
                         <div class="tab-pane" id="tab_spatial">
                             <div class="row" style="padding: 14px;">
                                 <div class="col-md-4">
 
-                                    @foreach($resource->spatial as $spatial)
+                                    @foreach($resource['_source']['spatial'] as $spatial)
 
-                                    @if (!empty($spatial->placename)) 
+                                    @if (!empty($spatial['placeName'])) 
                                     <div class="col-md-12">
                                         <b>Place Name</b>
-                                        <p>{{ $spatial->placename }}</p>
+                                        <p>{{ $spatial['placeName'] }}</p>
                                     </div>
                                     @endif    
 
-                                    @if (!empty($spatial->geonameid)) 
-                                    <div class="col-md-12">
-                                        <b>Geoname Id</b>
-                                        <p>{{ $spatial->geonameid }}</p>
-                                    </div>
-                                    @endif 
 
-                                    @if (!empty($spatial->lat)) 
+                                    @if (!empty($spatial['lat'])) 
                                     <div class="col-md-12">
                                         <b>Latitude</b>
-                                        <p>{{ $spatial->lat }}</p>
+                                        <p>{{ $spatial['lat'] }}</p>
                                     </div>
                                     @endif  
 
-                                    @if (!empty($spatial->lon)) 
+                                    @if (!empty($spatial['lon'])) 
                                     <div class="col-md-12">
                                         <b>Longtitude</b>
-                                        <p>{{ $spatial->lon }}</p>
+                                        <p>{{ $spatial['lon'] }}</p>
                                     </div>
                                     @endif 
 
-                                    @if (!empty($spatial->coordinate_system)) 
+                                    @if (!empty($spatial['coordinateSystem'])) 
                                     <div class="col-md-12">
                                         <b>Coordinate System</b>
-                                        <p>{{ $spatial->coordinate_system }}</p>
+                                        <p>{{ $spatial['coordinateSystem'] }}</p>
                                     </div>
                                     @endif 
 
-                                    @if (!empty($spatial->address)) 
-                                    <div class="col-md-12">
-                                        <b>Address</b>
-                                        <p>{{ $spatial->address }} {{ $spatial->numinroad}}</p>
-                                    </div>
-                                    @endif 
-
-                                    @if (!empty($spatial->country)) 
+                                    @if (!empty($spatial['country'])) 
                                     <div class="col-md-12">
                                         <b>Country</b>
-                                        <p>{{ $spatial->country }}</p>
+                                        <p>{{ $spatial['country'] }}</p>
                                     </div>
-                                    @endif                                             
-
-                                    @if (!empty($spatial->postcode)) 
-                                    <div class="col-md-12">
-                                        <b>Postcode</b>
-                                        <p>{{ $spatial->postcode }}</p>
-                                    </div>
-                                    @endif                                                                                              		
-
+                                    @endif       
+                                    
                                     @endforeach		
                                 </div>
                                 <div class="col-md-8">
@@ -453,7 +388,7 @@
     </section>
 </aside>
 
-@if (count($resource->spatial) != 0)
+@if (count($resource['_source']['spatial']) != 0 && isset($resource['_source']['spatial'][0]['lat']))
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -461,7 +396,7 @@
             /* GOOGLE MAP */
             function map_initialize() {
                 var bounds = new google.maps.LatLngBounds();
-                var myLatlng = new google.maps.LatLng({{ $resource->spatial[0]->lat }},{{ $resource->spatial[0]->lon }});
+                var myLatlng = new google.maps.LatLng({{ $spatial['lat']  }},{{ $spatial['lon'] }});
 
                 var mapOptions = {
                     zoom: 10,
@@ -483,14 +418,14 @@
                 var ibArray = new Array();
                 var markers = [];
 
-                @foreach($resource->spatial as $spatial)
+                @foreach($resource['_source']['spatial'] as $spatial)
 
-                    var myLatlng = new google.maps.LatLng({{ $spatial->lat }}, {{ $spatial->lon }});
+                    var myLatlng = new google.maps.LatLng({{ $spatial['lat'] }}, {{ $spatial['lon'] }});
 
                     var contentString = '<div id="content">' +
                             '<div id="siteNotice">' +
                             '</div>' +
-                            '<h4 id="firstHeading" class="firstHeading">{{ $spatial->placename }}</h4>' +
+                            '<h4 id="firstHeading" class="firstHeading">{{ $spatial['placeName'] }}</h4>' +
                             '<div id="bodyContent">' +
                             // '<p>'+object.desc+'</p>'+
                             '</div>' +
@@ -506,7 +441,7 @@
                     var marker = new google.maps.Marker({
                         position: myLatlng,
                         map: map,
-                        title: '{{ $spatial->placename }}',
+                        title: '{{ $spatial['placeName'] }}',
                         icon: circlePin
                     });
                     //bounds.extend(marker.position);

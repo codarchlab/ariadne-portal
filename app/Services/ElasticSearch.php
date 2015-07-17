@@ -46,7 +46,7 @@ class ElasticSearch {
         $result = $client->get($getParams);   
         
         if($result['found']){
-            return $result['_source'];
+            return $result;
         }else{
             throw new Exception('No docuemnt found by id: '.$id);
         }

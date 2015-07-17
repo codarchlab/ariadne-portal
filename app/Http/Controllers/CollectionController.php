@@ -40,7 +40,8 @@ class CollectionController extends Controller {
      * @return View
      */
     public function show($id) {
-        $collection = DataResource::get($id);
+        $collection = DataResource::get($id, 'collection');
+        debug($collection);
         return view('provider_data.dataresource')->with('resource', $collection);
     }
 
