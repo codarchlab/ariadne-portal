@@ -124,7 +124,7 @@
                                 <div class="col-md-12">
                                     <b>Keywords</b>
                                     @foreach($resource['_source']['keyword'] as $value)
-                                    <p>{{ $value }}</p>
+                                    <p><a href="{{ route('search', ['keyword' => $value]) }}">{{ $value }}</a></p>
                                     @endforeach
                                 </div>
                                 @endif
