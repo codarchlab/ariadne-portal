@@ -40,8 +40,8 @@ class TextualDocumentController extends Controller {
      * @return View
      */
     public function show($id) {
-        $textualDocument = DataResource::get($id);
-        return view('provider_data.textualDocument')->with('resource', $textualDocument);
+        $textualDocument = DataResource::get($id,'textualDocument');
+        return view('provider_data.dataresource')->with('resource', $textualDocument);
     }
 
     public function subject($subjectId) {

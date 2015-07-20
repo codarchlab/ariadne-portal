@@ -30,7 +30,7 @@
                         @if (isset($resource['_source']['temporal']))
                         <li><a href="#tab_temporal" data-toggle="tab">Temporal</a></li>
                         @endif
-                        @if (count($resource['_source']['temporal']) != 0)                       
+                        @if (isset($resource['_source']['spatial']))                       
                         <li><a href="#tab_spatial" data-toggle="tab">Spatial</a></li>
                         @endif
                     </ul>
@@ -75,7 +75,7 @@
                                 @if (isset($resource['_source']['language']))
                                 <div class="col-md-12">
                                     <b>Language</b>
-                                    <p>{{ $resource['_source']['issued'] }} <img src='../img/language/{{ $resource['_source']['issued'] }}.png' style='height: 24px;'/></p>
+                                    <p>{{ $resource['_source']['language'] }} <img src='../img/language/{{ $resource['_source']['language'] }}.png' style='height: 24px;'/></p>
                                 </div>
                                 @endif
 
@@ -259,11 +259,11 @@
                                     </div>
                                     <div class='row' style='margin-bottom:8px;'>
 
-                                        @if (!empty($temporal->from_bc))
+                                        @if (!empty($temporal['from']))
                                         <div class='col-md-2 col-sm-offset-2'>
                                             <b>Period:</b>
                                         </div>
-                                        <div class='col-md-8'>{{ $temporal->from_bc }}</div>
+                                        <div class='col-md-8'>{{ $temporal['from'] }}</div>
                                         @endif
 
                                         @if (!empty($temporal->from_year))
@@ -330,7 +330,7 @@
 
                         @endif
 
-                        @if (count($resource['_source']['spatial']) != 0)
+                        @if (isset($resource['_source']['spatial']))
                         <div class="tab-pane" id="tab_spatial">
                             <div class="row" style="padding: 14px;">
                                 <div class="col-md-4">
@@ -388,7 +388,7 @@
     </section>
 </aside>
 
-@if (count($resource['_source']['spatial']) != 0 && isset($resource['_source']['spatial'][0]['lat']))
+@if (isset($resource['_source']['spatial']) && isset($resource['_source']['spatial'][0]['lat']))
 
     <script type="text/javascript">
         $(document).ready(function () {

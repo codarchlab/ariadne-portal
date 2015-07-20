@@ -32,7 +32,7 @@
                                     <td>{{ $textualDocument['_id'] }}</td>
                                     <td>{{ $textualDocument['_source']['providerAcro'] }}</td>
                                    
-                                    <td><a href="#">{{ $textualDocument['_source']['title'] }}</a></td>
+                                    <td><a href="{{ action('TextualDocumentController@show', $textualDocument['_id']) }}">{{ $textualDocument['_source']['title'] }}</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -30,9 +30,8 @@
                                 @foreach ($collections as $collection)
                                 <tr>
                                     <td>{{ $collection['_id'] }}</td>
-                                    <td>{{ $collection['_source']['providerAcro'] }}</td>
-                                    <!-- {{ action('CollectionController@show', $collection['_id']) }}-->
-                                    <td><a href="#">{{ $collection['_source']['title'] }}</a></td>
+                                    <td>{{ $collection['_source']['providerAcro'] }}</td>                                
+                                    <td><a href="{{ action('CollectionController@show', $collection['_id']) }}">{{ $collection['_source']['title'] }}</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
