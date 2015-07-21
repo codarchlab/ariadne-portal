@@ -16,12 +16,12 @@ return [
         /* Aggregations used for filtering in the search */
         'elastic_search_aggregations' => [
             'type' => ['terms' => ['field' => '_type']],
-            'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name']],
+            'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
             'subject' => ['terms' => ['field' => 'subject']],
-            'keyword' => ['terms' => ['field' => 'keyword']],
+            'keyword' => ['terms' => ['field' => 'keyword.raw']],
             'contributor' => ['terms' => ['field' => 'contributor.name']],
-            'publisher' => ['terms' => ['field' => 'publisher.name']],
-            'spatial' => ['terms' => ['field' => 'spatial.placeName']],
+            'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
+            'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
             'rights' => ['terms' => ['field' => 'rights']],
             'language' => ['terms' => ['field' => 'language']],
             'issued' => ['terms' => ['field' => 'issued']]
