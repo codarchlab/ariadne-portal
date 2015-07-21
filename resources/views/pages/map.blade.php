@@ -9,12 +9,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary" >
-                    <div class="box-body" id='map' style="width:100%; height:700px; margin: 0px; padding: 0px; z-index: 1001;">
+                    <div class="box-body" id='map' style="width:100%; height:500px; margin: 0px; padding: 0px; z-index: 1001;">
                                 
                     </div> <!-- /.box-body -->
                 </div>
             </div><!-- /.col -->           
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <a href="#" id='clear_map' class="btn btn-sm btn-primary">Clear rectangles</a>
+                </p> 
+            </div>
+        </div>	
     </section><!-- /.content -->                
 </aside><!-- /.right-side -->
  <script>       
@@ -111,11 +118,39 @@
                 google.maps.event.trigger(map, 'resize');
                 AutoCenter();
                
+                var drawingManager = new google.maps.drawing.DrawingManager({
+                     drawingMode: google.maps.drawing.OverlayType.RECTANGLE,
+                     drawingControl: true,
+                     drawingControlOptions: {
+                         position: google.maps.ControlPosition.TOP_CENTER,
+                         drawingModes: [
+                           google.maps.drawing.OverlayType.RECTANGLE
+                         ]
+                     },
+                     rectangleOptions: {
+                         editable:true,
+                         draggable:true,
+                         geodesic:true
+                     }
+                 });
+                drawingManager.setMap(map);
+                 
+                google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+                    //drawingManager.setMap(null);
+                    drawingManager.setDrawingMode(null);
+                });
+                
+                google.maps.event.addListener(event.overlay, 'click', function() {
+                    alert('hhh');
+                    this.setMap(null);
+                    drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
+                });
+                
 
             }
             map_initialize();
 
-
+            
         });
     </script>    
 @endsection
