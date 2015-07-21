@@ -135,17 +135,24 @@
                  });
                 drawingManager.setMap(map);
                  
-                google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
-                    //drawingManager.setMap(null);
+                /*google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+                    drawingManager.setMap(null);
                     drawingManager.setDrawingMode(null);
+                });*/
+    
+                google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {                    
+                    var bounds = event.overlay.getBounds();                   
+                    event.overlay.setMap(null);                  
+                   alert(bounds);
+                    /*$.ajax({
+                        url: 'login',
+                        method: 'post',
+                        data: bounds,
+                        success: function(data){
+                          alert(data);
+                        }
+                    }); */
                 });
-                
-                google.maps.event.addListener(event.overlay, 'click', function() {
-                    alert('hhh');
-                    this.setMap(null);
-                    drawingManager.setDrawingMode(google.maps.drawing.OverlayType.RECTANGLE);
-                });
-                
 
             }
             map_initialize();
