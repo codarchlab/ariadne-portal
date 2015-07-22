@@ -78,7 +78,7 @@
 
                 </div>                
                 <div class="row">
-                    <p><strong>Total:</strong> {{ $hits->total() }}</p>
+                    <p><strong>Total:</strong> <span class="badge">{{ $hits->total() }}</span></p>
                     {!! $hits->appends(Input::all())->render() !!}
                 </div>              
                 <div class="row"><div class="col-md-8"><hr/></div></div>
@@ -117,13 +117,19 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-10">
-                                        type: <b>{{ $hit['_type'] }}</b><br/>
-                                        
-                                        @if(array_key_exists('subject', $hit['_source']))
-                                        {{ $hit['_source']['subject'] }}
+                                    <div class="col-md-2">
+                                        type: <span class="badge">{{ $hit['_type'] }}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        @if(array_key_exists('issued', $hit['_source']))
+                                        issued: <span class="badge">{{ $hit['_source']['issued'] }}</span>
                                         @endif
                                     </div>
+                                    <div class="col-md-3">
+                                        @if(array_key_exists('publisher', $hit['_source']) && count($hit['_source']['publisher']) >= 1)
+                                        publisher: <span class="badge">{{ $hit['_source']['publisher'][0]['name'] }}</span>
+                                        @endif
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
