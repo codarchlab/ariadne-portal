@@ -33,6 +33,7 @@ Route::get('provider/{id}/textualDocument', 'ProviderController@textualDocument'
 Route::get('subject', 'SubjectController@index');
 
 Route::get('map', 'MapController@index');
+Route::post('map_results', 'MapController@results');
 
 Route::get('collection', 'CollectionController@index');
 Route::post('collection', 'CollectionController@index');

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use Request;
+use Input;
 use \App\Services\Map;
 
 class MapController extends Controller {
@@ -32,9 +33,18 @@ class MapController extends Controller {
      * @return Response
      */
     public function index() {
-        $points = Map::all();
+        $points = Map::all();        
         //dd($points);
         return view('pages.map')->with('points', $points);
+    }
+    
+    public function results() {
+        if(Request::ajax()) {
+           $data = Input::all();    
+           
+           $resources = Map::searchResults($data);           
+           return $resources;
+        }       
     }
     
      

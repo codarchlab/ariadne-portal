@@ -9,16 +9,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary" >
-                    <div class="box-body" id='map' style="width:100%; height:500px; margin: 0px; padding: 0px; z-index: 1001;">
-                                
+                    <div class="box-body" id='map' style="width:100%; height:500px; margin: 0px; padding: 0px; z-index: 1001;">                              
                     </div> <!-- /.box-body -->
+                    <form>
+                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
+                    </form>
                 </div>
             </div><!-- /.col -->           
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p>
-                    <a href="#" id='clear_map' class="btn btn-sm btn-primary">Clear rectangles</a>
+                <p>                    
+                    <a href="#" id='clear_map' class="btn btn-sm btn-primary"></a>
                 </p> 
             </div>
         </div>	
@@ -143,15 +145,24 @@
                 google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {                    
                     var bounds = event.overlay.getBounds();                   
                     event.overlay.setMap(null);                  
-                   alert(bounds);
-                    /*$.ajax({
-                        url: 'login',
-                        method: 'post',
-                        data: bounds,
-                        success: function(data){
-                          alert(data);
-                        }
-                    }); */
+                    console.log(bounds);
+                    var top_left_lan = bounds.getNorthEast().lat();
+                    var top_left_lon = bounds.getNorthEast().lng();
+                    var bottom_right_lan = bounds.getSouthWest().lat();
+                    var bottom_right_lon = bounds.getSouthWest().lng();
+      
+                    $.ajax({
+                        type: "POST",
+                        headers: { 'Access-Control-Allow-Origin': '*' },
+                        data: { "top_left_lan":top_left_lan,"top_left_lon":top_left_lon,"bottom_right_lan":bottom_right_lan,"bottom_right_lon":bottom_right_lon, _token: $('input[name=_token]').val()},
+                        url: "map_results",
+                        success: function(response) { 
+                            console.log(response);                           
+                        }, 
+                        error: function(response) {                             
+                            console.log('server errors',response);
+                        } 
+                    });
                 });
 
             }

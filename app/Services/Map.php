@@ -21,5 +21,21 @@ class Map {
         return $points;
     }
     
-    
+    public static function searchResults($data) {
+        $query = ['filter' => 
+                    ['geo_bounding_box' => 
+                        ['spatial.location' => 
+                            ['top_left' => 
+                                ['lat' => $data['top_left_lan'],'lon' => $data['top_left_lon']],
+                            'bottom_right' => 
+                                ['lat' => $data['bottom_right_lan'],'lon' => $data['bottom_right_lon']]
+                            ]
+                        ]
+                    ]
+                ];
+                                  
+        $resources = ElasticSearch::allHits($query, 'resource');
+              
+        return $resources;
+    }
 }
