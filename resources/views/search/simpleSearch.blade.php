@@ -94,6 +94,7 @@
                                     </div>
                                     <div class="col-md-10">
                                         <div class="row">
+                                            <strong>
                                         @if(array_key_exists('title', $hit['_source']))
                                             @if($hit['_type'] == 'database')
                                                 <a href="{{ action('DatabaseController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
@@ -108,12 +109,13 @@
                                             @endif
                                         @else
                                             <a href="#{{ $hit['_type'] }} {{ $hit['_id'] }}">[Title missing]</a>                                  
-                                        @endif   
-                                        </a>
-                                        </div>
+                                        @endif 
+                                            </strong>
+                                        
                                         @if(array_key_exists('description', $hit['_source']))
-                                            {{ str_limit($hit['_source']['description'], 290) }}
+                                            <p>{{ str_limit($hit['_source']['description'], 290) }}</p>
                                         @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
