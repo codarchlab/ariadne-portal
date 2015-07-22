@@ -95,26 +95,26 @@
                                     <div class="col-md-10">
                                         <div class="row">
                                             <strong>
-                                        @if(array_key_exists('title', $hit['_source']))
-                                            @if($hit['_type'] == 'database')
-                                                <a href="{{ action('DatabaseController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
-                                            @elseif($hit['_type'] == 'dataset')
-                                                <a href="{{ action('DatasetController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
-                                            @elseif($hit['_type'] == 'gis')
-                                                <a href="{{ action('GisController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
-                                            @elseif($hit['_type'] == 'collection')
-                                                <a href="{{ action('CollectionController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
-                                            @else
-                                                <a href="#{{ $hit['_type'] }} {{ $hit['_id'] }}">{{ $hit['_source']['title'] }}</a>   
-                                            @endif
-                                        @else
-                                            <a href="#{{ $hit['_type'] }} {{ $hit['_id'] }}">[Title missing]</a>                                  
-                                        @endif 
+                                                @if(array_key_exists('title', $hit['_source']))
+                                                    @if($hit['_type'] == 'database')
+                                                        <a href="{{ action('DatabaseController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                                    @elseif($hit['_type'] == 'dataset')
+                                                        <a href="{{ action('DatasetController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                                    @elseif($hit['_type'] == 'gis')
+                                                        <a href="{{ action('GisController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                                    @elseif($hit['_type'] == 'collection')
+                                                        <a href="{{ action('CollectionController@show', $hit['_id']) }}">{{ $hit['_source']['title'] }}</a>
+                                                    @else
+                                                        <a href="#{{ $hit['_type'] }} {{ $hit['_id'] }}">{{ $hit['_source']['title'] }}</a>   
+                                                    @endif
+                                                @else
+                                                    <a href="#{{ $hit['_type'] }} {{ $hit['_id'] }}">[Title missing]</a>                                  
+                                                @endif 
                                             </strong>
                                         
-                                        @if(array_key_exists('description', $hit['_source']))
-                                            <p>{{ str_limit($hit['_source']['description'], 290) }}</p>
-                                        @endif
+                                            @if(array_key_exists('description', $hit['_source']))
+                                                <p>{{ str_limit($hit['_source']['description'], 290) }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
