@@ -19,7 +19,7 @@ return [
             'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
             'subject' => ['terms' => ['field' => 'subject']],
             'keyword' => ['terms' => ['field' => 'keyword.raw']],
-            'contributor' => ['terms' => ['field' => 'contributor.name']],
+            'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
             'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
             'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
             'rights' => ['terms' => ['field' => 'rights']],
