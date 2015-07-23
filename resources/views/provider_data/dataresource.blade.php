@@ -345,17 +345,17 @@
                                     @endif    
 
 
-                                    @if (!empty($spatial['lat'])) 
+                                    @if (!empty($spatial['location']['lat'])) 
                                     <div class="col-md-12">
                                         <b>Latitude</b>
-                                        <p>{{ $spatial['lat'] }}</p>
+                                        <p>{{ $spatial['location']['lat'] }}</p>
                                     </div>
                                     @endif  
 
-                                    @if (!empty($spatial['lon'])) 
+                                    @if (!empty($spatial['location']['lon'])) 
                                     <div class="col-md-12">
                                         <b>Longtitude</b>
-                                        <p>{{ $spatial['lon'] }}</p>
+                                        <p>{{ $spatial['location']['lon'] }}</p>
                                     </div>
                                     @endif 
 
@@ -388,7 +388,7 @@
     </section>
 </aside>
 
-@if (isset($resource['_source']['spatial']) && isset($resource['_source']['spatial'][0]['lat']))
+@if (isset($resource['_source']['spatial']) && isset($resource['_source']['spatial'][0]['location']['lat']))
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -396,7 +396,7 @@
             /* GOOGLE MAP */
             function map_initialize() {
                 var bounds = new google.maps.LatLngBounds();
-                var myLatlng = new google.maps.LatLng({{ $spatial['lat']  }},{{ $spatial['lon'] }});
+                var myLatlng = new google.maps.LatLng({{ $spatial['location']['lat']  }},{{ $spatial['location']['lon'] }});
 
                 var mapOptions = {
                     zoom: 10,
@@ -419,13 +419,13 @@
                 var markers = [];
 
                 @foreach($resource['_source']['spatial'] as $spatial)
-
-                    var myLatlng = new google.maps.LatLng({{ $spatial['lat'] }}, {{ $spatial['lon'] }});
+                    <?php $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); ?>
+                    var myLatlng = new google.maps.LatLng({{ $spatial['location']['lat'] }}, {{ $spatial['location']['lon'] }});
 
                     var contentString = '<div id="content">' +
                             '<div id="siteNotice">' +
                             '</div>' +
-                            '<h4 id="firstHeading" class="firstHeading">{{ $spatial['placeName'] }}</h4>' +
+                            '<h4 id="firstHeading" class="firstHeading"><?php echo $placename; ?></h4>' +
                             '<div id="bodyContent">' +
                             // '<p>'+object.desc+'</p>'+
                             '</div>' +
@@ -441,7 +441,7 @@
                     var marker = new google.maps.Marker({
                         position: myLatlng,
                         map: map,
-                        title: '{{ $spatial['placeName'] }}',
+                        title: '<?php echo $placename; ?>',
                         icon: circlePin
                     });
                     //bounds.extend(marker.position);
@@ -461,73 +461,7 @@
                 @endforeach
 
                 var mc = new MarkerClusterer(map, markers);
-                /*$.ajax({
-                 type: "POST",
-                 url: "components/map/rest_get_markers.php",
-                 dataType: 'json',
-                 success: function(data) {
-                 //console.log(data.markers);
-                 $.each(data.markers,function(idx,object){ 
-                 var myLatlng = new google.maps.LatLng(parseFloat(object.lat),parseFloat(object.lon));
 
-                 var contentString =   '<div id="content">'+
-                 '<div id="siteNotice">'+
-                 '</div>'+
-                 '<h4 id="firstHeading" class="firstHeading">'+object.label+'</h4>'+
-                 '<div id="bodyContent">'+
-                 '<p>'+object.desc+'</p>'+
-                 '</div>'+
-                 '</div>';
-
-
-                 var infowindow = new google.maps.InfoWindow({
-                 content: contentString
-                 });
-
-                 ibArray[idx] = infowindow;
-
-                 var marker = new google.maps.Marker({
-                 position: myLatlng,
-                 map: map,
-                 title: object.label,
-                 icon: circlePin
-                 });
-                 //bounds.extend(marker.position);
-
-                 google.maps.event.addListener(marker, 'click', function() {
-
-                 for (var i = 0; i < ibArray.length; i++ ) {
-                 ibArray[i].close();
-                 }
-
-                 infowindow.open(map,marker);
-                 });
-
-                 markers.push(marker);
-                 });
-                 var mc = new MarkerClusterer(map, markers);
-
-                 },
-                 error: function(ret) { alert("There was an error when retrieving the enrichment details."); }
-                 });*/
-
-
-                /*
-                 google.maps.event.addListener(map, 'zoom_changed', function() {
-                 zoomChangeBoundsListener = 
-                 google.maps.event.addListener(map, 'bounds_changed', function(event) {
-                 if (this.getZoom() > 15 && this.initialZoom == true) {
-                 // Change max/min zoom here
-                 this.setZoom(15);
-                 this.initialZoom = false;
-                 }
-                 google.maps.event.removeListener(zoomChangeBoundsListener);
-                 });
-                 });
-
-                 map.initialZoom = true;
-                 map.fitBounds(bounds);
-                 */
                 $(document).on('click', '.nav-tabs li', function (event) {
                     google.maps.event.trigger(map, 'resize');
                 });

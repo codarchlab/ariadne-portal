@@ -17,13 +17,15 @@
                 </div>
             </div><!-- /.col -->           
         </div>
-        <div class="row">
+       <!-- <div class="row">
             <div class="col-md-12">
                 <p>                    
                     <a href="#" id='clear_map' class="btn btn-sm btn-primary"></a>
                 </p> 
             </div>
-        </div>	
+        </div>	-->
+        <div class="row" id="results">            
+        </div>
     </section><!-- /.content -->                
 </aside><!-- /.right-side -->
  <script>       
@@ -145,19 +147,58 @@
                 google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {                    
                     var bounds = event.overlay.getBounds();                   
                     event.overlay.setMap(null);                  
-                    console.log(bounds);
+                    //console.log(bounds);
                     var top_left_lan = bounds.getNorthEast().lat();
                     var top_left_lon = bounds.getNorthEast().lng();
                     var bottom_right_lan = bounds.getSouthWest().lat();
                     var bottom_right_lon = bounds.getSouthWest().lng();
-      
+                    console.log(top_left_lan,top_left_lon,bottom_right_lan,bottom_right_lon);
+                    
                     $.ajax({
                         type: "POST",
                         headers: { 'Access-Control-Allow-Origin': '*' },
                         data: { "top_left_lan":top_left_lan,"top_left_lon":top_left_lon,"bottom_right_lan":bottom_right_lan,"bottom_right_lon":bottom_right_lon, _token: $('input[name=_token]').val()},
                         url: "map_results",
                         success: function(response) { 
-                            console.log(response);                           
+                            $( "#results" ).empty();
+                            console.log(response); 
+                            var ObjectsNum = response.length;
+                            var result_boxes = "";
+                            for (var i = 0; i < ObjectsNum; i++) {
+                                //alert(response[i]['_id']); 
+                                if (response[i]['_source']['description']!="") var description = response[i]['_source']['description'];
+                                else var description = '';
+                                var url = '{{ action("CollectionController@show", ":id") }}';
+                                url = url.replace(':id', response[i]['_id']);
+                                if (response[i]['_type']=="dataset") url = url.replace('CollectionController@show', 'DatasetController@show');
+                                if (response[i]['_type']=="database") url = url.replace('CollectionController@show', 'DatabaseController@show');
+                                if (response[i]['_type']=="gis") url = url.replace('CollectionController@show', 'GisController@show');
+                                if (response[i]['_type']=="textualDocument") url = url.replace('CollectionController@show', 'TextualDocumentController@show');
+                                result_boxes +=  '<div class="col-md-4">'
+                                                    +' <div class="box box-primary" id="dataresource_item" item_id='+response[i]['_id']+'>'
+                                                        +'<div class="box-body">'
+                                                            +'<div class="row">'
+                                                                +'<div class="col-md-3">'
+                                                                    +'<img src="img/monument.png" height="50" border="0"> '
+                                                                +'</div>'
+                                                                +'<div class="col-md-8">'
+                                                                    +'<div class="row">'
+                                                                        +'<a href="'+url+'" target="blank">'+response[i]['_source']['title']+'</a>'
+                                                                        +'<p>'+description+'</p>'
+                                                                    +'</div>'
+                                                                +'</div>'
+                                                            +'</div>'
+                                                            +'<div class="row">'
+                                                                +'<div class="col-md-4">'
+                                                                    +'type: <span class="badge">'+response[i]['_type']+'</span>'
+                                                                +'</div>'
+                                                            +'</div>'
+                                                        +'</div>'
+                                                    +'</div>'
+                                                +'</div>';                                
+                            }  
+                            $('#results').append(result_boxes);
+                            if (ObjectsNum==0) $('#results').append('There are no items in this area');
                         }, 
                         error: function(response) {                             
                             console.log('server errors',response);
