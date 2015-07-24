@@ -59,6 +59,7 @@
                     foreach ($point['_source']['spatial'] as &$spatial) {
                         //$placename = $point['_source']['spatial'][0]['placeName'];    
                         $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); 
+                        //lat lon must be changed in data
                         $lon 	= $spatial['location']['lat'];      
                         $lat 	= $spatial['location']['lon'];                       
                 ?>		

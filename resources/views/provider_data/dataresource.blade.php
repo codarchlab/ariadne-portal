@@ -420,6 +420,7 @@
 
                 @foreach($resource['_source']['spatial'] as $spatial)
                     <?php $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); ?>
+                    //lat lon must be changed in data
                     var myLatlng = new google.maps.LatLng({{ $spatial['location']['lat'] }}, {{ $spatial['location']['lon'] }});
 
                     var contentString = '<div id="content">' +
