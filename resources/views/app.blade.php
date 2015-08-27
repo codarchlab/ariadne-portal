@@ -7,39 +7,9 @@
         <link href="/css/app.css" rel="stylesheet">
 
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <!-- bootstrap 3.0.2 -->
-        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <!-- font Awesome -->
-        <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <!-- Ionicons -->
-        <link href="/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
-        <link href="/css/morris/morris.css" rel="stylesheet" type="text/css" />
-        <!-- jvectormap -->
-        <link href="/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-        <!-- fullCalendar -->
-        <link href="/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
-        <!-- Daterange picker -->
-        <link href="/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link href="/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-        <!-- Theme style -->
-        <link href="/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link href="/css/app.css" rel="stylesheet" type="text/css" />
         <link rel="Shortcut icon" href="http://ariadne-infrastructure.eu/extension/mdr_site/design/ariadne/images/favicon.ico" type="image/x-icon" />
-
-        <style>
-            .modal.modal-wide .modal-dialog {
-                width: 70%;
-            }
-            .modal-wide .modal-body {
-                overflow-y: auto;
-            }
-        </style>
         
-        <!-- Scripts -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -80,39 +50,7 @@
 
 
             <!-- jQuery UI 1.10.3 -->
-            <script src="/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
-            <!-- Bootstrap -->
-            <script src="/js/bootstrap.min.js" type="text/javascript"></script>
-            <!-- Morris.js charts -->
-            <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-            <script src="/js/plugins/morris/morris.min.js" type="text/javascript"></script>
-            <!-- Sparkline -->
-            <script src="/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-            <!-- jvectormap -->
-            <script src="/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-            <script src="/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-            <!-- fullCalendar -->
-            <script src="/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-            <!-- jQuery Knob Chart -->
-            <script src="/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
-            <!-- daterangepicker -->
-            <script src="/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-            <!-- Bootstrap WYSIHTML5 -->
-            <script src="/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-            <!-- iCheck -->
-            <script src="/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-
-            <!-- FLOT CHARTS -->
-            <script src="/js/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
-            <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-            <script src="/js/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
-            <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-            <script src="/js/plugins/flot/jquery.flot.pie.min.js" type="text/javascript"></script>
-            <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
-            <script src="/js/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>            
-
-
-            <!-- AdminLTE App -->
-            <script src="/js/AdminLTE/app.js" type="text/javascript"></script>        
+            <script src="/js/app.js" type="text/javascript"></script>
+                  
     </body>
 </html>
