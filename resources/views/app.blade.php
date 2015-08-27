@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>ARIADNE Portal</title>
 
-        <link href="/css/app.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
 
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link href="/css/app.css" rel="stylesheet" type="text/css" />
