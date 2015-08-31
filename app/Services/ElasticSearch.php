@@ -64,6 +64,7 @@ class ElasticSearch {
         $perPage = Request::input('perPage', 10);
         $from = $perPage * (Request::input('page', 1) - 1);
         
+        $query['highlight'] = array('fields' => array('*' => (object) array()));
         $searchParams = array(
             'body' => $query,
             'size' => $perPage,

@@ -1,4 +1,5 @@
-<div class="col-md-12">
+<?php debug($hit)?>
+<div class="col-md-12 hit">
     <div class="box box-primary" id="dataresource_item" item_id="{{ $hit['_id'] }}">
         <div class="box-body">
             <div class="row">
@@ -27,8 +28,19 @@
                             @endif 
                         </strong>
 
+                        @if(array_key_exists('highlight', $hit))
+                            <h5>Matches found</h5>
+                            @foreach($hit['highlight'] as $key => $values)
+                                <p class="highlights">
+                                   <strong>{{ $key }}</strong>:  
+                                   @foreach($values as $key => $value)
+                                   {!! $value !!}
+                                   @endforeach
+                                </p>
+                            @endforeach
+                        @endif
                         @if(array_key_exists('description', $hit['_source']))
-                        <p>{{ str_limit($hit['_source']['description'], 290) }}</p>
+                            <p>{{ str_limit($hit['_source']['description'], 290) }}</p>
                         @endif
                     </div>
                 </div>
