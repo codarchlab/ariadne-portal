@@ -1,0 +1,12 @@
+$brand-primary:                    rgb(99, 155, 145) !default;
+
+$navbar-default-color:                     #000 !default;
+$navbar-default-bg:                        rgb(168, 39, 18) !default;
+
+$navbar-default-link-color:                #fff !default;
+$navbar-default-link-hover-color:          #fff !default;
+$navbar-default-link-hover-bg:             darken($navbar-default-bg, 3.25%) !default;
+$navbar-default-link-active-color:         #efefef !default;
+$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
+$navbar-default-link-disabled-color:       #fff !default;
+$navbar-default-link-disabled-bg:          transparent !default;
