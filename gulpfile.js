@@ -8,7 +8,10 @@ var paths = {
 elixir(function(mix) {
     
     // compile sass (including bootstrap)
-    mix.sass("style.scss", 'public/css/', { includePaths: [paths.bootstrap + 'stylesheets/'] });
+    mix.sass("style.scss", 'public/css/', {
+        includePaths: [paths.bootstrap + 'stylesheets/'],
+        precision: 8
+    });
 
     // copy bootstrap fonts
     mix.copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts/bootstrap/');
