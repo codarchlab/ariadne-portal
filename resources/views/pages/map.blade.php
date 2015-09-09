@@ -57,11 +57,12 @@
                 <?php 
                 foreach ($points as &$point) {
                     foreach ($point['_source']['spatial'] as &$spatial) {
-                        //$placename = $point['_source']['spatial'][0]['placeName'];    
-                        $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); 
-                        //lat lon must be changed in data
-                        $lon 	= $spatial['location']['lat'];      
-                        $lat 	= $spatial['location']['lon'];                       
+                        if (isset($spatial['placeName'])) {
+                            //$placename = $point['_source']['spatial'][0]['placeName'];    
+                            $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); 
+                            //lat lon must be changed in data
+                            $lon 	= $spatial['location']['lat'];      
+                            $lat 	= $spatial['location']['lon'];                       
                 ?>		
 
                 var myLatlng = new google.maps.LatLng(<?php echo $lat; ?>,<?php echo $lon; ?>);
@@ -90,7 +91,7 @@
 
                 markers.push(marker);
 
-                    <?php } }?>
+                <?php } } }?>
 
                 for (var i = 0; i < markers.length; i++) {
                     var marker = markers[i];
