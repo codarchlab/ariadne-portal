@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>ARIADNE Portal</title>
 
-        <link href="/css/style.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
 
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link rel="Shortcut icon" href="http://ariadne-infrastructure.eu/extension/mdr_site/design/ariadne/images/favicon.ico" type="image/x-icon" />
@@ -25,7 +25,7 @@
         <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
 
         <!-- combined JS code -->
-        <script src="/js/app.js" type="text/javascript"></script>
+        <script src="./js/app.js" type="text/javascript"></script>
 
         <div class="container-fluid">
             @yield('content')
