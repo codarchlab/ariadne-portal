@@ -61,8 +61,8 @@
                             //$placename = $point['_source']['spatial'][0]['placeName'];    
                             $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); 
                             //lat lon must be changed in data
-                            $lon 	= $spatial['location']['lat'];      
-                            $lat 	= $spatial['location']['lon'];                       
+                            $lat 	= $spatial['location']['lat'];      
+                            $lon 	= $spatial['location']['lon'];                       
                 ?>		
 
                 var myLatlng = new google.maps.LatLng(<?php echo $lat; ?>,<?php echo $lon; ?>);
