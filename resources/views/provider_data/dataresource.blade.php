@@ -337,7 +337,7 @@
 
                                     @foreach($resource['_source']['spatial'] as $spatial)
 
-                                    @if (!empty($spatial['placeName'])) 
+                                    @if (isset($spatial['placeName'])) 
                                     <div class="col-md-12">
                                         <b>Place Name</b>
                                         <p>{{ $spatial['placeName'] }}</p>
@@ -419,7 +419,10 @@
                 var markers = [];
 
                 @foreach($resource['_source']['spatial'] as $spatial)
-                    <?php $placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); ?>
+                    <?php 
+						if (isset($spatial['placeName'])) {
+							$placename = str_replace(array("\r", "\n", "\t", "\v"), '', $spatial['placeName']); 							
+					?>
                     //lat lon must be changed in data
                     var myLatlng = new google.maps.LatLng({{ $spatial['location']['lat'] }}, {{ $spatial['location']['lon'] }});
 
@@ -458,6 +461,7 @@
 
                     markers.push(marker);
                     //});
+					<?php } ?>
 
                 @endforeach
 
