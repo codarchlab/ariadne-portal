@@ -51,7 +51,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($providers as $provider)
-                                            @if($provider['datasets'] > 0 || $provider['collections'] > 0 || $provider['databases'] > 0 || $provider['textualDocument'] > 0)
+                                            @if($provider['datasets'] > 0 || $provider['collections'] > 0 || $provider['databases'] > 0 || $provider['textualDocuments'] > 0)
                                             <tr>
                                                 <td>
                                                     <img src='img/language/{{ $provider['_source']['flag'] }}.png' style='height: 24px;'/>

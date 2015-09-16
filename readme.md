@@ -1,23 +1,110 @@
-## Laravel PHP Framework
+#Before setup
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+###Install composer
+https://getcomposer.org
+Follow install instructions for your operating system
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+###Clone repo from bitbucket (git)
+Clone repo from bitbucket (you need to have access to the private repo at https://bitbucket.org/ariadne-infrastructure/ariadne-portal/) into you project folder.
+Create local config file
+Make a copy of .env.example and name it .env
+Edit .env in a text editor, change username, password and database.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+###Install vendor libraries via composer
+navigate to the root folder of the project (where composer.json is located)
+run: 
 
-## Official Documentation
+    composer install
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Libraries used by the portal will now be downloaded, this could take a while
+The libraries will be downloaded into the directory called “vendor”, this directory is ignored in the file .gitignore
+If you have project files from your IDE in the same folder as the source code, add these to .gitignore
 
-## Contributing
+###Run during development
+To run PHP:s built in webserver run:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    php artisan serve
 
-### License
+##Setup apache
+Easiest way to do development is to create a virtual host (vhost).
+Example config:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+    <VirtualHost ariadne.laravel.localhost:80>
+        ServerAdmin webmaster@dummy-host2.example.com
+        DocumentRoot "C:/Users/karl/ariadne-portal/public/"
+    	
+    	<Directory "C:/Users/karl/ariadne-portal/public/">
+            Options Indexes FollowSymLinks Includes ExecCGI 
+            Order allow,deny  
+            Allow from all  
+            AllowOverride All 
+    	</Directory>
+    	
+        ServerName ariadne.laravel.localhost
+        ErrorLog "logs/ariadne.laravel.localhost-error.log"
+        CustomLog "logs/ariadne.laravel.localhost-access.log" common
+    </VirtualHost>
+
+
+Observe the path of the directory, DocumentRoot should be the folder named public inside the project folder.
+Place this file in apaches vhost directory, be sure the line for loading the module vhost_alias_module and “Include conf/extra/httpd-vhosts.conf” is uncommented. In httpd.conf
+
+###Add an entry to your host file:
+(on windows C:\Windows\System32\Drivers\etc\hosts, mac: Open /Applications/Utilities/NetInfo Manager, linux: sudo nano /etc/hosts)
+ariadne.laravel.localhost 127.0.0.1
+
+
+The portal should no be hosted via http://ariadne.laravel.localhost
+
+Overview of central parts of the portal in Laravel
+The application code is located in the sub-folder “app”.
+Views are located in resources\views
+
+##Routes (paths)
+Laravel looks for matching paths in app/Http/routes.php an example is:
+
+    Route::get('providers', 'ProviderController@index');
+
+This line forwards any request to http://ariadne.laravel.localhost/providers to the function index in the class ProviderController in the file app/Http/Controllers/ProviderController.php
+
+More information about controllers can be found in the Laravel documentation: http://laravel.com/docs/5.0/routing
+
+##Controllers
+Controllers handles request and provides a rendered view (html) or data in some form.
+Logic for handle the request and rendering of the views should be called here.
+
+###Documentation about controllers:
+http://laravel.com/docs/5.0/controllers
+Services
+A service meant for doing calls for data retrieval.
+For example app/Services/Provider.php handles retrieval of provider-records from the database.
+The data retrieval is done via the query builder in Laravel
+Eg:
+
+    $subjects = DB::table('ariadne_subject')
+                   ->select('ariadne_subject.id', 'ariadne_subject.name')
+                   ->orderBy('ariadne_subject.name')
+                   ->get();
+
+will get an array of subjects in the table ariadne_subject
+
+More information about the query builder:
+http://laravel.com/docs/5.0/queries
+
+##Views
+Views (templates) is responsible for rendering items.
+These are located in resources\views
+app.blade.php is the main structure for the portal and is extended for eg home.blade.php or providers.blade.php
+
+Views are called from the controller eg from ProviderController.php:
+
+    $providers = Provider::statistics();
+    return view('providers')->with('providers', $providers);
+
+This will give the view (providers.blade.php) a variable ($providers) with all the providers to loop trough.
+
+###More about views:
+http://laravel.com/docs/5.0/views
+
+
+
