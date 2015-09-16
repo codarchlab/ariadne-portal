@@ -18,7 +18,7 @@
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_general" data-toggle="tab">General</a></li>
-                        @if (isset($resource['_source']['keyword']))                        
+                        @if (isset($resource['_source']['keyword']) || isset($resource['_source']['nativeSubject']) || isset($resource['_source']['archaeologicalResourceType']))                        
                         <li><a href="#tab_subjects" data-toggle="tab">Subjects</a></li>
                         @endif
                         @if (isset($resource['_source']['rights']))      
@@ -46,6 +46,13 @@
                                 <div class="col-md-12">
                                     <b>Other Identifiers</b>
                                     <p>{{ $resource['_source']['originalId'] }}</p>
+                                </div>
+                                @endif
+                                
+                                @if (isset($resource['_source']['identifier']))
+                                <div class="col-md-12">
+                                    <b>Identifier</b>
+                                    <p><a href='#'>{{ $resource['_source']['identifier'] }}</a></p>
                                 </div>
                                 @endif
 
@@ -97,26 +104,31 @@
                             </div>
                         </div>
 
-                        @if (isset($resource['_source']['keyword']) || isset($resource['_source']['subject']) || isset($resource['_source']['ariadne_subject']))  
+                        @if (isset($resource['_source']['keyword']) || isset($resource['_source']['nativeSubject']) || isset($resource['_source']['archaeologicalResourceType']))  
 
                         <div class="tab-pane" id="tab_subjects">
                             <div class="row" style="padding: 14px;">
 
-                                @if (isset($resource['_source']['ariadne_subject']))
+                                @if (isset($resource['_source']['archaeologicalResourceType']))
                                 <div class="col-md-12">
-                                    <b>Ariadne Subject</b>
-                                    @foreach($resource['_source']['ariadne_subject'] as $value)
-                                    <p>{{ $value }}</p>
-                                    @endforeach
+                                    <b>Archaeological Resource Type</b>
+                                   
+                                        <p>{{$resource['_source']['archaeologicalResourceType']['name']}}</p>
+                                   
                                 </div>
                                 @endif
 
-                                @if (isset($resource['_source']['subject']))
+                                @if (isset($resource['_source']['nativeSubject']))
                                 <div class="col-md-12">
-                                    <b>Other subject</b>
-                                    @foreach($resource['_source']['subject'] as $value)
-                                    <p>{{ $value }}</p>
+                                    <b>Native subject</b><br/>
+                                     <ol>
+                                    @foreach($resource['_source']['nativeSubject'] as $value)                                       
+                                        <li>
+                                            <b>Label</b><p>{{ $value['prefLabel'] }}</p>
+                                            <b>Concept URI</b><p><a href='{{ $value['rdfAbout'] }}' target="blank">{{ $value['rdfAbout'] }}</a></p>
+                                        </li>                                       
                                     @endforeach
+                                     </ol>
                                 </div>
                                 @endif
 
@@ -170,7 +182,7 @@
 
                         @endif
 
-                        @if (isset($resource['_source']['creator']) || isset($resource['_source']['owner']) || isset($resource['_source']['publisher']) ||
+                        @if (isset($resource['_source']['creator']) || isset($resource['_source']['contributor']) || isset($resource['_source']['owner']) || isset($resource['_source']['publisher']) ||
                         isset($resource['_source']['legalResponsible']) || isset($resource['_source']['scientificResponsible']) || isset($resource['_source']['technicalResponsible']))           
 
                         <div class="tab-pane" id="tab_ownership">
@@ -189,6 +201,15 @@
                                 <div class="col-md-12">
                                     <b>Owner</b>
                                     @foreach($resource['_source']['owner'] as $value)
+                                    <p>{{ $value['name'] }}</p>
+                                    @endforeach
+                                </div>
+                                @endif  
+                                
+                                @if (isset($resource['_source']['contributor'])) 
+                                <div class="col-md-12">
+                                    <b>Contributor</b>
+                                    @foreach($resource['_source']['contributor'] as $value)
                                     <p>{{ $value['name'] }}</p>
                                     @endforeach
                                 </div>
@@ -243,13 +264,13 @@
 
                                     @foreach ($resource['_source']['temporal'] as $temporal)
 
-                                    @if (!empty($temporal['period_name']))                                            
+                                    @if (!empty($temporal['periodName']))                                            
                                     <div class='row' style='margin-bottom:8px;'>
                                         <div class='col-md-2'>
                                             <b>Period Name</b>
                                         </div>
                                         <div class='col-md-10'>
-                                            <p> {{  $temporal['period_name'] }}</p>
+                                            <p> {{  $temporal['periodName'] }}</p>
                                         </div>
                                     </div>
                                     @endif
