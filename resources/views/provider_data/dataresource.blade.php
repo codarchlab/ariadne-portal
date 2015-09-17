@@ -125,7 +125,9 @@
                                     @foreach($resource['_source']['nativeSubject'] as $value)                                       
                                         <li>
                                             <b>Label</b><p>{{ $value['prefLabel'] }}</p>
-                                            <b>Concept URI</b><p><a href='{{ $value['rdfAbout'] }}' target="blank">{{ $value['rdfAbout'] }}</a></p>
+                                            @if (isset($value['rdfAbout']))
+                                                <b>Concept URI</b><p><a href='{{ $value['rdfAbout'] }}' target="blank">{{ $value['rdfAbout'] }}</a></p>
+                                            @endif
                                         </li>                                       
                                     @endforeach
                                      </ol>
