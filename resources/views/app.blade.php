@@ -50,7 +50,7 @@
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="/" class="logo">
+            <a href="{{ action('WelcomeController@index') }}" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 <img src="{{ asset("img/logo2.png") }}" height="40" style="position:relative; " border="0" />
             </a>
