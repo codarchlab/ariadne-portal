@@ -29,9 +29,9 @@
                             <tbody>
                                 @foreach ($datasets as $dataset)
                                 <tr>
-                                    <td>{{ $dataset->id }}</td>
-                                    <td>{{ $dataset->provider }}</td>
-                                    <td><a href="{{ action('DatasetController@show', $dataset->id) }}">{{ $dataset->name }}</a></td>                                                                        
+                                    <td>{{ $dataset['_id'] }}</td>
+                                    <td>{{ $dataset['_source']['providerAcro'] }}</td>
+                                    <td><a href="{{ action('DatasetController@show', $dataset['_id']) }}">{{ $dataset['_source']['title'] }}</a></td>                                                                        
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -194,7 +194,10 @@
                                 <div class="col-md-12">
                                     <b>Creator</b>
                                     @foreach($resource['_source']['creator'] as $value)
-                                    <p>{{ $value['name'] }}</p>
+                                        <p>{{ $value['name'] }}</p>
+                                        @if (isset($value['type']))
+                                            <p>Type: {{ $value['type'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @endif   
@@ -203,7 +206,10 @@
                                 <div class="col-md-12">
                                     <b>Owner</b>
                                     @foreach($resource['_source']['owner'] as $value)
-                                    <p>{{ $value['name'] }}</p>
+                                        <p>{{ $value['name'] }} }}</p>
+                                         @if (isset($value['type']))
+                                            <p>Type: {{ $value['type'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @endif  
@@ -212,7 +218,10 @@
                                 <div class="col-md-12">
                                     <b>Contributor</b>
                                     @foreach($resource['_source']['contributor'] as $value)
-                                    <p>{{ $value['name'] }}</p>
+                                        <p>{{ $value['name'] }}</p>
+                                         @if (isset($value['type']))
+                                            <p>Type: {{ $value['type'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @endif   
@@ -221,7 +230,10 @@
                                 <div class="col-md-12">
                                     <b>Publisher</b>
                                     @foreach($resource['_source']['publisher'] as $value)
-                                    <p>{{ $value['name'] }}</p>
+                                        <p>{{ $value['name'] }}</p>
+                                         @if (isset($value['type']))
+                                            <p>Type: {{ $value['type'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @endif      
@@ -230,7 +242,10 @@
                                 <div class="col-md-12">
                                     <b>Legal Responsible</b>
                                     @foreach($resource['_source']['legalResponsible'] as $value)
-                                    <p>{{ $value['name'] }}</p>
+                                        <p>{{ $value['name'] }}</p>
+                                         @if (isset($value['type']))
+                                            <p>Type: {{ $value['type'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @endif                                    
@@ -239,7 +254,10 @@
                                 <div class="col-md-12">
                                     <b>Scientific Responsible</b>
                                     @foreach($resource['_source']['scientificResponsible'] as $value)
-                                    <p>{{ $value['name'] }}</p>
+                                        <p>{{ $value['name'] }}</p>
+                                         @if (isset($value['type']))
+                                            <p>Type: {{ $value['type'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @endif  
@@ -248,7 +266,10 @@
                                 <div class="col-md-12">
                                     <b>Technical Responsible</b>
                                     @foreach($resource['_source']['technicalResponsible'] as $value)
-                                    <p>{{ $value }}</p>
+                                        <p>{{ $value['name'] }}</p>
+                                        @if (isset($value['type']))
+                                            <p>Type: {{ $value['type'] }}</p>
+                                        @endif
                                     @endforeach
                                 </div>
                                 @endif      
@@ -266,86 +287,34 @@
 
                                     @foreach ($resource['_source']['temporal'] as $temporal)
 
-                                    @if (!empty($temporal['periodName']))                                            
-                                    <div class='row' style='margin-bottom:8px;'>
-                                        <div class='col-md-2'>
-                                            <b>Period Name</b>
+                                        @if (!empty($temporal['periodName']))                                            
+                                        <div class='row' style='margin-bottom:8px;'>
+                                            <div class='col-md-2'>
+                                                <b>Period Name</b>
+                                            </div>
+                                            <div class='col-md-10'>
+                                                <p> {{  $temporal['periodName'] }}</p>
+                                            </div>
                                         </div>
-                                        <div class='col-md-10'>
-                                            <p> {{  $temporal['periodName'] }}</p>
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    <div class='row' style='margin-bottom:8px;'>
-                                        <div class='col-md-4'>From Period:</div>
-                                    </div>
-                                    <div class='row' style='margin-bottom:8px;'>
+                                        @endif
 
                                         @if (!empty($temporal['from']))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Period:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal['from'] }}</div>
+                                            <div class='col-md-2'>
+                                                <b>From</b>
+                                            </div>  
+                                            <div class='col-md-10'>
+                                                <p> {{  $temporal['from'] }}</p>
+                                            </div>                                            
                                         @endif
 
-                                        @if (!empty($temporal->from_year))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Year:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal->from_year }}</div>
-                                        @endif                                                
-
-                                        @if (!empty($temporal->from_month))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Month:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal->from_month }}</div>
-                                        @endif  
-
-                                        @if (!empty($temporal->from_day))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Day:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal->from_day }}</div>
+                                        @if (!empty($temporal['until']))
+                                         <div class='col-md-2'>
+                                                <b>To</b>
+                                            </div>  
+                                            <div class='col-md-10'>
+                                                <p> {{  $temporal['until'] }}</p>
+                                            </div>                                         
                                         @endif
-
-                                    </div>
-
-                                    <div class='row' style='margin-bottom:8px;'>
-                                        <div class='col-md-4'>To Period:</div>                                                    
-                                    </div>
-                                    <div class='row' style='margin-bottom:8px;'>
-
-                                        @if (!empty($temporal->to_bc))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Period:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal->to_bc }}</div>
-                                        @endif
-
-                                        @if (!empty($temporal->to_year))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Year:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal->to_year }}</div>
-                                        @endif
-
-                                        @if (!empty($temporal->to_month))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Month:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal->to_month }}</div>
-                                        @endif  
-
-                                        @if (!empty($temporal->to_day))
-                                        <div class='col-md-2 col-sm-offset-2'>
-                                            <b>Day:</b>
-                                        </div>
-                                        <div class='col-md-8'>{{ $temporal->to_day }}</div>
-                                        @endif                                                
-
-                                    </div>  
                                     @endforeach
                                 </div>
                             </div>
