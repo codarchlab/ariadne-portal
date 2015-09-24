@@ -20,10 +20,21 @@ Libraries used by the portal will now be downloaded, this could take a while
 The libraries will be downloaded into the directory called “vendor”, this directory is ignored in the file .gitignore
 If you have project files from your IDE in the same folder as the source code, add these to .gitignore
 
+###Compile JS and CSS files
+
+Gulp is used to compile SCSS into CSS files and to combine and minify all JavaScript files. Before deployment gulp has to be run:
+
+    npm install
+    gulp
+
 ###Run during development
 To run PHP:s built in webserver run:
 
     php artisan serve
+
+To automatically recompile js and css files after changes
+
+    gulp watch
 
 ##Setup apache
 Easiest way to do development is to create a virtual host (vhost).
@@ -105,6 +116,3 @@ This will give the view (providers.blade.php) a variable ($providers) with all t
 
 ###More about views:
 http://laravel.com/docs/5.0/views
-
-
-
