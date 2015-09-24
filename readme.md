@@ -88,19 +88,7 @@ Logic for handle the request and rendering of the views should be called here.
 http://laravel.com/docs/5.0/controllers
 Services
 A service meant for doing calls for data retrieval.
-For example app/Services/Provider.php handles retrieval of provider-records from the database.
-The data retrieval is done via the query builder in Laravel
-Eg:
-
-    $subjects = DB::table('ariadne_subject')
-                   ->select('ariadne_subject.id', 'ariadne_subject.name')
-                   ->orderBy('ariadne_subject.name')
-                   ->get();
-
-will get an array of subjects in the table ariadne_subject
-
-More information about the query builder:
-http://laravel.com/docs/5.0/queries
+For example app/Services/Provider.php handles retrieval of provider-records from the Elastic Search.
 
 ##Views
 Views (templates) is responsible for rendering items.
