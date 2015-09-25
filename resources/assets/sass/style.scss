@@ -3,10 +3,179 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700&subset=latin,latin-ext);
 
 body {
-	font-family: 'Lato',Helvetica,sans-serif;
-	padding-top: 70px;
+
+	padding-top: 150px;
 }
 
 .hit {
+
 	margin-bottom: 30px;
+}
+
+.navbar-big {
+
+  min-height: 84px;
+  background-color: #000;
+  padding-left: 120px;
+}
+
+.navbar-big .glyphicon {
+
+  top: 7px;
+  font-size: 1.5em;
+  padding-right: 10px;
+}
+
+#searchlogo {
+
+  padding: 150px 0 50px 0;
+  display: block;
+  margin: 0 auto;
+}
+
+#logo-symbol {
+
+  height: 55px;
+}
+
+/**
+  Navigation Bar Elements
+*/
+
+.navbar .nav li {
+
+  width: 21%;
+  display: inline-block;
+  float: none;
+}
+.navbar .nav {
+
+  float: none;
+  text-align: center;
+}
+
+.navbar-toggle {
+
+  margin-top: 25px;
+  margin-right: 20px;
+
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+
+  border-color: #000;
+}
+
+.navbar-default {
+
+  background-color: #000;
+  border: none;
+}
+
+#navBrowse {
+
+  border-bottom: 5px solid #75A99D;
+}
+
+#navBrowse a,
+#navServices a,
+#navExperiments a,
+#navAbout a {
+
+  color: #fff;
+  padding: 25px 0 25px 0;
+}
+
+#navServices {
+
+  border-bottom: 5px solid #BB3921;
+}
+
+#navExperiments {
+
+  border-bottom: 5px solid #D5A03A;
+}
+
+#navAbout {
+
+  border-bottom: 5px solid #506A9F;
+}
+
+#navBrowse > a:hover,
+#navBrowse > a:focus,
+#navBrowse.active > a {
+
+  color: #fff;
+  background-color: #75A99D;
+}
+
+#navServices > a:hover,
+#navServices > a:focus,
+#navServices.active > a {
+
+  color: #fff;
+  background-color: #BB3921;
+}
+
+#navExperiments > a:hover,
+#navExperiments > a:focus,
+#navExperiments.active > a {
+
+  color: #fff;
+  background-color: #D5A03A;
+}
+
+#navAbout > a:hover,
+#navAbout > a:focus,
+#navAbout.active > a {
+
+  color: #fff;
+  background-color: #506A9F
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+
+  background-color: transparent;
+}
+
+#logoitem {
+
+  position: absolute;
+  left: 15px;
+  top: 3px;
+}
+
+.navbar .navbar-inner {
+
+  padding: 0;
+}
+
+.navbar .nav {
+
+  margin: 0;
+  display: table;
+  width: 100%;
+}
+
+.navbar .nav > li {
+
+  display: table-cell;
+  width: 1%;
+  float: none;
+  text-align: center;
+}
+
+
+.navbar .nav li:first-child a {
+
+  border-left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.navbar .nav li:last-child a {
+
+  border-right: 0;
+  border-radius: 0 3px 3px 0;
 }
