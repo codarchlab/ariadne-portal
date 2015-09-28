@@ -18,3 +18,8 @@ $navbar-default-link-disabled-bg:          transparent !default;
 $navbar-default-toggle-hover-bg:           #ddd !default;
 $navbar-default-toggle-icon-bar-bg:        #888 !default;
 $navbar-default-toggle-border-color:       #ddd !default;
+
+// Buttons
+$btn-primary-color:              #fff !default;
+$btn-primary-bg:                 rgba(80, 106, 159, 0.8) !default;
+$btn-primary-border:             darken($btn-primary-bg, 5%) !default;

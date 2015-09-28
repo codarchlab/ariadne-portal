@@ -6,7 +6,7 @@
 
     <div class="col-md-6 col-md-offset-3 text-center">
         
-        <img id="searchlogo" class="img-responsive" src="img/logo.png">
+        <img id="searchlogo" class="img-responsive" src="img/logo-white.png">
 
         {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}            
 

@@ -1,20 +1,26 @@
 <nav id="navbar">
+
+    <div id="logo">
+
+        <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">
+            <img id="logo-symbol" src="{{ asset("img/logo-symbol.png") }}">
+        </a>
+
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+
+    </div>
+
     <ul class="nav navbar-fixed-top nav-justified navbar-big">
-        <li id="logoitem">
-            <div class="navbar-header">
 
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">
-                    <img id="logo-symbol" src="{{ asset("img/logo-symbol.png") }}">
-                </a>
-
-            </div>
-        </li>
         <li id="navBrowse">
             <a href="{{ action('MapController@index') }}">
                 <span class="glyphicon glyphicon-globe"></span>
