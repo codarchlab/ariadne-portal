@@ -174,7 +174,6 @@ body {
   text-align: center;
 }
 
-
 .navbar .nav li:first-child a {
 
   border-left: 0;
@@ -185,4 +184,15 @@ body {
 
   border-right: 0;
   border-radius: 0 3px 3px 0;
+}
+
+/**
+  Prevent stacking of list items in small screen resolutions
+*/
+.nav-justified > li {
+  display: table-cell;
+  width: 1%;
+}
+.nav-justified > li > a {
+  margin-bottom: 0;
 }

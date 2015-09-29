@@ -6120,4 +6120,14 @@ body {
   border-right: 0;
   border-radius: 0 3px 3px 0; }
 
+/**
+  Prevent stacking of list items in small screen resolutions
+*/
+.nav-justified > li, .nav-tabs.nav-justified > li {
+  display: table-cell;
+  width: 1%; }
+
+.nav-justified > li > a, .nav-tabs.nav-justified > li > a {
+  margin-bottom: 0; }
+
 /*# sourceMappingURL=style.css.map */
