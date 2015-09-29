@@ -6,7 +6,7 @@
 
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 
-        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="Shortcut icon" href="http://ariadne-infrastructure.eu/extension/mdr_site/design/ariadne/images/favicon.ico" type="image/x-icon" />
         
         <!--[if lt IE 9]>
@@ -14,7 +14,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body {{ (Request::is('/') ? ' id=frontpage' : '') }}>
         
         @include('shared._navigation')
 

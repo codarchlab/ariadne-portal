@@ -5993,7 +5993,9 @@ button.close {
     display: none !important; } }
 
 body {
-  padding-top: 150px;
+  padding-top: 150px; }
+
+body#frontpage {
   background: url("../img/frontpage-bgr_blur.jpg");
   background-size: cover;
   background-repeat: no-repeat; }
