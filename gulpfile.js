@@ -3,7 +3,7 @@ var elixir = require('laravel-elixir');
 var paths = {
     'jquery': './vendor/components/jquery/',
     'bootstrap': './vendor/twbs/bootstrap-sass/assets/'
-}
+};
 
 elixir(function(mix) {
     
