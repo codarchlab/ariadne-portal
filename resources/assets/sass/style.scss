@@ -14,6 +14,26 @@ body#frontpage {
   background-repeat: no-repeat;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+  margin-bottom: 25px;
+}
+
+h1 {
+
+  color: #555;
+}
+
+h2 {
+
+  color: #777;
+}
+
 .hit {
 
 	margin-bottom: 30px;
@@ -92,8 +112,9 @@ body#frontpage {
 #navExperiments a,
 #navAbout a {
 
-  color: #777;
+  color: #555;
   padding: 15px 0 20px 0;
+  font-size: 1.3em;
 }
 
 #navServices {
@@ -155,7 +176,7 @@ body#frontpage {
   z-index: 2000;
   position: fixed;
   left: 15px;
-  top: -5px;
+  top: 3px;
 }
 
 .navbar .navbar-inner {
@@ -199,4 +220,12 @@ body#frontpage {
 }
 .nav-justified > li > a {
   margin-bottom: 0;
+}
+
+/**
+  about page
+*/
+#aboutpage {
+
+  text-align: justify;
 }
