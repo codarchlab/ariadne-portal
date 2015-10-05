@@ -22,12 +22,12 @@
         <script src="https://maps.googleapis.com/maps/api/js?libraries=drawing"></script>
         <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
 
+        <!-- combined JS code -->
+        <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
+
         <div class="container-fluid">
             @yield('content')
         </div>
-
-        <!-- combined JS code -->
-        <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
                   
     </body>
 </html>
