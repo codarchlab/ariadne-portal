@@ -1,9 +1,9 @@
-<nav id="navbar">
+<nav {{ (Request::is('/') ? ' id=navbar-big' : 'id=navbar-small') }}>
 
     <div id="logo">
 
         <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">
-            <img id="logo-symbol" src="{{ asset("img/logo-symbol.png") }}">
+            <img id="brand" src="{{ asset("img/logo-symbol.png") }}">
         </a>
 
         <div class="navbar-header">
@@ -19,7 +19,7 @@
 
     </div>
 
-    <ul class="nav navbar-fixed-top nav-justified navbar-big">
+    <ul class="nav navbar-fixed-top nav-justified navbar-main">
 
         <li id="navBrowse">
             <a href="{{ action('MapController@index') }}">

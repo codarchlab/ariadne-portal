@@ -6017,29 +6017,7 @@ h2 {
 .hit {
   margin-bottom: 30px; }
 
-.navbar-big {
-  min-height: 69px;
-  /* background-color: rgba(0, 0, 0, 0.6); */
-  padding-left: 120px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-bottom: 3px #ccc; }
-
-.navbar-big .glyphicon {
-  top: 7px;
-  font-size: 1.5em;
-  padding-right: 10px; }
-
-#searchlogo {
-  padding: 50px 0 50px 0;
-  display: block;
-  margin: 0 auto; }
-
-#logo-symbol {
-  height: 55px; }
-
-/**
-  Navigation Bar Elements
-*/
+/* Navbar defaults */
 .navbar .nav li {
   width: 21%;
   display: inline-block;
@@ -6060,16 +6038,14 @@ h2 {
   background-color: #000;
   border: none; }
 
-#navBrowse {
-  border-bottom: 5px solid #75A99D; }
-
 #navBrowse a,
 #navServices a,
 #navExperiments a,
 #navAbout a {
-  color: #555;
-  padding: 15px 0 20px 0;
-  font-size: 1.3em; }
+  color: #555; }
+
+#navBrowse {
+  border-bottom: 5px solid #75A99D; }
 
 #navServices {
   border-bottom: 5px solid #BB3921; }
@@ -6109,12 +6085,6 @@ h2 {
 .navbar-default .navbar-nav > .open > a:focus {
   background-color: transparent; }
 
-#logo {
-  z-index: 2000;
-  position: fixed;
-  left: 15px;
-  top: 3px; }
-
 .navbar .navbar-inner {
   padding: 0; }
 
@@ -6137,6 +6107,12 @@ h2 {
   border-right: 0;
   border-radius: 0 3px 3px 0; }
 
+#logo {
+  z-index: 2000;
+  position: fixed;
+  left: 15px;
+  top: 3px; }
+
 /**
   Prevent stacking of list items in small screen resolutions
 */
@@ -6147,6 +6123,78 @@ h2 {
 .nav-justified > li > a, .nav-tabs.nav-justified > li > a {
   margin-bottom: 0; }
 
+.navbar-main {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 3px #ccc; }
+
+.navbar-main .glyphicon {
+  top: 7px;
+  font-size: 1.5em;
+  padding-right: 10px; }
+
+/* / Navbar defaults */
+/* Big navbar */
+#navbar-big .navbar-main {
+  min-height: 69px;
+  padding-left: 120px; }
+
+#navbar-big #navBrowse a,
+#navbar-big #navServices a,
+#navbar-big #navExperiments a,
+#navbar-big #navAbout a {
+  color: #555;
+  padding: 15px 0 20px 0;
+  font-size: 1.3em; }
+
+#navbar-big #brand {
+  height: 55px; }
+
+/* / Big navbar */
+/* Small navbar */
+#navbar-small .navbar-main {
+  min-height: 69px;
+  padding-left: 95px; }
+
+#navbar-small #navBrowse a,
+#navbar-small #navServices a,
+#navbar-small #navExperiments a,
+#navbar-small #navAbout a {
+  color: #555;
+  padding: 7px 0 10px 0;
+  font-size: 1.0em; }
+
+#navbar-small #brand {
+  width: 30px; }
+
+#navbar-small .navbar-main .glyphicon {
+  top: 3px;
+  font-size: 1.1em;
+  padding-right: 10px; }
+
+#navbar-small #logo {
+  top: 0; }
+
+#navbar-small #navServices {
+  border-bottom: 3px solid #BB3921; }
+
+#navbar-small #navBrowse {
+  border-bottom: 3px solid #75A99D; }
+
+#navbar-small #navExperiments {
+  border-bottom: 3px solid #D5A03A; }
+
+#navbar-small #navAbout {
+  border-bottom: 3px solid #506A9F; }
+
+/* / Small navbar */
+#searchlogo {
+  padding: 50px 0 50px 0;
+  display: block;
+  margin: 0 auto; }
+
+/**
+  Navigation Bar Elements
+*/
 /**
   about page
 */
