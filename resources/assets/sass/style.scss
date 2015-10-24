@@ -211,7 +211,7 @@ h2 {
 #navbar-big .navbar-main {
 
   min-height: 69px;
-  padding-left: 120px;
+  padding-left: 0;
 }
 
 #navbar-big #navBrowse a,
@@ -229,13 +229,18 @@ h2 {
   height: 55px;
 }
 
+#navbar-big .navbar-brand {
+
+  display: none;
+}
+
 /* / Big navbar */
 
 /* Small navbar */
 
 #navbar-small .navbar-main {
 
-  min-height: 69px;
+  min-height: 50px;
   padding-left: 95px;
 }
 

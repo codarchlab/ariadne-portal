@@ -6136,7 +6136,7 @@ h2 {
 /* Big navbar */
 #navbar-big .navbar-main {
   min-height: 69px;
-  padding-left: 120px; }
+  padding-left: 0; }
 
 #navbar-big #navBrowse a,
 #navbar-big #navServices a,
@@ -6149,10 +6149,13 @@ h2 {
 #navbar-big #brand {
   height: 55px; }
 
+#navbar-big .navbar-brand {
+  display: none; }
+
 /* / Big navbar */
 /* Small navbar */
 #navbar-small .navbar-main {
-  min-height: 69px;
+  min-height: 50px;
   padding-left: 95px; }
 
 #navbar-small #navBrowse a,
