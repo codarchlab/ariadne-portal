@@ -6198,10 +6198,30 @@ h2 {
 /**
   Navigation Bar Elements
 */
-/**
-  about page
-*/
+/* About page */
 #aboutpage {
   text-align: justify; }
+
+/* Footer */
+#footer {
+  font-size: 0.9em;
+  width: 100%;
+  margin-top: 100px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px; }
+
+#frontpage #footer .text-muted {
+  color: #fff !important; }
+
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 80px; }
 
 /*# sourceMappingURL=style.css.map */

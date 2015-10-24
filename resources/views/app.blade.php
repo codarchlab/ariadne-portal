@@ -27,6 +27,8 @@
 
         <div class="container-fluid">
             @yield('content')
+
+            @include('shared._footer')
         </div>
                   
     </body>
