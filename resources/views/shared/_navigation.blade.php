@@ -2,7 +2,7 @@
 
     <div id="logo">
 
-        <a class="navbar-brand" href="{{ action('WelcomeController@index') }}">
+        <a class="navbar-brand" href="{{ action('PageController@welcome') }}">
             <img id="brand" src="{{ asset("img/logo-symbol.png") }}">
         </a>
 
@@ -43,7 +43,7 @@
         </li>
 
         <li id="navAbout" {{ (Request::is('about') ? ' class=active' : '') }}>
-            <a href="{{ action('WelcomeController@about') }}">
+            <a href="{{ action('PageController@about') }}">
                 <span class="glyphicon glyphicon-question-sign"></span>
                 About
             </a>

@@ -2,31 +2,37 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Config;
 use App\Services\ElasticSearch;
-use Utils;
+use App\Services\DataResource;
+use App\Services\Utils;
 use Request;
 
-class SearchController extends Controller {
+class ResourceController extends Controller {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('guest');
-    }
 
     public function index() {
-        return view('search.simpleSearch');
+        return view('resource.search');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param string $type the elasticsearch type
+     * @param  int  $id
+     * @return View
+     */
+    public function show($type,$id) {
+        $resource = ElasticSearch::get($id, 'resource', $type);
+        return view('resource.show')->with('resource', $resource);
     }
 
     /**
      * Performs a faceted search depending on the GET-values
      * Eg ?q=dig&keyword=england does a free text search for dig in
      * resources where the keyword england exists
-     * 
+     *
      * @return View rendered pagination for search results
      */
     public function search() {
@@ -53,9 +59,9 @@ class SearchController extends Controller {
 
         $hits = ElasticSearch::search($query, 'resource');
 
-        return view('search.simpleSearch')
-                        ->with('type', null)
-                        ->with('aggregations', $query['aggregations'])
-                        ->with('hits', $hits);
+        return view('resource.search')
+            ->with('type', null)
+            ->with('aggregations', $query['aggregations'])
+            ->with('hits', $hits);
     }
 }

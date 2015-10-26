@@ -6,7 +6,7 @@
     <!-- Heading -->
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}            
+            {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
 
                 <div class="input-group">
                     {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources...")) !!}
@@ -73,7 +73,7 @@
             </div>
             <div class="row">
                 @foreach($hits as $hit)
-                    @include('search.hit', ['hit' => $hit])
+                    @include('resource.search_hit', ['hit' => $hit])
                 @endforeach
             </div>
             <div class="row">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Services\Provider;
 
-class WelcomeController extends Controller {
+class PageController extends Controller {
     /*
       |--------------------------------------------------------------------------
       | Welcome Controller
@@ -17,24 +17,16 @@ class WelcomeController extends Controller {
       |
      */
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('guest');
-    }
 
     /**
      * Show the application welcome screen to the user.
      *
      * @return Response
      */
-    public function index() {
-        $providers = Provider::statistics2withES();
+    public function welcome() {
+        $providers = Provider::statistics();
         //dd($providers);
-        return view('pages.welcome')->with('providers', $providers);
+        return view('page.welcome')->with('providers', $providers);
     }
     
     /**
@@ -44,6 +36,6 @@ class WelcomeController extends Controller {
      */
     public function about()
     {
-        return view('pages.about');
+        return view('page.about');
     }    
 }

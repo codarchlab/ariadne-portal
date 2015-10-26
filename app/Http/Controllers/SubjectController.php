@@ -9,15 +9,6 @@ use App\Services\Subject;
 class SubjectController extends Controller {
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('guest');
-    }
-
-    /**
      * List the subjects and number of records
      *
      * @return Response
@@ -26,7 +17,7 @@ class SubjectController extends Controller {
         $subjects = Subject::statisticsWithES();
         debug($subjects);
         //dd($subjects);
-        return view('ariadne_subject.subjects')->with('subjects', $subjects);
+        return view('subject.index')->with('subjects', $subjects);
     }
 
 }

@@ -8,7 +8,7 @@
         
         <img id="searchlogo" class="img-responsive" src="img/logo-white.png">
 
-        {!! Form::open(array("action" => "SearchController@search", "method" => "GET")) !!}            
+        {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
 
         <div class="input-group">
             {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources in the Ariadne catalog ...")) !!}

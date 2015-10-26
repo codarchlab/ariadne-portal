@@ -19,15 +19,6 @@ class MapController extends Controller {
      */
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('guest');
-    }
-
-    /**
      * Show the application welcome screen to the user.
      *
      * @return Response
@@ -35,7 +26,7 @@ class MapController extends Controller {
     public function index() {
         $points = Map::all();        
         //dd($points);
-        return view('pages.map')->with('points', $points);
+        return view('map.index')->with('points', $points);
     }
     
     public function results() {
