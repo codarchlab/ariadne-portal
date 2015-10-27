@@ -1,0 +1,255 @@
+/* Navbar defaults */
+
+.navbar .nav li {
+
+  width: 21%;
+  display: inline-block;
+  float: none;
+}
+
+.navbar .nav {
+
+  float: none;
+  text-align: center;
+}
+
+.navbar-toggle {
+
+  margin-top: 25px;
+  margin-right: 20px;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+
+  border-color: #000;
+}
+
+.navbar-default {
+
+  background-color: #000;
+  border: none;
+}
+
+#navBrowse a,
+#navServices a,
+#navExperiments a,
+#navAbout a {
+
+  color: #555;
+}
+
+#navBrowse {
+
+  border-bottom: 5px solid #D5A03A;
+}
+
+#navServices {
+
+  border-bottom: 5px solid #BB3921;
+}
+
+#navExperiments {
+
+  border-bottom: 5px solid #75A99D;
+}
+
+#navAbout {
+
+  border-bottom: 5px solid #506A9F;
+}
+
+#navBrowse > a:hover,
+#navBrowse > a:focus,
+#navBrowse.active > a {
+
+  color: #fff;
+  background-color: rgba(213, 160, 58, 0.8);
+}
+
+#navServices > a:hover,
+#navServices > a:focus,
+#navServices.active > a {
+
+  color: #fff;
+  background-color: rgba(187, 57, 33, 0.8);
+}
+
+#navExperiments > a:hover,
+#navExperiments > a:focus,
+#navExperiments.active > a {
+
+  color: #fff;
+  background-color: rgba(117, 169, 157, 0.8);
+}
+
+#navAbout > a:hover,
+#navAbout > a:focus,
+#navAbout.active > a {
+
+  color: #fff;
+  background-color: rgba(80, 106, 159, 0.8);
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+
+  background-color: transparent;
+}
+
+.navbar .navbar-inner {
+
+  padding: 0;
+}
+
+.navbar .nav {
+
+  margin: 0;
+  display: table;
+  width: 100%;
+}
+
+.navbar .nav > li {
+
+  display: table-cell;
+  width: 1%;
+  float: none;
+  text-align: center;
+}
+
+.navbar .nav li:first-child a {
+
+  border-left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.navbar .nav li:last-child a {
+
+  border-right: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+#logo {
+
+  z-index: 2000;
+  position: fixed;
+}
+
+/**
+  Prevent stacking of list items in small screen resolutions
+*/
+.nav-justified > li {
+
+  display: table-cell;
+  width: 1%;
+}
+.nav-justified > li > a {
+
+  margin-bottom: 0;
+}
+
+.navbar-main {
+
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 3px #ccc;
+}
+
+.navbar-main .glyphicon {
+
+  top: 7px;
+  font-size: 1.5em;
+  padding-right: 10px;
+}
+
+/* / Navbar defaults */
+
+/* Big navbar */
+
+#navbar-big .navbar-main {
+
+  min-height: 69px;
+  padding-left: 0;
+}
+
+#navbar-big #navBrowse a,
+#navbar-big #navServices a,
+#navbar-big #navExperiments a,
+#navbar-big #navAbout a {
+
+  color: #555;
+  padding: 15px 0 20px 0;
+  font-size: 1.3em;
+}
+
+#navbar-big #brand {
+
+  height: 55px;
+}
+
+#navbar-big .navbar-brand {
+
+  display: none;
+}
+
+/* / Big navbar */
+
+/* Small navbar */
+
+#navbar-small .navbar-main {
+
+  min-height: 50px;
+  padding-left: 64px;
+}
+
+#navbar-small .navbar-main > li {
+
+  border-bottom-width: 3px;
+}
+
+#navbar-small .navbar-main > li > a {
+
+  color: #555;
+  padding: 12px 0 10px 0;
+  font-size: 1.1em;
+}
+
+#navbar-small .navbar-brand {
+
+  padding: 8px;
+}
+
+#navbar-small #brand {
+
+  height: 56px;
+}
+
+#navbar-small .navbar-main .glyphicon {
+
+  top: 3px;
+  font-size: 1.1em;
+  padding-right: 10px;
+}
+
+#navbar-small #logo {
+
+  top: 0;
+}
+
+/* / Small navbar */
+
+#searchlogo {
+
+  padding: 50px 0 50px 0;
+  display: block;
+  margin: 0 auto;
+}
+
+/**
+  Navigation Bar Elements
+*/
+
+/* About page */
+#aboutpage {
+
+  text-align: justify;
+}
