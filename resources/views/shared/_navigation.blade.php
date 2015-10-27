@@ -1,4 +1,4 @@
-<nav {{ (Request::is('/') ? ' id=navbar-big' : 'id=navbar-small') }}>
+<nav {{ (Request::is('/') ? 'id=navbar-big' : 'id=navbar-small') }}>
 
     <div id="logo">
 
