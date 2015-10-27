@@ -28,4 +28,8 @@ return [
     'type_collection' => 'Collection',
     'type_dataset' => 'Dataset',
     'type_textualDocument' => 'Textual Document',
+    'part_of' => 'Resource is part of',
+    'geo_similar' => 'Geographically similar',
+    'theme_similar' => 'Thematically similar',
+    'applicable_services' => 'Applicable services'
 ];

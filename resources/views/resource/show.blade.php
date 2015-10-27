@@ -135,9 +135,20 @@
 
 
     </div>
-    <!-- resoure context -->
-    <div class="col-md-4">
+    <!-- resource context -->
+    <div class="col-md-4 resource-context">
+        <h4>{{ trans('resource.part_of') }}</h4>
+        <h4>{{ trans('resource.geo_similar') }}</h4>
+        <div id="map"></div>
+        <script>
+            var map = L.map("map").setView([0, 0], 10);
 
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+        </script>
+        <h4>{{ trans('resource.theme_similar') }}</h4>
+        <h4>{{ trans('resource.applicable_services') }}</h4>
     </div>
 
 </div>

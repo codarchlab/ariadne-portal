@@ -74,6 +74,8 @@ body {
   margin-bottom: 80px;
 }
 
+/* Resources metadata */
+
 .resource-metadata div {
   margin-bottom: 10px;
   text-align: justify;
@@ -87,4 +89,10 @@ body {
   list-style-type: none;
   padding-left: 0px;
   margin-bottom: 0px;
+}
+
+/* Resources context */
+
+.resource-context #map {
+  height: 250px;
 }

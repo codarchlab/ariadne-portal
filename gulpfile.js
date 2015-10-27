@@ -2,7 +2,8 @@ var elixir = require('laravel-elixir');
 
 var paths = {
     'jquery': './vendor/components/jquery/',
-    'bootstrap': './vendor/twbs/bootstrap-sass/assets/'
+    'bootstrap': './vendor/twbs/bootstrap-sass/assets/',
+    'leaflet': './vendor/drmonty/leaflet/'
 };
 
 elixir(function(mix) {
@@ -20,7 +21,8 @@ elixir(function(mix) {
     mix.scripts(
     	[
             paths.jquery + "jquery.js",
-            paths.bootstrap + "javascripts/bootstrap.js"
+            paths.bootstrap + "javascripts/bootstrap.js",
+            paths.leaflet + "js/leaflet.js"
         ],
         'public/js/app.js'
     );
