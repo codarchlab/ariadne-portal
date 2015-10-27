@@ -30,7 +30,7 @@
   border: none;
 }
 
-#navBrowse a,
+#navCatalog a,
 #navServices a,
 #navExperiments a,
 #navAbout a {
@@ -38,7 +38,7 @@
   color: #555;
 }
 
-#navBrowse {
+#navCatalog, #navSearch {
 
   border-bottom: 5px solid #D5A03A;
 }
@@ -59,11 +59,6 @@
 }
 
 /* Search tab in navbar */
-#navSearch {
-
-  border-bottom: 5px solid #72B986;
-}
-
 #navSearch .input-group {
 
   margin: 0 15px;
@@ -77,38 +72,38 @@
 #navSearch .btn-primary {
 
   border: 0;
-  background-color: #62996D;
+  background-color: #D5A03A;
 }
 
 #navSearch .btn {
 
-  padding: 5px 3px 6px 9px;
+  height: 31px !important;
+  padding: 2px 3px 4px 9px;
 }
 
 #navSearch .form-control {
 
-  height: 35px;
+  height: 31px;
 }
 
 #navSearch .form-control:focus {
 
   box-shadow: none;
-  border-color: #62996D;
+  border-color: #D5A03A;
 }
 
 .navbar .nav li#navSearch {
 
-  width: 15%;
   display: inline-block;
   float: none;
 }
 
-#navBrowse > a:hover,
-#navBrowse > a:focus,
-#navBrowse.active > a {
+#navCatalog > a:hover,
+#navCatalog > a:focus,
+#navCatalog.active > a {
 
   color: #fff;
-  background-color: rgba(213, 160, 58, 0.8);
+  background-color: rgba(213, 160, 58, 0.7);
 }
 
 #navServices > a:hover,
@@ -216,7 +211,7 @@
   padding-left: 0;
 }
 
-#navbar-big #navBrowse a,
+#navbar-big #navCatalog a,
 #navbar-big #navServices a,
 #navbar-big #navExperiments a,
 #navbar-big #navAbout a {
