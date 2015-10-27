@@ -78,9 +78,6 @@
 
         <h4>{{ trans('resource.metadata') }}</h4>
 
-        <h4>{{ trans('resource.license') }}</h4>
-
-
         <dl class="dl-horizontal">
 
 
@@ -132,7 +129,7 @@
             @endif
         </dl>
 
-
+        <h4>{{ trans('resource.license') }}</h4>
 
     </div>
     <!-- resoure context -->
