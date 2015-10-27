@@ -2,6 +2,8 @@
 @import "bootstrap";
 @import "navigation";
 @import "search_hits";
+@import "resource";
+@import "footer";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,700&subset=latin,latin-ext);
 
 body {
@@ -40,59 +42,17 @@ html {
   position: relative;
   min-height: 100%;
 }
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 80px;
-}
-
-
-/* Footer */
-#footer {
-
-  font-size: 0.9em;
-  width: 100%;
-  margin-top: 100px;
-
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 80px;
-}
-
-#frontpage #footer .text-muted {
-
-  color: #fff !important;
-}
 
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 80px;
 }
 
-/* Resources metadata */
-
-.resource-metadata div {
-  margin-bottom: 10px;
-  text-align: justify;
-}
-
-.resource-metadata .tag {
-  padding-right: 10px;
-}
-
-.resource-metadata ul {
-  list-style-type: none;
-  padding-left: 0px;
-  margin-bottom: 0px;
-}
-
-/* Resources context */
-
-.resource-context #map {
-  height: 250px;
+#frontpage .search-form {
+  margin-top: 70px;
 }

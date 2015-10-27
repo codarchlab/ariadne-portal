@@ -4,7 +4,9 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-1">
-                    <img src="{{ asset("img/monument.png") }}" height="50" border="0"> 
+
+                    <img src="{{ asset("img/icons/")."/icon_".$hit['_type'].".png" }}" height="50" border="0">
+
                 </div>
                 <div class="col-md-11">
                     

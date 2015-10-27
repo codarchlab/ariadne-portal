@@ -78,9 +78,6 @@
 
         <h4>{{ trans('resource.metadata') }}</h4>
 
-        <h4>{{ trans('resource.license') }}</h4>
-
-
         <dl class="dl-horizontal">
 
 
@@ -100,7 +97,7 @@
             @endif
 
             @if (isset($resource['_source']['archaeologicalResourceType']))
-                <dt>{{ trans('resource.resource_type') }}</dt>
+                <dt>{{ trans('resource.archaeologicalResourceType') }}</dt>
                 <dd>{{ $resource['_source']['archaeologicalResourceType']['name'] }}</dd>
             @endif
 
@@ -132,7 +129,7 @@
             @endif
         </dl>
 
-
+        <h4>{{ trans('resource.license') }}</h4>
 
     </div>
     <!-- resource context -->
