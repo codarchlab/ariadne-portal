@@ -29,60 +29,69 @@
         </div>
 
         @if (isset($resource['_source']['description']))
-        <div>
-            {{$resource['_source']['description']}}
-        </div>
+            <div>
+                {{$resource['_source']['description']}}
+            </div>
         @endif
 
         @if (isset($resource['_source']['nativeSubject']))
-        <div>
-            @foreach ($resource['_source']['nativeSubject'] as $nativeSubject)
-                <!-- TODO search for subject -->
-                <a class="tag">
-                    <span class="glyphicon glyphicon-tag"></span>
-                    {{ $nativeSubject['prefLabel'] }}
-                </a>
-            @endforeach
-        </div>
+            <div>
+                @foreach ($resource['_source']['nativeSubject'] as $nativeSubject)
+                    <!-- TODO search for subject -->
+                    <a class="tag">
+                        <span class="glyphicon glyphicon-tag"></span>
+                        {{ $nativeSubject['prefLabel'] }}
+                    </a>
+                @endforeach
+            </div>
         @endif
 
         @if (isset($resource['_source']['temporal']))
         <div>
             @foreach ($resource['_source']['temporal'] as $temporal)
 
-            @if(isset($temporal['periodName']))
+                @if(isset($temporal['periodName']))
 
-            <!-- TODO search for period -->
-                <a class="tag">
-                    <span class="glyphicon glyphicon-time"></span>
-                    {{ $temporal['periodName'] }}
-                </a>
-            @endif
-            @endforeach
-        </div>
-        @endif
-
-        @if (isset($resource['_source']['spatial']))
-        <div>
-            @foreach ($resource['_source']['spatial'] as $spatial)
-                @if(isset($spatial['placeName']))
-                    <!-- TODO search for place -->
+                <!-- TODO search for period -->
                     <a class="tag">
-                        <span class="glyphicon glyphicon-map-marker"></span>
-                        {{ $spatial['placeName'] }}
+                        <span class="glyphicon glyphicon-time"></span>
+                        {{ $temporal['periodName'] }}
                     </a>
                 @endif
             @endforeach
         </div>
         @endif
 
+        @if (isset($resource['_source']['spatial']))
+            <div>
+                @foreach ($resource['_source']['spatial'] as $spatial)
+                    @if(isset($spatial['placeName']))
+                        <!-- TODO search for place -->
+                        <a class="tag">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            {{ $spatial['placeName'] }}
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        @endif
+
         <h4>{{ trans('resource.metadata') }}</h4>
+
+        <h4>{{ trans('resource.license') }}</h4>
+
 
         <dl class="dl-horizontal">
 
-            @if (isset($resource['_source']['identifier']))
+
+            @if (isset($resource['_id']))
                 <dt>{{ trans('resource.identifier') }}</dt>
                 <dd>{{ $resource['_id'] }}</dd>
+            @endif
+
+            @if (isset($resource['_type']))
+                <dt>{{ trans('resource.type') }}</dt>
+                <dd>{{ trans('resource.type_'.$resource['_type']) }}</dd>
             @endif
 
             @if (isset($resource['_source']['language']))
@@ -96,14 +105,14 @@
             @endif
 
             @if (isset($resource['_source']['publisher']))
-            <dt>{{ trans('resource.publisher') }}</dt>
-            <dd>
-                <ul>
-                    @foreach($resource['_source']['publisher'] as $publisher)
-                        <li>{{ $publisher['name'] }} [{{ $publisher['type']}}]</li>
-                    @endforeach
-                </ul>
-            </dd>
+                <dt>{{ trans('resource.publisher') }}</dt>
+                <dd>
+                    <ul>
+                        @foreach($resource['_source']['publisher'] as $publisher)
+                            <li>{{ $publisher['name'] }} [{{ $publisher['type']}}]</li>
+                        @endforeach
+                    </ul>
+                </dd>
             @endif
 
             @if (isset($resource['_source']['issued']))
@@ -113,16 +122,15 @@
 
             @if (isset($resource['_source']['contributor']))
                 <dt>{{ trans('resource.contributor') }}</dt>
-                <dd><ul>
-                @foreach($resource['_source']['contributor'] as $contributor)
-                    <li>{{ $contributor['name'] }} [{{ $contributor['type']}}]</li>
-                @endforeach
-                </ul></dd>
+                <dd>
+                    <ul>
+                        @foreach($resource['_source']['contributor'] as $contributor)
+                            <li>{{ $contributor['name'] }} [{{ $contributor['type']}}]</li>
+                        @endforeach
+                    </ul>
+                </dd>
             @endif
         </dl>
-
-
-        <h4>{{ trans('resource.license') }}</h4>
 
 
 

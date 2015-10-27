@@ -23,4 +23,6 @@ return [
     'language' => 'Language',
     'language_en' => 'English',
     'identifier' => 'Identifier',
+    'type' => 'Type',
+    'type_collection' => 'Collection',
 ];
