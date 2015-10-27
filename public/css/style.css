@@ -6166,6 +6166,29 @@ button.close {
 #aboutpage {
   text-align: justify; }
 
+.hit {
+  padding: 15px;
+  cursor: pointer; }
+
+.hit:hover {
+  background-color: #f3f3f3; }
+
+.hit h5 {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px; }
+
+.hit p {
+  margin-bottom: 7px; }
+
+.hit p.highlights {
+  margin: 0;
+  font-size: 0.9em; }
+
+.hit em {
+  background-color: #ffffcc;
+  font-style: normal; }
+
 body {
   padding-top: 80px; }
 
@@ -6187,9 +6210,6 @@ h1 {
 
 h2 {
   color: #777; }
-
-.hit {
-  margin-bottom: 30px; }
 
 html {
   position: relative;
