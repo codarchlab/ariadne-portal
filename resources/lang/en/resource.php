@@ -22,7 +22,10 @@ return [
     'resource_type' => 'Resource type',
     'language' => 'Language',
     'language_en' => 'English',
+    'language_de' => 'Deutsch',
     'identifier' => 'Identifier',
     'type' => 'Type',
     'type_collection' => 'Collection',
+    'type_dataset' => 'Dataset',
+    'type_textualDocument' => 'Textual Document',
 ];
