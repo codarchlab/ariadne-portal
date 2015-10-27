@@ -48,6 +48,20 @@
                 About
             </a>
         </li>
+
+        <li id="navSearch">
+
+            {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
+
+            <div class="input-group">
+                {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search...")) !!}
+            <span class="input-group-btn">
+                {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
+            </span>
+            </div>
+            {!! Form::close() !!}
+
+        </li>
     </ul>
 
 </nav>
