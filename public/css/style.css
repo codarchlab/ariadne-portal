@@ -6224,4 +6224,16 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 80px; }
 
+.resource-metadata div {
+  margin-bottom: 10px;
+  text-align: justify; }
+
+.resource-metadata .tag {
+  padding-right: 10px; }
+
+.resource-metadata ul {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-bottom: 0px; }
+
 /*# sourceMappingURL=style.css.map */
