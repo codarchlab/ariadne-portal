@@ -1,0 +1,21 @@
+/* Footer */
+#footer {
+
+  font-size: 0.9em;
+  padding: 30px;
+  margin-top: 30px;
+  background-color: #efefef;
+}
+
+#frontpage #footer {
+
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0 , 0.2);
+  color: #fff;
+  width: 100%;
+}
+
+#frontpage #footer p {
+	margin: 0;
+}
