@@ -17,6 +17,28 @@ class ResourceController extends Controller {
     }
 
     /**
+     * Filters out the items which can be shown on a map.
+     *
+     * @param $resource
+     * @return array of item from the spatial array which have
+     *   a location property.
+     */
+    private function getValidGeoItems($resource) {
+        $geo_items = array();
+        if (!array_key_exists('spatial',$resource['_source']))
+            return $geo_items;
+
+        foreach ($resource['_source']['spatial'] as $spatial){
+            if (!array_key_exists('location',$spatial))
+                continue;
+            $location=$spatial['location'];
+            array_push($geo_items,$location);
+        }
+
+        return $geo_items;
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param string $type the elasticsearch type
@@ -24,8 +46,13 @@ class ResourceController extends Controller {
      * @return View
      */
     public function show($type,$id) {
+
         $resource = ElasticSearch::get($id, 'resource', $type);
-        return view('resource.show')->with('resource', $resource);
+        $geo_items = $this->getValidGeoItems($resource);
+
+        return view('resource.show')
+            ->with('resource', $resource)
+            ->with('geo_items', $geo_items);
     }
 
     /**
