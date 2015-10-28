@@ -2,7 +2,8 @@
 /node_modules
 .env
 /nbproject
-composer*
+composer.lock
+composer.phar
 .idea
 .vagrant
 Vagrantfile
