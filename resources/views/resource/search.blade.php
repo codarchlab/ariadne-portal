@@ -69,9 +69,11 @@
         <!-- Results -->
         <div class="col-md-8" id="search_results_box">            
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <p><strong>Total:</strong> <span class="badge">{{ number_format($hits->total()) }}</span></p>
-                    {!! $hits->appends(Input::all())->render() !!}
+                <div class="col-md-4 total">
+                    <strong>{{ trans('search.total') }}:</strong> <span class="badge">{{ number_format($hits->total()) }}</span>
+                </div>
+                <div class="col-md-8 text-right">
+                    <small>{!! $hits->appends(Input::all())->render() !!}</small>
                 </div>
             </div>
             <div class="row">
@@ -83,12 +85,12 @@
                 @endforeach
             </div>
             <div class="row">
-                <div class="col-md-12 text-center">
-                    {!! $hits->appends(Input::all())->render() !!}
-                </div>
+                <div class="col-md-12"><hr/></div>
             </div>
             <div class="row">
-                <div class="col-md-12"><hr/></div>
+                <div class="col-md-12 text-right">
+                    <small>{!! $hits->appends(Input::all())->render() !!}</small>
+                </div>
             </div>
         </div>
     </div>

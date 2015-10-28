@@ -3,30 +3,21 @@
 
   font-size: 0.9em;
   padding: 30px;
-  margin-top: 30px;
-  background-color: #efefef;
-
-  position: absolute !important;
-  bottom: 0;
+  background-color: #ddd;
   width: 100%;
   height: 100px;
+  position: absolute;
+  bottom: 0;
 }
 
 #frontpage #footer {
 
+  position: absolute !important;
+  bottom: 0;
   background-color: rgba(0, 0, 0 , 0.2);
   color: #fff;
 }
 
 #frontpage #footer p {
 	margin: 0;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 100px;
 }

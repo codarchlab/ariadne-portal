@@ -1,4 +1,15 @@
+/* primary colors */
+$yellow: #D5A03A;
+$red: #BB3921;
+$green: #75A99D;
+$blue: #506A9F;
+
 /* Navbar defaults */
+
+#navbar-small {
+
+  background-color: #efefef;
+}
 
 .navbar .nav li {
 
@@ -40,22 +51,27 @@
 
 #navCatalog, #navSearch {
 
-  border-bottom: 5px solid #D5A03A;
+  border-bottom: 5px solid $yellow;
 }
 
 #navServices {
 
-  border-bottom: 5px solid #BB3921;
+  border-bottom: 5px solid $red;
 }
 
 #navExperiments {
 
-  border-bottom: 5px solid #75A99D;
+  border-bottom: 5px solid $green;
 }
 
 #navAbout {
 
-  border-bottom: 5px solid #506A9F;
+  border-bottom: 5px solid $blue;
+}
+
+#navSearch.active {
+
+  background-color: rgba($yellow, 0.2);
 }
 
 /* Search tab in navbar */
@@ -72,7 +88,7 @@
 #navSearch .btn-primary {
 
   border: 0;
-  background-color: #D5A03A;
+  background-color: $yellow;
 }
 
 #navSearch .btn {
@@ -103,7 +119,7 @@
 #navCatalog.active > a {
 
   color: #fff;
-  background-color: rgba(213, 160, 58, 0.7);
+  background-color: rgba($yellow, 0.2);
 }
 
 #navServices > a:hover,
@@ -111,7 +127,7 @@
 #navServices.active > a {
 
   color: #fff;
-  background-color: rgba(187, 57, 33, 0.8);
+  background-color: rgba($red, 0.2);
 }
 
 #navExperiments > a:hover,
@@ -119,7 +135,7 @@
 #navExperiments.active > a {
 
   color: #fff;
-  background-color: rgba(117, 169, 157, 0.8);
+  background-color: rgba($green, 0.2);
 }
 
 #navAbout > a:hover,
@@ -127,7 +143,7 @@
 #navAbout.active > a {
 
   color: #fff;
-  background-color: rgba(80, 106, 159, 0.8);
+  background-color: rgba($blue, 0.2);
 }
 
 .navbar-default .navbar-nav > .open > a,
@@ -190,7 +206,7 @@
 
 .navbar-main {
 
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(239, 239, 239, 0.9);
   border-bottom: 3px #ccc;
 }
 
@@ -243,7 +259,7 @@
 #navbar-small .navbar-main {
 
   min-height: 50px;
-  padding-left: 64px;
+  padding-left: 71px;
 }
 
 #navbar-small .navbar-main > li {
@@ -260,7 +276,7 @@
 
 #navbar-small .navbar-brand {
 
-  padding: 8px;
+  padding: 7px;
 }
 
 #navbar-small #brand {
@@ -277,7 +293,7 @@
 
 #navbar-small #logo {
 
-  top: 0;
+  top: 1px;
 }
 
 /* / Small navbar */
