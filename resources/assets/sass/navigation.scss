@@ -258,30 +258,31 @@ $blue: #506A9F;
 
 #navbar-small .navbar-main {
 
-  min-height: 50px;
-  padding-left: 71px;
+  height: 50px;
+  padding-left: 69px;
 }
 
 #navbar-small .navbar-main > li {
 
-  border-bottom-width: 4px;
+  border-bottom-width: 3px;
 }
 
 #navbar-small .navbar-main > li > a {
 
   color: #555;
-  padding: 10px 0 10px 0;
-  font-size: 1.1em;
+  padding: 13px 0 9px 0;
+  font-size: 15px;
+  line-height: 25px;
 }
 
 #navbar-small .navbar-brand {
 
-  padding: 7px;
+  padding: 8px;
 }
 
 #navbar-small #brand {
 
-  height: 56px;
+  height: 55px;
 }
 
 #navbar-small .navbar-main .glyphicon {

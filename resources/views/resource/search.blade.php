@@ -69,10 +69,10 @@
         <!-- Results -->
         <div class="col-md-8" id="search_results_box">            
             <div class="row">
-                <div class="col-md-4 total">
+                <div class="col-md-3 total">
                     <strong>{{ trans('search.total') }}:</strong> <span class="badge">{{ number_format($hits->total()) }}</span>
                 </div>
-                <div class="col-md-8 text-right">
+                <div class="col-md-9 text-right">
                     <small>{!! $hits->appends(Input::all())->render() !!}</small>
                 </div>
             </div>
