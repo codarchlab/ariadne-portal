@@ -17,11 +17,12 @@ return [
         'elastic_search_aggregations' => [
             'type' => ['terms' => ['field' => '_type']],
             'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
-            'subject' => ['terms' => ['field' => 'subject']],
+            'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel']],
             'keyword' => ['terms' => ['field' => 'keyword.raw']],
             'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
             'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
             'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
+            'temporal' => ['terms' => ['field' => 'temporal.periodName']],
             'rights' => ['terms' => ['field' => 'rights']],
             'language' => ['terms' => ['field' => 'language']],
             'issued' => ['terms' => ['field' => 'issued']]

@@ -37,8 +37,7 @@
         @if (isset($resource['_source']['nativeSubject']))
             <div>
                 @foreach ($resource['_source']['nativeSubject'] as $nativeSubject)
-                    <!-- TODO search for subject -->
-                    <a class="tag">
+                    <a class="tag" href="{{ route('search', [ 'nativeSubject' => $nativeSubject['prefLabel'] ]) }}">
                         <span class="glyphicon glyphicon-tag"></span>
                         {{ $nativeSubject['prefLabel'] }}
                     </a>
@@ -49,11 +48,8 @@
         @if (isset($resource['_source']['temporal']))
         <div>
             @foreach ($resource['_source']['temporal'] as $temporal)
-
                 @if(isset($temporal['periodName']))
-
-                <!-- TODO search for period -->
-                    <a class="tag">
+                    <a class="tag" href="{{ route('search', [ 'temporal' => $temporal['periodName'] ]) }}">
                         <span class="glyphicon glyphicon-time"></span>
                         {{ $temporal['periodName'] }}
                     </a>
@@ -66,8 +62,7 @@
             <div>
                 @foreach ($resource['_source']['spatial'] as $spatial)
                     @if(isset($spatial['placeName']))
-                        <!-- TODO search for place -->
-                        <a class="tag">
+                        <a class="tag" href="{{ route('search', [ 'spatial' => $spatial['placeName'] ]) }}">
                             <span class="glyphicon glyphicon-map-marker"></span>
                             {{ $spatial['placeName'] }}
                         </a>
