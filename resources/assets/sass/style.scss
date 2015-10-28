@@ -7,9 +7,16 @@
 @import "pagination";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,700&subset=latin,latin-ext);
 
+html {
+
+  position: relative;
+  min-height: 100%;
+}
+
 body {
 
-  background-color: #ccc;
+  background-color: #fff;
+  margin-bottom: 75px;
 }
 
 body#frontpage {
@@ -49,16 +56,6 @@ h1 {
 h2 {
 
   color: #777;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
 }
 
 #frontpage .search-form {

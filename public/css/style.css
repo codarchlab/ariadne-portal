@@ -6246,9 +6246,11 @@ button.close {
 #footer {
   font-size: 0.9em;
   padding: 30px;
-  background-color: #ccc;
+  background-color: #ddd;
   width: 100%;
-  height: 100px; }
+  height: 100px;
+  position: absolute;
+  bottom: 0; }
 
 #frontpage #footer {
   position: absolute !important;
@@ -6269,8 +6271,13 @@ button.close {
 #search_results_box .pagination li > a {
   padding: 4px 12px; }
 
+html {
+  position: relative;
+  min-height: 100%; }
+
 body {
-  background-color: #ccc; }
+  background-color: #fff;
+  margin-bottom: 75px; }
 
 body#frontpage {
   background: url("../img/frontpage-bgr_blur.jpg");
@@ -6298,14 +6305,6 @@ h1 {
 
 h2 {
   color: #777; }
-
-html {
-  position: relative;
-  min-height: 100%; }
-
-html {
-  position: relative;
-  min-height: 100%; }
 
 #frontpage .search-form {
   margin-top: 70px; }
