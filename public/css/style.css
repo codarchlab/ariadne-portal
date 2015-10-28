@@ -5992,7 +5992,11 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+/* primary colors */
 /* Navbar defaults */
+#navbar-small {
+  background-color: #efefef; }
+
 .navbar .nav li {
   width: 21%;
   display: inline-block;
@@ -6067,19 +6071,19 @@ button.close {
 #navServices > a:focus,
 #navServices.active > a {
   color: #fff;
-  background-color: rgba(187, 57, 33, 0.8); }
+  background-color: rgba(187, 57, 33, 0.7); }
 
 #navExperiments > a:hover,
 #navExperiments > a:focus,
 #navExperiments.active > a {
   color: #fff;
-  background-color: rgba(117, 169, 157, 0.8); }
+  background-color: rgba(117, 169, 157, 0.7); }
 
 #navAbout > a:hover,
 #navAbout > a:focus,
 #navAbout.active > a {
   color: #fff;
-  background-color: rgba(80, 106, 159, 0.8); }
+  background-color: rgba(80, 106, 159, 0.7); }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
@@ -6123,7 +6127,7 @@ button.close {
   margin-bottom: 0; }
 
 .navbar-main {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(239, 239, 239, 0.9);
   border-bottom: 3px #ccc; }
 
 .navbar-main .glyphicon {
