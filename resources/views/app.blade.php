@@ -26,7 +26,7 @@
         <!-- combined JS code -->
         <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
 
-        <div class="container-fluid">
+        <div class="container-fluid content">
             @yield('content')
         </div>
 
