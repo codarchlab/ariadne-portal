@@ -23,9 +23,10 @@ elixir(function(mix) {
     // combine scripts into single app.js
     mix.scripts(
     	[
-            paths.jquery + 'jquery.js',
-            paths.bootstrap + 'javascripts/bootstrap.js',
-            paths.leaflet + 'js/leaflet.js'
+            paths.jquery + "jquery.js",
+            paths.bootstrap + "javascripts/bootstrap.js",
+            paths.leaflet + "js/leaflet.js",
+            "/js/*.js"
         ],
         'public/js/app.js'
     );
