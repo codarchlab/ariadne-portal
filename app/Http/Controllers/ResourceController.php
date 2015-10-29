@@ -95,10 +95,14 @@ class ResourceController extends Controller {
 
         $hits = ElasticSearch::search($query, 'resource');
 
-        return view('resource.search')
-            ->with('type', null)
-            ->with('aggregations', $query['aggregations'])
-            ->with('translateAggregations', Config::get('app.translate_aggregations'))
-            ->with('hits', $hits);
+        if (Request::wantsJson()) {
+            return response()->json($hits);
+        } else {
+            return view('resource.search')
+                ->with('type', null)
+                ->with('aggregations', $query['aggregations'])
+                ->with('translateAggregations', Config::get('app.translate_aggregations'))
+                ->with('hits', $hits);
+        }
     }
 }
