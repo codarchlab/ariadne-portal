@@ -141,10 +141,8 @@
 
             <script>
 
-                var map;
-
                 var initializeMap = function() {
-                    map = L.map("map");
+                    var map = L.map("map");
                     map.setView([0, 17], 0);
 
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -152,7 +150,9 @@
                     }).addTo(map);
 
                     L.Icon.Default.imagePath = '/img/leaflet/default';
-                }
+
+                    return map;
+                };
 
                 var createMarkers = function(geoItems, priority, markerColor) {
                     var markers = [];
@@ -177,21 +177,19 @@
                     return markers;
                 };
 
-                var showMarkers = function(markers) {
+                var showMarkers = function(map,markers) {
                     for (var i in markers) {
                         markers[i].addTo(map);
                     }
                 };
 
-                var fitViewportToMarkers = function(markers) {
+                var fitViewportToMarkers = function(map,markers) {
                     var group = L.featureGroup(markers);
                     map.fitBounds(group.getBounds());
                 };
 
 
                 // Main
-
-                initializeMap();
 
                 var geoItems = {!! json_encode($geo_items) !!}
                 var nearbyGeoItems = {!! json_encode($nearby_geo_items) !!}
@@ -200,8 +198,9 @@
                 markers = markers.concat(createMarkers(nearbyGeoItems, false));
                 markers = markers.concat(createMarkers(geoItems, true, 'orange'));                
 
-                showMarkers(markers);
-                fitViewportToMarkers(markers); 
+                var map = initializeMap();
+                showMarkers(map,markers);
+                fitViewportToMarkers(map,markers);
 
             </script>
         @endif
