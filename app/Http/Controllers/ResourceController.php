@@ -38,6 +38,22 @@ class ResourceController extends Controller {
         return $geo_items;
     }
 
+    private function getNearbyGeoItems($type, $geo_item) {
+
+        $nearby_geo_items = array();
+
+        foreach (ElasticSearch::geoDistanceQuery('resource', $type, $geo_item)
+                 as $nearby_resource) {
+
+            foreach ($this->getValidGeoItems($nearby_resource)
+                     as $valid_nearby_geo_item) {
+                array_push($nearby_geo_items,$valid_nearby_geo_item);
+            }
+        }
+
+        return $nearby_geo_items;
+    }
+
     /**
      * Display the specified resource.
      *
@@ -49,19 +65,12 @@ class ResourceController extends Controller {
 
         $resource = ElasticSearch::get($id, 'resource', $type);
         $geo_items = $this->getValidGeoItems($resource);
-
-        foreach (ElasticSearch::geoDistanceQuery('resource',$type,$geo_items[0])
-                 as $nearby_resource) {
-
-            foreach ($this->getValidGeoItems($nearby_resource)
-                     as $valid_nearby_geo_item) {
-                array_push($geo_items,$valid_nearby_geo_item);
-            }
-        }
+        $nearby_geo_items = $this->getNearbyGeoItems($type, $geo_items[0]);
 
         return view('resource.show')
             ->with('resource', $resource)
-            ->with('geo_items', $geo_items);
+            ->with('geo_items', $geo_items)
+            ->with('nearby_geo_items', $nearby_geo_items);
     }
 
     /**

@@ -141,21 +141,33 @@
 
             <script>
 
+                var addMarkersToMap = function(geoItems, markerColor) {
+                    for (var i = 0; i<geoItems.length; i++) {
+                        var markerFilePath = '/img/leaflet/default/marker-icon.png';
+                        if (markerColor)
+                            markerFilePath = '/img/leaflet/custom/marker-icon-' + markerColor + '.png';
+
+                        var markerIcon = L.icon({
+                            iconUrl: markerFilePath,
+                            shadowUrl: '/img/leaflet/default/marker-shadow.png',
+                        });
+
+                        L.marker([geoItems[i].lat, geoItems[i].lon], {icon: markerIcon}).addTo(map);
+                    }
+                };
+
                 var map = L.map("map").setView([0, 17], 0);
 
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
 
-                L.Icon.Default.imagePath = '/img/leaflet';
-                var resourceLocations = {!! json_encode($geo_items) !!}
+                L.Icon.Default.imagePath = '/img/leaflet/default';
+                var geoItems = {!! json_encode($geo_items) !!}
+                var nearbyGeoItems = {!! json_encode($nearby_geo_items) !!}
 
-                for (var i = 0; i<resourceLocations.length; i++) {
-                    var latLng = [resourceLocations[i].lat,
-                        resourceLocations[i].lon]
-
-                    L.marker(latLng).addTo(map)
-                }
+                addMarkersToMap(nearbyGeoItems);
+                addMarkersToMap(geoItems, 'orange'); 
 
             </script>
         @endif

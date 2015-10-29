@@ -10,6 +10,6 @@ Vagrantfile
 Homestead.yaml
 /components
 /public/css
-/public/img/leaflet
+/public/img/leaflet/default
 /public/fonts
 /public/js
