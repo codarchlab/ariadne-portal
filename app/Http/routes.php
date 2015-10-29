@@ -24,4 +24,6 @@ Route::get('subject', 'SubjectController@index');
 Route::get('map', 'MapController@index');
 Route::post('map_results', 'MapController@results');
 
+Route::get('browse', 'BrowseController@map');
+
 Route::get('{type}/{id}','ResourceController@show' );
