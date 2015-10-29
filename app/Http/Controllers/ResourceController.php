@@ -83,6 +83,9 @@ class ResourceController extends Controller {
     public function search() {
         $query = ['aggregations' => Config::get('app.elastic_search_aggregations')];
 
+        // add geogrid aggregation
+        $query['aggregations']['geogrid'] = ['geohash_grid' => [ 'field' => 'spatial.location', 'precision' => 2 ]];
+
         if (Request::has('q')) {
             $q = ['query_string' => ['query' => Request::get('q')]];
             $query['query']['bool']['must'][] = $q;

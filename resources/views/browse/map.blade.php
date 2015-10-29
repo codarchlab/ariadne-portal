@@ -12,6 +12,15 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+        var grid = {!! json_encode($grid) !!};
+
+        grid.forEach(function(bucket) {
+        	console.log(bucket);
+        	var corners = Geohash.bounds(bucket['key']);
+        	var bounds = L.latLngBounds(corners.sw, corners.ne);
+        	L.rectangle(bounds, {color: "#ff7800", weight: 1}),bindLabel(bucket['doc_count']).addTo(map);
+        });
+
     </script>
 
 @endsection

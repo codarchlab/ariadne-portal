@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d280c7f728a237f6211351fe2efd61be",
+    "hash": "0b5235db4eaa990ce065e59556529979",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -119,48 +119,6 @@
                 "preload"
             ],
             "time": "2015-05-26 10:57:51"
-        },
-        {
-            "name": "components/jquery",
-            "version": "2.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/components/jquery.git",
-                "reference": "7b1d1104656a092423fbfba13c5920e9bbba290c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/7b1d1104656a092423fbfba13c5920e9bbba290c",
-                "reference": "7b1d1104656a092423fbfba13c5920e9bbba290c",
-                "shasum": ""
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "jquery.js"
-                    ],
-                    "files": [
-                        "jquery.min.js",
-                        "jquery.min.map",
-                        "jquery-migrate.js",
-                        "jquery-migrate.min.js"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "John Resig",
-                    "email": "jeresig@gmail.com"
-                }
-            ],
-            "description": "jQuery JavaScript Library",
-            "homepage": "http://jquery.com",
-            "time": "2015-05-08 05:04:47"
         },
         {
             "name": "danielstjules/stringy",
@@ -317,45 +275,6 @@
                 "string"
             ],
             "time": "2014-12-20 21:24:13"
-        },
-        {
-            "name": "drmonty/leaflet",
-            "version": "0.7.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/drmonty/leaflet.git",
-                "reference": "eda8011e743b8abbfc32624c1c1b1ce3d0e98e50"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/drmonty/leaflet/zipball/eda8011e743b8abbfc32624c1c1b1ce3d0e98e50",
-                "reference": "eda8011e743b8abbfc32624c1c1b1ce3d0e98e50",
-                "shasum": ""
-            },
-            "require": {
-                "robloach/component-installer": "*"
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "js/leaflet.js"
-                    ],
-                    "files": [
-                        "js/*.js",
-                        "css/*.css",
-                        "images/*.png"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "JavaScript library for mobile-friendly interactive maps http://leafletjs.com",
-            "homepage": "http://leafletjs.com/",
-            "keywords": [
-                "gis",
-                "map"
-            ],
-            "time": "2015-10-26 10:10:37"
         },
         {
             "name": "elasticsearch/elasticsearch",
@@ -739,84 +658,6 @@
                 "tokenizer"
             ],
             "time": "2015-03-11 20:06:43"
-        },
-        {
-            "name": "kriswallsmith/assetic",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
-                "reference": "cb92b179dddfb8a3f341d53bd27e088f24d9c2e5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1",
-                "symfony/process": "~2.1"
-            },
-            "conflict": {
-                "twig/twig": "<1.12"
-            },
-            "require-dev": {
-                "cssmin/cssmin": "*",
-                "joliclic/javascript-packer": "*",
-                "kamicane/packager": "*",
-                "leafo/lessphp": "^0.3.7",
-                "leafo/scssphp": "*@dev",
-                "leafo/scssphp-compass": "*@dev",
-                "mrclay/minify": "*",
-                "patchwork/jsqueeze": "~1.0|~2.0",
-                "phpunit/phpunit": "~4.8",
-                "psr/log": "~1.0",
-                "ptachoire/cssembed": "*",
-                "symfony/phpunit-bridge": "~2.7",
-                "twig/twig": "~1.8|~2.0"
-            },
-            "suggest": {
-                "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
-                "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
-                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin",
-                "patchwork/jsqueeze": "Assetic provides the integration with the JSqueeze JavaScript compressor",
-                "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
-                "twig/twig": "Assetic provides the integration with the Twig templating engine"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Assetic": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kris Wallsmith",
-                    "email": "kris.wallsmith@gmail.com",
-                    "homepage": "http://kriswallsmith.net/"
-                }
-            ],
-            "description": "Asset Management for PHP",
-            "homepage": "https://github.com/kriswallsmith/assetic",
-            "keywords": [
-                "assets",
-                "compression",
-                "minification"
-            ],
-            "time": "2015-10-15 01:33:42"
         },
         {
             "name": "laravel/framework",
@@ -1451,54 +1292,6 @@
                 "shell"
             ],
             "time": "2015-03-26 18:43:54"
-        },
-        {
-            "name": "robloach/component-installer",
-            "version": "0.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RobLoach/component-installer.git",
-                "reference": "908a859aa7c4949ba9ad67091e67bac10b66d3d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RobLoach/component-installer/zipball/908a859aa7c4949ba9ad67091e67bac10b66d3d7",
-                "reference": "908a859aa7c4949ba9ad67091e67bac10b66d3d7",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "kriswallsmith/assetic": "1.*",
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "composer/composer": "1.*@alpha",
-                "phpunit/phpunit": "4.*"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                },
-                "class": "ComponentInstaller\\ComponentInstallerPlugin"
-            },
-            "autoload": {
-                "psr-0": {
-                    "ComponentInstaller": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Loach",
-                    "homepage": "http://robloach.net"
-                }
-            ],
-            "description": "Allows installation of Components via Composer.",
-            "time": "2015-08-10 12:35:38"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2258,59 +2051,6 @@
                 "dump"
             ],
             "time": "2015-07-01 10:03:42"
-        },
-        {
-            "name": "twbs/bootstrap-sass",
-            "version": "v3.3.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap-sass.git",
-                "reference": "d64d48fd23c9624cc5c996e6516b7dc33fde5919"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/d64d48fd23c9624cc5c996e6516b7dc33fde5919",
-                "reference": "d64d48fd23c9624cc5c996e6516b7dc33fde5919",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto"
-                },
-                {
-                    "name": "Thomas McDonald"
-                },
-                {
-                    "name": "Tristan Harward"
-                },
-                {
-                    "name": "Peter Gumeson"
-                },
-                {
-                    "name": "Gleb Mazovetskiy"
-                },
-                {
-                    "name": "Jacob Thornton"
-                }
-            ],
-            "description": "bootstrap-sass is a Sass-powered version of Bootstrap, ready to drop right into your Sass powered applications.",
-            "homepage": "http://github.com/twbs/bootstrap-sass",
-            "keywords": [
-                "bootstrap",
-                "css",
-                "sass"
-            ],
-            "time": "2015-06-16 16:29:50"
         },
         {
             "name": "vlucas/phpdotenv",
