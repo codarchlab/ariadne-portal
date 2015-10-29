@@ -65,7 +65,10 @@ class ResourceController extends Controller {
 
         $resource = ElasticSearch::get($id, 'resource', $type);
         $geo_items = $this->getValidGeoItems($resource);
-        $nearby_geo_items = $this->getNearbyGeoItems($type, $geo_items[0]);
+        $nearby_geo_items = null;
+        if (!empty($geo_items)) {
+            $nearby_geo_items = $this->getNearbyGeoItems($type, $geo_items[0]);
+        }
 
         return view('resource.show')
             ->with('resource', $resource)
