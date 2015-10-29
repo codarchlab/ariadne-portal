@@ -149,10 +149,11 @@
 
                 L.Icon.Default.imagePath = '/img/leaflet';
                 var resourceLocations = {!! json_encode($geo_items) !!}
-                console.log(resourceLocations)
+
                 for (var i = 0; i<resourceLocations.length; i++) {
                     var latLng = [resourceLocations[i].lat,
                         resourceLocations[i].lon]
+
                     L.marker(latLng).addTo(map)
                 }
 

@@ -48,9 +48,51 @@ class ElasticSearch {
         if($result['found']){
             return $result;
         }else{
-            throw new Exception('No docuemnt found by id: '.$id);
+            throw new Exception('No document found by id: '.$id);
         }
     }
+
+    /**
+     * @param $index
+     * @param $type
+     * @param $location must have keys and values for lat and lon.
+     * @return resources within a range of x km of $location.
+     */
+    public static function geoDistanceQuery($index, $type, $location) {
+
+        $json = '{
+            "query" : {
+
+                "filtered" : {
+                  "query" : {
+                      "match_all" : {}
+                  },
+                  "filter" : {
+                      "geo_distance" : {
+                          "distance" : "20km",
+                          "spatial.location" : {
+                              "lat" : '.$location['lat'].',
+                              "lon" : '.$location['lon'].'
+                          }
+                      }
+                  }
+              }
+            }
+        }';
+
+        $params = [
+            'index' => $index,
+            'type' => $type,
+            'body' => $json
+        ];
+
+        $result = self::getClient()->search($params);
+        return $result['hits']['hits'];
+    }
+
+
+
+
     
     /**
      * Performs a paginated search against Elastic Search
