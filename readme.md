@@ -25,6 +25,7 @@ If you have project files from your IDE in the same folder as the source code, a
 Gulp is used to compile SCSS into CSS files and to combine and minify all JavaScript files. Before deployment gulp has to be run:
 
     npm install
+    bower install
     gulp
 
 ###Run during development
