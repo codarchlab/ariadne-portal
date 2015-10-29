@@ -141,7 +141,22 @@
 
             <script>
 
-                var addMarkersToMap = function(geoItems, markerColor) {
+                var map;
+
+                var initializeMap = function() {
+                    map = L.map("map");
+                    map.setView([0, 17], 0);
+
+                    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    L.Icon.Default.imagePath = '/img/leaflet/default';
+                }
+
+                var createMarkers = function(geoItems, markerColor) {
+                    var markers = [];
+
                     for (var i = 0; i<geoItems.length; i++) {
                         var markerFilePath = '/img/leaflet/default/marker-icon.png';
                         if (markerColor)
@@ -152,22 +167,37 @@
                             shadowUrl: '/img/leaflet/default/marker-shadow.png',
                         });
 
-                        L.marker([geoItems[i].lat, geoItems[i].lon], {icon: markerIcon}).addTo(map);
+                        markers.push(L.marker([geoItems[i].lat, geoItems[i].lon], {icon: markerIcon}));
+                    }
+
+                    return markers;
+                };
+
+                var showMarkers = function(markers) {
+                    for (var i in markers) {
+                        markers[i].addTo(map);
                     }
                 };
 
-                var map = L.map("map").setView([0, 17], 0);
+                var fitViewportToMarkers = function(markers) {
+                    var group = L.featureGroup(markers);
+                    map.fitBounds(group.getBounds());
+                };
 
-                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
 
-                L.Icon.Default.imagePath = '/img/leaflet/default';
+                // Main
+
+                initializeMap();
+
                 var geoItems = {!! json_encode($geo_items) !!}
                 var nearbyGeoItems = {!! json_encode($nearby_geo_items) !!}
 
-                addMarkersToMap(nearbyGeoItems);
-                addMarkersToMap(geoItems, 'orange'); 
+                var markers = [];
+                markers = markers.concat(createMarkers(nearbyGeoItems));
+                markers = markers.concat(createMarkers(geoItems, 'orange'));                
+
+                showMarkers(markers);
+                fitViewportToMarkers(markers); 
 
             </script>
         @endif
