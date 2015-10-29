@@ -170,12 +170,13 @@
                                 //alert(response[i]['_id']); 
                                 if (response[i]['_source']['description']!="") var description = response[i]['_source']['description'];
                                 else var description = '';
-                                var url = '{{ action("CollectionController@show", ":id") }}';
+                                var url = '{{ action("ResourceController@show",[":type" ,":id"]) }}';
                                 url = url.replace(':id', response[i]['_id']);
-                                if (response[i]['_type']=="dataset") url = url.replace('CollectionController@show', 'DatasetController@show');
+                                url = url.replace(':type', response[i]['_type']);
+                                /*if (response[i]['_type']=="dataset") url = url.replace('CollectionController@show', 'DatasetController@show');
                                 if (response[i]['_type']=="database") url = url.replace('CollectionController@show', 'DatabaseController@show');
                                 if (response[i]['_type']=="gis") url = url.replace('CollectionController@show', 'GisController@show');
-                                if (response[i]['_type']=="textualDocument") url = url.replace('CollectionController@show', 'TextualDocumentController@show');
+                                if (response[i]['_type']=="textualDocument") url = url.replace('CollectionController@show', 'TextualDocumentController@show');*/
                                 result_boxes +=  '<div class="col-md-4">'
                                                     +' <div class="box box-primary" id="dataresource_item" item_id='+response[i]['_id']+'>'
                                                         +'<div class="box-body">'

@@ -11,7 +11,7 @@ class Map {
                      ];
         $points_size = Elasticsearch::countHits($size_query, 'resource');
         
-        $query= ['size' => $points_size,
+        $query= ['size' => 2000,
                 'filter'=>
                           ['exists' => ['field' => 'lat']]
                      ];
