@@ -147,7 +147,7 @@
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
 
-                L.Icon.Default.imagePath = '/images';
+                L.Icon.Default.imagePath = '/img/leaflet';
                 var resourceLocations = {!! json_encode($geo_items) !!}
                 console.log(resourceLocations)
                 for (var i = 0; i<resourceLocations.length; i++) {

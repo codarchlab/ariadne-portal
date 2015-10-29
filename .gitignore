@@ -9,3 +9,4 @@ Vagrantfile
 *.iml
 Homestead.yaml
 /components
+/public/css
