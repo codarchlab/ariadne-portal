@@ -4,7 +4,7 @@ namespace App\Services;
 use Config;
 use Request;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Pagination\ElasticSearchPaginator;
 
 class ElasticSearch {
 
@@ -125,17 +125,14 @@ class ElasticSearch {
         
         $queryResponse = $client->search($searchParams);
         //dd($queryResponse);
-        $paginator = new LengthAwarePaginator(
+        $paginator = new ElasticSearchPaginator(
                             $queryResponse['hits']['hits'],
                             $queryResponse['hits']['total'],
                             $perPage,
+                            $queryResponse['aggregations'],
                             Paginator::resolveCurrentPage(),
                             ['path' => Paginator::resolveCurrentPath()]
                         );
-        $paginator->aggregations = array();
-        if(array_key_exists('aggregations', $queryResponse)){
-            $paginator->aggregations = $queryResponse['aggregations'];
-        }
         return $paginator;
     }
     

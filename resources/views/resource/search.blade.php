@@ -16,13 +16,11 @@
                 <div class="input-group">
                     {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources...")) !!}
 
-                    @if(isset($hits->aggregations))
-                        @foreach($hits->aggregations as $key => $aggregation)
-                            @if(Input::get($key))
-                                {!! Form::hidden($key, Input::get($key)) !!}
-                            @endif
-                        @endforeach
-                    @endif
+                    @foreach($hits->aggregations() as $key => $aggregation)
+                        @if(Input::get($key))
+                            {!! Form::hidden($key, Input::get($key)) !!}
+                        @endif
+                    @endforeach
 
                     <span class="input-group-btn">
                         {!! Form::button('&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
@@ -36,7 +34,7 @@
                 @include('resource.search_facet', [
                     'key' => $key,
                     'aggregation' => $aggregation,
-                    'buckets' => $hits->aggregations[$key]['buckets']
+                    'buckets' => $hits->aggregations()[$key]['buckets']
                 ])
             @endforeach
 
