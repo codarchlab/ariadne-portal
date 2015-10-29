@@ -154,7 +154,7 @@
                     L.Icon.Default.imagePath = '/img/leaflet/default';
                 }
 
-                var createMarkers = function(geoItems, markerColor) {
+                var createMarkers = function(geoItems, priority, markerColor) {
                     var markers = [];
 
                     for (var i = 0; i<geoItems.length; i++) {
@@ -167,7 +167,11 @@
                             shadowUrl: '/img/leaflet/default/marker-shadow.png',
                         });
 
-                        markers.push(L.marker([geoItems[i].lat, geoItems[i].lon], {icon: markerIcon}));
+                        var markerOptions = { icon: markerIcon };
+                        if (priority)
+                            markerOptions.zIndexOffset = 1000;
+
+                        markers.push(L.marker([geoItems[i].lat, geoItems[i].lon], markerOptions));
                     }
 
                     return markers;
@@ -193,8 +197,8 @@
                 var nearbyGeoItems = {!! json_encode($nearby_geo_items) !!}
 
                 var markers = [];
-                markers = markers.concat(createMarkers(nearbyGeoItems));
-                markers = markers.concat(createMarkers(geoItems, 'orange'));                
+                markers = markers.concat(createMarkers(nearbyGeoItems, false));
+                markers = markers.concat(createMarkers(geoItems, true, 'orange'));                
 
                 showMarkers(markers);
                 fitViewportToMarkers(markers); 
