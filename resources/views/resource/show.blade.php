@@ -83,12 +83,12 @@
 
             @if (isset($resource['_type']))
                 <dt>{{ trans('resource.type') }}</dt>
-                <dd>{{ trans('resource.type_'.$resource['_type']) }}</dd>
+                <dd>{{ trans('resource.type.'.$resource['_type']) }}</dd>
             @endif
 
             @if (isset($resource['_source']['language']))
                 <dt>{{ trans('resource.language') }}</dt>
-                <dd>{{ trans('resource.language_'.$resource['_source']['language']) }}</dd>
+                <dd>{{ trans('resource.language.'.$resource['_source']['language']) }}</dd>
             @endif
 
             @if (isset($resource['_source']['archaeologicalResourceType']))
