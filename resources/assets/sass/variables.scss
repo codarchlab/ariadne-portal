@@ -14,7 +14,7 @@ $font-size-h4:            ceil(($font-size-base * 1.25)) !default;
 $font-size-h5:            $font-size-base !default;
 $font-size-h6:            ceil(($font-size-base * 0.85)) !default;
 
-$brand-primary:                    #506a9f !default;
+$brand-primary:							   #135c77 !default;
 
 $navbar-default-color:                     #000 !default;
 $navbar-default-bg:                        rgb(0, 0, 0) !default;
@@ -34,5 +34,5 @@ $navbar-default-toggle-border-color:       #ddd !default;
 
 // Buttons
 $btn-primary-color:              #fff !default;
-$btn-primary-bg:                 rgba(80, 106, 159, 0.8) !default;
+$btn-primary-bg:                 $brand-primary;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
