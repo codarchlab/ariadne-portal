@@ -1,9 +1,3 @@
-/* primary colors */
-$yellow: #D5A03A;
-$red: #BB3921;
-$green: #75A99D;
-$blue: #135c77;
-
 /* Navbar defaults */
 
 #navbar-small {
@@ -87,7 +81,7 @@ $blue: #135c77;
 
 #navSearch .btn-primary {
 
-  border: 0;
+  border-color: darken($yellow, 5%);
   background-color: $yellow;
 }
 

@@ -1,3 +1,14 @@
+/* custom variables */
+
+// primary colors
+$yellow: #D5A03A;
+$red: #BB3921;
+$green: #75A99D;
+$blue: #135c77;
+
+
+/* Overridden Bootstrap variables */
+
 $font-size-base: 14px;
 
 //** Unit-less `line-height` for use in components like buttons.
@@ -14,7 +25,7 @@ $font-size-h4:            ceil(($font-size-base * 1.25)) !default;
 $font-size-h5:            $font-size-base !default;
 $font-size-h6:            ceil(($font-size-base * 0.85)) !default;
 
-$brand-primary:							   #135c77 !default;
+$brand-primary:							   $blue !default;
 
 $navbar-default-color:                     #000 !default;
 $navbar-default-bg:                        rgb(0, 0, 0) !default;

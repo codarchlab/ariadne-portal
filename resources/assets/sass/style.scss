@@ -38,6 +38,12 @@ body#frontpage {
   background-color: transparent;
 }
 
+#frontpage .search-form .btn-primary {
+
+  border-color: darken($yellow, 5%);
+  background-color: $yellow;
+}
+
 h1,
 h2,
 h3,
