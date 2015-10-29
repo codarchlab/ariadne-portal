@@ -19,7 +19,7 @@ elixir(function(mix) {
     mix.copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts/bootstrap/');
 
     // copy leaflet image files
-    mix.copy(paths.leaflet + 'images/**', 'public/img/leaflet/default');
+    mix.copy(paths.leaflet + 'dist/images/**', 'public/img/leaflet/default');
 
     // combine scripts into single app.js
     mix.scripts(
