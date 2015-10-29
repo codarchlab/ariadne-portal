@@ -44,6 +44,18 @@ body#frontpage {
   background-color: $yellow;
 }
 
+.form-control:focus {
+
+  border-color: #0f4b61;
+  box-shadow: none !important;
+}
+
+#frontpage .form-control:focus {
+
+  box-shadow: none !important;
+  border-color: $yellow !important;
+}
+
 h1,
 h2,
 h3,
