@@ -89,6 +89,7 @@ class ResourceController extends Controller {
         return view('resource.search')
             ->with('type', null)
             ->with('aggregations', $query['aggregations'])
+            ->with('translateAggregations', Config::get('app.translate_aggregations'))
             ->with('hits', $hits);
     }
 }

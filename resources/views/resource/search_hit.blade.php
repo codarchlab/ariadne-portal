@@ -1,4 +1,3 @@
-<?php debug($hit)?>
 <div class="col-md-12 hit" onclick="window.location.href = '{{action('ResourceController@show', [ $hit['_type'], $hit['_id'] ]  )}}'">
     <div class="box box-primary" id="dataresource_item" item_id="{{ $hit['_id'] }}">
         <div class="box-body">

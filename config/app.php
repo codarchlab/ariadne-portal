@@ -27,6 +27,9 @@ return [
             'language' => ['terms' => ['field' => 'language']],
             'issued' => ['terms' => ['field' => 'issued']]
         ],
+
+        /* Aggregations whose values should be translated */
+        'translate_aggregations' => [ 'type', 'language' ],
     
 	/*
 	|--------------------------------------------------------------------------
