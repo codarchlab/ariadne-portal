@@ -11,7 +11,7 @@ elixir(function(mix) {
     // compile sass (including bootstrap)
     mix.sass(['style.scss', paths.leaflet + 'css/leaflet.css'], 'public/css/style.css', {
         includePaths: [paths.bootstrap + 'stylesheets/'],
-        precision: 8
+        precision: 10
     });
 
     // copy bootstrap fonts
