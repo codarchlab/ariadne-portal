@@ -87,11 +87,41 @@ class ResourceController extends Controller {
         $query = ['aggregations' => Config::get('app.elastic_search_aggregations')];
 
         // add geogrid aggregation
-        $query['aggregations']['geogrid'] = ['geohash_grid' => [ 'field' => 'spatial.location', 'precision' => 2 ]];
+        $ghp = Request::has('ghp') ? Request::input('ghp') : 2;
+        $query['aggregations']['geogrid'] = ['geohash_grid' => [
+            'field' => 'spatial.location', 'precision' => intval($ghp) 
+        ]];
 
+        $innerQuery = ['match_all' => []];
         if (Request::has('q')) {
             $q = ['query_string' => ['query' => Request::get('q')]];
-            $query['query']['bool']['must'][] = $q;
+            $innerQuery = ['bool' => ['must' => $q]];
+        }
+
+        // TODO: refactor so that ES service takes care of bbox parsing
+        if (Request::has('bbox')) {
+            $bbox = explode(',', Request::input('bbox'));
+            $query['query'] = [
+                'filtered' => [
+                    'query' => $innerQuery,
+                    'filter' => [
+                        'geo_bounding_box' => [
+                            'spatial.location' => [
+                                'top_left' => [
+                                    'lat' => floatval($bbox[3]),
+                                    'lon' => floatval($bbox[0])
+                                ],                                
+                                'bottom_right' => [
+                                    'lat' => floatval($bbox[1]),
+                                    'lon' => floatval($bbox[2])
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ];
+        } else {
+            $query['query'] = $innerQuery;
         }
 
         foreach ($query['aggregations'] as $key => $aggregation) {

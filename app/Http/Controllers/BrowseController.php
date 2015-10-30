@@ -17,15 +17,7 @@ class BrowseController extends Controller {
      * @return View rendered pagination for search results
      */
     public function map() {
-        $query = [
-          'aggregations' => ['geogrid' => ['geohash_grid' => [ 'field' => 'spatial.location', 'precision' => 2 ]]]
-        ];
-
-        $result = ElasticSearch::search($query, 'resource');
-
-        return view('browse.map')
-            ->with('grid', $result->aggregations()['geogrid']['buckets']);
-
+        return view('browse.map');
     }  
      
 }
