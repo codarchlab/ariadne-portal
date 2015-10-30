@@ -92,10 +92,24 @@ class ResourceController extends Controller {
             'field' => 'spatial.location', 'precision' => intval($ghp) 
         ]];
 
-        $innerQuery = ['match_all' => []];
+        $q = ['match_all' => []];
         if (Request::has('q')) {
             $q = ['query_string' => ['query' => Request::get('q')]];
-            $innerQuery = ['bool' => ['must' => $q]];
+        }
+        $innerQuery = ['bool' => ['must' => $q]];
+
+        foreach ($query['aggregations'] as $key => $aggregation) {
+            if (Request::has($key)) {
+                $values = Utils::getArgumentValues($key);
+
+                $field = $aggregation['terms']['field'];
+
+                foreach ($values as $value) {
+                    $fieldQuery = [];
+                    $fieldQuery[$field] = $value;
+                    $innerQuery['bool']['must'][] = ['match' => $fieldQuery];
+                }
+            }
         }
 
         // TODO: refactor so that ES service takes care of bbox parsing
@@ -122,20 +136,6 @@ class ResourceController extends Controller {
             ];
         } else {
             $query['query'] = $innerQuery;
-        }
-
-        foreach ($query['aggregations'] as $key => $aggregation) {
-            if (Request::has($key)) {
-                $values = Utils::getArgumentValues($key);
-
-                $field = $aggregation['terms']['field'];
-
-                foreach ($values as $value) {
-                    $fieldQuery = [];
-                    $fieldQuery[$field] = $value;
-                    $query['query']['bool']['must'][] = ['match' => $fieldQuery];
-                }
-            }
         }
 
         $hits = ElasticSearch::search($query, 'resource');
