@@ -154,24 +154,35 @@
                     return map;
                 };
 
-                var createMarkers = function(geoItems, priority, markerColor) {
+                var markerIconForColor = function(markerColor) {
+
+                    var markerFilePath = '/img/leaflet/default/marker-icon.png';
+                    if (markerColor)
+                        markerFilePath = '/img/leaflet/custom/marker-icon-' + markerColor + '.png';
+
+                    var markerIcon = L.icon({
+                        iconUrl: markerFilePath,
+                        shadowUrl: '/img/leaflet/default/marker-shadow.png'
+                    });
+
+                    return markerIcon;
+                };
+
+                var createMarkers = function(spatialItems, priority, markerColor) {
                     var markers = [];
 
-                    for (var i = 0; i<geoItems.length; i++) {
-                        var markerFilePath = '/img/leaflet/default/marker-icon.png';
-                        if (markerColor)
-                            markerFilePath = '/img/leaflet/custom/marker-icon-' + markerColor + '.png';
+                    for (var i = 0; i<spatialItems.length; i++) {
 
-                        var markerIcon = L.icon({
-                            iconUrl: markerFilePath,
-                            shadowUrl: '/img/leaflet/default/marker-shadow.png',
-                        });
-
-                        var markerOptions = { icon: markerIcon };
+                        var markerOptions = { icon: markerIconForColor(markerColor), riseOnHover: true};
                         if (priority)
                             markerOptions.zIndexOffset = 1000;
+                        var marker = L.marker([spatialItems[i].location.lat, spatialItems[i].location.lon], markerOptions);
+                        marker.bindLabel(spatialItems[i].placeName, {
+                            offset: [30,0],
+                            className: "marker-label" }
+                        );
 
-                        markers.push(L.marker([geoItems[i].lat, geoItems[i].lon], markerOptions));
+                        markers.push(marker);
                     }
 
                     return markers;
@@ -191,12 +202,12 @@
 
                 // Main
 
-                var geoItems = {!! json_encode($geo_items) !!}
-                var nearbyGeoItems = {!! json_encode($nearby_geo_items) !!}
+                var spatialItems = {!! json_encode($geo_items) !!}
+                var nearbySpatialItems = {!! json_encode($nearby_geo_items) !!}
 
                 var markers = [];
-                markers = markers.concat(createMarkers(nearbyGeoItems, false));
-                markers = markers.concat(createMarkers(geoItems, true, 'orange'));                
+                markers = markers.concat(createMarkers(nearbySpatialItems, false));
+                markers = markers.concat(createMarkers(spatialItems, true, 'orange'));
 
                 var map = initializeMap();
                 showMarkers(map,markers);

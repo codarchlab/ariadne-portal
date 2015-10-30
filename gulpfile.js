@@ -10,7 +10,9 @@ var paths = {
 elixir(function(mix) {
     
     // compile sass (including bootstrap)
-    mix.sass(['style.scss', paths.leaflet + 'dist/leaflet.css'], 'public/css/style.css', {
+    mix.sass(['style.scss',
+        paths.leaflet + 'dist/leaflet.css',
+        paths.leaflet_label + 'dist/leaflet.label.css'], 'public/css/style.css', {
         includePaths: [paths.bootstrap + 'stylesheets/'],
         precision: 10
     });
