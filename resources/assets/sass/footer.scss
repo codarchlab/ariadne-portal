@@ -12,12 +12,17 @@
 
 #frontpage #footer {
 
-  position: absolute !important;
-  bottom: 0;
   background-color: rgba(0, 0, 0 , 0.2);
   color: #fff;
 }
 
 #frontpage #footer p {
 	margin: 0;
+}
+
+#footer #eulogo {
+
+  float: left;
+  margin: 4px 10px 0 0;
+  border: 1px solid #fff;
 }
