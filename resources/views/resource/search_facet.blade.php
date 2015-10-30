@@ -1,12 +1,11 @@
 @if(count($buckets) > 0 || Input::has($key))
 
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
         <div class="panel panel-default">
 
             <div class="panel-heading" role="tab" id="heading_{{$key}}">
                 <h3 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$key}}" aria-expanded="true" aria-controls="collapse_{{$key}}">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$key}}"
+                       aria-expanded="true" aria-controls="collapse_{{$key}}">
                         {{ trans('resource.'.$key) }}
                     </a>
                 </h3>
@@ -43,7 +42,5 @@
 
             </div>
         </div>
-
-    </div>
 
 @endif
