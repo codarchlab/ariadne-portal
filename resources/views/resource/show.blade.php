@@ -189,7 +189,7 @@
                 var makeMarker = function(spatialItem,priority,markerColor) {
                     var marker = L.marker([spatialItem.location.lat, spatialItem.location.lon],
                         markerOptions(priority,markerColor));
-                    marker.bindLabel(spatialItem.placeName,  labelOptions);
+                    marker.bindLabel(spatialItem.placeName,  labelOptions());
                     marker.on('click',markerClickFunction);
                     return marker;
                 };
