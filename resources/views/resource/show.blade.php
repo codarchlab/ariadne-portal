@@ -168,22 +168,37 @@
                     return markerIcon;
                 };
 
+                var markerClickFunction = function(e) {
+                    window.location = '/search?spatial='+ e.target.label._content;
+                };
+
+                var markerOptions = function(priority,markerColor) {
+                    var markerOptions = { icon: markerIconForColor(markerColor), riseOnHover: true};
+                    if (priority)
+                        markerOptions.zIndexOffset = 1000;
+                    return markerOptions;
+                };
+
+                var labelOptions = function() {
+                    return {
+                        offset: [30,0],
+                        className: "marker-label"
+                    }
+                };
+
+                var makeMarker = function(spatialItem,priority,markerColor) {
+                    var marker = L.marker([spatialItem.location.lat, spatialItem.location.lon],
+                        markerOptions(priority,markerColor));
+                    marker.bindLabel(spatialItem.placeName,  labelOptions);
+                    marker.on('click',markerClickFunction);
+                    return marker;
+                };
+
                 var createMarkers = function(spatialItems, priority, markerColor) {
                     var markers = [];
 
-                    for (var i = 0; i<spatialItems.length; i++) {
-
-                        var markerOptions = { icon: markerIconForColor(markerColor), riseOnHover: true};
-                        if (priority)
-                            markerOptions.zIndexOffset = 1000;
-                        var marker = L.marker([spatialItems[i].location.lat, spatialItems[i].location.lon], markerOptions);
-                        marker.bindLabel(spatialItems[i].placeName, {
-                            offset: [30,0],
-                            className: "marker-label" }
-                        );
-
-                        markers.push(marker);
-                    }
+                    for (var i = 0; i<spatialItems.length; i++)
+                        markers.push(makeMarker(spatialItems[i],priority,markerColor));
 
                     return markers;
                 };
