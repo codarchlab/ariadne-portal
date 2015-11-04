@@ -154,15 +154,13 @@
                     return map;
                 };
 
-                var createMarkers = function(geoItems, priority, markerColor) {
-                    var markers = [];
+                var markerIconForColor = function(markerColor) {
 
-                    for (var i = 0; i<geoItems.length; i++) {
-                        var markerFilePath = '/img/leaflet/default/marker-icon.png';
-                        if (markerColor)
-                            markerFilePath = '/img/leaflet/custom/marker-icon-' + markerColor + '.png';
+                    var markerFilePath = '/img/leaflet/default/marker-icon.png';
+                    if (markerColor)
+                        markerFilePath = '/img/leaflet/custom/marker-icon-' + markerColor + '.png';
 
-                        var markerIcon = L.icon({
+                    var markerIcon = L.icon({
                             iconUrl: markerFilePath,
                             iconSize: [25, 41],
                             iconAnchor: [12, 40],
@@ -171,13 +169,40 @@
                             shadowAnchor: [12, 40]
                         });
 
-                        var markerOptions = { icon: markerIcon };
+                    return markerIcon;
+                };
 
-                        if (priority)
-                            markerOptions.zIndexOffset = 1000;
+                var markerClickFunction = function(e) {
+                    window.location = '/search?spatial='+ e.target.label._content;
+                };
 
-                        markers.push(L.marker([geoItems[i].lat, geoItems[i].lon], markerOptions));
+                var markerOptions = function(priority,markerColor) {
+                    var markerOptions = { icon: markerIconForColor(markerColor), riseOnHover: true};
+                    if (priority)
+                        markerOptions.zIndexOffset = 1000;
+                    return markerOptions;
+                };
+
+                var labelOptions = function() {
+                    return {
+                        offset: [30,0],
+                        className: "marker-label"
                     }
+                };
+
+                var makeMarker = function(spatialItem,priority,markerColor) {
+                    var marker = L.marker([spatialItem.location.lat, spatialItem.location.lon],
+                        markerOptions(priority,markerColor));
+                    marker.bindLabel(spatialItem.placeName,  labelOptions());
+                    marker.on('click',markerClickFunction);
+                    return marker;
+                };
+
+                var createMarkers = function(spatialItems, priority, markerColor) {
+                    var markers = [];
+
+                    for (var i = 0; i<spatialItems.length; i++)
+                        markers.push(makeMarker(spatialItems[i],priority,markerColor));
 
                     return markers;
                 };
@@ -196,12 +221,12 @@
 
                 // Main
 
-                var geoItems = {!! json_encode($geo_items) !!}
-                var nearbyGeoItems = {!! json_encode($nearby_geo_items) !!}
+                var spatialItems = {!! json_encode($geo_items) !!}
+                var nearbySpatialItems = {!! json_encode($nearby_geo_items) !!}
 
                 var markers = [];
-                markers = markers.concat(createMarkers(nearbyGeoItems, false));
-                markers = markers.concat(createMarkers(geoItems, true, 'orange'));                
+                markers = markers.concat(createMarkers(nearbySpatialItems, false));
+                markers = markers.concat(createMarkers(spatialItems, true, 'orange'));
 
                 var map = initializeMap();
                 showMarkers(map,markers);

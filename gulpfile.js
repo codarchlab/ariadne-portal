@@ -1,15 +1,18 @@
 var elixir = require('laravel-elixir');
 
 var paths = {
-    'jquery': './vendor/components/jquery/',
-    'bootstrap': './vendor/twbs/bootstrap-sass/assets/',
-    'leaflet': './vendor/drmonty/leaflet/'
+    'jquery': './bower_components/jquery/',
+    'bootstrap': './bower_components/bootstrap-sass/assets/',
+    'leaflet': './bower_components/leaflet/',
+    'leaflet_label': './bower_components/Leaflet.label/'
 };
 
 elixir(function(mix) {
     
     // compile sass (including bootstrap)
-    mix.sass(['style.scss', paths.leaflet + 'css/leaflet.css'], 'public/css/style.css', {
+    mix.sass(['style.scss',
+        paths.leaflet + 'dist/leaflet.css',
+        paths.leaflet_label + 'dist/leaflet.label.css'], 'public/css/style.css', {
         includePaths: [paths.bootstrap + 'stylesheets/'],
         precision: 10
     });
@@ -18,15 +21,16 @@ elixir(function(mix) {
     mix.copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts/bootstrap/');
 
     // copy leaflet image files
-    mix.copy(paths.leaflet + 'images/**', 'public/img/leaflet/default');
+    mix.copy(paths.leaflet + 'dist/images/**', 'public/img/leaflet/default');
 
     // combine scripts into single app.js
     mix.scripts(
     	[
-            paths.jquery + "jquery.js",
+            paths.jquery + "dist/jquery.js",
             paths.bootstrap + "javascripts/bootstrap.js",
-            paths.leaflet + "js/leaflet.js",
-            "/js/*.js"
+            paths.leaflet + "dist/leaflet.js",
+            paths.leaflet_label + "dist/leaflet.label.js",
+            "*.js"
         ],
         'public/js/app.js'
     );

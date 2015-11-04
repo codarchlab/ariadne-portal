@@ -17,41 +17,41 @@ class ResourceController extends Controller {
     }
 
     /**
-     * Filters out the items which can be shown on a map.
+     * Filters out the spatial items which can be shown on a map.
      *
      * @param $resource
      * @return array of item from the spatial array which have
      *   a location property.
      */
     private function getValidGeoItems($resource) {
-        $geo_items = array();
-        if (!array_key_exists('spatial',$resource['_source']))
-            return $geo_items;
+        $spatialItems = array();
 
-        foreach ($resource['_source']['spatial'] as $spatial){
-            if (!array_key_exists('location',$spatial))
+        if (!array_key_exists('spatial',$resource['_source']))
+            return $spatialItems;
+
+        foreach ($resource['_source']['spatial'] as $spatialItem){
+            if (!array_key_exists('location',$spatialItem))
                 continue;
-            $location=$spatial['location'];
-            array_push($geo_items,$location);
+            array_push($spatialItems,$spatialItem);
         }
 
-        return $geo_items;
+        return $spatialItems;
     }
 
-    private function getNearbyGeoItems($type, $geo_item) {
+    private function getNearbySpatialItems($type, $spatialItem) {
 
-        $nearby_geo_items = array();
+        $nearbySpatialItems = array();
 
-        foreach (ElasticSearch::geoDistanceQuery('resource', $type, $geo_item)
-                 as $nearby_resource) {
+        foreach (ElasticSearch::geoDistanceQuery('resource', $type, $spatialItem['location'])
+                 as $nearbyResource) {
 
-            foreach ($this->getValidGeoItems($nearby_resource)
-                     as $valid_nearby_geo_item) {
-                array_push($nearby_geo_items,$valid_nearby_geo_item);
+            foreach ($this->getValidGeoItems($nearbyResource)
+                     as $validNearbySpatialItem) {
+                array_push($nearbySpatialItems,$validNearbySpatialItem);
             }
         }
 
-        return $nearby_geo_items;
+        return $nearbySpatialItems;
     }
 
     /**
@@ -64,13 +64,16 @@ class ResourceController extends Controller {
     public function show($type,$id) {
 
         $resource = ElasticSearch::get($id, 'resource', $type);
-        $geo_items = $this->getValidGeoItems($resource);
-        $nearby_geo_items = $this->getNearbyGeoItems($type, $geo_items[0]);
+        $spatial_items = $this->getValidGeoItems($resource);
+        $nearby_spatial_items = null;
+        if (!empty($spatial_items)) {
+            $nearby_spatial_items = $this->getNearbySpatialItems($type, $spatial_items[0]);
+        }
 
         return view('resource.show')
             ->with('resource', $resource)
-            ->with('geo_items', $geo_items)
-            ->with('nearby_geo_items', $nearby_geo_items);
+            ->with('geo_items', $spatial_items)
+            ->with('nearby_geo_items', $nearby_spatial_items);
     }
 
     /**
@@ -83,10 +86,17 @@ class ResourceController extends Controller {
     public function search() {
         $query = ['aggregations' => Config::get('app.elastic_search_aggregations')];
 
+        // add geogrid aggregation
+        $ghp = Request::has('ghp') ? Request::input('ghp') : 2;
+        $query['aggregations']['geogrid'] = ['geohash_grid' => [
+            'field' => 'spatial.location', 'precision' => intval($ghp) 
+        ]];
+
+        $q = ['match_all' => []];
         if (Request::has('q')) {
             $q = ['query_string' => ['query' => Request::get('q')]];
-            $query['query']['bool']['must'][] = $q;
         }
+        $innerQuery = ['bool' => ['must' => $q]];
 
         foreach ($query['aggregations'] as $key => $aggregation) {
             if (Request::has($key)) {
@@ -97,9 +107,35 @@ class ResourceController extends Controller {
                 foreach ($values as $value) {
                     $fieldQuery = [];
                     $fieldQuery[$field] = $value;
-                    $query['query']['bool']['must'][] = ['match' => $fieldQuery];
+                    $innerQuery['bool']['must'][] = ['match' => $fieldQuery];
                 }
             }
+        }
+
+        // TODO: refactor so that ES service takes care of bbox parsing
+        if (Request::has('bbox')) {
+            $bbox = explode(',', Request::input('bbox'));
+            $query['query'] = [
+                'filtered' => [
+                    'query' => $innerQuery,
+                    'filter' => [
+                        'geo_bounding_box' => [
+                            'spatial.location' => [
+                                'top_left' => [
+                                    'lat' => floatval($bbox[3]),
+                                    'lon' => floatval($bbox[0])
+                                ],                                
+                                'bottom_right' => [
+                                    'lat' => floatval($bbox[1]),
+                                    'lon' => floatval($bbox[2])
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ];
+        } else {
+            $query['query'] = $innerQuery;
         }
 
         $hits = ElasticSearch::search($query, 'resource');

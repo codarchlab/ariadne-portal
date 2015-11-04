@@ -31,11 +31,13 @@
             <h4>{{ trans('search.filters') }}</h4>
 
             @foreach($aggregations as $key => $aggregation)
-                @include('resource.search_facet', [
-                    'key' => $key,
-                    'aggregation' => $aggregation,
-                    'buckets' => $hits->aggregations()[$key]['buckets']
-                ])
+                @if($key != 'geogrid')
+                    @include('resource.search_facet', [
+                        'key' => $key,
+                        'aggregation' => $aggregation,
+                        'buckets' => $hits->aggregations()[$key]['buckets']
+                    ])
+                @endif
             @endforeach
 
         </div>

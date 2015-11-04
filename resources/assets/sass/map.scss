@@ -1,0 +1,12 @@
+.grid-label-container {
+    position: relative;
+}
+
+.grid-label-container .grid-label {
+	position: absolute;
+	text-align: center;
+	left: -44px;
+	top: -2px;
+	width: 100px;
+	font-weight: bold;
+}
