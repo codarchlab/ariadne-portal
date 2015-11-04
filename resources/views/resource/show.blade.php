@@ -164,10 +164,15 @@
 
                         var markerIcon = L.icon({
                             iconUrl: markerFilePath,
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 40],
                             shadowUrl: '/img/leaflet/default/marker-shadow.png',
+                            shadowSize: [41, 41],
+                            shadowAnchor: [12, 40]
                         });
 
                         var markerOptions = { icon: markerIcon };
+
                         if (priority)
                             markerOptions.zIndexOffset = 1000;
 
