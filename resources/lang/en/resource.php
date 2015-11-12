@@ -17,6 +17,8 @@ return [
     'keyword' => 'Keyword',
     'nativeSubject' => 'Subject',
     'nativeSubject.prefLabel' => 'Subject',
+    'accessRights' => 'Access Rights',
+    'accessPolicy' => 'Access Policy',
     'type' => 'Type',
     'type.collection' => 'Collection',
     'type.dataset' => 'Dataset',

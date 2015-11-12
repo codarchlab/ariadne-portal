@@ -125,14 +125,32 @@
         </dl>
 
         <h4>{{ trans('resource.license') }}</h4>
+        
+        <dl class="dl-horizontal">
+
+            @if (isset($resource['_source']['accessRights']))
+                <dt>{{ trans('resource.accessRights') }}</dt>
+                <dd>{{ $resource['_source']['accessRights'] }}</dd>
+            @endif
+            
+            @if (isset($resource['_source']['accessPolicy']))
+                <dt>{{ trans('resource.accessPolicy') }}</dt>
+                <dd>{{ $resource['_source']['accessPolicy'] }}</dd>
+            @endif
+
+        </dl>
 
     </div>
     <!-- resource context -->
     <div class="col-md-4 resource-context">
 
-        <h4>{{ trans('resource.part_of') }}</h4>
-
-
+        <h4>{{ trans('resource.part_of') }}</h4>           
+            @if (isset($resource['_source']['isPartOf']))
+                @foreach($resource['_source']['isPartOf'] as $isPartOf)
+                <p>{{ $isPartOf }}</p>
+                @endforeach
+            @endif
+            
         @if (sizeof($geo_items)>0)
 
             <h4>{{ trans('resource.geo_similar') }}</h4>
