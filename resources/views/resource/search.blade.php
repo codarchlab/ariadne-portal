@@ -1,5 +1,5 @@
 @extends('app')
-@section('title', 'Searh - Ariadne portal')
+@section('title', 'Search - Ariadne portal')
 @section('content')
 
 <div>
