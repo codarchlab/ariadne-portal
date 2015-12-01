@@ -5,13 +5,13 @@
         <div class="panel-heading" role="tab" id="heading_{{$key}}">
             <h3 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$key}}"
-                   aria-expanded="true" aria-controls="collapse_{{$key}}">
+                   aria-expanded="<?php echo($key == 'type') ? 'true' : 'false' ?>" aria-controls="collapse_{{$key}}">
                     {{ trans('resource.'.$key) }}
                 </a>
             </h3>
         </div>
 
-        <div id="collapse_{{$key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_{{$key}}">
+        <div id="collapse_{{$key}}" class="panel-collapse collapse <?php echo($key == 'type') ? 'in' : '' ?>" role="tabpanel" aria-labelledby="heading_{{$key}}">
 
             <div class="list-group">
 
@@ -41,7 +41,7 @@
             </div>
 
         </div>
-        
+
     </div>
 
 @endif
