@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Services\Provider;
-use Storage;
 
 class PageController extends Controller {
     /*
