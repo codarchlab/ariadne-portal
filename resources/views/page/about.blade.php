@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'About - Ariadne portal')
 @section('content')
 
     <div id="aboutpage" class="container">

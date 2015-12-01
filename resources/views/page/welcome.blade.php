@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Welcome - Ariadne portal')
 @section('content')
 
 <div class="row">

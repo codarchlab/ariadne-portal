@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', $resource['_source']['title'].' - Ariadne portal')
 @section('content')
 
 <div class="row">

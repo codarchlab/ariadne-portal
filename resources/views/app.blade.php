@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>ARIADNE Portal</title>
+        <title>@yield('title')</title>
 
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 
