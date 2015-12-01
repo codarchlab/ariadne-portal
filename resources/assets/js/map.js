@@ -2,61 +2,51 @@ function GridMap(container) {
 
 	var self = this;
 
-	this.drawGrid = function(grid) {
+	this.drawHeatmap = function(grid) {
+
+		if (heatmap) {
+			map.removeLayer(heatmap);
+		}
 
 		var max = grid[0]['doc_count'];
-
-		// remove old grid layers when redrawing
-		layers.forEach(function(layer) {
-			map.removeLayer(layer);
-		});
+		var heatPoints = [];
 
 		grid.forEach(function(bucket) {
-			var corners = Geohash.bounds(bucket['key']);
-			var bounds = L.latLngBounds(corners.sw, corners.ne);
-		    var heat = Math.pow(bucket['doc_count'] / max, 1/5); // add curve to accomodate for long-tail distibution
-			var rect = L.rectangle(bounds, {color: heatMapColorforValue(heat), weight: 1}).addTo(map);
-			rect.on('click', function(e) { performSearch(bounds); });
-			layers.push(rect);
-			var label = L.marker(bounds.getCenter(), {
-				icon: L.divIcon({
-					className: 'grid-label-container',
-					html: '<div class="grid-label">'+bucket['doc_count'].toLocaleString('en-US')+'</div>'
-				}),
-				zIndexOffset: 1000
-			}).addTo(map);
-			label.on('click', function(e) { performSearch(bounds); });
-			layers.push(label);
+			var point = Geohash.decode(bucket['key']);
+			heatPoints.push([point.lat, point.lon, bucket['doc_count']]);
 		});
+
+		heatmap = L.heatLayer(heatPoints, { 
+			radius: 25,
+			max: max,
+			gradient: generateGradient(0.5),
+			minOpacity: 0.1
+		}).addTo(map);
 
 	};
 
 	this.refreshGrid = function() {
 
-		var ghPrecision = getGhprecFromZoom(map.getZoom());
-		var bBox = map.getBounds().toBBoxString();
-
-		var uri = "/search?ghp="+ghPrecision+"&bbox="+bBox;
-		requestsInProgress++;
+		var uri = generateSearchUri();
+		requestInProgress = uri;
 		$.getJSON(uri, function(data) {
-			requestsInProgress--;
-			if(requestsInProgress == 0) // prevent overriding grid if requests are in progress
-				self.drawGrid(data['aggregations']['geogrid']['buckets']);
+			if(requestInProgress == uri) { // only display last request sent
+				self.drawHeatmap(data['aggregations']['geogrid']['buckets']);
+			}
 		});
 
 	}
 
-	var map = L.map(container, { zoomControl: false }).setView([40, 17], 3);
-	map.addControl( L.control.zoom({position: 'bottomright'}) )
-	var layers = [];
-	var requestsInProgress = 0;
+	this.triggerSearch = function() {
+		var uri = generateSearchUri();
+		window.location.href = uri;
+	}
 
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-	    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
-
-	map.on('zoomend', this.refreshGrid);
-	map.on('moveend', this.refreshGrid);
+	function generateSearchUri() {
+		var ghPrecision = getGhprecFromZoom(map.getZoom());
+		var bBox = map.getBounds().toBBoxString();
+		return "/search?ghp="+ghPrecision+"&bbox="+bBox;
+	}
 
 	function performSearch(bounds) {
 		var bBox = bounds.toBBoxString();
@@ -66,14 +56,36 @@ function GridMap(container) {
 
 	function getGhprecFromZoom(zl) {
         var ghprecForZoomLevel =
-            [1,1,2,2,2,2,3,3,3,4,4,5,5,6,6,6,7,7,7];
+            [3,3,4,4,4,4,5,5,5,6,6,7,7,8,8,8,9,9,9];
         if (zl>18) zl=18;
         return ghprecForZoomLevel[zl];
-    };
+    }
 
-	function heatMapColorforValue(value){
-		var h = (1.0 - value) * 240
+	function heatMapColorforValue(value) {
+		var h = Math.round((1.0 - value) * 240);
 		return "hsl(" + h + ", 100%, 60%)";
 	}
+
+	function generateGradient(s) {
+		var gradient = {};
+		for (var i = 1; i <= 10; i++) {
+			gradient[s * i / 10] = heatMapColorforValue(i / 10);
+		}
+		return gradient;
+	}
+
+	var map = L.map(container, { zoomControl: false }).setView([40, 17], 3);
+	map.addControl( L.control.zoom({position: 'bottomright'}) )	
+
+	var heatmap;
+
+	var requestInProgress;
+
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	map.on('zoomend', this.refreshGrid);
+	map.on('moveend', this.refreshGrid);
 
 }

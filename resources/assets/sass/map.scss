@@ -1,12 +1,13 @@
-.grid-label-container {
-    position: relative;
+.map-controls {
+	position: absolute;
+	bottom: 10px;
+	right: 50px;
+	left: 50px;
+	z-index: 500;
+	text-align: center;
 }
 
-.grid-label-container .grid-label {
-	position: absolute;
-	text-align: center;
-	left: -44px;
-	top: -2px;
-	width: 100px;
-	font-weight: bold;
+.map-controls .btn-primary {	
+	border-color: darken($yellow, 5%);
+ 	background-color: $yellow;
 }
