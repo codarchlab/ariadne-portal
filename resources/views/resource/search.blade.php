@@ -29,7 +29,20 @@
                 </div>
             {!! Form::close() !!}
 
+            <!-- -->
             <h4>{{ trans('search.filters') }}</h4>
+
+            <div id="activeFilters">
+            @foreach($aggregations as $key => $aggregation)
+                @if($key != 'geogrid')
+                    @include('resource.search_active-filters', [
+                        'key' => $key,
+                        'aggregation' => $aggregation,
+                        'buckets' => $hits->aggregations()[$key]['buckets']
+                    ])
+                @endif
+            @endforeach
+            </div>
 
             @foreach($aggregations as $key => $aggregation)
                 @if($key != 'geogrid')
