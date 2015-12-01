@@ -4,6 +4,10 @@
         <meta charset="UTF-8">
         <title>@yield('title')</title>
 
+        @if(env('local', 'staging'))
+        <meta name="robots" content="noindex">
+        @endif
+        
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
