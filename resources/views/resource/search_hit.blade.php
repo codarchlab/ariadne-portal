@@ -23,7 +23,7 @@
 
                     <p>
                         {{ trans('resource.type') }}:
-                        <span class="badge">{{ trans('resource.type.'.$hit['_type']) }}</span>
+                        <span class="badge">{{ $hit['_source']['archaeologicalResourceType']['name'] }}</span>
                         @if(array_key_exists('publisher', $hit['_source']) && count($hit['_source']['publisher']) >= 1)
                             {{ trans('resource.publisher') }}:
                             <span class="badge">{{ $hit['_source']['publisher'][0]['name'] }}</span>
