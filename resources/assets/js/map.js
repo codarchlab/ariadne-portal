@@ -46,7 +46,8 @@ function GridMap(container) {
 
 	}
 
-	var map = L.map(container).setView([40, 17], 3);
+	var map = L.map(container, { zoomControl: false }).setView([40, 17], 3);
+	map.addControl( L.control.zoom({position: 'bottomright'}) )
 	var layers = [];
 	var requestsInProgress = 0;
 
