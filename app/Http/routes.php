@@ -27,3 +27,5 @@ Route::post('map_results', 'MapController@results');
 Route::get('browse/map', 'BrowseController@map');
 
 Route::get('{type}/{id}','ResourceController@show' );
+
+Route::get('robots.txt','PageController@robots' );

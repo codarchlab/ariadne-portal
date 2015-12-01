@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Services\Provider;
+use Storage;
 
 class PageController extends Controller {
     /*
@@ -38,4 +39,22 @@ class PageController extends Controller {
     {
         return view('page.about');
     }    
+    
+    /**
+     * Generate robots.txt
+     *
+     * @return Response
+     */
+    public function robots()
+    {
+        $path = public_path();
+        
+        if(env('local', 'staging')) {
+            $path .= '\robots_development.txt';
+        }else {
+            $path .= '\robots_production.txt';
+        }
+        return response(file_get_contents($path))
+                ->header('Content-Type', 'text/plain');
+    }       
 }
