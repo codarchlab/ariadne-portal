@@ -4,10 +4,6 @@ function GridMap(container) {
 
 	this.drawHeatmap = function(grid) {
 
-		if (heatmap) {
-			map.removeLayer(heatmap);
-		}
-
 		var max = grid[0]['doc_count'];
 		var heatPoints = [];
 
@@ -25,27 +21,61 @@ function GridMap(container) {
 
 	};
 
-	this.refreshGrid = function() {
+	this.drawMarkers = function(resources) {
+		for (var i = 0; i < resources.length; i++) {
+			for (var j = 0; j < resources[i]['_source']['spatial'].length; j++) {
+				var spatial = resources[i]['_source']['spatial'][j];
+				if ('location' in spatial) {
+					var marker = L.marker(spatial.location, { riseOnHover: true });
+					var label = ('placeName' in spatial) ? spatial.placeName
+						: spatial.location.lat + ", " + spatial.location.lon;
+					marker.bindLabel(label, { className: "marker-label" });
+					marker.on('click', function(e) {
+                    	window.location = '/search?spatial='+ label;
+                	});
+					marker.addTo(map);
+					markers.push(marker);
+				}
+			};
+
+		};
+	};
+
+	this.resetLayers = function() {
+		if (heatmap) {
+			map.removeLayer(heatmap);
+		}
+		for (var i = 0; i < markers.length; i++) {
+			map.removeLayer(markers[i]);
+		};
+	};
+
+	this.refreshMap = function() {
 
 		var uri = generateSearchUri();
 		requestInProgress = uri;
 		$.getJSON(uri, function(data) {
 			if(requestInProgress == uri) { // only display last request sent
-				self.drawHeatmap(data['aggregations']['geogrid']['buckets']);
+				self.resetLayers();
+				if (data.total > 100) {
+					self.drawHeatmap(data['aggregations']['geogrid']['buckets']);
+				} else {
+					self.drawMarkers(data['data']);
+				}
 			}
 		});
 
-	}
+	};
 
 	this.triggerSearch = function() {
 		var uri = generateSearchUri();
 		window.location.href = uri;
-	}
+	};
 
 	function generateSearchUri() {
 		var ghPrecision = getGhprecFromZoom(map.getZoom());
 		var bBox = map.getBounds().toBBoxString();
-		return "/search?ghp="+ghPrecision+"&bbox="+bBox;
+		return "/search?ghp="+ghPrecision+"&bbox="+bBox+"&perPage=100";
 	}
 
 	function performSearch(bounds) {
@@ -78,14 +108,16 @@ function GridMap(container) {
 	map.addControl( L.control.zoom({position: 'bottomright'}) )	
 
 	var heatmap;
+	var markers = [];
 
 	var requestInProgress;
 
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 	    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
+	L.Icon.Default.imagePath = '/img/leaflet/default';
 
-	map.on('zoomend', this.refreshGrid);
-	map.on('moveend', this.refreshGrid);
+	map.on('zoomend', this.refreshMap);
+	map.on('moveend', this.refreshMap);
 
 }

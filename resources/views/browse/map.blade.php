@@ -12,7 +12,7 @@
 
 	<script>
         var gridMap = new GridMap("map");
-        gridMap.refreshGrid();
+        gridMap.refreshMap();
     </script>
 
 @endsection
