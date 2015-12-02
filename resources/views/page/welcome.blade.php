@@ -41,10 +41,18 @@
     <div class="col-md-5">
         <h3>Browse</h3>
         <div class="panel panel-default">
-            <div class="panel-image hide-panel-body">
-                <a href="{{ action('BrowseController@map') }}"><img src="img/where.JPG"></a>
-                <a href="#"><img src="img/when.JPG" ></a>
-                <a href="#"><img src="img/what.JPG" ></a>
+            <div class="panel-image hide-panel-body">   
+                <div class="row">
+                    <div class="col-md-4" style="padding-left: 0px; padding-right: 0px;">
+                        <a href="{{ action('BrowseController@map') }}"><img src="img/where.JPG" class="img-responsive"></a>
+                    </div> 
+                    <div class="col-md-4" style="padding-left: 0px; padding-right: 0px;">
+                        <a href="#"><img src="img/when.JPG" class="img-responsive"></a>
+                    </div> 
+                    <div class="col-md-4" style="padding-left: 0px; padding-right: 0px;">
+                        <a href="#"><img src="img/what.JPG" class="img-responsive"></a>
+                    </div> 
+                </div> 
             </div>
         </div>
     </div>
