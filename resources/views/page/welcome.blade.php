@@ -6,7 +6,7 @@
 
     <div class="col-md-6 col-md-offset-3 text-center search-form">
         
-        <img id="searchlogo" class="img-responsive" src="img/logo-white.png">
+        <a href="http://www.ariadne-infrastructure.eu/" target="_blank"><img id="searchlogo" class="img-responsive" src="img/logo-white.png"></a>
 
         {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
             <div class="input-group">
@@ -19,5 +19,35 @@
     </div>
 
 </div>
+<div class="row">
+    <div class="col-md-5 col-md-offset-1">
+        <h3>Welcome</h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    ARIADNE is ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <h4>Featured resource</h4>
+                <p>
+                    Description is ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h3>Browse</h3>
+        <div class="panel panel-default">
+            <div class="panel-image hide-panel-body">
+                <img src="img/where.JPG">
+                <img src="img/when.JPG" >
+                <img src="img/what.JPG" >
+            </div>
+        </div>
+    </div>
+</div>  
 
 @endsection
