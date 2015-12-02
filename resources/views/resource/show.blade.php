@@ -257,6 +257,14 @@
 
 
         <h4>{{ trans('resource.theme_similar') }}</h4>
+        <ul>@foreach($similar_resources as $similar_resource)
+            <li>
+                <a href="{{ action('ResourceController@show', [ $similar_resource['_type'], $similar_resource['_id'] ]  ) }}">
+                    {{ $similar_resource['_source']['title'] }}
+                </a>
+            </li>
+        @endforeach
+        </ul>
 
         <h4>{{ trans('resource.applicable_services') }}</h4>
     </div>

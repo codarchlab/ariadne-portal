@@ -64,16 +64,20 @@ class ResourceController extends Controller {
     public function show($type,$id) {
 
         $resource = ElasticSearch::get($id, 'resource', $type);
+
         $spatial_items = $this->getValidGeoItems($resource);
         $nearby_spatial_items = null;
         if (!empty($spatial_items)) {
             $nearby_spatial_items = $this->getNearbySpatialItems($type, $spatial_items[0]);
         }
 
+        $similar_resources = ElasticSearch::thematicallySimilarQuery($resource);
+
         return view('resource.show')
             ->with('resource', $resource)
             ->with('geo_items', $spatial_items)
-            ->with('nearby_geo_items', $nearby_spatial_items);
+            ->with('nearby_geo_items', $nearby_spatial_items)
+            ->with('similar_resources', $similar_resources);
     }
 
     /**

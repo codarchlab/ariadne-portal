@@ -15,7 +15,7 @@ elixir(function(mix) {
         [
             'style.scss',
             paths.leaflet + 'dist/leaflet.css',
-            paths.leaflet_label + 'dist/leaflet-label.css'
+            paths.leaflet_label + 'dist/leaflet.label.css'
         ],
         'public/css/style.css',
         {
