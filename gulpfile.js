@@ -5,17 +5,20 @@ var paths = {
     'bootstrap': './bower_components/bootstrap-sass/assets/',
     'leaflet': './bower_components/leaflet/',
     'leaflet_label': './bower_components/Leaflet.label/',
-    'leaflet_heat': './bower_components/Leaflet.heat/'
+    'leaflet_heat': './bower_components/Leaflet.heat/',
+    'd3' : './bower_components/d3/',
+    'c3' : './bower_components/c3/'
 };
 
 elixir(function(mix) {
-    
+
     // compile sass (including bootstrap)
     mix.sass(
         [
-            'style.scss',
             paths.leaflet + 'dist/leaflet.css',
-            paths.leaflet_label + 'dist/leaflet.label.css'
+            paths.c3 + 'c3.css',
+            paths.leaflet_label + 'dist/leaflet.label.css',
+            'style.scss'
         ],
         'public/css/style.css',
         {
@@ -38,6 +41,8 @@ elixir(function(mix) {
             paths.leaflet + "dist/leaflet.js",
             paths.leaflet_label + "dist/leaflet.label.js",
             paths.leaflet_heat + "dist/leaflet-heat.js",
+            paths.d3 + "d3.js",
+            paths.c3 + "c3.js",
             "*.js"
         ],
         'public/js/app.js'

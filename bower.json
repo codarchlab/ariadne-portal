@@ -13,6 +13,9 @@
     "bootstrap-sass": "~3.3.5",
     "jquery": "~2.1.4",
     "leaflet": "0.7.7",
-    "Leaflet.heat": "https://github.com/Leaflet/Leaflet.heat.git#~0.2.0"
+    "Leaflet.heat": "https://github.com/Leaflet/Leaflet.heat.git#~0.2.0",
+    "Leaflet.label": "~0.2.1",
+    "d3": "~3.5.10",
+    "c3": "~0.4.10"
   }
 }
