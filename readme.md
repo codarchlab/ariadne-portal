@@ -32,7 +32,7 @@ For Windows:</br></br>
    1) Download node.js https://nodejs.org/en/download/</br>
    2) Download python https://www.python.org/getit/windows/</br>
    3) Run <code> npm install -g node-gyp</code></br>
-   4) Run <code> npm insatll </code></br>
+   4) Run <code> npm install </code></br>
    5) Run <code> npm install -g bower</code></br>
    5) Run <code> npm install -g gulp</code></br>
 
