@@ -42,9 +42,9 @@
         <h3>Browse</h3>
         <div class="panel panel-default">
             <div class="panel-image hide-panel-body">
-                <img src="img/where.JPG">
-                <img src="img/when.JPG" >
-                <img src="img/what.JPG" >
+                <a href="{{ action('BrowseController@map') }}"><img src="img/where.JPG"></a>
+                <a href="#"><img src="img/when.JPG" ></a>
+                <a href="#"><img src="img/what.JPG" ></a>
             </div>
         </div>
     </div>
