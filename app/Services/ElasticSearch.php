@@ -91,6 +91,75 @@ class ElasticSearch {
     }
 
 
+    /**
+     * @param $resource
+     * @return the seven most similar resources based on subjects & time periods
+     */
+    public static function thematicallySimilarQuery($resource) {
+
+      $json = '{
+        "query": {
+          "bool": {
+            "must_not": {
+              "match": {
+                "_id": "' . $resource['_id'] .  '"
+              }
+            },
+            "should": [';
+
+      $firstMatch = true;
+
+      if (array_key_exists('nativeSubject', $resource['_source'])) {
+        foreach ($resource['_source']['nativeSubject'] as $subject) {
+          if (!array_key_exists('prefLabel', $subject))
+            continue;
+
+          if ($firstMatch)
+            $firstMatch = false;
+          else
+            $json .= ',';
+
+          $json .= '{
+              "match": {
+                "nativeSubject.prefLabel": "' . $subject['prefLabel'] . '"
+              }
+            }';
+        }
+      }
+
+      if (array_key_exists('temporal', $resource['_source'])) {
+        foreach ($resource['_source']['temporal'] as $temporal) {
+          if (!array_key_exists('periodName', $temporal))
+            continue;
+
+          if ($firstMatch)
+            $firstMatch = false;
+          else
+            $json .= ',';
+
+          $json .= '{
+              "match": {
+                "temporal.periodName": "' . $temporal['periodName'] . '"
+              }
+            }';
+        }
+      }
+        
+      $json .= '],
+              "minimum_should_match" : 1
+            }
+          }
+        }';
+
+      $params = [
+            'index' => 'resource',
+            'size' => 7,
+            'body' => $json
+        ];
+
+        $result = self::getClient()->search($params);
+        return $result['hits']['hits'];
+    }
 
 
     
