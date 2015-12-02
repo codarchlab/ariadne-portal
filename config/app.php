@@ -31,6 +31,18 @@ return [
         /* Aggregations whose values should be translated */
         'translate_aggregations' => [ 'type', 'language' ],
     
+    	/*
+	|--------------------------------------------------------------------------
+	| Google analytics
+	|--------------------------------------------------------------------------
+	|
+	| The Google Analytics access key
+	|
+	*/  
+    
+        'google_analytics' => env('GOOGLE_ANALYTICS'),
+    
+    
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
