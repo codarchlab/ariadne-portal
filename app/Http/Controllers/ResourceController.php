@@ -126,6 +126,12 @@ class ResourceController extends Controller {
             'field' => 'spatial.location', 'precision' => intval($ghp) 
         ]];
 
+        $query['aggregations']['from_dates'] = ['date_histogram' => [
+            'field' => 'temporal.from', 'interval' => 'year'
+        ]];
+
+        $q = ['match_all' => []];
+
         if (Request::has('q')) {
             $field_groups = Config::get('app.elastic_search_field_groups');
             

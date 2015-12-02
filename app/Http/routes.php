@@ -25,6 +25,7 @@ Route::get('provider', 'ProviderController@index');
 Route::get('subject', 'SubjectController@index');
 
 Route::get('browse/map', 'BrowseController@map');
+Route::get('browse/when', 'BrowseController@when');
 
 Route::get('resource/{id}', [
     'uses' => 'ResourceController@show',

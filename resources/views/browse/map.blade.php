@@ -1,5 +1,4 @@
 @extends('app')
-
 @section('content')
 
 	<div class="browse-map-container">
@@ -19,6 +18,7 @@
 				</button>
 			</div>
 		</div>
+
 
 		<div class="fullscreen" id="map"></div>
 

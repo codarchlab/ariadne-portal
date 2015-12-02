@@ -19,5 +19,9 @@ class BrowseController extends Controller {
     public function map() {
         return view('browse.map');
     }  
-     
+
+
+    public function when() {
+        return view('browse.when');
+    }
 }
