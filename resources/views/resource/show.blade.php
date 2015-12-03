@@ -136,7 +136,11 @@
             
             @if (isset($resource['_source']['accessPolicy']))
                 <dt>{{ trans('resource.accessPolicy') }}</dt>
-                <dd>{{ $resource['_source']['accessPolicy'] }}</dd>
+                <dd>
+                    <a href="{{ $resource['_source']['accessPolicy'] }}">
+                        {{ $resource['_source']['accessPolicy'] }}
+                    </a>
+                </dd>
             @endif
 
         </dl>
