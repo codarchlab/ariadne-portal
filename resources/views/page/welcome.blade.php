@@ -6,7 +6,7 @@
 
     <div class="col-md-6 col-md-offset-3 text-center search-form">
         
-        <a href="http://www.ariadne-infrastructure.eu/" target="_blank"><img id="searchlogo" class="img-responsive" src="img/logo-white.png"></a>
+        <img id="searchlogo" class="img-responsive" src="img/logo-white.png">
 
         {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
             <div class="input-group">

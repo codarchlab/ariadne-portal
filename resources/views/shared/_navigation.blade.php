@@ -2,7 +2,7 @@
 
     <div id="logo">
 
-        <a class="navbar-brand" href="{{ action('PageController@welcome') }}">
+        <a class="navbar-brand" href="http://www.ariadne-infrastructure.eu">
             <img id="brand" src="{{ asset("img/logo-symbol.png") }}">
         </a>
 
