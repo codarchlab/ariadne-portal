@@ -121,11 +121,10 @@ class ResourceController extends Controller {
             'field' => 'spatial.location', 'precision' => intval($ghp) 
         ]];
 
-        $q = ['match_all' => []];
         if (Request::has('q')) {
             $q = ['query_string' => ['query' => Request::get('q')]];
+            $query['query']['bool']['must'][] = $q;
         }
-        $innerQuery = ['bool' => ['must' => $q]];
 
         foreach ($query['aggregations'] as $key => $aggregation) {
             if (Request::has($key)) {
@@ -139,14 +138,15 @@ class ResourceController extends Controller {
                     $query['query']['bool']['must'][] = ['match' => $fieldQuery];
                 }
             }
-        }
-
+        }        
+        
+        
         // TODO: refactor so that ES service takes care of bbox parsing
         if (Request::has('bbox')) {
             $bbox = explode(',', Request::input('bbox'));
             $query['query'] = [
                 'filtered' => [
-                    'query' => $innerQuery,
+                    'query' => $query['query'],
                     'filter' => [
                         'geo_bounding_box' => [
                             'spatial.location' => [
@@ -163,12 +163,8 @@ class ResourceController extends Controller {
                     ]
                 ]
             ];
-        } else {
-            $query['query'] = $innerQuery;
         }
         
-        
-
         $hits = ElasticSearch::search($query, 'resource');
 
         if (Request::wantsJson()) {
