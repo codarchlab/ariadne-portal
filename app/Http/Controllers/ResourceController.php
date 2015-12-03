@@ -129,6 +129,7 @@ class ResourceController extends Controller {
 
         foreach ($query['aggregations'] as $key => $aggregation) {
             if (Request::has($key)) {
+                debug("has ".$key);
                 $values = Utils::getArgumentValues($key);
 
                 $field = $aggregation['terms']['field'];
@@ -136,7 +137,7 @@ class ResourceController extends Controller {
                 foreach ($values as $value) {
                     $fieldQuery = [];
                     $fieldQuery[$field] = $value;
-                    $innerQuery['bool']['must'][] = ['match' => $fieldQuery];
+                    $query['query']['bool']['must'][] = ['match' => $fieldQuery];
                 }
             }
         }
@@ -166,6 +167,8 @@ class ResourceController extends Controller {
         } else {
             $query['query'] = $innerQuery;
         }
+        
+        
 
         $hits = ElasticSearch::search($query, 'resource');
 
