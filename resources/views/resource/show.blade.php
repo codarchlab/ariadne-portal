@@ -2,6 +2,29 @@
 @section('title', $resource['_source']['title'].' - Ariadne portal')
 @section('content')
 
+<div id="citationModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">{{ trans('resource.cite.header') }}</h4>
+            </div>
+            <div class="modal-body resource-citation-modal">
+                <div class="info">{{ trans('resource.cite.info') }}.</div>
+                <form>
+                    <input id="citationLink" type="text" readonly value="{{$citationLink}}"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#citationModal').on('shown.bs.modal', function() {
+            $('#citationLink').select();
+        });
+    </script>
+</div>
+
 <div class="row">
 
     <!-- resoure metadata -->
@@ -19,11 +42,10 @@
 
             <div class="pull-right">
                 <!-- TODO Enable button when endpoint for export is available. -->
-                <a>
+                <a class="button">
                     <span class="glyphicon glyphicon-file"></span>
                 </a>
-                <!-- TODO Open modal for copying citation. -->
-                <a>
+                <a class="button" data-toggle="modal" data-target="#citationModal">
                     <span class="glyphicon glyphicon-link"></span>
                 </a>
             </div>
@@ -257,7 +279,8 @@
 
 
         <h4>{{ trans('resource.theme_similar') }}</h4>
-        <ul>@foreach($similar_resources as $similar_resource)
+        <ul>
+        @foreach($similar_resources as $similar_resource)
             <li>
                 <a href="{{ action('ResourceController@show', [ $similar_resource['_type'], $similar_resource['_id'] ]  ) }}">
                     {{ $similar_resource['_source']['title'] }}

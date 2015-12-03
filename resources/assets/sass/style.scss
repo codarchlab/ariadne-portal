@@ -29,6 +29,11 @@ body#frontpage {
   background-repeat: no-repeat;
 }
 
+body.modal-open {
+    overflow: auto;
+    padding-right: 0px !important;
+}
+
 .content {
 
   padding-top: 80px;

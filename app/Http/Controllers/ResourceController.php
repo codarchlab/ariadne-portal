@@ -54,6 +54,28 @@ class ResourceController extends Controller {
         return $nearbySpatialItems;
     }
 
+    private function getCitationLink($resource) {
+
+        // Check if a persistent identifier is specified
+        $identifiers = ['doi:', 'hdl:', 'urn:', 'http://', 'https://'];
+
+        if (array_key_exists('originalId', $resource['_source'])) {
+            $originalId = $resource['_source']['originalId'];
+
+            foreach ($identifiers as $identifier) {
+                if (substr($originalId, 0, strlen($identifier)) === $identifier)
+                    return $originalId;
+            }
+        }
+
+        // Return landing page url if no persistent identifier is given
+        if (array_key_exists('landingPage', $resource['_source']))
+            return $resource['_source']['landingPage'];
+
+        // Return portal url if no landing page url is given
+        return 'http://' . $_SERVER['HTTP_HOST'] . '/' . $resource['_type'] . '/' . $resource['_id'];
+    }
+
     /**
      * Display the specified resource.
      *
@@ -73,11 +95,14 @@ class ResourceController extends Controller {
 
         $similar_resources = ElasticSearch::thematicallySimilarQuery($resource);
 
+        $citationLink = $this->getCitationLink($resource);
+
         return view('resource.show')
             ->with('resource', $resource)
             ->with('geo_items', $spatial_items)
             ->with('nearby_geo_items', $nearby_spatial_items)
-            ->with('similar_resources', $similar_resources);
+            ->with('similar_resources', $similar_resources)
+            ->with('citationLink', $citationLink);
     }
 
     /**

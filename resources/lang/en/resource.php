@@ -26,5 +26,8 @@ return [
     'part_of' => 'Resource is part of',
     'geo_similar' => 'Geographically similar',
     'theme_similar' => 'Thematically similar',
-    'applicable_services' => 'Applicable services'
+    'applicable_services' => 'Applicable services',
+    'cite.header' => 'Cite this resource',
+    'cite.close' => 'Close',
+    'cite.info' => 'Copy to clipboard with Ctrl+C / ⌘+C'
 ];
