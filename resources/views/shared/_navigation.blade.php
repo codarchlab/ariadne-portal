@@ -22,7 +22,7 @@
     <ul class="nav navbar-fixed-top nav-justified navbar-main">
 
         <li id="navCatalog">
-            <a href="{{ action('BrowseController@map') }}">
+            <a href="{{ action('PageController@welcome') }}">
                 <span class="glyphicon glyphicon-globe"></span>
                 Catalog
             </a>
