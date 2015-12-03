@@ -50,18 +50,36 @@ function GridMap(container) {
 		};
 	};
 
+	this.updateResourceCount = function(count) {
+		var formatted = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		$(".map-controls .resource-count .count").text(formatted);
+	};
+
+	this.showLoading = function() {
+		$(".map-controls .resource-count").hide();
+		$(".map-controls .loading").show();
+	}
+
+	this.hideLoading = function() {
+		$(".map-controls .resource-count").show();
+		$(".map-controls .loading").hide();
+	};
+
 	this.refreshMap = function() {
 
 		var uri = generateSearchUri();
 		requestInProgress = uri;
+		self.showLoading();
 		$.getJSON(uri, function(data) {
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
+				self.updateResourceCount(data.total);
 				if (data.total > 100) {
-					self.drawHeatmap(data['aggregations']['geogrid']['buckets']);
+					self.drawHeatmap(data.aggregations.geogrid.buckets);
 				} else {
-					self.drawMarkers(data['data']);
+					self.drawMarkers(data.data);
 				}
+				self.hideLoading();
 			}
 		});
 
