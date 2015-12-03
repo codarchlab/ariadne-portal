@@ -129,7 +129,6 @@ class ResourceController extends Controller {
 
         foreach ($query['aggregations'] as $key => $aggregation) {
             if (Request::has($key)) {
-                debug("has ".$key);
                 $values = Utils::getArgumentValues($key);
 
                 $field = $aggregation['terms']['field'];
