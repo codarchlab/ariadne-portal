@@ -37,28 +37,28 @@
                                         <th>{{ $provider['_source']['acronym'] }}</th>
                                         <td>
                                             @if($provider['collections'] > 0)
-                                                <a href="{{ action('ProviderController@collection', $provider['_id']) }}">{{ $provider['collections'] }}</a>
+                                                {{ $provider['collections'] }}
                                             @else
                                                 {{ $provider['collections'] }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($provider['datasets'] > 0)
-                                                <a href="{{ action('ProviderController@dataset', $provider['_id']) }}">{{ $provider['datasets'] }}</a>
+                                                {{ $provider['datasets'] }}
                                             @else
                                                 {{ $provider['datasets'] }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($provider['databases'] > 0)
-                                                <a href="{{ action('ProviderController@database', $provider['_id']) }}">{{ $provider['databases'] }}</a>
+                                                {{ $provider['databases'] }}
                                             @else
                                                 {{ $provider['databases'] }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($provider['textualDocuments'] > 0)
-                                                <a href="{{ action('ProviderController@textualDocument', $provider['_id']) }}">{{ $provider['textualDocuments'] }}</a>
+                                                {{ $provider['textualDocuments'] }}
                                             @else
                                                 {{ $provider['textualDocuments'] }}
                                             @endif
@@ -66,35 +66,35 @@
                                         <?php if($full): ?>
                                         <td>
                                             @if($provider->gis > 0)
-                                                <a href="{{ action('ProviderController@gis', $provider['_id']) }}">{{ $provider->gis }}</a>
+                                                {{ $provider->gis }}
                                             @else
                                                 {{ $provider->gis }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($provider->schemas > 0)
-                                                <a href="{{ action('ProviderController@schema', $provider['_id']) }}">{{ $provider->schemas }}</a>
+                                                {{ $provider->schemas }}
                                             @else
                                                 {{ $provider->schemas }}
                                             @endif
                                         </td>    
                                         <td>
                                             @if($provider->services > 0)
-                                                <a href="{{ action('ProviderController@service', $provider['_id']) }}">{{ $provider->services }}</a>
+                                                {{ $provider->services }}
                                             @else
                                                 {{ $provider->services }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($provider->vocabularies > 0)
-                                                <a href="{{ action('ProviderController@vocabulary', $provider['_id']) }}">{{ $provider->vocabularies }}</a>
+                                                {{ $provider->vocabularies }}
                                             @else
                                                 {{ $provider->vocabularies }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($provider->foaf > 0)
-                                                <a href="{{ action('ProviderController@agent', $provider['_id']) }}">{{ $provider->foaf }}</a>
+                                                {{ $provider->foaf }}
                                             @else
                                                 {{ $provider->foaf }}
                                             @endif

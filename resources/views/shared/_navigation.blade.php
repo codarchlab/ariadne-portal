@@ -2,7 +2,7 @@
 
     <div id="logo">
 
-        <a class="navbar-brand" href="{{ action('PageController@welcome') }}">
+        <a class="navbar-brand" href="http://www.ariadne-infrastructure.eu">
             <img id="brand" src="{{ asset("img/logo-symbol.png") }}">
         </a>
 
@@ -22,7 +22,7 @@
     <ul class="nav navbar-fixed-top nav-justified navbar-main">
 
         <li id="navCatalog">
-            <a href="{{ action('BrowseController@map') }}">
+            <a href="{{ action('PageController@welcome') }}">
                 <span class="glyphicon glyphicon-globe"></span>
                 Catalog
             </a>

@@ -165,7 +165,7 @@ class Utils {
     public static function keyValueActive($key, $value) {
         $arguments = Input::all();
         if(array_key_exists($key, $arguments)){
-            $values = explode("|", $arguments[$key]);
+            $values = explode('|', $arguments[$key]);
             return in_array($value, $values);
         } 
         return false;

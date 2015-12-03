@@ -2,18 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Config;
 use App\Services\Provider;
-use \App\Services\Collection;
-use \App\Services\Dataset;
-use \App\Services\Gis;
-use \App\Services\Agent;
-use \App\Services\Database;
-use \App\Services\MetaSchema;
-use \App\Services\Service;
-use \App\Services\Vocabulary;
-use App\Services\Utils;
+use Utils;
 
 class ProviderController extends Controller {
 
@@ -25,7 +15,7 @@ class ProviderController extends Controller {
      */
     public function index() {
         $providers = Provider::statistics();
-        return view('provider_info.providers')
+        return view('provider.index')
                 ->with('providers', $providers)
                 ->with('full', false);
     }
