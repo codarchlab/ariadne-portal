@@ -97,12 +97,18 @@ class ResourceController extends Controller {
 
         $citationLink = $this->getCitationLink($resource);
 
+        $parts_count = null;
+        if($type == 'collection') {
+            $parts_count = ElasticSearch::getPartsCountQuery($resource);            
+        }
+        
         return view('resource.show')
             ->with('resource', $resource)
             ->with('geo_items', $spatial_items)
             ->with('nearby_geo_items', $nearby_spatial_items)
             ->with('similar_resources', $similar_resources)
-            ->with('citationLink', $citationLink);
+            ->with('citationLink', $citationLink)
+            ->with('parts_count', $parts_count);
     }
 
     /**
