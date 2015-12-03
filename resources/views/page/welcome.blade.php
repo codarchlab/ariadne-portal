@@ -1,5 +1,11 @@
 @extends('app')
 @section('title', 'Welcome - Ariadne portal')
+
+@section('description', 'ARIADNE brings together and integrates existing archaeological research data infrastructures
+so that researchers can use the various distributed datasets and new and powerful technologies as an integral
+component of the archaeological research methodology.')
+@section('keywords', 'Archaeological Research Data Infrastructures, Metadata Registry')
+
 @section('content')
 
 <div class="row">

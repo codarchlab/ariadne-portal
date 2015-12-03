@@ -2,6 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
+
+        <meta name="description" content="@yield('description')">
+        <meta name="keywords" content="@yield('keywords')">
+
         <title>@yield('title')</title>
 
         @if(env('APP_ENV') != 'production')

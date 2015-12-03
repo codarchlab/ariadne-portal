@@ -1,5 +1,22 @@
 @extends('app')
 @section('title', $resource['_source']['title'].' - Ariadne portal')
+
+@section('description', $resource['_source']['title'])
+
+@if (isset($resource['_source']['nativeSubject']))
+
+    <?php $keywords = array(); ?>
+
+    @foreach ($resource['_source']['nativeSubject'] as $nativeSubject)
+        <?php $keywords[] = $nativeSubject['prefLabel']; ?>
+    @endforeach
+
+    <?php $keywords = implode(',', $keywords); ?>
+
+    @section('keywords', $keywords)
+
+@endif
+
 @section('content')
 
 <div id="citationModal" class="modal fade">
