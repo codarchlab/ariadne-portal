@@ -29,5 +29,7 @@ return [
     'applicable_services' => 'Applicable services',
     'cite.header' => 'Cite this resource',
     'cite.close' => 'Close',
-    'cite.info' => 'Copy to clipboard with Ctrl+C / ⌘+C'
+    'cite.info' => 'Copy to clipboard with Ctrl+C / ⌘+C',
+    'has_parts' => 'Has parts',
+    'children' => 'children'
 ];

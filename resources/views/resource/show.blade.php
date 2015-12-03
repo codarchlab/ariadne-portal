@@ -171,13 +171,22 @@
     <!-- resource context -->
     <div class="col-md-4 resource-context">
 
-        <h4>{{ trans('resource.part_of') }}</h4>           
-            @if (isset($resource['_source']['isPartOf']))
-                @foreach($resource['_source']['isPartOf'] as $isPartOf)
-                <p>{{ $isPartOf }}</p>
-                @endforeach
-            @endif
-            
+        @if (isset($resource['_source']['isPartOf']))
+            <h4>{{ trans('resource.part_of') }}</h4>           
+            @foreach($resource['_source']['isPartOf'] as $isPartOf)
+            <p>{{ $isPartOf }}</p>
+            @endforeach
+        @endif
+        
+        @if (isset($parts_count) && $parts_count != 0)
+            <h4>{{ trans('resource.has_parts') }}</h4>  
+            <p>
+                <a href="{{ route('search', [ 'q' => 'isPartOf:' . $resource['_id'] ]) }}">
+                    {{ trans('resource.children') .' (' . $parts_count . ')' }}
+                </a>
+            </p>
+        @endif
+        
         @if (sizeof($geo_items)>0)
 
             <h4>{{ trans('resource.geo_similar') }}</h4>

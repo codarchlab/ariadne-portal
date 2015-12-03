@@ -161,6 +161,22 @@ class ElasticSearch {
         return $result['hits']['hits'];
     }
 
+/**
+     * @param $resource
+     * @return count of parts in a collection
+     */
+    public static function getPartsCountQuery($resource) {
+    
+        $json = '{ "query": { "match" : { "isPartOf": ' . $resource['_id'] . ' } } }';
+
+        $params = [
+            'index' => 'resource',            
+            'body' => $json
+        ];
+
+        $result = self::getClient()->search($params);                   
+        return $result['hits']['total'];
+    }    
 
     
     /**
