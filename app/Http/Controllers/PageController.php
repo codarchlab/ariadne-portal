@@ -47,10 +47,10 @@ class PageController extends Controller {
     {
         $path = public_path();
         
-        if(env('local', 'staging')) {
-            $path .= '/robots_development.txt';
-        }else {
+        if(env('APP_ENV') == 'production') {
             $path .= '/robots_production.txt';
+        }else {
+            $path .= '/robots_development.txt';
         }
         return response(file_get_contents($path))
                 ->header('Content-Type', 'text/plain');

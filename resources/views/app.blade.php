@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>@yield('title')</title>
 
-        @if(env('local', 'staging'))
+        @if(env('APP_ENV') != 'production')
         <meta name="robots" content="noindex">
         @endif
         
