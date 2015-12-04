@@ -2,7 +2,19 @@
 @section('title', $resource['_source']['title'].' - Ariadne portal')
 
 @if (isset($resource['_source']['description']))
-    @section('description', $resource['_source']['description'])
+
+    <?php
+        $description = $resource['_source']['description'];
+        $length = 155;
+
+        if (strlen($description) > $length) {
+
+            $description = substr($description, 0, $length) . '...';
+        }
+    ?>
+
+    @section('description', $description)
+
 @endif
 
 @if (isset($resource['_source']['nativeSubject']))
