@@ -14,17 +14,23 @@ component of the archaeological research methodology.')
         
         <img id="searchlogo" class="img-responsive" src="img/logo-white.png">
 
-        {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "class" => "form-inline")) !!}
-            <div class="form-group">
-                {!! Form::select("fields", ["" => "All fields", "subject" => "Subject", "time" => "Time period", "location" => "Location"], null, ["class" => "form-control"]) !!}
+        <div class="row">            
+            <div class="col-md-8 col-md-offset-2">
+                <div class="row">
+                    {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "class" => "form-inline")) !!}
+                        <div class="col-md-3 form-group">
+                            {!! Form::select("fields", ["" => "All fields", "subject" => "Subject", "time" => "Time period", "location" => "Location"], null, ["class" => "form-control"]) !!}
+                        </div>
+                        <div class="col-md-9 input-group">
+                            {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources in the Ariadne catalog ...")) !!}
+                            <span class="submit-btn input-group-btn">
+                                {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
+                            </span>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
             </div>
-            <div class="input-group">
-                {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control col-md-6", "placeholder" => "Search for resources in the Ariadne catalog ...")) !!}
-                <span class="input-group-btn">
-                    {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
-                </span>
-            </div>
-        {!! Form::close() !!}
+        </div>
     </div>
 
 </div>
