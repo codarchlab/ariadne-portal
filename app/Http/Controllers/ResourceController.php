@@ -139,6 +139,8 @@ class ResourceController extends Controller {
                 $q = ['query_string' => ['query' => Request::get('q')]];
                 $query['query']['bool']['must'][] = $q;
             }
+        } else {
+            $query['query'] = ['match_all' => []];
         }
 
         foreach ($query['aggregations'] as $key => $aggregation) {
