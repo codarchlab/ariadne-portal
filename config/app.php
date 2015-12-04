@@ -27,6 +27,13 @@ return [
             'language' => ['terms' => ['field' => 'language']],
             'issued' => ['terms' => ['field' => 'issued']]
         ],
+    
+        /* Fields to search in if a specific fieldgroup is selected in the frontpage search form */
+        'elastic_search_field_groups' =>[
+            'subject' => ['nativeSubject.prefLabel'],
+            'time' => ['temporal.periodName'],
+            'location' => ['spatial.placeName']
+        ],
 
         /* Aggregations whose values should be translated */
         'translate_aggregations' => [ 'type', 'language' ],

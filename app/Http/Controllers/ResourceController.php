@@ -128,8 +128,17 @@ class ResourceController extends Controller {
         ]];
 
         if (Request::has('q')) {
-            $q = ['query_string' => ['query' => Request::get('q')]];
-            $query['query']['bool']['must'][] = $q;
+            $field_groups = Config::get('app.elastic_search_field_groups');
+            
+            if(Request::has('fields') && array_key_exists(Request::get('fields'), $field_groups)){
+                foreach ($field_groups[Request::get('fields')] as $field){
+                    $q = ['match' => [$field => Request::get('q')]];
+                    $query['query']['bool']['should'][] = $q;
+                }
+            }else {
+                $q = ['query_string' => ['query' => Request::get('q')]];
+                $query['query']['bool']['must'][] = $q;
+            }
         }
 
         foreach ($query['aggregations'] as $key => $aggregation) {

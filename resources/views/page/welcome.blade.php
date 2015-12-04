@@ -14,9 +14,12 @@ component of the archaeological research methodology.')
         
         <img id="searchlogo" class="img-responsive" src="img/logo-white.png">
 
-        {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
+        {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "class" => "form-inline")) !!}
+            <div class="form-group">
+                {!! Form::select("fields", ["" => "All fields", "subject" => "Subject", "time" => "Time period", "location" => "Location"], null, ["class" => "form-control"]) !!}
+            </div>
             <div class="input-group">
-                {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources in the Ariadne catalog ...")) !!}
+                {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control col-md-6", "placeholder" => "Search for resources in the Ariadne catalog ...")) !!}
                 <span class="input-group-btn">
                     {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
                 </span>
