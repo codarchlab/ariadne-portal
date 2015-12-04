@@ -1,7 +1,9 @@
 @extends('app')
 @section('title', $resource['_source']['title'].' - Ariadne portal')
 
-@section('description', $resource['_source']['title'])
+@if (isset($resource['_source']['description']))
+    @section('description', $resource['_source']['description'])
+@endif
 
 @if (isset($resource['_source']['nativeSubject']))
 
