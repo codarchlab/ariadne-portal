@@ -190,9 +190,13 @@
             @if (isset($resource['_source']['accessPolicy']))
                 <dt>{{ trans('resource.accessPolicy') }}</dt>
                 <dd>
+                    @if(filter_var($resource['_source']['accessPolicy'], FILTER_VALIDATE_URL))
                     <a href="{{ $resource['_source']['accessPolicy'] }}">
                         {{ $resource['_source']['accessPolicy'] }}
                     </a>
+                    @else
+                    {{ $resource['_source']['accessPolicy'] }}
+                    @endif
                 </dd>
             @endif
 
