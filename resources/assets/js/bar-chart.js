@@ -7,99 +7,92 @@
  */
 function BarChart(container) {
 
-    /**
-     * Basic setup of the c3 bar chart to fit our purposes.
-     */
-    var chart = c3.generate({
-        bindto: '#'+container,
-        data: {
-            x: 'Years',
-            columns: [
-                ['Years'],     // x axis
-                ['From Dates: ']  // data
-            ],
-            type: 'bar',
-            onclick: function(e) { console.log("TODO trigger location change for event: ",e); }
-        },
-        color: {
-            pattern: ['#D5A03A','#FFFFFF']
-        },
-        legend: {
-            show: false
-        },
-        bar: {
-            width: 10
-        },
-        axis: {
-            y: {
-                show: false
-            }
-        }
-    });
+    var bucketElWidth= 100; // in px
+    var bucketElHeight=400; // in px
 
-    /**
-     * Expects a dateString starting with the year and
-     * returns the year portion of it.
-     *
-     * @param dateString (-)YYYY(.*)
-     * @returns {string} (-)YYYY
-     */
-    var getYear = function(dateString) {
-        if (dateString.slice(0, 1) == "-")
-            return dateString.substring(0, 5);
-        else
-            return dateString.substring(0,4);
+    var addBoxElements = function(bucketElements) {
+        bucketElements
+            .append('button').attr('onclick', function(d){
+                return "barChart.present("+ d.from+","+ d.to+");";
+            })
+            .style("width", function(d) { return bucketElWidth+"px"; })
+            .style("height", function(d) { return bucketElHeight+"px" })
+            .style("background-color", function(d){ var color='#F8F8F8 ';
+                if ((d.index%2)==0) color='#F0F0F0'; return color; })
+            .style("position", "absolute")
+            .style("left", function(d) { return d.index*bucketElWidth+"px"; })
+            ;
+    };
+
+
+    var addDateElements = function(bucketElements) {
+        bucketElements
+            .append('p').text(function(d) { return d.from })
+            .style("position","absolute")
+            .style("top","10px")
+            .style("left",function(d) {return d.index*bucketElWidth-15+"px"});
+    };
+
+    var addDocCountElements = function(bucketElements) {
+        bucketElements
+            .append('a').attr('href', function(d){
+                return '/search?start='+ d.from+'&end='+ d.to;
+            })
+            .append('p').text( function(d) { return d.text } )
+            .style("position","absolute")
+            .style("top","100px")
+            .style("left",function(d) {return d.index*bucketElWidth+30+"px"})
+            .style("font-size","30px")
+            .style("background-color","black")
+            .style("background-color","white");
     };
 
     /**
-     * Pushes one fromDateCount for the year.
-     * Searches fromDatesBuckets for counts for years.
-     * If there is no count, 0 will be pushed.
+     * Takes the elasticsearch data buckets and
+     * converts into a dataset digestable by d3.
      *
-     * @param year {string} of format YYYY.
-     * @param fromDatesCount {array} one count will be pushed to this array.
-     * @param fromDatesBuckets elastic search date_histogram year buckets.
+     * @param buckets elastic search data_range buckets.
+     * @returns {Array} the dataset for d3.
      */
-    var pushFromDateCount = function(year,fromDatesCount,fromDatesBuckets) {
-        var itemFound=false;
-        for (var j in fromDatesBuckets) {
-
-            if (getYear(fromDatesBuckets[j].key_as_string)==year){
-                fromDatesCount.push(fromDatesBuckets[j].doc_count);
-                itemFound=true;
-            }
+    var convertESBuckets = function(buckets) {
+        var da=[];
+        for (i in buckets) {
+            da.push({
+                index: i,
+                from: parseInt(buckets[i].from_as_string),
+                to: parseInt(buckets[i].to_as_string),
+                text: buckets[i].doc_count});
         }
-        if (itemFound==false) fromDatesCount.push(0);
+        return da;
     };
 
     /**
-     * Fetches, processes and inserts the
-     * processed data to the bar chart diagram.
+     * Creates the basic div elements corresponding to the buckets retrieved
+     * from the elasticsearch agg. These elements can then get
+     * enriched by the add* functions.
      *
-     * Presents data within the range beginning with startYear and
-     * ending with endYear.
-     *
-     * @param startYear
-     * @param endYear
+     * @param esBuckets
+     * @returns {*|void}
      */
+    var createBucketElements = function(esBuckets) {
+        var bucketElements= d3.select("#chart").selectAll("div")
+            .data(convertESBuckets(esBuckets))
+            .enter().append("div");
+        return bucketElements;
+    };
+    
     this.present = function(startYear,endYear) {
 
-        $.getJSON("/search?_all", function(data) {
+        $.getJSON("/search?start="+startYear+"&end="+endYear, function(data) {
 
-            var years = ['Years'];
-            var fromDatesCount = ['From Dates: '];
+            d3.select("#chart").selectAll("div").remove();
 
-            for (var i=startYear;i<=endYear;i++) {
-                years.push(i.toString());
-                pushFromDateCount(i.toString(),fromDatesCount,data.aggregations.from_dates.buckets);
-            }
-
-            chart.load({
-                columns: [
-                    years,
-                    fromDatesCount
-                ]
-            });
+            var bucketElements =
+                createBucketElements(data.aggregations.date_ranges.buckets);
+            
+            addBoxElements(bucketElements);
+            addDateElements(bucketElements);
+            addDocCountElements(bucketElements);
         });
     };
 }

@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DebugBar;
 
 use Illuminate\Support\Facades\Config;
 use App\Services\Resource;
 use App\Services\Utils;
 use Request;
+
 
 class ResourceController extends Controller {
 
@@ -118,6 +119,7 @@ class ResourceController extends Controller {
      * @return View rendered pagination for search results
      */
     public function search() {
+
         $query = ['aggregations' => Config::get('app.elastic_search_aggregations')];
 
         // add geogrid aggregation
@@ -126,8 +128,31 @@ class ResourceController extends Controller {
             'field' => 'spatial.location', 'precision' => intval($ghp) 
         ]];
 
-        $query['aggregations']['from_dates'] = ['date_histogram' => [
-            'field' => 'temporal.from', 'interval' => 'year'
+
+        $nrBuckets= 10;
+        $thisYear= 2016; // WARNING: ES INDEX MUST NOT CONTAIN DATES AFTER THIS YEAR. TODO FIX
+        $logBase= 10;
+
+        $startYear = Request::has("start") ? intval(Request::get("start")) : -600000;
+        $endYear = Request::has("end") ? intval(Request::get("end")) : 2010;
+
+        $r= log($thisYear-$endYear,$logBase);
+        $l= log($thisYear-$startYear,$logBase);
+        $d=($l-$r)/$nrBuckets;
+
+        $selectedRanges=array();
+
+        for ($i=0;$i<$nrBuckets;$i++) {
+
+            array_push($selectedRanges,
+                ['to'=>sprintf('%06d',$thisYear-pow($logBase,$r+$i*$d)),
+                    'from'=>sprintf('%06d',$thisYear-pow($logBase,$r+$i*$d+$d))]);
+        }
+
+        $query['aggregations']['date_ranges'] = ['date_range' => [
+            'field' => 'temporal.from',
+            'format' => 'yyyyyy',
+            'ranges'  => $selectedRanges
         ]];
 
         $q = ['match_all' => []];
