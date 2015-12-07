@@ -1,4 +1,12 @@
-function GridMap(container) {
+/**
+ * Class for viewing search results on a map.
+ *
+ * Displays a heatmap for large search results based
+ * on the elasticsearch geogrid aggregation.
+ *
+ * Smaller results are displayed as markers.
+ */
+function GridMap(container, queryUri) {
 
 	var self = this;
 
@@ -91,15 +99,9 @@ function GridMap(container) {
 	};
 
 	function generateSearchUri() {
-		var ghPrecision = getGhprecFromZoom(map.getZoom());
-		var bBox = map.getBounds().toBBoxString();
-		return "/search?ghp="+ghPrecision+"&bbox="+bBox+"&perPage=100";
-	}
-
-	function performSearch(bounds) {
-		var bBox = bounds.toBBoxString();
-		var uri = "/search?bbox="+bBox;
-		window.location.href = uri;
+		query.params['ghp'] = getGhprecFromZoom(map.getZoom());
+		query.params['bbox'] = map.getBounds().toBBoxString();
+		return query.toUri();
 	}
 
 	function getGhprecFromZoom(zl) {
@@ -122,8 +124,16 @@ function GridMap(container) {
 		return gradient;
 	}
 
-	var map = L.map(container, { zoomControl: false }).setView([40, 17], 3);
-	map.addControl( L.control.zoom({position: 'bottomright'}) )	
+	var map = L.map(container, { zoomControl: false });
+	map.addControl( L.control.zoom({position: 'bottomright'}) );
+
+	var query = Query.fromUri(queryUri);
+	if (query.params['bbox']) {
+		var bounds = query.params.bbox.split(",");
+		map.fitBounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]]);
+	} else {
+		map.setView([40, 17], 3);
+	}
 
 	var heatmap;
 	var markers = [];

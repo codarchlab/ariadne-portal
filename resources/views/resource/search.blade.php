@@ -33,16 +33,20 @@
             <h4>{{ trans('search.filters') }}</h4>
 
             <div id="activeFilters">
-            @foreach($aggregations as $key => $aggregation)
-                @if($key != 'geogrid')
-                    @include('resource.search_active-filters', [
-                        'key' => $key,
-                        'aggregation' => $aggregation,
-                        'buckets' => $hits->aggregations()[$key]['buckets']
-                    ])
-                @endif
-            @endforeach
+                @foreach($aggregations as $key => $aggregation)
+                    @if($key != 'geogrid')
+                        @include('resource.search_active-filters', [
+                            'key' => $key,
+                            'aggregation' => $aggregation,
+                            'buckets' => $hits->aggregations()[$key]['buckets']
+                        ])
+                    @endif
+                @endforeach
             </div>
+
+            @include('resource.search_map-filter', [
+                'buckets' => $hits->aggregations()[$key]['buckets']
+            ])
 
             @foreach($aggregations as $key => $aggregation)
                 @if($key != 'geogrid')

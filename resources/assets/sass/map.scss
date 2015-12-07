@@ -1,4 +1,4 @@
-.map-controls {
+.browse-map-container .map-controls {
 	position: absolute;
 	top: 60px;
 	right: 10px;
@@ -6,14 +6,14 @@
 	text-align: center;
 }
 
-.map-controls .btn-search {	
+.browse-map-container .map-controls .btn-search {	
 	border-color: darken($yellow, 5%);
  	background-color: $yellow;
  	color: #fff;
  	text-align: center;
 }
 
-.map-controls .btn-search:hover {	
+.browse-map-container .map-controls .btn-search:hover {	
 	border-color: darken($yellow, 5%);
  	background-color: $yellow;
  	color: #fff;

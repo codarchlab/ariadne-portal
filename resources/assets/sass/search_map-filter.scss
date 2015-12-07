@@ -1,0 +1,27 @@
+.filter-map-container {
+	position: relative;
+}
+
+.filter-map-container .map {
+	height: 250px;
+}
+
+.filter-map-container .map-controls {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 100;
+}
+
+.filter-map-container .map-controls .btn-filter {	
+	border-color: darken($brand-primary, 5%);
+ 	background-color: $brand-primary;
+ 	color: #fff;
+ 	text-align: center;
+}
+
+.filter-map-container .map-controls .btn-filter:hover {	
+	border-color: darken($brand-primary, 5%);
+ 	background-color: $brand-primary;
+ 	color: #fff;
+}
