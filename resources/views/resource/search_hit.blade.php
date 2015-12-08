@@ -1,4 +1,4 @@
-<div class="col-md-12 hit" onclick="window.location.href = '{{action('ResourceController@show', [ $hit['_type'], $hit['_id'] ]  )}}'">
+<div class="col-md-12 hit" onclick="window.location.href = '{{ route('resource', $hit['_id']) }}'">
     <div class="box box-primary" id="dataresource_item" item_id="{{ $hit['_id'] }}">
         <div class="box-body">
             <div class="row">
@@ -10,7 +10,7 @@
                 <div class="col-md-11">
                     
                     <h5>
-                        <a href="{{ action('ResourceController@show', [ $hit['_id'] ]  ) }}">
+                        <a href="{{ route('resource', $hit['_id']) }}">
                             @if(array_key_exists('highlight', $hit) && array_key_exists('title', $hit['highlight']))
                                 {!! $hit['highlight']['title'][0] !!}
                             @elseif(array_key_exists('title', $hit['_source']))
