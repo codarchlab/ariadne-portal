@@ -82,11 +82,11 @@ function GridMap(container, queryUri) {
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
 				console.log(data);
-				self.updateResourceCount(data.hits.total);
+				self.updateResourceCount(data.total);
 				if (data.total > 100) {
-					self.drawHeatmap(data.hits.aggregations.geogrid.buckets);
+					self.drawHeatmap(data.aggregations.geogrid.buckets);
 				} else {
-					self.drawMarkers(data.hits.data);
+					self.drawMarkers(data.data);
 				}
 				self.hideLoading();
 			}

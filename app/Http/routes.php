@@ -24,14 +24,22 @@ Route::get('browse/when', 'BrowseController@when');
 
 Route::get('search', [
     'as'=> 'search',
-    'uses' => 'ResourceController@search',
-    'middleware' => ['negotiate:resource.search']
+    'uses' => 'ResourceController@search'
 ]);
 
 /* resource routes, implementing "cool URIs" (http://www.w3.org/TR/cooluris/) */
 
+Route::get('page/{id}', [
+    'as' => 'resource.page',
+    'uses' => 'ResourceController@page'
+]);
+Route::get('data/{id}.json', 'ResourceController@data');
+Route::get('data/{id}', [
+    'as' => 'resource.data',
+    'uses' => 'ResourceController@data'
+]);
+Route::get('resource/{id}.json', 'ResourceController@data');
 Route::get('resource/{id}', [
-    'as' => 'resource',
-    'uses' => 'ResourceController@show',
-    'middleware' => ['negotiate:resource.show']
+    'as' => 'resourece',
+    'uses' => 'ResourceController@negotiate'
 ]);

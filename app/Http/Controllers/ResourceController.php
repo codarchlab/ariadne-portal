@@ -82,7 +82,7 @@ class ResourceController extends Controller {
      * @param  int  $id
      * @return View
      */
-    public function show($id) {
+    public function page($id) {
 
         $resource = Resource::get($id);
 
@@ -101,20 +101,42 @@ class ResourceController extends Controller {
             $parts_count = Resource::getPartsCountQuery($resource);
         }
         
-        return [
+        return view('resource.page', [
             'resource' => $resource,
             'geo_items' => $spatial_items,
             'nearby_geo_items' => $nearby_spatial_items,
             'similar_resources' => $similar_resources,
             'citationLink' => $citationLink,
             'parts_count' => $parts_count
-        ];
+        ]);
     }
 
+    /**
+     * Serialize the specified resource.
+     *
+     * @param  int  $id
+     * @return Response response object
+     */
+    public function data($id) {
 
+        $resource = Resource::get($id);
+        return response()->json($resource['_source']);
+    }
 
+    /**
+     * Resolve resource URI to page or data.
+     *
+     * @param  int  $id
+     * @return Redirector redirector
+     */
+    public function negotiate($id) {
 
-
+        if (Request::wantsJson()) {
+            return redirect()->route('resource.data', [ 'id' => $id ], 303);
+        } else {
+            return redirect()->route('resource.page', [ 'id' => $id ], 303);
+        }
+    }
 
     /**
      * Performs a faceted search depending on the GET-values
@@ -198,10 +220,14 @@ class ResourceController extends Controller {
         
         $hits = Resource::search($query, 'resource');
 
-        return [
-            'aggregations' => $query['aggregations'],
-            'translateAggregations' => Config::get('app.translate_aggregations'),
-            'hits' => $hits
-        ];
+        if (Request::wantsJson()) {
+            return response()->json($hits);
+        } else {
+            return view('resource.search')
+                ->with('type', null)
+                ->with('aggregations', $query['aggregations'])
+                ->with('translateAggregations', Config::get('app.translate_aggregations'))
+                ->with('hits', $hits);
+        }
     }
 }
