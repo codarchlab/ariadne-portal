@@ -111,6 +111,11 @@ class ResourceController extends Controller {
         ];
     }
 
+
+
+
+
+
     /**
      * Performs a faceted search depending on the GET-values
      * Eg ?q=dig&keyword=england does a free text search for dig in
@@ -129,31 +134,10 @@ class ResourceController extends Controller {
         ]];
 
 
-        $nrBuckets= 10;
-        $thisYear= 2016; // WARNING: ES INDEX MUST NOT CONTAIN DATES AFTER THIS YEAR. TODO FIX
-        $logBase= 10;
-
         $startYear = Request::has("start") ? intval(Request::get("start")) : -600000;
-        $endYear = Request::has("end") ? intval(Request::get("end")) : 2010;
+        $endYear = Request::has("end") ? intval(Request::get("end")) : date("Y");
+//         $query['aggregations']['date_ranges']= Resource::prepareDateRangesAggregation($startYear,$endYear,6);
 
-        $r= log($thisYear-$endYear,$logBase);
-        $l= log($thisYear-$startYear,$logBase);
-        $d=($l-$r)/$nrBuckets;
-
-        $selectedRanges=array();
-
-        for ($i=0;$i<$nrBuckets;$i++) {
-
-            array_push($selectedRanges,
-                ['to'=>sprintf('%06d',$thisYear-pow($logBase,$r+$i*$d)),
-                    'from'=>sprintf('%06d',$thisYear-pow($logBase,$r+$i*$d+$d))]);
-        }
-
-        $query['aggregations']['date_ranges'] = ['date_range' => [
-            'field' => 'temporal.from',
-            'format' => 'yyyyyy',
-            'ranges'  => $selectedRanges
-        ]];
 
         $q = ['match_all' => []];
 

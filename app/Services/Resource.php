@@ -164,4 +164,47 @@ class Resource
         return $result['hits']['total'];
     }
 
+
+
+
+    public static function prepareDateRangesAggregation($startYear,$endYear,$nrBuckets) {
+
+        return ['date_range' => [
+            'field' => 'temporal.from',
+            'format' => 'yyyyyy',
+            'ranges'  => self::calculateRanges($startYear,$endYear,$nrBuckets)
+        ]];
+    }
+
+    private static function calculateRanges($startYear,$endYear,$nrBuckets) {
+
+        $r= self::getXVal($endYear);
+        $d=(self::getXVal($startYear)-$r)/$nrBuckets;
+
+        $selectedRanges=array();
+        for ($i=0;$i<$nrBuckets;$i++) {
+            array_push($selectedRanges,
+                [
+                    'to'=>sprintf('%06d',self::getYear($r+$i*$d)),
+                    'from'=>sprintf('%06d',self::getYear($r+$i*$d+$d))
+                ]
+            );
+        }
+        return $selectedRanges;
+    }
+
+    private static function getXVal($year) {
+        return log(self::referenceYear()-$year,self::LOG_BASE);
+    }
+
+    private static function getYear($xVal) {
+        return self::referenceYear()-pow(self::LOG_BASE,$xVal);
+    }
+
+    const LOG_BASE = 10;
+
+    private static function referenceYear() {
+        return date("Y")+1;
+    }
+
 }

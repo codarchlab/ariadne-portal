@@ -22,12 +22,6 @@ class BrowseController extends Controller {
 
 
     public function when() {
-
-        $startYear= Request::has("start") ? intval(Request::get("start")) : -600000;
-        $endYear= Request::has("end") ? intval(Request::get("end")) : 2015;
-        info($startYear);
-        info($endYear);
-
-        return view('browse.when',['start'=>$startYear,'end'=>$endYear]);
+        return view('browse.when');
     }
 }

@@ -5,11 +5,8 @@
 
     </div>
     <script>
-        var start=<?php echo $start;?>;
-        var end=<?php echo $end;?>;
-
-        var barChart = new BarChart("chart");
-        barChart.present(start,end);
+        var bucketTimeline = new BucketTimeline("chart");
+        bucketTimeline.present(undefined,undefined);
     </script>
 
 @endsection

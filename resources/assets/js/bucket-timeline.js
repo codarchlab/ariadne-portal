@@ -5,7 +5,7 @@
  * @param container the id of the dom element used
  *   to show the chart.
  */
-function BarChart(container) {
+function BucketTimeline(container) {
 
     var bucketElWidth= 100; // in px
     var bucketElHeight=400; // in px
@@ -83,7 +83,11 @@ function BarChart(container) {
     
     this.present = function(startYear,endYear) {
 
-        $.getJSON("/search?start="+startYear+"&end="+endYear, function(data) {
+        var query="/search?q=*";
+        if (startYear!=undefined&&endYear!=undefined)
+            query= "/search?start="+startYear+"&end="+endYear;
+
+        $.getJSON(query, function(data) {
 
             d3.select("#chart").selectAll("div").remove();
 
