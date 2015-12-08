@@ -91,9 +91,10 @@
 
                     $description_short = substr($description, 0, $length) . '...';
                 }
+                else $description_short = $description;
             ?>
             <div id='resource_description'>
-                <span id='short'>{{$description_short}}<a href="#" id="more_desc"> More</a> </span>
+                <span id='short'>{{$description_short}}<?php if (strlen($description) > $length){?><a href="#" id="more_desc"> More</a> <?php }?></span>
                 <span style='display: none;' id='full'>{{$description}}<a href="#" id="less_desc"> Less</a> </span>                
             </div>
         @endif
