@@ -4,7 +4,7 @@
 @if (isset($resource['_source']['description']))
 
     <?php
-        $description = $resource['_source']['description'];
+        $description = strip_tags($resource['_source']['description']);
         $length = 155;
 
         if (strlen($description) > $length) {
@@ -84,7 +84,7 @@
 
         @if (isset($resource['_source']['description']))
             <div id="description" itemprop="description">
-                {{$resource['_source']['description']}}
+                {!! $resource['_source']['description'] !!}
             </div>
         @endif
 
