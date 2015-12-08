@@ -24,9 +24,6 @@ Route::get('provider', 'ProviderController@index');
 
 Route::get('subject', 'SubjectController@index');
 
-Route::get('map', 'MapController@index');
-Route::post('map_results', 'MapController@results');
-
 Route::get('browse/map', 'BrowseController@map');
 
 Route::get('resource/{id}', [
