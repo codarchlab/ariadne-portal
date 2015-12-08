@@ -182,13 +182,13 @@ return [
 		'Illuminate\Session\SessionServiceProvider',
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
-		'Illuminate\View\ViewServiceProvider',
-                'Illuminate\Html\HtmlServiceProvider',
-
-                /*
-                 * Laravel debugbarDebug
-                 */
-                'Barryvdh\Debugbar\ServiceProvider',
+		'Illuminate\View\ViewServiceProvider', 
+		'Illuminate\Html\HtmlServiceProvider',
+		'Illuminate\Broadcasting\BroadcastServiceProvider',
+        /*
+		 * Laravel debugbarDebug
+		 */
+		'Barryvdh\Debugbar\ServiceProvider',
             
 		/*
 		 * Application Service Providers...
