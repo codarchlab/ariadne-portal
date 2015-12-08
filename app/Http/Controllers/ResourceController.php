@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Support\Facades\Config;
-use App\Services\ElasticSearch;
-use App\Services\DataResource;
+use App\Services\Resource;
 use App\Services\Utils;
 use Request;
 
@@ -38,11 +37,11 @@ class ResourceController extends Controller {
         return $spatialItems;
     }
 
-    private function getNearbySpatialItems($type, $spatialItem) {
+    private function getNearbySpatialItems($spatialItem) {
 
         $nearbySpatialItems = array();
 
-        foreach (ElasticSearch::geoDistanceQuery('resource', $type, $spatialItem['location'])
+        foreach (Resource::geoDistanceQuery($spatialItem['location'])
                  as $nearbyResource) {
 
             foreach ($this->getValidGeoItems($nearbyResource)
@@ -79,27 +78,26 @@ class ResourceController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param string $type the elasticsearch type
      * @param  int  $id
      * @return View
      */
-    public function show($type,$id) {
+    public function show($id) {
 
-        $resource = ElasticSearch::get($id, 'resource', $type);
+        $resource = Resource::get($id);
 
         $spatial_items = $this->getValidGeoItems($resource);
         $nearby_spatial_items = null;
         if (!empty($spatial_items)) {
-            $nearby_spatial_items = $this->getNearbySpatialItems($type, $spatial_items[0]);
+            $nearby_spatial_items = $this->getNearbySpatialItems($spatial_items[0]);
         }
 
-        $similar_resources = ElasticSearch::thematicallySimilarQuery($resource);
+        $similar_resources = Resource::thematicallySimilarQuery($resource);
 
         $citationLink = $this->getCitationLink($resource);
 
         $parts_count = null;
-        if($type == 'collection') {
-            $parts_count = ElasticSearch::getPartsCountQuery($resource);            
+        if($resource['_source']['resourceType'] == 'collection') {
+            $parts_count = Resource::getPartsCountQuery($resource);
         }
         
         return view('resource.show')
@@ -182,7 +180,7 @@ class ResourceController extends Controller {
             ];
         }
         
-        $hits = ElasticSearch::search($query, 'resource');
+        $hits = Resource::search($query, 'resource');
 
         if (Request::wantsJson()) {
             return response()->json($hits);

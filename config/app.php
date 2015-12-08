@@ -12,6 +12,7 @@ return [
 	*/    
     
         'elastic_search_host' => env('ELASTIC_SEARCH_HOST'),
+		'elastic_search_catalog_index' => env('ELASTIC_SEARCH_CATALOG_INDEX'),
     
         /* Aggregations used for filtering in the search */
         'elastic_search_aggregations' => [
