@@ -63,22 +63,6 @@ class Utils {
         return $aSubjects;
     }
     
-    public static function allESwithType($provider = null,$type) {
-
-        $query = ['query'=>
-                          ['match_all' => []]
-                     ];
-        
-        if ($provider) {
-             $query = ['query'=>
-                          ['match' => ['providerId' => $provider]]
-                     ];
-        }       
-        $collections = ElasticSearch::allResourcePaginated($query, 'resource', $type);
-              
-        return $collections;
-    }
-    
     public static function getSubjectName($subjectId) {
         $query = ['query'=>
                           ['match' => ['_id' => $subjectId]]

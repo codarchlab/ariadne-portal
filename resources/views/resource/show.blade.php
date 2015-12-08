@@ -83,7 +83,7 @@
         </div>
 
         @if (isset($resource['_source']['description']))
-            <div itemprop="description">
+            <div id="description" itemprop="description">
                 {{$resource['_source']['description']}}
             </div>
         @endif
@@ -135,11 +135,6 @@
                 <dd>{{ $resource['_id'] }}</dd>
             @endif
 
-            @if (isset($resource['_type']))
-                <dt>{{ trans('resource.type') }}</dt>
-                <dd>{{ trans('resource.type.'.$resource['_type']) }}</dd>
-            @endif
-
             @if (isset($resource['_source']['language']))
                 <dt>{{ trans('resource.language') }}</dt>
                 <dd itemprop="inLanguage">{{ trans('resource.language.'.$resource['_source']['language']) }}</dd>
@@ -148,6 +143,11 @@
             @if (isset($resource['_source']['archaeologicalResourceType']))
                 <dt>{{ trans('resource.archaeologicalResourceType') }}</dt>
                 <dd>{{ $resource['_source']['archaeologicalResourceType']['name'] }}</dd>
+            @endif
+
+            @if (isset($resource['_source']['resourceType']))
+                <dt>{{ trans('resource.resourceType') }}</dt>
+                <dd>{{ trans('resource.resourceType.'.$resource['_source']['resourceType']) }}</dd>
             @endif
 
             @if (isset($resource['_source']['publisher']))
@@ -229,7 +229,8 @@
             <div id="map"></div>
 
             <script>
-
+                $("#description").readmore();
+                
                 var initializeMap = function() {
                     var map = L.map("map");
                     map.setView([0, 17], 0);
@@ -330,7 +331,7 @@
         <ul>
         @foreach($similar_resources as $similar_resource)
             <li>
-                <a href="{{ action('ResourceController@show', [ $similar_resource['_type'], $similar_resource['_id'] ]  ) }}">
+                <a href="{{ action('ResourceController@show', [ $similar_resource['_id'] ]  ) }}">
                     {{ $similar_resource['_source']['title'] }}
                 </a>
             </li>

@@ -4,13 +4,13 @@
             <div class="row">
                 <div class="col-md-1">
 
-                    <img src="{{ asset("img/icons/")."/icon_".$hit['_type'].".png" }}" height="50" border="0">
+                    <img src="{{ asset("img/icons/")."/icon_".$hit['_source']['resourceType'].".png" }}" height="50" border="0">
 
                 </div>
                 <div class="col-md-11">
                     
                     <h5>
-                        <a href="{{ action('ResourceController@show', [ $hit['_type'], $hit['_id'] ]  ) }}">
+                        <a href="{{ action('ResourceController@show', [ $hit['_id'] ]  ) }}">
                             @if(array_key_exists('highlight', $hit) && array_key_exists('title', $hit['highlight']))
                                 {!! $hit['highlight']['title'][0] !!}
                             @elseif(array_key_exists('title', $hit['_source']))

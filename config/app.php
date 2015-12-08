@@ -12,6 +12,7 @@ return [
 	*/    
     
         'elastic_search_host' => env('ELASTIC_SEARCH_HOST'),
+		'elastic_search_catalog_index' => env('ELASTIC_SEARCH_CATALOG_INDEX'),
     
         /* Aggregations used for filtering in the search */
         'elastic_search_aggregations' => [
@@ -182,12 +183,12 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-                'Illuminate\Html\HtmlServiceProvider',
-
-                /*
-                 * Laravel debugbarDebug
-                 */
-                'Barryvdh\Debugbar\ServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
+		'Illuminate\Broadcasting\BroadcastServiceProvider',
+        /*
+		 * Laravel debugbarDebug
+		 */
+		'Barryvdh\Debugbar\ServiceProvider',
             
 		/*
 		 * Application Service Providers...
