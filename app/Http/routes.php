@@ -40,6 +40,6 @@ Route::get('data/{id}', [
 ]);
 Route::get('resource/{id}.json', 'ResourceController@data');
 Route::get('resource/{id}', [
-    'as' => 'resourece',
+    'as' => 'resource',
     'uses' => 'ResourceController@negotiate'
 ]);
