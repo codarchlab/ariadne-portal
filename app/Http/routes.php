@@ -26,6 +26,6 @@ Route::post('map_results', 'MapController@results');
 
 Route::get('browse/map', 'BrowseController@map');
 
-Route::get('resource/{id}','ResourceController@show' );
+Route::get('resource/{id}', [ 'uses' => 'ResourceController@show', 'middleware' => ['negotiate:resource.show'] ] );
 
 Route::get('robots.txt','PageController@robots' );

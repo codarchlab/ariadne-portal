@@ -100,13 +100,14 @@ class ResourceController extends Controller {
             $parts_count = Resource::getPartsCountQuery($resource);
         }
         
-        return view('resource.show')
-            ->with('resource', $resource)
-            ->with('geo_items', $spatial_items)
-            ->with('nearby_geo_items', $nearby_spatial_items)
-            ->with('similar_resources', $similar_resources)
-            ->with('citationLink', $citationLink)
-            ->with('parts_count', $parts_count);
+        return [
+            'resource' => $resource,
+            'geo_items' => $spatial_items,
+            'nearby_geo_items' => $nearby_spatial_items,
+            'similar_resources' => $similar_resources,
+            'citationLink' => $citationLink,
+            'parts_count' => $parts_count
+        ];
     }
 
     /**
