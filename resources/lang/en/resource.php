@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'landing_page' => 'Access resouce on the web',
+    'landing_page' => 'Access resource on the web',
     'metadata' => 'Metadata',
     'license' => 'License information',
     'contributor' => 'Contributor',
