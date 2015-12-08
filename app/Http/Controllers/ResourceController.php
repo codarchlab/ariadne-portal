@@ -140,7 +140,7 @@ class ResourceController extends Controller {
                 $query['query']['bool']['must'][] = $q;
             }
         } else {
-            $query['query'] = ['match_all' => []];
+            $query['query']['bool']['must'][] = ['query_string' => ['query' => '*']];
         }
 
         foreach ($query['aggregations'] as $key => $aggregation) {
