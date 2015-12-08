@@ -35,7 +35,7 @@
                             <p>{!! $value !!}</p>
                         @endforeach
                     @elseif(array_key_exists('description', $hit['_source']))
-                        <p>{{ str_limit($hit['_source']['description'], 290) }}</p>
+                        <p>{{ str_limit(strip_tags($hit['_source']['description']), 290) }}</p>
                     @endif                    
 
                     @if(array_key_exists('highlight', $hit))
