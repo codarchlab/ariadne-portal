@@ -229,7 +229,10 @@
             <div id="map"></div>
 
             <script>
-                $("#description").readmore();
+                $("#description").readmore({
+                    moreLink: '<a href="#"><?php print trans('resource.readmore'); ?></a>',
+                    lessLink: '<a href="#"><?php print trans('resource.readless'); ?></a>'
+                });
                 
                 var initializeMap = function() {
                     var map = L.map("map");

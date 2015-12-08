@@ -31,5 +31,7 @@ return [
     'cite.close' => 'Close',
     'cite.info' => 'Copy to clipboard with Ctrl+C / ⌘+C',
     'has_parts' => 'Has parts',
-    'children' => 'children'
+    'children' => 'children',
+    'readmore' => 'Read more',
+    'readless' => 'Close'
 ];

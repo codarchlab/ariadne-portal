@@ -44,3 +44,7 @@
 .resource-citation-modal input {
   width: 100%;
 }
+
+#description + [data-readmore-toggle] {
+    margin-bottom: 15px;
+}
