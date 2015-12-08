@@ -83,8 +83,18 @@
         </div>
 
         @if (isset($resource['_source']['description']))
-            <div>
-                {{$resource['_source']['description']}}
+            <?php
+                $description = $resource['_source']['description'];
+                $length = 555;
+
+                if (strlen($description) > $length) {
+
+                    $description_short = substr($description, 0, $length) . '...';
+                }
+            ?>
+            <div id='resource_description'>
+                <span id='short'>{{$description_short}}<a href="#" id="more_desc"> More</a> </span>
+                <span style='display: none;' id='full'>{{$description}}<a href="#" id="less_desc"> Less</a> </span>                
             </div>
         @endif
 
@@ -229,7 +239,16 @@
             <div id="map"></div>
 
             <script>
-
+                $( "#more_desc" ).click(function() {
+                    $('#short').hide();
+                    $('#full').show();
+                });
+                
+                $( "#less_desc" ).click(function() {
+                    $('#short').show();
+                    $('#full').hide();
+                });
+                
                 var initializeMap = function() {
                     var map = L.map("map");
                     map.setView([0, 17], 0);
