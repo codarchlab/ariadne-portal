@@ -14,8 +14,11 @@
 Route::get('/', 'PageController@welcome');
 Route::get('about', 'PageController@about');
 
-Route::get('search', 'ResourceController@index');
-Route::get('search', ['as'=> 'search', 'uses' => 'ResourceController@search']);
+Route::get('search', [
+    'as'=> 'search',
+    'uses' => 'ResourceController@search',
+    'middleware' => ['negotiate:resource.search']
+]);
 
 Route::get('provider', 'ProviderController@index');
 
@@ -26,6 +29,9 @@ Route::post('map_results', 'MapController@results');
 
 Route::get('browse/map', 'BrowseController@map');
 
-Route::get('resource/{id}', [ 'uses' => 'ResourceController@show', 'middleware' => ['negotiate:resource.show'] ] );
+Route::get('resource/{id}', [
+    'uses' => 'ResourceController@show',
+    'middleware' => ['negotiate:resource.show']
+]);
 
 Route::get('robots.txt','PageController@robots' );

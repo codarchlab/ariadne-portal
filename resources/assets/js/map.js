@@ -81,11 +81,12 @@ function GridMap(container, queryUri) {
 		$.getJSON(uri, function(data) {
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
-				self.updateResourceCount(data.total);
+				console.log(data);
+				self.updateResourceCount(data.hits.total);
 				if (data.total > 100) {
-					self.drawHeatmap(data.aggregations.geogrid.buckets);
+					self.drawHeatmap(data.hits.aggregations.geogrid.buckets);
 				} else {
-					self.drawMarkers(data.data);
+					self.drawMarkers(data.hits.data);
 				}
 				self.hideLoading();
 			}

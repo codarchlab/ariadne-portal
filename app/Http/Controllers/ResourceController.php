@@ -183,14 +183,10 @@ class ResourceController extends Controller {
         
         $hits = Resource::search($query, 'resource');
 
-        if (Request::wantsJson()) {
-            return response()->json($hits);
-        } else {
-            return view('resource.search')
-                ->with('type', null)
-                ->with('aggregations', $query['aggregations'])
-                ->with('translateAggregations', Config::get('app.translate_aggregations'))
-                ->with('hits', $hits);
-        }
+        return [
+            'aggregations' => $query['aggregations'],
+            'translateAggregations' => Config::get('app.translate_aggregations'),
+            'hits' => $hits
+        ];
     }
 }

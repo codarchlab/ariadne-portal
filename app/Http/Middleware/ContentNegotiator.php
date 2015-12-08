@@ -30,7 +30,16 @@ class ContentNegotiator {
         $response = $next($request);
 
         if ($request->wantsJson()) {
-            return response()->json($response->original);
+            foreach ($response->original as $key => $value) {
+                $data = [];
+                // convert complex objects (like paginator) to array to enable json encoding
+                if (method_exists($value, 'toArray')) {
+                    $data[$key] = $value->toArray();
+                } else {
+                    $data[$key] = $value;
+                }
+            }
+            return response()->json($data);
         } else {
             return view($view, $response->original);
         }
