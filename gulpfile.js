@@ -7,7 +7,8 @@ var paths = {
     'leaflet_label': './bower_components/Leaflet.label/',
     'leaflet_heat': './bower_components/Leaflet.heat/',
     'd3' : './bower_components/d3/',
-    'c3' : './bower_components/c3/'
+    'c3' : './bower_components/c3/',
+    'readmore' : './bower_components/readmore-js/'
 };
 
 elixir(function(mix) {
@@ -43,6 +44,7 @@ elixir(function(mix) {
             paths.leaflet_heat + "dist/leaflet-heat.js",
             paths.d3 + "d3.js",
             paths.c3 + "c3.js",
+            paths.readmore + "readmore.js",
             "*.js"
         ],
         'public/js/app.js'
