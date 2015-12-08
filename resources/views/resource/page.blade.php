@@ -341,7 +341,6 @@
         @endforeach
         </ul>
 
-        <h4>{{ trans('resource.applicable_services') }}</h4>
     </div>
 
 </div>
