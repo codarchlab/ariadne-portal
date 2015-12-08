@@ -213,19 +213,21 @@ class Resource
      */
     private static function calculateRanges($startYear,$endYear,$nrBuckets) {
 
-        $margin= self::getXVal($endYear);
-        $delta=(self::getXVal($startYear)-$margin)/$nrBuckets;
+        $xStartingPoint= self::getXVal($endYear);
+        $xDelta=(self::getXVal($startYear)-$xStartingPoint)/$nrBuckets;
 
-        $selectedRanges=array();
+        $ranges=array();
         for ($i=0;$i<$nrBuckets;$i++) {
-            array_push($selectedRanges,
+            $xLeftMargin= $xStartingPoint+$i*$xDelta;
+            $xRightMargin=$xStartingPoint+$i*$xDelta+$xDelta;
+            array_push($ranges,
                 [
-                    'to'=>sprintf('%06d',self::getYear($margin+$i*$delta)),
-                    'from'=>sprintf('%06d',self::getYear($margin+$i*$delta+$delta))
+                    'to'=>sprintf('%06d',self::getYear($xLeftMargin)), // mirrored, left margin becomes to date
+                    'from'=>sprintf('%06d',self::getYear($xRightMargin))
                 ]
             );
         }
-        return $selectedRanges;
+        return $ranges;
     }
 
     private static function getXVal($year) {
