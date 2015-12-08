@@ -29,7 +29,7 @@
         <!-- combined JS code -->
         <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
 
-        <div class="container-fluid content">
+        <div class="container-fluid content" itemscope itemtype="http://schema.org/DataCatalog">
             @yield('content')
         </div>
 

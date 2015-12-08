@@ -59,12 +59,12 @@
 <div class="row">
 
     <!-- resoure metadata -->
-    <div class="col-md-8 resource-metadata">
-        <h3>{{ $resource['_source']['title'] }}</h3>
+    <div class="col-md-8 resource-metadata" itemscope itemtype="http://schema.org/Dataset">
+        <h3 itemprop="name">{{ $resource['_source']['title'] }}</h3>
 
         <div>
             @if (isset($resource['_source']['landingPage']))
-                <a href="{{ $resource['_source']['landingPage']}}" target="_blank">
+                <a href="{{ $resource['_source']['landingPage']}}" target="_blank" itemprop="sameAs">
                     <span class="glyphicon glyphicon-globe"></span> {{ trans('resource.landing_page') }}
                 </a>
             @endif
@@ -83,7 +83,7 @@
         </div>
 
         @if (isset($resource['_source']['description']))
-            <div>
+            <div itemprop="description">
                 {{$resource['_source']['description']}}
             </div>
         @endif
@@ -93,7 +93,7 @@
                 @foreach ($resource['_source']['nativeSubject'] as $nativeSubject)
                     <a class="tag" href="{{ route('search', [ 'nativeSubject' => $nativeSubject['prefLabel'] ]) }}">
                         <span class="glyphicon glyphicon-tag"></span>
-                        {{ $nativeSubject['prefLabel'] }}
+                        <span itemprop="keywords">{{ $nativeSubject['prefLabel'] }}</span>
                     </a>
                 @endforeach
             </div>
@@ -118,7 +118,7 @@
                     @if(isset($spatial['placeName']))
                         <a class="tag" href="{{ route('search', [ 'spatial' => $spatial['placeName'] ]) }}">
                             <span class="glyphicon glyphicon-map-marker"></span>
-                            {{ $spatial['placeName'] }}
+                            <span itemprop="spatial" itemscope="itemscope" itemtype="http://schema.org/Place" itemid="http://dbpedia.org/resource/{{ $spatial['placeName'] }}">{{ $spatial['placeName'] }}</span>
                         </a>
                     @endif
                 @endforeach
@@ -142,7 +142,7 @@
 
             @if (isset($resource['_source']['language']))
                 <dt>{{ trans('resource.language') }}</dt>
-                <dd>{{ trans('resource.language.'.$resource['_source']['language']) }}</dd>
+                <dd itemprop="inLanguage">{{ trans('resource.language.'.$resource['_source']['language']) }}</dd>
             @endif
 
             @if (isset($resource['_source']['archaeologicalResourceType']))
@@ -155,7 +155,7 @@
                 <dd>
                     <ul>
                         @foreach($resource['_source']['publisher'] as $publisher)
-                            <li>{{ $publisher['name'] }} [{{ $publisher['type']}}]</li>
+                            <li itemprop="publisher" itemscope="" itemtype="http://schema.org/ {{ $publisher['type'] }}">{{ $publisher['name'] }} [{{ $publisher['type']}}]</li>
                         @endforeach
                     </ul>
                 </dd>
@@ -163,7 +163,7 @@
 
             @if (isset($resource['_source']['issued']))
                 <dt>{{ trans('resource.issued') }}</dt>
-                <dd>{{ $resource['_source']['issued'] }}</dd>
+                <dd itemprop="datePublished">{{ $resource['_source']['issued'] }}</dd>
             @endif
 
             @if (isset($resource['_source']['contributor']))
@@ -171,7 +171,7 @@
                 <dd>
                     <ul>
                         @foreach($resource['_source']['contributor'] as $contributor)
-                            <li>{{ $contributor['name'] }} [{{ $contributor['type']}}]</li>
+                        <li itemprop="contributor" itemscope="" itemtype="http://schema.org/ {{ $contributor['type'] }}"><span itemprop="name">{{ $contributor['name'] }}</span> [{{ $contributor['type']}}]</li>
                         @endforeach
                     </ul>
                 </dd>
@@ -209,7 +209,7 @@
         @if (isset($resource['_source']['isPartOf']))
             <h4>{{ trans('resource.part_of') }}</h4>           
             @foreach($resource['_source']['isPartOf'] as $isPartOf)
-            <p>{{ $isPartOf }}</p>
+                <p>{{ $isPartOf }}</p>
             @endforeach
         @endif
         
