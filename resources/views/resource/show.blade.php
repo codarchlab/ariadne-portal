@@ -83,8 +83,9 @@
         </div>
 
         @if (isset($resource['_source']['description']))
+
             <div id="description">
-                {{$resource['_source']['description']}}              
+                {{$resource['_source']['description']}}
             </div>
         @endif
 
