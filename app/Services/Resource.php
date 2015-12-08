@@ -165,8 +165,19 @@ class Resource
     }
 
 
-
-
+    /**
+     * Creates an aggregation partial with pre-calculated date
+     * ranges of non-equal length. The ranges are calculated on
+     * the basis of an algorithm which creates buckets spanning
+     * each time more years in an exponential manner, the more
+     * far away they are, looking backwards in time from the next year
+     * of the current date.
+     *
+     * @param $startYear
+     * @param $endYear
+     * @param $nrBuckets
+     * @return array
+     */
     public static function prepareDateRangesAggregation($startYear,$endYear,$nrBuckets) {
 
         return ['date_range' => [
@@ -176,17 +187,41 @@ class Resource
         ]];
     }
 
+    /**
+     * We arrange the years on the y-axis of a graph whose x-axis serves
+     * us to map them to something linear. This allows for dividing any
+     * given ranges from $startYear to $endYear into a $nrBuckets of equals
+     * sub-ranges. Mapping back the start and end points of these ranges
+     * gives us the corresponding years again.
+     *
+     * The mapping function is a plain exponential function. The x-axis value
+     * is used as the exponent which results in ever growing year values on the
+     * y-axis. Arranging the years in this way accounts for an intuition where
+     * the resources we have are distributed more sparsely the more we
+     * move backwards in time.
+     *
+     * To use the exponential function, $startYear and $endYear are mirrored on and
+     * arranged relatively to a reference year, which is the next year seen from now.
+     * This year acts the null point of the y-axis of the the graph.
+     *
+     * @param $startYear
+     * @param $endYear
+     * @param $nrBuckets
+     * @return array with range items like
+     *   [ 'from' => string, - year with six digits.
+     *   'to' => string ]    - year with six digits.
+     */
     private static function calculateRanges($startYear,$endYear,$nrBuckets) {
 
-        $r= self::getXVal($endYear);
-        $d=(self::getXVal($startYear)-$r)/$nrBuckets;
+        $margin= self::getXVal($endYear);
+        $delta=(self::getXVal($startYear)-$margin)/$nrBuckets;
 
         $selectedRanges=array();
         for ($i=0;$i<$nrBuckets;$i++) {
             array_push($selectedRanges,
                 [
-                    'to'=>sprintf('%06d',self::getYear($r+$i*$d)),
-                    'from'=>sprintf('%06d',self::getYear($r+$i*$d+$d))
+                    'to'=>sprintf('%06d',self::getYear($margin+$i*$delta)),
+                    'from'=>sprintf('%06d',self::getYear($margin+$i*$delta+$delta))
                 ]
             );
         }
