@@ -33,7 +33,7 @@
             {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
 
             <div class="input-group">
-                {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search...")) !!}
+                {!! Form::text("q", "", array("id" => "q", "class" => "form-control", "placeholder" => "Start a new search...")) !!}
             <span class="input-group-btn">
                 {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
             </span>
