@@ -190,11 +190,10 @@ class Resource
         self::shiftRangeIfNecessary($startYear,$endYear);
         self::extendRangeIfNecessary($startYear,$endYear,$nrBuckets);
 
-        return ['date_range' => [
-            'field' => 'temporal.from',
-            'format' => 'yyyyyy',
-            'ranges'  => self::calculateRanges($startYear,$endYear,$nrBuckets)
+        return ['filters' => [
+            'filters' => self::calculateRanges($startYear,$endYear,$nrBuckets)
         ]];
+
     }
 
     /**
@@ -255,29 +254,71 @@ class Resource
 
         $ranges=array();
         for ($i=0;$i<$nrBuckets;$i++) {
-            $xLeftMargin= $xStartingPoint+$i*$xDelta;
-            $xRightMargin=$xStartingPoint+$i*$xDelta+$xDelta;
-            array_push($ranges, self::makeRange(
-                $xLeftMargin,
-                $xRightMargin));
+            self::addRange($ranges,
+                self::getYear($xStartingPoint+$i*$xDelta+$xDelta), // mirrored, right margin becomes start year
+                self::getYear($xStartingPoint+$i*$xDelta)          // mirrored, left margin becomes end year
+            );
         }
-        return $ranges;
+        return array_reverse($ranges);
     }
 
-    private static function makeRange($xLeftMargin,$xRightMargin) {
+    /**
+     * Generates a meaningful key for the range and places
+     * a newly generated elasticsearch range agg item to ranges[key]
+     *
+     * @param $ranges
+     * @param $rangeStartYear
+     * @param $rangeEndYear
+     */
+    private static function addRange(&$ranges,$rangeStartYear,$rangeEndYear) {
+        $ranges[$rangeStartYear.":".$rangeEndYear]=self::makeRange(
+            $rangeStartYear,
+            $rangeEndYear);
+    }
+
+    /**
+     * ElasticSearch aggregation partial.
+     *
+     * @param $rangeStartYear
+     * @param $rangeEndYear
+     * @return array
+     */
+    private static function makeRange($rangeStartYear, $rangeEndYear) {
         return
-        [
-            'to'=>sprintf('%06d',self::getYear($xLeftMargin)), // mirrored, left margin becomes to date
-            'from'=>sprintf('%06d',self::getYear($xRightMargin))
-        ];
+            [
+                'bool' => [
+                    'must' => [
+                        [
+                            'range' => [
+                                'temporal.until' => [
+                                    'gte' => $rangeStartYear,
+                                    'format' => 'yyyyyy'
+                                ]
+                            ]
+                        ],
+                        [
+                            'range' => [
+                                'temporal.from' => [
+                                    'lte' => $rangeEndYear,
+                                    'format' => 'yyyyyy'
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ];
     }
 
     private static function getXVal($year) {
         return log(self::referenceYear()-$year,self::LOG_BASE);
     }
 
+    /**
+     * @param $xVal
+     * @return string year
+     */
     private static function getYear($xVal) {
-        return self::referenceYear()-pow(self::LOG_BASE,$xVal);
+        return "".round(self::referenceYear()-pow(self::LOG_BASE,$xVal));
     }
 
     const LOG_BASE = 10;

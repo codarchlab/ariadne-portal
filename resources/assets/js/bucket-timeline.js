@@ -13,7 +13,7 @@ function BucketTimeline(container) {
     var addBoxElements = function(bucketElements) {
         bucketElements
             .append('button').attr('onclick', function(d){
-                return "barChart.present("+ d.from+","+ d.to+");";
+                return "bucketTimeline.present("+ d.from+","+ d.to+");";
             })
             .style("width", function(d) { return bucketElWidth+"px"; })
             .style("height", function(d) { return bucketElHeight+"px" })
@@ -27,10 +27,10 @@ function BucketTimeline(container) {
 
     var addDateElements = function(bucketElements) {
         bucketElements
-            .append('p').text(function(d) { return d.from })
+            .append('p').text(function(d) { return d.range })
             .style("position","absolute")
             .style("top","10px")
-            .style("left",function(d) {return d.index*bucketElWidth-15+"px"});
+            .style("left",function(d) {return d.index*bucketElWidth+5+"px"});
     };
 
     var addDocCountElements = function(bucketElements) {
@@ -56,12 +56,14 @@ function BucketTimeline(container) {
      */
     var convertESBuckets = function(buckets) {
         var da=[];
-        for (i in buckets) {
+
+        var i=0;
+        for (key in buckets) {
             da.push({
                 index: i,
-                from: parseInt(buckets[i].from_as_string),
-                to: parseInt(buckets[i].to_as_string),
-                text: buckets[i].doc_count});
+                range: key,
+                text: buckets[key].doc_count});
+            i++;
         }
         return da;
     };
@@ -88,7 +90,7 @@ function BucketTimeline(container) {
             query= "/search?start="+startYear+"&end="+endYear;
 
         $.getJSON(query, function(data) {
-
+            console.log(data)
             d3.select("#chart").selectAll("div").remove();
 
             var bucketElements =
