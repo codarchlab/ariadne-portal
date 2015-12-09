@@ -30,11 +30,20 @@ function GridMap(container, queryUri) {
 	};
 
 	this.drawMarkers = function(resources) {
+		var markerIcon = L.icon({
+			iconUrl: '/img/leaflet/custom/marker-icon-blue.png',
+			iconSize: [25, 41],
+			iconAnchor: [12, 40],
+			shadowUrl: '/img/leaflet/default/marker-shadow.png',
+			shadowSize: [41, 41],
+			shadowAnchor: [12, 40]
+		});
+
 		for (var i = 0; i < resources.length; i++) {
 			for (var j = 0; j < resources[i]['_source']['spatial'].length; j++) {
 				var spatial = resources[i]['_source']['spatial'][j];
 				if ('location' in spatial) {
-					var marker = L.marker(spatial.location, { riseOnHover: true });
+					var marker = L.marker(spatial.location, { riseOnHover: true, icon: markerIcon });
 					var label = ('placeName' in spatial) ? spatial.placeName
 						: spatial.location.lat + ", " + spatial.location.lon;
 					marker.bindLabel(label, { className: "marker-label" });

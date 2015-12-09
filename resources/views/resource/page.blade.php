@@ -318,8 +318,8 @@
                 var nearbySpatialItems = {!! json_encode($nearby_geo_items) !!}
 
                 var markers = [];
-                markers = markers.concat(createMarkers(nearbySpatialItems, false));
-                markers = markers.concat(createMarkers(spatialItems, true, 'orange'));
+                markers = markers.concat(createMarkers(nearbySpatialItems, false, 'blue'));
+                markers = markers.concat(createMarkers(spatialItems, true, 'red'));
 
                 var map = initializeMap();
                 showMarkers(map,markers);
