@@ -220,14 +220,19 @@ class Resource
         for ($i=0;$i<$nrBuckets;$i++) {
             $xLeftMargin= $xStartingPoint+$i*$xDelta;
             $xRightMargin=$xStartingPoint+$i*$xDelta+$xDelta;
-            array_push($ranges,
-                [
-                    'to'=>sprintf('%06d',self::getYear($xLeftMargin)), // mirrored, left margin becomes to date
-                    'from'=>sprintf('%06d',self::getYear($xRightMargin))
-                ]
-            );
+            array_push($ranges, self::makeRange(
+                $xLeftMargin,
+                $xRightMargin));
         }
         return $ranges;
+    }
+
+    private static function makeRange($xLeftMargin,$xRightMargin) {
+        return
+        [
+            'to'=>sprintf('%06d',self::getYear($xLeftMargin)), // mirrored, left margin becomes to date
+            'from'=>sprintf('%06d',self::getYear($xRightMargin))
+        ];
     }
 
     private static function getXVal($year) {
