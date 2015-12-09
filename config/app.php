@@ -25,7 +25,7 @@ return [
             'temporal' => ['terms' => ['field' => 'temporal.periodName']],
             'rights' => ['terms' => ['field' => 'rights']],
             'language' => ['terms' => ['field' => 'language']],
-            'issued' => ['terms' => ['field' => 'issued']]
+            'issued' => ['terms' => ['field' => 'issued.raw']]
         ],
     
         /* Fields to search in if a specific fieldgroup is selected in the frontpage search form */
