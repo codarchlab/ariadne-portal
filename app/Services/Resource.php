@@ -173,12 +173,22 @@ class Resource
      * far away they are, looking backwards in time from the next year
      * of the current date.
      *
-     * @param $startYear
-     * @param $endYear
+     * @param $startYear int|string denoting one margin of the data range to divide up into buckets.
+     * @param $endYear int|string denoting one margin of the date range to divide up into bucktes.
+     *   Can be before or after $startYear.
      * @param $nrBuckets
-     * @return array
+     * @return array with a date_range aggregation object ready for querying
+     *   elasticsearch. It contains $nrBuckets of ranges which span each at least one year.
+     *   If the difference of $startYear and $endYear is to low for that, one of them gets
+     *   adjusted. If at least one of the dates has a year which is in the future, the whole range
+     *   gets shifted so that one of the dates will be the current year. Their difference will remain
+     *   the same though.
      */
     public static function prepareDateRangesAggregation($startYear,$endYear,$nrBuckets) {
+
+        self::switchIfNeccessary($startYear,$endYear);
+        self::shiftRangeIfNecessary($startYear,$endYear);
+        self::extendRangeIfNecessary($startYear,$endYear,$nrBuckets);
 
         return ['date_range' => [
             'field' => 'temporal.from',
@@ -186,6 +196,33 @@ class Resource
             'ranges'  => self::calculateRanges($startYear,$endYear,$nrBuckets)
         ]];
     }
+
+    /**
+     * @param $startYear
+     * @param $endYear must be greater or equal $endYear
+     */
+    private static function shiftRangeIfNecessary(&$startYear,&$endYear) {
+        if ($endYear>date("Y")) {
+            $shiftWidth=$endYear-date("Y");
+            $endYear=$endYear-$shiftWidth;
+            $startYear=$startYear-$shiftWidth;
+        }
+    }
+
+    private static function extendRangeIfNecessary(&$startYear,$endYear,$nrBuckets) {
+        if (($endYear-$startYear)<$nrBuckets) {
+            $startYear=$endYear-$nrBuckets;
+        }
+    }
+
+    private static function switchIfNeccessary(&$startYear,&$endYear) {
+        if ($endYear<$startYear) {
+            $temp=$startYear;
+            $startYear=$endYear;
+            $endYear=$temp;
+        }
+    }
+
 
     /**
      * We arrange the years on the y-axis of a graph whose x-axis serves
