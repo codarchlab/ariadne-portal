@@ -99,7 +99,7 @@ function BucketTimeline(container) {
             d3.select("#"+container).selectAll("div").remove();
 
             var bucketElements =
-                createBucketElements(data.aggregations.date_buckets.buckets);
+                createBucketElements(data.aggregations.range_buckets.buckets);
             
             addBoxElements(bucketElements);
             addDateElements(bucketElements);

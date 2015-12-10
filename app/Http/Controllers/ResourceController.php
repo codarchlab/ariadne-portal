@@ -158,7 +158,7 @@ class ResourceController extends Controller {
 
         $startYear = Request::has("start") ? intval(Request::get("start")) : 0000;
         $endYear = Request::has("end") ? intval(Request::get("end")) : 2000;
-        // $query['aggregations']['date_buckets']= Resource::prepareDateRangesAggregation($startYear,$endYear,6);
+        // $query['aggregations']['range_buckets']= Resource::prepareRangeBucketsAggregation($startYear,$endYear,6);
 
         $q = ['match_all' => []];
 

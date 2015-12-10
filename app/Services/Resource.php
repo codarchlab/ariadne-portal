@@ -166,8 +166,8 @@ class Resource
 
 
     /**
-     * Creates an aggregation partial with pre-calculated date
-     * ranges of non-equal length. The ranges are calculated on
+     * Creates an ElasticSearch aggregation query object with pre-calculated
+     * date ranges of non-equal length. The ranges are calculated on
      * the basis of an algorithm which creates buckets spanning
      * each time more years in an exponential manner, the more
      * far away they are, looking backwards in time, from the next year
@@ -177,14 +177,14 @@ class Resource
      * @param $endYear int|string denoting one margin of the date range to divide up into bucktes.
      *   Can be before or after $startYear.
      * @param $nrBuckets int
-     * @return array with a custom date_buckets aggregation object ready for querying
+     * @return array with a custom range_buckets aggregation object ready for querying
      *   elasticsearch. It contains $nrBuckets of ranges which span each at least one year.
      *   If the difference of $startYear and $endYear is to low for that, one of them gets
      *   adjusted. If at least one of the dates has a year which is in the future, the whole range
      *   gets shifted so that one of the dates will be the current year. Their difference will remain
      *   the same though.
      */
-    public static function prepareDateRangesAggregation($startYear,$endYear,$nrBuckets) {
+    public static function prepareRangeBucketsAggregation($startYear, $endYear, $nrBuckets) {
 
         self::switchIfNeccessary($startYear,$endYear);
         self::shiftRangeIfNecessary($startYear,$endYear);
@@ -279,7 +279,7 @@ class Resource
      */
     private static function addRange(&$ranges,$rangeStartYear,$rangeEndYear) {
         $key=$rangeStartYear.":".$rangeEndYear;
-        $ranges[$key]=self::makeRange(
+        $ranges[$key]=self::makeRangeAggPartial(
             $rangeStartYear,
             $rangeEndYear);
     }
@@ -291,7 +291,7 @@ class Resource
      * @param $rangeEndYear
      * @return array
      */
-    private static function makeRange($rangeStartYear, $rangeEndYear) {
+    private static function makeRangeAggPartial($rangeStartYear, $rangeEndYear) {
         return
             [
                 'bool' => [
