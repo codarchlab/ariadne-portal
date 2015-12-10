@@ -36,6 +36,6 @@
         </div>
 
         @include('shared._footer')
-                  
+
     </body>
 </html>
