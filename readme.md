@@ -4,11 +4,11 @@
 https://getcomposer.org
 Follow install instructions for your operating system
 
-###Clone repo from bitbucket (git)
-Clone repo from bitbucket (you need to have access to the private repo at https://bitbucket.org/ariadne-infrastructure/ariadne-portal/) into you project folder.
+###setup
+Clone this repo from GitHub
 Create local config file
-Make a copy of .env.example and name it .env
-Edit .env in a text editor, change username, password and database.
+Make a copy of ``.env.example`` and name it ``.env``
+Edit ``.env`` in a text editor, update info about elastic search etc.
 
 ###Install vendor libraries via composer
 navigate to the root folder of the project (where composer.json is located)
@@ -17,8 +17,8 @@ run:
     composer install
 
 Libraries used by the portal will now be downloaded, this could take a while
-The libraries will be downloaded into the directory called “vendor”, this directory is ignored in the file .gitignore
-If you have project files from your IDE in the same folder as the source code, add these to .gitignore
+The libraries will be downloaded into the directory called “vendor”, this directory is ignored in the file ``.gitignore``
+If you have project files from your IDE in the same folder as the source code, add these to ``.gitignore``
 
 ###Compile JS and CSS files
 
@@ -45,7 +45,7 @@ To automatically recompile js and css files after changes
 
     gulp watch
 
-##Setup apache
+##Setup portal in apache
 Easiest way to do development is to create a virtual host (vhost).
 Example config:
 
@@ -70,46 +70,8 @@ Observe the path of the directory, DocumentRoot should be the folder named publi
 Place this file in apaches vhost directory, be sure the line for loading the module vhost_alias_module and “Include conf/extra/httpd-vhosts.conf” is uncommented. In httpd.conf
 
 ###Add an entry to your host file:
-(on windows C:\Windows\System32\Drivers\etc\hosts, mac: Open /Applications/Utilities/NetInfo Manager, linux: sudo nano /etc/hosts)
-ariadne.laravel.localhost 127.0.0.1
+(on windows C:\Windows\System32\Drivers\etc\hosts, mac: Open ``/Applications/Utilities/NetInfo Manager``, linux: ``sudo nano /etc/hosts``)
+``ariadne.laravel.localhost 127.0.0.1``
 
 
-The portal should no be hosted via http://ariadne.laravel.localhost
-
-Overview of central parts of the portal in Laravel
-The application code is located in the sub-folder “app”.
-Views are located in resources\views
-
-##Routes (paths)
-Laravel looks for matching paths in app/Http/routes.php an example is:
-
-    Route::get('providers', 'ProviderController@index');
-
-This line forwards any request to http://ariadne.laravel.localhost/providers to the function index in the class ProviderController in the file app/Http/Controllers/ProviderController.php
-
-More information about controllers can be found in the Laravel documentation: http://laravel.com/docs/5.0/routing
-
-##Controllers
-Controllers handles request and provides a rendered view (html) or data in some form.
-Logic for handle the request and rendering of the views should be called here.
-
-###Documentation about controllers:
-http://laravel.com/docs/5.0/controllers
-Services
-A service meant for doing calls for data retrieval.
-For example app/Services/Provider.php handles retrieval of provider-records from the Elastic Search.
-
-##Views
-Views (templates) is responsible for rendering items.
-These are located in resources\views
-app.blade.php is the main structure for the portal and is extended for eg home.blade.php or providers.blade.php
-
-Views are called from the controller eg from ProviderController.php:
-
-    $providers = Provider::statistics();
-    return view('providers')->with('providers', $providers);
-
-This will give the view (providers.blade.php) a variable ($providers) with all the providers to loop trough.
-
-###More about views:
-http://laravel.com/docs/5.0/views
+The portal should now be hosted via http://ariadne.laravel.localhost
