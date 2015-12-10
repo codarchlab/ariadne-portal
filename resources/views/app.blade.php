@@ -6,6 +6,8 @@
         <meta name="description" content="@yield('description')">
         <meta name="keywords" content="@yield('keywords')">
 
+        @yield('headers')
+        
         <title>@yield('title')</title>
 
         @if(env('APP_ENV') != 'production')

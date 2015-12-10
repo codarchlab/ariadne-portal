@@ -33,7 +33,10 @@ Route::get('page/{id}', [
     'as' => 'resource.page',
     'uses' => 'ResourceController@page'
 ]);
-Route::get('data/{id}.json', 'ResourceController@data');
+Route::get('data/{id}.json', [
+    'as' => 'resource.json',
+    'uses' => 'ResourceController@data'
+]);
 Route::get('data/{id}', [
     'as' => 'resource.data',
     'uses' => 'ResourceController@data'

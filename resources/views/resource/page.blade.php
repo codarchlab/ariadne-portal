@@ -31,6 +31,10 @@
 
 @endif
 
+@section('headers')
+<link rel="meta" type="application/json" title="JSON" href="{{ route('resource.json', $resource['_id']) }}">
+@endsection
+
 @section('content')
 
 <div id="citationModal" class="modal fade">
