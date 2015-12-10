@@ -76,8 +76,7 @@
             <!-- TODO Add contact information when available in data. See mockups. -->
 
             <div class="pull-right">
-                <!-- TODO Enable button when endpoint for export is available. -->
-                <a class="button">
+                <a class="button" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
                     <span class="glyphicon glyphicon-file"></span>
                 </a>
                 <a class="button" data-toggle="modal" data-target="#citationModal">
