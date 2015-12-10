@@ -170,14 +170,14 @@ class Resource
      * ranges of non-equal length. The ranges are calculated on
      * the basis of an algorithm which creates buckets spanning
      * each time more years in an exponential manner, the more
-     * far away they are, looking backwards in time from the next year
+     * far away they are, looking backwards in time, from the next year
      * of the current date.
      *
      * @param $startYear int|string denoting one margin of the data range to divide up into buckets.
      * @param $endYear int|string denoting one margin of the date range to divide up into bucktes.
      *   Can be before or after $startYear.
-     * @param $nrBuckets
-     * @return array with a date_range aggregation object ready for querying
+     * @param $nrBuckets int
+     * @return array with a custom date_buckets aggregation object ready for querying
      *   elasticsearch. It contains $nrBuckets of ranges which span each at least one year.
      *   If the difference of $startYear and $endYear is to low for that, one of them gets
      *   adjusted. If at least one of the dates has a year which is in the future, the whole range
@@ -197,8 +197,8 @@ class Resource
     }
 
     /**
-     * @param $startYear
-     * @param $endYear must be greater or equal $endYear
+     * @param $startYear string
+     * @param $endYear string must be greater or equal $endYear
      */
     private static function shiftRangeIfNecessary(&$startYear,&$endYear) {
         if ($endYear>date("Y")) {
@@ -208,12 +208,21 @@ class Resource
         }
     }
 
+    /**
+     * @param $startYear string
+     * @param $endYear string
+     * @param $nrBuckets int
+     */
     private static function extendRangeIfNecessary(&$startYear,$endYear,$nrBuckets) {
         if (($endYear-$startYear)<$nrBuckets) {
             $startYear=$endYear-$nrBuckets;
         }
     }
 
+    /**
+     * @param $startYear string
+     * @param $endYear string
+     */
     private static function switchIfNeccessary(&$startYear,&$endYear) {
         if ($endYear<$startYear) {
             $temp=$startYear;
@@ -243,9 +252,7 @@ class Resource
      * @param $startYear
      * @param $endYear
      * @param $nrBuckets
-     * @return array with range items like
-     *   [ 'from' => string, - year with six digits.
-     *   'to' => string ]    - year with six digits.
+     * @return array with range agg items.
      */
     private static function calculateRanges($startYear,$endYear,$nrBuckets) {
 
@@ -266,12 +273,13 @@ class Resource
      * Generates a meaningful key for the range and places
      * a newly generated elasticsearch range agg item to ranges[key]
      *
-     * @param $ranges
-     * @param $rangeStartYear
-     * @param $rangeEndYear
+     * @param $ranges array range aggregation to push items to.
+     * @param $rangeStartYear string
+     * @param $rangeEndYear string
      */
     private static function addRange(&$ranges,$rangeStartYear,$rangeEndYear) {
-        $ranges[$rangeStartYear.":".$rangeEndYear]=self::makeRange(
+        $key=$rangeStartYear.":".$rangeEndYear;
+        $ranges[$key]=self::makeRange(
             $rangeStartYear,
             $rangeEndYear);
     }
