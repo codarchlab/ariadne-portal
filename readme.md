@@ -58,6 +58,7 @@ Example config:
             Order allow,deny  
             Allow from all  
             AllowOverride All 
+            AddDefaultCharset UTF-8
     	</Directory>
     	
         ServerName ariadne.laravel.localhost
