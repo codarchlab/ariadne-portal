@@ -186,7 +186,7 @@ class Resource
      */
     public static function prepareRangeBucketsAggregation($startYear, $endYear, $nrBuckets) {
 
-        self::switchIfNeccessary($startYear,$endYear);
+        self::swapIfNecessary($startYear,$endYear);
         self::shiftRangeIfNecessary($startYear,$endYear);
         self::extendRangeIfNecessary($startYear,$endYear,$nrBuckets);
 
@@ -223,7 +223,7 @@ class Resource
      * @param $startYear string
      * @param $endYear string
      */
-    private static function switchIfNeccessary(&$startYear,&$endYear) {
+    private static function swapIfNecessary(&$startYear, &$endYear) {
         if ($endYear<$startYear) {
             $temp=$startYear;
             $startYear=$endYear;
