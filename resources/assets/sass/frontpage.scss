@@ -75,10 +75,25 @@ body#frontpage {
   text-shadow: 1px 1px #999;
 }
 
-#welcomeLinks img:hover {
+#welcomeLinks .image {
 
-  transition: box-shadow 0.5s ease;
-  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+  transition: all 2.0s ease;
+}
+#welcomeLinks .image {
+
+  transform: scale(1.0); /* Standard Property */
+  filter: drop-shadow(0px 0px 0px #333);
+}
+#welcomeLinks .image:hover {
+
+  transform: scale(1.5); /* Standard Property */
+  filter: drop-shadow(7px 7px 7px #333);
+}
+
+#welcomeLinks .imageBox {
+
+  background-color: #b6d0d1;
+  overflow:hidden;
 }
 
 #welcomeDescription {

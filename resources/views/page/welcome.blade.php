@@ -13,7 +13,7 @@ component of the archaeological research methodology.')
     <div class="col-md-6 col-md-offset-3 text-center search-form">
 
         <div id="welcomeSearch">
-        
+
             <img id="searchlogo" class="img-responsive" src="img/logo.png">
 
             <div class="row">
@@ -64,7 +64,10 @@ component of the archaeological research methodology.')
                 <div id="welcomeLinks">
 
                     <h3>Browse</h3>
-                    <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.jpg" class="img-responsive"></a>
+
+                    <div class="imageBox">
+                        <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.png" class="img-responsive image"></a>
+                    </div>
 
                 </div>
 
