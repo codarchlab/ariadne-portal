@@ -69,6 +69,19 @@ component of the archaeological research methodology.')
                         <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.png" class="img-responsive image"></a>
                     </div>
 
+                    <source src="img/takeoff.mp3"></source>
+                    <script>
+
+                        $(".imageBox").mouseenter(function(){
+                            $("<audio></audio>").attr({
+                                'src':'img/takeoff.mp3',
+                                'volume':0.4,
+                                'autoplay':'autoplay'
+                            }).appendTo("body");
+                        });
+
+                    </script>
+
                 </div>
 
             </div>
