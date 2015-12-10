@@ -1,6 +1,8 @@
 /**
- * A chart showing a range of years on a timeline and the number of
- * resources found which have from dates for these years.
+ * A chart showing a number of buckets corresponding to portions
+ * of a logarithmic timeline. Each bucket contains a doc_count
+ * which measures the number of resources which have date ranges
+ * reaching in or ranging over the correpsonding timespan of the bucket.
  *
  * @param container the id of the dom element used
  *   to show the chart.
@@ -20,8 +22,7 @@ function BucketTimeline(container) {
             .style("background-color", function(d){ var color='#F8F8F8 ';
                 if ((d.index%2)==0) color='#F0F0F0'; return color; })
             .style("position", "absolute")
-            .style("left", function(d) { return d.index*bucketElWidth+"px"; })
-            ;
+            .style("left", function(d) { return d.index*bucketElWidth+"px"; });
     };
 
 
@@ -36,7 +37,7 @@ function BucketTimeline(container) {
     var addDocCountElements = function(bucketElements) {
         bucketElements
             .append('a').attr('href', function(d){
-                return '/search?start='+ d.from+'&end='+ d.to;
+                return '/search?start='+ d.from+'&end='+d.to;
             })
             .append('p').text( function(d) { return d.text } )
             .style("position","absolute")
@@ -48,24 +49,28 @@ function BucketTimeline(container) {
     };
 
     /**
-     * Takes the elasticsearch data buckets and
-     * converts into a dataset digestable by d3.
+     * Takes date_buckets and
+     * converts it into a dataset
+     * digestable by d3.
      *
-     * @param buckets elastic search data_range buckets.
+     * @param buckets date_buckets. An ElasticSearch
+     *   aggregation as built and provided by the
+     *   ResourceController.
      * @returns {Array} the dataset for d3.
      */
     var convertESBuckets = function(buckets) {
-        var da=[];
-
+        var data=[];
         var i=0;
         for (key in buckets) {
-            da.push({
+            data.push({
                 index: i,
                 range: key,
+                from: key.split(":")[0],
+                to: key.split(":")[1],
                 text: buckets[key].doc_count});
             i++;
         }
-        return da;
+        return data;
     };
 
     /**
@@ -77,7 +82,7 @@ function BucketTimeline(container) {
      * @returns {*|void}
      */
     var createBucketElements = function(esBuckets) {
-        var bucketElements= d3.select("#chart").selectAll("div")
+        var bucketElements= d3.select("#"+container).selectAll("div")
             .data(convertESBuckets(esBuckets))
             .enter().append("div");
         return bucketElements;
@@ -90,11 +95,11 @@ function BucketTimeline(container) {
             query= "/search?start="+startYear+"&end="+endYear;
 
         $.getJSON(query, function(data) {
-            console.log(data)
-            d3.select("#chart").selectAll("div").remove();
+
+            d3.select("#"+container).selectAll("div").remove();
 
             var bucketElements =
-                createBucketElements(data.aggregations.date_ranges.buckets);
+                createBucketElements(data.aggregations.date_buckets.buckets);
             
             addBoxElements(bucketElements);
             addDateElements(bucketElements);
