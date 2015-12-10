@@ -6,7 +6,7 @@
     </div>
     <script>
         var bucketTimeline = new BucketTimeline("chart");
-        bucketTimeline.present(undefined,undefined);
+        bucketTimeline.renderIntoDOM(undefined,undefined);
     </script>
 
 @endsection

@@ -4,8 +4,8 @@
  * which measures the number of resources which have date ranges
  * reaching in or ranging over the correpsonding timespan of the bucket.
  *
- * @param container the id of the dom element used
- *   to show the chart.
+ * @param container string the id of the dom element used
+ *   to render the chart into.
  */
 function BucketTimeline(container) {
 
@@ -15,7 +15,7 @@ function BucketTimeline(container) {
     var addBoxElements = function(bucketElements) {
         bucketElements
             .append('button').attr('onclick', function(d){
-                return "bucketTimeline.present("+ d.from+","+ d.to+");";
+                return "bucketTimeline.renderIntoDOM("+ d.from+","+ d.to+");";
             })
             .style("width", function(d) { return bucketElWidth+"px"; })
             .style("height", function(d) { return bucketElHeight+"px" })
@@ -79,31 +79,52 @@ function BucketTimeline(container) {
      * enriched by the add* functions.
      *
      * @param esBuckets
+     * @param container string
      * @returns {*|void}
      */
-    var createBucketElements = function(esBuckets) {
+    var createBucketElements = function(container,esBuckets) {
         var bucketElements= d3.select("#"+container).selectAll("div")
             .data(convertESBuckets(esBuckets))
             .enter().append("div");
         return bucketElements;
     };
-    
-    this.present = function(startYear,endYear) {
 
-        var query="/search?q=*";
-        if (startYear!=undefined&&endYear!=undefined)
-            query= "/search?start="+startYear+"&end="+endYear;
+    var buildQuery = function(startYear,endYear) {
+        var q = new Query();
+        if ((startYear!=undefined)&&(endYear!=undefined)) {
+            q.params.start = startYear;
+            q.params.end = endYear;
+        }
+        return q;
+    };
 
-        $.getJSON(query, function(data) {
+    /**
+     * Removes the old chart and paints a new one.
+     * 
+     * @param container
+     * @param data
+     */
+    var redraw = function(container,data) {
+        d3.select("#"+container).selectAll("div").remove();
 
-            d3.select("#"+container).selectAll("div").remove();
+        var bucketElements =
+            createBucketElements(container, data.aggregations.range_buckets.buckets);
 
-            var bucketElements =
-                createBucketElements(data.aggregations.range_buckets.buckets);
-            
-            addBoxElements(bucketElements);
-            addDateElements(bucketElements);
-            addDocCountElements(bucketElements);
+        addBoxElements(bucketElements);
+        addDateElements(bucketElements);
+        addDocCountElements(bucketElements);
+    };
+
+    /**
+     * Acquires the data and builds and renders
+     * the graph for a given range into the dom.
+     *
+     * @param startYear
+     * @param endYear
+     */
+    this.renderIntoDOM = function(startYear,endYear) {
+        $.getJSON(buildQuery(startYear,endYear).toUri(), function(data) {
+            redraw(container,data);
         });
     };
 }

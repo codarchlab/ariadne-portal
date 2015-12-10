@@ -3,6 +3,9 @@
  *
  * Handles the conversion between a javascript object
  * representing a search query and the corresponging URI.
+ *
+ * @param q string query string.
+ * @param params object representing the GET parameters of the query.
  */
 function Query(q, params) {
 
@@ -10,7 +13,6 @@ function Query(q, params) {
 
 	this.q = typeof q !== 'undefined' ? q : '*';
 	this.params = typeof params !== 'undefined' ? params : {};
-	console.log("Query()", this.params);
 
 	this.toUri = function() {
 		var uri = '/search?q=' + self.q;
@@ -32,4 +34,4 @@ Query.fromUri = function(uri) {
 		else params[result[1]] = result[2];
 	}
 	return new Query(q, params);
-}
+};
