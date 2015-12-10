@@ -1,0 +1,93 @@
+body#frontpage {
+
+  background: url("../img/frontpage-bgr_blur.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#frontpage .content {
+
+  background-color: transparent;
+}
+
+#frontpage .search-form .btn-primary {
+
+  border-color: darken($yellow, 5%);
+  background-color: $yellow;
+}
+
+#frontpage .form-control:focus {
+
+  box-shadow: none !important;
+  border-color: $yellow !important;
+}
+
+#frontpage .search-form {
+  margin-top: 70px;
+}
+
+#frontpage .search-form .submit-btn {
+  width: 1%;
+}
+
+#welcomeSearch {
+
+  border-radius: 10px;
+  background-color: rgba(239, 239, 239, 0.5);
+  padding-bottom: 57px;
+
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#welcomeDetails {
+
+  color: #fff;
+  font-size: 1.1em;
+  margin-top: 27px;
+}
+
+#welcomeLinks img, #welcomeDescription p {
+
+  border-radius: 5px;
+}
+
+#welcomeDetails h3 {
+
+  font-size: 1.7em;
+}
+
+#welcomeDescription, #welcomeLinks {
+
+  background-color: rgba(239, 239, 239, 0.5);
+  padding: 25px 25px 23px 25px;
+  color: #333;
+}
+
+#welcomeLinks {
+
+  border-radius: 10px;
+}
+
+#welcomeDescription p:hover {
+
+  transition: text-shadow 0.5s ease;
+  text-shadow: 1px 1px #999;
+}
+
+#welcomeLinks img:hover {
+
+  transition: box-shadow 0.5s ease;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+#welcomeDescription {
+
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+#welcomeLinks {
+
+  margin-left: 5px;
+}

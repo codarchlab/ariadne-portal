@@ -1,5 +1,6 @@
 @import "variables";
 @import "bootstrap";
+@import "frontpage";
 @import "navigation";
 @import "search_facets";
 @import "search_hits";
@@ -24,13 +25,6 @@ body {
   margin-bottom: 50px;
 }
 
-body#frontpage {
-
-  background: url("../img/frontpage-bgr_blur.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 body.modal-open {
     overflow: auto;
     padding-right: 0px !important;
@@ -43,27 +37,10 @@ body.modal-open {
   background-color: #fff;
 }
 
-#frontpage .content {
-
-  background-color: transparent;
-}
-
-#frontpage .search-form .btn-primary {
-
-  border-color: darken($yellow, 5%);
-  background-color: $yellow;
-}
-
 .form-control:focus {
 
   border-color: #0f4b61;
   box-shadow: none !important;
-}
-
-#frontpage .form-control:focus {
-
-  box-shadow: none !important;
-  border-color: $yellow !important;
 }
 
 .btn-primary {
@@ -91,16 +68,7 @@ h2 {
   color: #777;
 }
 
-#frontpage .search-form {
-  margin-top: 70px;
-}
-
-#frontpage .search-form .submit-btn {
-    width: 1%;
-}
-
 .c3-axis path {
   stroke: #75A99D;
   stroke-width: 7;
 }
-
