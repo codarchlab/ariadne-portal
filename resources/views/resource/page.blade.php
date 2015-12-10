@@ -159,7 +159,7 @@
                 <dd>
                     <ul>
                         @foreach($resource['_source']['publisher'] as $publisher)
-                            <li itemprop="publisher" itemscope="" itemtype="http://schema.org/ {{ $publisher['type'] }}">{{ $publisher['name'] }} [{{ $publisher['type']}}]</li>
+                        <li><span itemprop="publisher" itemscope="" itemtype="http://schema.org/ {{ $publisher['type'] }}">{{ $publisher['name'] }}</span> <em>[{{ $publisher['type']}}]</em></li>
                         @endforeach
                     </ul>
                 </dd>
@@ -175,7 +175,7 @@
                 <dd>
                     <ul>
                         @foreach($resource['_source']['contributor'] as $contributor)
-                        <li itemprop="contributor" itemscope="" itemtype="http://schema.org/ {{ $contributor['type'] }}"><span itemprop="name">{{ $contributor['name'] }}</span> [{{ $contributor['type']}}]</li>
+                        <li itemprop="contributor" itemscope="" itemtype="http://schema.org/ {{ $contributor['type'] }}"><span itemprop="name">{{ $contributor['name'] }}</span> <em>[{{ $contributor['type']}}]</em></li>
                         @endforeach
                     </ul>
                 </dd>
