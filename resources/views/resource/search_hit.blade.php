@@ -22,7 +22,7 @@
                     </h5>
 
                     <p>
-                        {{ trans('resource.type') }}:
+                        {{ trans('resource.resourceType') }}:
                         <span class="badge">{{ $hit['_source']['archaeologicalResourceType']['name'] }}</span>
                         @if(array_key_exists('publisher', $hit['_source']) && count($hit['_source']['publisher']) >= 1)
                             {{ trans('resource.publisher') }}:
