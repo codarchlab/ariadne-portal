@@ -10,9 +10,9 @@ component of the archaeological research methodology.')
 
 <div class="row">
 
-    <div class="col-md-6 col-md-offset-3 text-center search-form">
+    <div class="col-md-10 col-md-offset-1 text-center search-form" style="background-color:rgba(239, 239, 239, 0.5);">
         
-        <img id="searchlogo" class="img-responsive" src="img/logo-white.png">
+        <img id="searchlogo" class="img-responsive" src="img/logo.png">
 
         <div class="row">            
             <div class="col-md-8 col-md-offset-2">
