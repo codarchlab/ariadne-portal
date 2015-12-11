@@ -44,11 +44,14 @@ function GridMap(container, queryUri) {
 				var spatial = resources[i]['_source']['spatial'][j];
 				if ('location' in spatial) {
 					var marker = L.marker(spatial.location, { riseOnHover: true, icon: markerIcon });
-					var label = ('placeName' in spatial) ? spatial.placeName
+					var label = spatial.placeName ? spatial.placeName
 						: spatial.location.lat + ", " + spatial.location.lon;
 					marker.bindLabel(label, { className: "marker-label" });
 					marker.on('click', function(e) {
-                    	window.location = '/search?spatial='+ label;
+						console.log(spatial.location);
+						var q = "spatial.location.lon:\"" + spatial.location.lon
+							+ "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
+						window.location.href = new Query(q).toUri();
                 	});
 					marker.addTo(map);
 					markers.push(marker);
@@ -90,7 +93,6 @@ function GridMap(container, queryUri) {
 		$.getJSON(uri, function(data) {
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
-				console.log(data);
 				self.updateResourceCount(data.total);
 				if (data.total > 100) {
 					self.drawHeatmap(data.aggregations.geogrid.buckets);
