@@ -53,8 +53,7 @@ In order to create a distribution package run:
 
 This tar.gz package contains all files needed to run the application on a web server.
 Before building the package make sure that the variables in `.env` are set up
-for the production environment and that public/robots.txt is present and contains
-the desired configuration.
+for the production environment.
 
 
 ##Setup portal in apache
