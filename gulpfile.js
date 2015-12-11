@@ -20,7 +20,7 @@ gulp.task("dist", ["sass", "copy", "scripts"], function() {
     return gulp.src(
             [
                 'app/**/*', 'bootstrap/*', 'storage/framework/*', 'config/*',
-                'public/**/*', 'resources/**/*', 'vendor/**/*', '.env'
+                'public/**/*', 'resources/**/*', 'vendor/**/*', '.env', 'package.json'
             ],
             { base: './', dot: true }
         )
