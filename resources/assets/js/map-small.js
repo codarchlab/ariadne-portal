@@ -31,10 +31,6 @@ function SmallMap(spatialItems,nearbySpatialItems) {
         return markerIcon;
     };
 
-    var markerClickFunction = function(e) {
-        window.location = '/search?spatial='+ e.target.label._content;
-    };
-
     var markerOptions = function(priority,markerColor) {
         var markerOptions = { icon: markerIconForColor(markerColor), riseOnHover: true};
         if (priority)
@@ -44,16 +40,20 @@ function SmallMap(spatialItems,nearbySpatialItems) {
 
     var labelOptions = function() {
         return {
-            offset: [30,0],
             className: "marker-label"
         }
     };
 
-    var makeMarker = function(spatialItem,priority,markerColor) {
-        var marker = L.marker([spatialItem.location.lat, spatialItem.location.lon],
-            markerOptions(priority,markerColor));
-        marker.bindLabel(spatialItem.placeName,  labelOptions());
-        marker.on('click',markerClickFunction);
+    var makeMarker = function(spatial,priority,markerColor) {
+        var marker = L.marker(spatial.location, markerOptions(priority,markerColor));
+        var label = spatial.placeName ? spatial.placeName
+            : spatial.location.lat + ", " + spatial.location.lon;
+        marker.bindLabel(label, { className: "marker-label" });
+        marker.on('click', function(e) {
+            var q = "spatial.location.lon:\"" + spatial.location.lon
+                + "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
+            window.location.href = new Query(q).toUri();
+        });
         return marker;
     };
 

@@ -122,7 +122,7 @@ function GridMap(container, queryUri) {
         return ghprecForZoomLevel[zl];
     }
 
-	function heatMapColorforValue(value) {
+	function heatMapColorForValue(value) {
 		var h = Math.round((1.0 - value) * 240);
 		return "hsl(" + h + ", 100%, 60%)";
 	}
@@ -130,7 +130,7 @@ function GridMap(container, queryUri) {
 	function generateGradient(s) {
 		var gradient = {};
 		for (var i = 1; i <= 10; i++) {
-			gradient[s * i / 10] = heatMapColorforValue(i / 10);
+			gradient[s * i / 10] = heatMapColorForValue(i / 10);
 		}
 		return gradient;
 	}
