@@ -48,7 +48,6 @@ function GridMap(container, queryUri) {
 						: spatial.location.lat + ", " + spatial.location.lon;
 					marker.bindLabel(label, { className: "marker-label" });
 					marker.on('click', function(e) {
-						console.log(spatial.location);
 						var q = "spatial.location.lon:\"" + spatial.location.lon
 							+ "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
 						window.location.href = new Query(q).toUri();
