@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
+$content = file_get_contents('../package.json');
+$package = json_decode($content);
+
 return [
 
 	/*
@@ -48,6 +53,17 @@ return [
 	*/  
     
         'google_analytics' => env('GOOGLE_ANALYTICS'),
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Application version
+	|--------------------------------------------------------------------------
+	|
+	| Retrieve app version as stated in package.json
+	|
+	*/
+		'version' => $package->version,
     
     
 	/*
