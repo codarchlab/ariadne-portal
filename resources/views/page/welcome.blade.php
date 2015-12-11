@@ -8,6 +8,26 @@ component of the archaeological research methodology.')
 
 @section('content')
 
+<script>
+
+    /**
+     * Randomize background image
+     */
+    var bgr = [
+        'img/frontpage/sitebgr_01.jpg',
+        'img/frontpage/sitebgr_02.jpg',
+        'img/frontpage/sitebgr_03.jpg',
+        'img/frontpage/sitebgr_04.jpg',
+        'img/frontpage/sitebgr_05.jpg',
+        'img/frontpage/sitebgr_06.jpg',
+        'img/frontpage/sitebgr_07.jpg'
+        ];
+
+    var image = bgr[Math.floor(Math.random() * bgr.length)];
+    $('body').css('background-image', 'url(' + image + ')');
+
+</script>
+
 <div class="row">
 
     <div class="col-md-6 col-md-offset-3 text-center search-form">
