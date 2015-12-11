@@ -60,7 +60,7 @@ body#frontpage {
 
   background-color: rgba(239, 239, 239, 0.5);
   padding: 25px 25px 23px 25px;
-  color: #333;
+  color: #000;
 }
 
 #welcomeLinks {
@@ -68,15 +68,9 @@ body#frontpage {
   border-radius: 10px;
 }
 
-#welcomeDescription p:hover {
-
-  transition: text-shadow 0.5s ease;
-  text-shadow: 1px 1px #999;
-}
-
 #welcomeLinks .image {
 
-  transition: all 2.0s ease;
+  transition: all 0.8s ease;
 }
 #welcomeLinks .image {
 
@@ -85,7 +79,7 @@ body#frontpage {
 }
 #welcomeLinks .image:hover {
 
-  transform: scale(1.5); /* Standard Property */
+  transform: scale(1.05); /* Standard Property */
   filter: drop-shadow(7px 7px 7px #333);
 }
 
