@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <div id="aboutpage" class="container">
+    <div id="aboutpage" class="container content">
 
     <!-- Main content -->
         <div class="row">
