@@ -24,16 +24,14 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body {{ (Request::is('/') ? ' id=frontpage' : '') }}>
+    <body {{ (Request::is('/') ? ' id=frontpage' : '') }} itemscope itemtype="http://schema.org/DataCatalog">
         
         @include('shared._navigation')
 
         <!-- combined JS code -->
         <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
 
-        <div class="container-fluid content" itemscope itemtype="http://schema.org/DataCatalog">
-            @yield('content')
-        </div>
+        @yield('content')
 
         @include('shared._footer')
 

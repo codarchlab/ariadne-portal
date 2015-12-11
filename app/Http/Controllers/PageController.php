@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Provider;
-
 class PageController extends Controller {
     /*
       |--------------------------------------------------------------------------
@@ -23,9 +21,7 @@ class PageController extends Controller {
      * @return Response
      */
     public function welcome() {
-        $providers = Provider::statistics();
-        //dd($providers);
-        return view('page.welcome')->with('providers', $providers);
+        return view('page.welcome');
     }
     
     /**

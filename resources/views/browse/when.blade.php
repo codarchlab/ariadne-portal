@@ -1,6 +1,8 @@
 @extends('app')
 @section('content')
 
+<div class="container-fluid">
+
     <div class="fullscreen" id="chart" style="position: absolute; top: 100px; left: 40px; height:400px; width: 1200px;">
 
     </div>
@@ -8,5 +10,7 @@
         var bucketTimeline = new BucketTimeline("chart");
         bucketTimeline.renderIntoDOM(undefined,undefined);
     </script>
+
+</div>
 
 @endsection

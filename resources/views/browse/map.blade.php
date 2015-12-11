@@ -1,6 +1,8 @@
 @extends('app')
 @section('content')
 
+<div class="container-fluid">
+
 	<div class="browse-map-container">
 
 		<div class="map-controls panel panel-default">
@@ -28,5 +30,7 @@
         var gridMap = new GridMap("map", window.location.href);
         gridMap.refreshMap();
     </script>
+
+</div>
 
 @endsection

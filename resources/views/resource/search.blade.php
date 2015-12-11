@@ -2,7 +2,7 @@
 @section('title', 'Search - Ariadne portal')
 @section('content')
 
-<div>
+<div class="container-fluid content">
 
     <!-- Main content -->
     <div class="row">

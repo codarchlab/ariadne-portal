@@ -44,11 +44,13 @@ function GridMap(container, queryUri) {
 				var spatial = resources[i]['_source']['spatial'][j];
 				if ('location' in spatial) {
 					var marker = L.marker(spatial.location, { riseOnHover: true, icon: markerIcon });
-					var label = ('placeName' in spatial) ? spatial.placeName
+					var label = spatial.placeName ? spatial.placeName
 						: spatial.location.lat + ", " + spatial.location.lon;
 					marker.bindLabel(label, { className: "marker-label" });
 					marker.on('click', function(e) {
-                    	window.location = '/search?spatial='+ label;
+						var q = "spatial.location.lon:\"" + spatial.location.lon
+							+ "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
+						window.location.href = new Query(q).toUri();
                 	});
 					marker.addTo(map);
 					markers.push(marker);
@@ -90,7 +92,6 @@ function GridMap(container, queryUri) {
 		$.getJSON(uri, function(data) {
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
-				console.log(data);
 				self.updateResourceCount(data.total);
 				if (data.total > 100) {
 					self.drawHeatmap(data.aggregations.geogrid.buckets);
@@ -121,7 +122,7 @@ function GridMap(container, queryUri) {
         return ghprecForZoomLevel[zl];
     }
 
-	function heatMapColorforValue(value) {
+	function heatMapColorForValue(value) {
 		var h = Math.round((1.0 - value) * 240);
 		return "hsl(" + h + ", 100%, 60%)";
 	}
@@ -129,7 +130,7 @@ function GridMap(container, queryUri) {
 	function generateGradient(s) {
 		var gradient = {};
 		for (var i = 1; i <= 10; i++) {
-			gradient[s * i / 10] = heatMapColorforValue(i / 10);
+			gradient[s * i / 10] = heatMapColorForValue(i / 10);
 		}
 		return gradient;
 	}
