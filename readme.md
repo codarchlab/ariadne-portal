@@ -45,7 +45,20 @@ To automatically recompile js and css files after changes
 
     gulp watch
 
+###Distribution
+
+In order to create a distribution package run:
+
+    gulp dist
+
+This tar.gz package contains all files needed to run the application on a web server.
+Before building the package make sure that the variables in `.env` are set up
+for the production environment and that public/robots.txt is present and contains
+the desired configuration.
+
+
 ##Setup portal in apache
+
 Easiest way to do development is to create a virtual host (vhost).
 Example config:
 

@@ -1,4 +1,10 @@
 var elixir = require('laravel-elixir');
+var gulp = require('gulp');
+var tar = require('gulp-tar');
+var gzip = require('gulp-gzip');
+var rename = require('gulp-rename');
+
+var package = require('./package.json');
 
 var paths = {
     'jquery': './bower_components/jquery/',
@@ -9,6 +15,22 @@ var paths = {
     'd3' : './bower_components/d3/',
     'readmore' : './bower_components/readmore-js/'
 };
+
+gulp.task("dist", ["sass", "copy", "scripts"], function() {
+    return gulp.src(
+            [
+                'app/**/*', 'bootstrap/*', 'storage/framework/*', 'config/*',
+                'public/**/*', 'resources/**/*', 'vendor/**/*', '.env'
+            ],
+            { base: './', dot: true }
+        )
+        .pipe(rename(function(path) {
+            path.dirname = package.name + '-' + package.version + '/' + path.dirname;
+        }))
+        .pipe(tar(package.name + '-' + package.version + '.tar'))
+        .pipe(gzip())
+        .pipe(gulp.dest('dist'));
+});
 
 elixir(function(mix) {
 
