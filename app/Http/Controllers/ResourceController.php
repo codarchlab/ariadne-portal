@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Config;
 use App\Services\Resource;
 use App\Services\Utils;
 use Request;
-
+use stdClass;
 
 class ResourceController extends Controller {
 
@@ -99,6 +99,17 @@ class ResourceController extends Controller {
         $parts_count = null;
         if($resource['_source']['resourceType'] == 'collection') {
             $parts_count = Resource::getPartsCountQuery($resource);
+        }    
+        
+        $partOf = [];
+        if(isset($resource['_source']['isPartOf'])) {
+           foreach($resource['_source']['isPartOf'] as $isPartOf){
+                $isPartOfParts = explode("/", $isPartOf);
+                $newThing = new stdClass;
+                $newThing->id = end($isPartOfParts);
+                $newThing->name = Utils::getResourceTitle(end($isPartOfParts));  
+                $partOf[] = $newThing;                              
+           }            
         }
         
         return view('resource.page', [
@@ -107,7 +118,8 @@ class ResourceController extends Controller {
             'nearby_geo_items' => $nearby_spatial_items,
             'similar_resources' => $similar_resources,
             'citationLink' => $citationLink,
-            'parts_count' => $parts_count
+            'parts_count' => $parts_count,
+            'partOf' => $partOf
         ]);
     }
 

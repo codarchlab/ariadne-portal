@@ -213,8 +213,10 @@
 
             @if (isset($resource['_source']['isPartOf']))
                 <h4>{{ trans('resource.part_of') }}</h4>
-                @foreach($resource['_source']['isPartOf'] as $isPartOf)
-                    <p>{{ $isPartOf }}</p>
+                @foreach($partOf as $isPartOf)
+                    <a href="{{ route('resource.page', $isPartOf->id  ) }}" target="_blank">
+                        <p>{{ $isPartOf->name }}</p>
+                    </a>
                 @endforeach
             @endif
 

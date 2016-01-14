@@ -72,6 +72,15 @@ class Utils {
         return $provider[0]['_source']['name'];
     }
     
+    public static function getResourceTitle($resourceId) {
+        $query = ['query'=>
+                          ['match' => ['_id' => $resourceId]]
+                     ];
+        $provider =  ElasticSearch::allHits($query,'catalog','resource');
+        if (count($provider)>0) return $provider[0]['_source']['title'];
+        else return '';
+    }
+    
     /**
      * Adds a value to a new parameter or adds it to the list of an existing
      * 
