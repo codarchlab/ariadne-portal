@@ -112,7 +112,7 @@ class Resource
         }
 
         if (array_key_exists('temporal', $resource['_source'])) {
-            foreach ($resource['_source']['temporal'] as $temporal) {
+            foreach ($resource['_source']['temporal'] as $temporal) {                
                 if (!array_key_exists('periodName', $temporal))
                     continue;
 
@@ -123,7 +123,7 @@ class Resource
 
                 $json .= '{
               "match": {
-                "temporal.periodName": "' . $temporal['periodName'] . '"
+                "temporal.periodName": "' . str_replace(array("\r", "\n", "\t", "\v"), '', $temporal['periodName']) . '"
               }
             }';
             }
