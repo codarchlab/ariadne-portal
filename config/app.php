@@ -22,7 +22,8 @@ return [
         /* Aggregations used for filtering in the search */
         'elastic_search_aggregations' => [
             'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
-            'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel']],
+            'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']],
+            'derivedSubject' => ['terms' => ['field' => 'derivedSubject.prefLabel.raw']],
             'keyword' => ['terms' => ['field' => 'keyword.raw']],
             'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
             'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
@@ -35,7 +36,7 @@ return [
     
         /* Fields to search in if a specific fieldgroup is selected in the frontpage search form */
         'elastic_search_field_groups' =>[
-            'subject' => ['nativeSubject.prefLabel'],
+            'subject' => ['nativeSubject.prefLabel.raw'],
             'time' => ['temporal.periodName'],
             'location' => ['spatial.placeName']
         ],
