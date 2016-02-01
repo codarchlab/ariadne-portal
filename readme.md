@@ -36,10 +36,12 @@ For Windows:</br></br>
    5) Run <code> npm install -g bower</code></br>
    5) Run <code> npm install -g gulp</code></br>
 
-###Run during development
-To run PHP:s built in webserver run:
+###Run the portal during development
+To run the portal in PHP:s built in webserver:
 
     php artisan serve
+
+The portal will now be accessible via `http://localhost:8000`
 
 To automatically recompile js and css files after changes
 
