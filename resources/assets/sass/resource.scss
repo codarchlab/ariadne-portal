@@ -26,6 +26,22 @@
   height: 250px;
 }
 
+.resource-context #map-legend {
+    float: right;    
+    display: block;
+}
+
+.resource-context #map-legend span {
+    padding-left: 20px;
+    font-size: 75%;
+}
+
+.resource-context #map-legend img {
+    height: 21px;
+    width: 13px;
+    margin-right: 5px;
+}
+
 .resource-context .marker-label {
   font-size: 12px;
 }

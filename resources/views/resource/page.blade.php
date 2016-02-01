@@ -233,8 +233,13 @@
 
                 <h4>{{ trans('resource.geo_similar') }}</h4>
 
+                
                 <div id="map"></div>
-
+                <div id="map-legend">
+                    <span><img src="/img/leaflet/custom/marker-icon-red.png" />{{  trans('resource.geo_legend_current') }}</span>
+                    <span><img src="/img/leaflet/custom/marker-icon-blue.png" />{{  trans('resource.geo_legend_similar') }}</span>
+                </div>
+                
                 <script>
                     $("#description").readmore({
                         moreLink: '<a href="#"><?php print trans('resource.readmore'); ?></a>',

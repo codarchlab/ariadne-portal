@@ -39,6 +39,8 @@ return [
     'publisher.name.raw' => 'Publisher',    
     'part_of' => 'Resource is part of',
     'geo_similar' => 'Geographically similar',
+    'geo_legend_current' => 'Current resource',
+    'geo_legend_similar' => 'Similar resource',
     'theme_similar' => 'Thematically similar',
     'applicable_services' => 'Applicable services',
     'cite.header' => 'Cite this resource',
