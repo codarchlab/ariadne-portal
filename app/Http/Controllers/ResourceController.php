@@ -160,17 +160,18 @@ class ResourceController extends Controller {
     public function search() {
 
         $query = ['aggregations' => Config::get('app.elastic_search_aggregations')];
-
+        
         // add geogrid aggregation
         $ghp = Request::has('ghp') ? Request::input('ghp') : 2;
         $query['aggregations']['geogrid'] = ['geohash_grid' => [
             'field' => 'spatial.location', 'precision' => intval($ghp) 
         ]];
 
-        if (Request::has("start")&&Request::has("end")) {
+        if (Request::has("start") && Request::has("end")) {
             $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
                     intval(Request::get("start")), intval(Request::get("end")), 6);
         }
+        
 
         $q = ['match_all' => []];
 
@@ -230,7 +231,7 @@ class ResourceController extends Controller {
         }
         
         $hits = Resource::search($query, 'resource');
-
+        
         if (Request::wantsJson()) {
             return response()->json($hits);
         } else {
