@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Storage;
 
-$content = file_get_contents('../package.json');
+$content = file_get_contents(base_path() . '/package.json');
 $package = json_decode($content);
 
 return [
