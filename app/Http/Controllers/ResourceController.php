@@ -83,7 +83,7 @@ class ResourceController extends Controller {
      * @return View
      */
     public function page($id) {
-
+   
     $resource = Resource::get($id);
 
     $spatial_items = $this->getValidGeoItems($resource);
