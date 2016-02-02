@@ -299,16 +299,14 @@ class Resource
                         [
                             'range' => [
                                 'temporal.until' => [
-                                    'gte' => $rangeStartYear,
-                                    'format' => 'yyyyyy'
+                                    'gte' => $rangeStartYear
                                 ]
                             ]
                         ],
                         [
                             'range' => [
                                 'temporal.from' => [
-                                    'lte' => $rangeEndYear,
-                                    'format' => 'yyyyyy'
+                                    'lte' => $rangeEndYear
                                 ]
                             ]
                         ]

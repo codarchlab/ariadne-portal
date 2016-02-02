@@ -31,6 +31,7 @@ function BucketTimeline(container) {
             .append('p').text(function(d) { return d.range })
             .style("position","absolute")
             .style("top","10px")
+            .style("font-size","8px")
             .style("left",function(d) {return d.index*bucketElWidth+5+"px"});
     };
 
@@ -43,7 +44,7 @@ function BucketTimeline(container) {
             .style("position","absolute")
             .style("top","100px")
             .style("left",function(d) {return d.index*bucketElWidth+30+"px"})
-            .style("font-size","30px")
+            .style("font-size","12px")
             .style("background-color","black")
             .style("background-color","white");
     };

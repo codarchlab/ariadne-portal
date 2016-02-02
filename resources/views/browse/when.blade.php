@@ -8,7 +8,7 @@
     </div>
     <script>
         var bucketTimeline = new BucketTimeline("chart");
-        bucketTimeline.renderIntoDOM(undefined,undefined);
+        bucketTimeline.renderIntoDOM(-100000000,2016);
     </script>
 
 </div>

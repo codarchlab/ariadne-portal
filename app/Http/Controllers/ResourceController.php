@@ -167,10 +167,10 @@ class ResourceController extends Controller {
             'field' => 'spatial.location', 'precision' => intval($ghp) 
         ]];
 
-
-        $startYear = Request::has("start") ? intval(Request::get("start")) : 0000;
-        $endYear = Request::has("end") ? intval(Request::get("end")) : 2000;
-        // $query['aggregations']['range_buckets']= Resource::prepareRangeBucketsAggregation($startYear,$endYear,6);
+        if (Request::has("start")&&Request::has("end")) {
+            $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
+                    intval(Request::get("start")), intval(Request::get("end")), 6);
+        }
 
         $q = ['match_all' => []];
 
