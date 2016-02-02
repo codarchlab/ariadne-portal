@@ -75,9 +75,8 @@ function SmallMap(spatialItems,nearbySpatialItems) {
                     data: { 'q': q },
                     dataType: "json"
                  }).complete(function(data){
-                     var total = data.responseJSON.total;
-                     if(total > 1){
-                        marker.options.labelText = label+' ('+total+' results)';
+                     if(data.responseJSON.total > 1){
+                        marker.options.labelText = label+' ('+data.responseJSON.total+' results)';
                      }else{
                          marker.options.labelText = data.responseJSON.data[0]._source.title;
                          marker.options.href = '/page/'+data.responseJSON.data[0]._id;
