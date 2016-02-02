@@ -117,8 +117,9 @@ function GridMap(container, queryUri) {
 
 	function getGhprecFromZoom(zl) {
         var ghprecForZoomLevel =
-            [3,3,4,4,4,4,5,5,5,6,6,7,7,8,8,8,9,9,9];
+            [3,3,4,4,5,5,6,6,6,7,7,8,8,9,9,9,10,10,10];
         if (zl>18) zl=18;
+		console.log(zl, ghprecForZoomLevel[zl]);
         return ghprecForZoomLevel[zl];
     }
 
