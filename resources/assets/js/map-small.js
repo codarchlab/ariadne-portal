@@ -31,10 +31,11 @@ function SmallMap(spatialItems,nearbySpatialItems) {
         return markerIcon;
     };
 
-    var markerOptions = function(priority,markerColor) {
+    var markerOptions = function(priority, markerColor) {
         var markerOptions = { icon: markerIconForColor(markerColor), riseOnHover: true};
-        if (priority)
+        if (priority) {
             markerOptions.zIndexOffset = 1000;
+        }
         return markerOptions;
     };
 
@@ -44,15 +45,48 @@ function SmallMap(spatialItems,nearbySpatialItems) {
         }
     };
 
-    var makeMarker = function(spatial,priority,markerColor) {
-        var marker = L.marker(spatial.location, markerOptions(priority,markerColor));
+    var makeMarker = function(spatial, priority, markerColor) {
+        var options = markerOptions(priority, markerColor);
+        var marker = L.marker(spatial.location, options);
         var label = spatial.placeName ? spatial.placeName
             : spatial.location.lat + ", " + spatial.location.lon;
         marker.bindLabel(label, { className: "marker-label" });
-        marker.on('click', function(e) {
-            var q = "spatial.location.lon:\"" + spatial.location.lon
+        
+        var q = "spatial.location.lon:\"" + spatial.location.lon
                 + "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
-            window.location.href = new Query(q).toUri();
+        
+        marker.on('click', function(e) {
+            if(marker.options.href === undefined){
+
+                window.location.href = new Query(q).toUri();              
+            }else{
+                window.location.href = marker.options.href;                
+            }
+        });
+        
+        marker.on('mouseover', function(e){
+            $('.leaflet-label').text(marker.options.labelText);
+   
+            if(marker.options.total === undefined) {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json",
+                    url: '/search',
+                    data: { 'q': q },
+                    dataType: "json"
+                 }).complete(function(data){
+                     var total = data.responseJSON.total;
+                     if(total > 1){
+                        marker.options.labelText = label+' ('+total+' results)';
+                     }else{
+                         marker.options.labelText = data.responseJSON.data[0]._source.title;
+                         marker.options.href = '/page/'+data.responseJSON.data[0]._id;
+                     }
+
+                     marker.options.total = data.responseJSON.total;
+                     $('.leaflet-label').text(marker.options.labelText);
+                 });
+             }
         });
         return marker;
     };
@@ -60,8 +94,9 @@ function SmallMap(spatialItems,nearbySpatialItems) {
     var createMarkers = function(spatialItems, priority, markerColor) {
         var markers = [];
 
-        for (var i = 0; i<spatialItems.length; i++)
-            markers.push(makeMarker(spatialItems[i],priority,markerColor));
+        for (var i = 0; i<spatialItems.length; i++){
+            markers.push(makeMarker(spatialItems[i], priority, markerColor));
+        }
 
         return markers;
     };
