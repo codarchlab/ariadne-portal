@@ -97,6 +97,13 @@ class ElasticSearch {
     return $paginator;
   }
 
+  /**
+   * Helper function to get the hit count
+   * @param array $query structured query for Elastic Search
+   * @param string $index index to search in
+   * @param string $type optional type to limit the search for
+   * @return int number of results from the query
+   */
   public static function countHits($query, $index, $type = null) {
 
     $searchParams = array(
