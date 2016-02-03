@@ -1,10 +1,10 @@
 @extends('app')
-@section('title', $resource['_source']['title'].' - Ariadne portal')
+@section('title', $subject['_source']['title'].' - Ariadne portal')
 
-@if (isset($resource['_source']['description']))
+@if (isset($subject['_source']['description']))
 
     <?php
-        $description = strip_tags($resource['_source']['description']);
+        $description = strip_tags($subject['_source']['description']);
         $length = 155;
 
         if (strlen($description) > $length) {
@@ -62,9 +62,7 @@
         </script>
     </div>
 
-    @if (str_contains(URL::previous(), URL::to('search')))
-        <div id="backlink"><a href="{{ URL::previous() }}">{{ trans('resource.backlink') }}</a></div>
-    @endif
+    <div id="backlink"><a href="{{ URL::previous() }}">{{ trans('resource.backlink') }}</a></div>
     
     <div class="row">
 
@@ -82,10 +80,10 @@
                 <!-- TODO Add contact information when available in data. See mockups. -->
 
                 <div class="pull-right">
-                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource in json" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
+                    <a class="button" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
-                    <a class="button"  data-tooltip="true" data-placement="bottom" title="Cite resource" data-toggle="modal" data-target="#citationModal">
+                    <a class="button" data-toggle="modal" data-target="#citationModal">
                         <span class="glyphicon glyphicon-link"></span>
                     </a>
                 </div>
