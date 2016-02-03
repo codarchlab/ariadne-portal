@@ -62,9 +62,7 @@
         </script>
     </div>
 
-    @if (str_contains(URL::previous(), URL::to('search')))
-        <div id="backlink"><a href="{{ URL::previous() }}">{{ trans('resource.backlink') }}</a></div>
-    @endif
+    <div id="backlink"><a href="{{ URL::previous() }}">{{ trans('resource.backlink') }}</a></div>
     
     <div class="row">
 
