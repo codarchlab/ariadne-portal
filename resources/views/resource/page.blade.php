@@ -62,6 +62,8 @@
         </script>
     </div>
 
+    <div id="backlink"><a href="{{ URL::previous() }}">{{ trans('resource.backlink') }}</a></div>
+    
     <div class="row">
 
         <!-- resoure metadata -->

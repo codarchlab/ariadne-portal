@@ -49,5 +49,6 @@ return [
     'has_parts' => 'Has parts',
     'children' => 'children',
     'readmore' => 'Read more',
-    'readless' => 'Close'
+    'readless' => 'Close',
+    'backlink' => 'Back to search results'
 ];
