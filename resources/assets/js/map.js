@@ -18,6 +18,7 @@ function GridMap(container, queryUri) {
 		grid.forEach(function(bucket) {
 			var point = Geohash.decode(bucket['key']);
 			heatPoints.push([point.lat, point.lon, bucket['doc_count']]);
+			points.push([point.lat, point.lon]);
 		});
 
 		heatmap = L.heatLayer(heatPoints, { 
@@ -30,6 +31,7 @@ function GridMap(container, queryUri) {
 	};
 
 	this.drawMarkers = function(resources) {
+
 		var markerIcon = L.icon({
 			iconUrl: '/img/leaflet/custom/marker-icon-blue.png',
 			iconSize: [25, 41],
@@ -54,6 +56,7 @@ function GridMap(container, queryUri) {
                 	});
 					marker.addTo(map);
 					markers.push(marker);
+					points.push(spatial.location);
 				}
 			};
 
@@ -86,28 +89,32 @@ function GridMap(container, queryUri) {
 	};
 
 	this.refreshMap = function() {
-
 		var uri = generateSearchUri();
+		performQuery(uri);
+	};
+
+	this.triggerSearch = function() {
+		var uri = generateSearchUri();
+		window.location.href = uri;
+	};
+
+	function performQuery(uri, callback) {
 		requestInProgress = uri;
 		self.showLoading();
 		$.getJSON(uri, function(data) {
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
 				self.updateResourceCount(data.total);
+				points = [];
 				if (data.total > 100) {
 					self.drawHeatmap(data.aggregations.geogrid.buckets);
 				} else {
 					self.drawMarkers(data.data);
 				}
-				self.hideLoading();
+				self.hideLoading();				
+				if (callback) callback();
 			}
 		});
-
-	};
-
-	this.triggerSearch = function() {
-		var uri = generateSearchUri();
-		window.location.href = uri;
 	};
 
 	function generateSearchUri() {
@@ -140,15 +147,17 @@ function GridMap(container, queryUri) {
 	map.addControl( L.control.zoom({position: 'bottomright'}) );
 
 	var query = Query.fromUri(queryUri);
+	var bounds = null;
 	if (query.params['bbox']) {
-		var bounds = query.params.bbox.split(",");
+		bounds = query.params.bbox.split(",");
 		map.fitBounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]]);
 	} else {
-		map.setView([40, 17], 3);
+		map.setView([50, 17], 3);
 	}
 
 	var heatmap;
 	var markers = [];
+	var points = [];
 
 	var requestInProgress;
 
@@ -157,6 +166,13 @@ function GridMap(container, queryUri) {
 	}).addTo(map);
 	L.Icon.Default.imagePath = '/img/leaflet/default';
 
-	map.on('moveend', this.refreshMap);
+	query.params['ghp'] = getGhprecFromZoom(map.getZoom());
+	performQuery(query.toUri(), function() {
+		map.fitBounds(L.latLngBounds(points));
+		// needed to prevent triggering refreshMap after fitBounds
+		setTimeout(function() {
+			map.on('moveend', self.refreshMap);
+		}, 1000);
+	});
 
 }

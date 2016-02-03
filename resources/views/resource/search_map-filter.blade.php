@@ -23,7 +23,6 @@
 
 		<script>
 	        var gridMap = new GridMap("map", window.location.href);
-	        gridMap.refreshMap();
 	    </script>
 
 	</div>
