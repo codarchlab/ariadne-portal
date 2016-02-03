@@ -12,7 +12,7 @@
 				<button type="button" class="btn btn-default btn-xs loading">
 					<span class="glyphicon glyphicon-refresh spin"></span>
 				</button>
-				<button type="button" class="btn btn-default btn-xs btn-filter" onclick="gridMap.triggerSearch()">
+				<button type="button" class="btn btn-default btn-xs btn-filter" onclick="gridMap.triggerSearch()" data-toggle="tooltip" data-placement="top" title="Search area" >
 					<span class="glyphicon glyphicon-filter"></span>
 				</button>
 			</div>
