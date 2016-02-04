@@ -63,15 +63,6 @@ class ElasticSearch {
    * @return LengthAwarePaginator paginated result of the search
    */
   public static function search($query, $index = null, $type = null) {
-    $perPage = Request::input('perPage', 10);
-    $from = $perPage * (Request::input('page', 1) - 1);
-
-    $query['highlight'] = array('fields' => array('*' => (object) array()));
-    $searchParams = array(
-      'body' => $query,
-      'size' => $perPage,
-      'from' => $from
-    );
 
     if ($index) {
       $searchParams['index'] = $index;
@@ -83,20 +74,39 @@ class ElasticSearch {
 
     $client = self::getClient();
 
-    $queryResponse = $client->search($searchParams);
+    if(Request::has('noPagination')){
+      $searchParams['body'] = $query;
+      $searchParams['size'] = Request::input('perPage', 10);
 
-    $paginator = new ElasticSearchPaginator(
-      $queryResponse['hits']['hits'], 
-      $queryResponse['hits']['total'], 
-      $perPage, 
-      $queryResponse['aggregations'], 
-      Paginator::resolveCurrentPage(), 
-      ['path' => Paginator::resolveCurrentPath()]
-    );
-    
-    return $paginator;
+      
+      return $client->search($searchParams);
+      
+    }else{      
+      $perPage = Request::input('perPage', 10);
+      $from = $perPage * (Request::input('page', 1) - 1);
+
+      $query['highlight'] = array('fields' => array('*' => (object) array()));
+      
+      $searchParams['body'] = $query;
+      $searchParams['size'] = $perPage;
+      $searchParams['from'] = $from;
+
+      $queryResponse = $client->search($searchParams);
+
+      $paginator = new ElasticSearchPaginator(
+        $queryResponse['hits']['hits'], 
+        $queryResponse['hits']['total'], 
+        $perPage, 
+        $queryResponse['aggregations'], 
+        Paginator::resolveCurrentPage(), 
+        ['path' => Paginator::resolveCurrentPath()]
+      );
+
+      return $paginator;      
+      
+    }
   }
-
+  
   /**
    * Helper function to get the hit count
    * @param array $query structured query for Elastic Search
