@@ -17,14 +17,11 @@ class AggregationController extends Controller {
     
     $aggregations = Config::get('app.elastic_search_aggregations');
     if(key_exists($aggregationId, $aggregations)){
-      $query = ['aggregations' => [$aggregationId => $aggregations[$aggregationId]]];
+      $query['aggregations'] = [$aggregationId => $aggregations[$aggregationId]];
       $query['aggregations'][$aggregationId]['terms']['size'] = 100;
     }
-
-    $hits = Resource::search($query, 'resource');
-
     
-    //dd($hits['aggregations']);
+    $hits = Resource::search($query, 'resource');
     
     if (Request::wantsJson()) {
       return response()->json($hits);

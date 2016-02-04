@@ -108,7 +108,15 @@ class Utils {
     if (array_key_exists('page', $arguments)) {
       unset($arguments['page']);
     }
-
+    
+    if (array_key_exists('noPagination', $arguments)) {
+      unset($arguments['noPagination']);
+    }
+    
+    if (array_key_exists('size', $arguments)) {
+      unset($arguments['size']);
+    }
+    
     return $arguments;
   }
 
@@ -136,10 +144,18 @@ class Utils {
     if (array_key_exists('page', $arguments)) {
       unset($arguments['page']);
     }
-
+    
+    if (array_key_exists('noPagination', $arguments)) {
+      unset($arguments['noPagination']);
+    }
+    
+    if (array_key_exists('size', $arguments)) {
+      unset($arguments['size']);
+    }
+    
     return $arguments;
   }
-
+  
   /**
    * Get a list of values for a specific key and returns them as an array
    * 

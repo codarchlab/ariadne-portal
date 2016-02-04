@@ -76,7 +76,7 @@ class ElasticSearch {
 
     if(Request::has('noPagination')){
       $searchParams['body'] = $query;
-      $searchParams['size'] = Request::input('perPage', 10);
+      $searchParams['size'] = Request::input('size', 10);
 
       
       return $client->search($searchParams);

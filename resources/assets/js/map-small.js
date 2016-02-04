@@ -75,7 +75,7 @@ function SmallMap(spatialItems,nearbySpatialItems) {
                     data: { 
                         'q': q,
                         'noPagination': 'true',
-                        'perPage':1
+                        'size':1
                     },
                     dataType: "json"
                  }).complete(function(data){
