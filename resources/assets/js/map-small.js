@@ -72,17 +72,21 @@ function SmallMap(spatialItems,nearbySpatialItems) {
                     type: "GET",
                     contentType: "application/json",
                     url: '/search',
-                    data: { 'q': q },
+                    data: { 
+                        'q': q,
+                        'noPagination': 'true',
+                        'perPage':1
+                    },
                     dataType: "json"
                  }).complete(function(data){
-                     if(data.responseJSON.total > 1){
-                        marker.options.labelText = label+' ('+data.responseJSON.total+' results)';
+                     if(data.responseJSON.hits.total > 1){
+                        marker.options.labelText = label+' ('+data.responseJSON.hits.total+' results)';
                      }else{
-                         marker.options.labelText = data.responseJSON.data[0]._source.title;
-                         marker.options.href = '/page/'+data.responseJSON.data[0]._id;
+                         marker.options.labelText = data.responseJSON.hits.hits[0]._source.title;
+                         marker.options.href = '/page/'+data.responseJSON.hits.hits[0]._id;
                      }
 
-                     marker.options.total = data.responseJSON.total;
+                     marker.options.total = data.responseJSON.hits.total;
                      $('.leaflet-label').text(marker.options.labelText);
                  });
              }
