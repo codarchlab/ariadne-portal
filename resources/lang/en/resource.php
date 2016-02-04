@@ -31,6 +31,7 @@ return [
     'archaeologicalResourceType.name' => 'Resource type',
     'archaeologicalResourceType.name.raw' => 'Resource type',
     'temporal.periodName.raw' => 'Period',
+    'spatial.country' => 'Country',
     'spatial.placeName' => 'Place',
     'spatial.placeName.raw' => 'Place',
     'nativeSubject.prefLabel.raw' => 'Native Subject',
