@@ -84,44 +84,44 @@ class ResourceController extends Controller {
      */
     public function page($id) {
    
-    $resource = Resource::get($id);
+      $resource = Resource::get($id);
 
-    $spatial_items = $this->getValidGeoItems($resource);
-    $nearby_spatial_items = null;
-    if (!empty($spatial_items)) {
-      $nearby_spatial_items = $this->getNearbySpatialItems($spatial_items[0]);
-    }
-
-    $similar_resources = Resource::thematicallySimilarQuery($resource);
-
-    $citationLink = $this->getCitationLink($resource);
-
-    $parts_count = null;
-    if ($resource['_source']['resourceType'] == 'collection') {
-      $parts_count = Resource::getPartsCountQuery($resource);
-    }
-
-    $partOf = [];
-    if (isset($resource['_source']['isPartOf'])) {
-      foreach ($resource['_source']['isPartOf'] as $isPartOf) {
-        $isPartOfParts = explode("/", $isPartOf);
-        $newThing = new stdClass;
-        $newThing->id = end($isPartOfParts);
-        $newThing->name = Utils::getResourceTitle(end($isPartOfParts));
-        $partOf[] = $newThing;
+      $spatial_items = $this->getValidGeoItems($resource);
+      $nearby_spatial_items = null;
+      if (!empty($spatial_items)) {
+        $nearby_spatial_items = $this->getNearbySpatialItems($spatial_items[0]);
       }
-    }
 
-    return view('resource.page', [
-      'resource' => $resource,
-      'geo_items' => $spatial_items,
-      'nearby_geo_items' => $nearby_spatial_items,
-      'similar_resources' => $similar_resources,
-      'citationLink' => $citationLink,
-      'parts_count' => $parts_count,
-      'partOf' => $partOf
-    ]);
-  }
+      $similar_resources = Resource::thematicallySimilarQuery($resource);
+
+      $citationLink = $this->getCitationLink($resource);
+
+      $parts_count = null;
+      if ($resource['_source']['resourceType'] == 'collection') {
+        $parts_count = Resource::getPartsCountQuery($resource);
+      }
+
+      $partOf = [];
+      if (isset($resource['_source']['isPartOf'])) {
+        foreach ($resource['_source']['isPartOf'] as $isPartOf) {
+          $isPartOfParts = explode("/", $isPartOf);
+          $newThing = new stdClass;
+          $newThing->id = end($isPartOfParts);
+          $newThing->name = Utils::getResourceTitle(end($isPartOfParts));
+          $partOf[] = $newThing;
+        }
+      }
+
+      return view('resource.page', [
+        'resource' => $resource,
+        'geo_items' => $spatial_items,
+        'nearby_geo_items' => $nearby_spatial_items,
+        'similar_resources' => $similar_resources,
+        'citationLink' => $citationLink,
+        'parts_count' => $parts_count,
+        'partOf' => $partOf
+      ]);
+    }
 
   /**
      * Serialize the specified resource.
