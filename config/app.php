@@ -16,35 +16,35 @@ return [
 	|
 	*/    
     
-        'elastic_search_host' => env('ELASTIC_SEARCH_HOST'),
-		'elastic_search_catalog_index' => env('ELASTIC_SEARCH_CATALOG_INDEX'),
+	'elastic_search_host' => env('ELASTIC_SEARCH_HOST'),
+	'elastic_search_catalog_index' => env('ELASTIC_SEARCH_CATALOG_INDEX'),
     
-        /* Aggregations used for filtering in the search */
-        'elastic_search_aggregations' => [
-            'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
-            'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']],
-            'derivedSubject' => ['terms' => ['field' => 'derivedSubject.prefLabel.raw']],
-            'keyword' => ['terms' => ['field' => 'keyword.raw']],
-            'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
-            'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
-            'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
-            'temporal' => ['terms' => ['field' => 'temporal.periodName.raw']],
-            'rights' => ['terms' => ['field' => 'rights']],
-            'language' => ['terms' => ['field' => 'language']],
-            'issued' => ['terms' => ['field' => 'issued.raw']]
-        ],
+	/* Aggregations used for filtering in the search */
+	'elastic_search_aggregations' => [
+    'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
+    'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']],
+    'derivedSubject' => ['terms' => ['field' => 'derivedSubject.prefLabel.raw']],
+    'keyword' => ['terms' => ['field' => 'keyword.raw']],
+    'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
+    'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
+    'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
+    'temporal' => ['terms' => ['field' => 'temporal.periodName.raw']],
+    'rights' => ['terms' => ['field' => 'rights']],
+    'language' => ['terms' => ['field' => 'language']],
+    'issued' => ['terms' => ['field' => 'issued.raw']]
+	],
     
-        /* Fields to search in if a specific fieldgroup is selected in the frontpage search form */
-        'elastic_search_field_groups' =>[
-            'subject' => ['nativeSubject.prefLabel.raw'],
-            'time' => ['temporal.periodName'],
-            'location' => ['spatial.placeName']
-        ],
+	/* Fields to search in if a specific fieldgroup is selected in the frontpage search form */
+	'elastic_search_field_groups' =>[
+		'subject' => ['nativeSubject.prefLabel.raw'],
+		'time' => ['temporal.periodName'],
+		'location' => ['spatial.placeName']
+	],
 
-        /* Aggregations whose values should be translated */
-        'translate_aggregations' => [ 'type', 'language' ],
+	/* Aggregations whose values should be translated */
+	'translate_aggregations' => [ 'type', 'language' ],
     
-    	/*
+	/*
 	|--------------------------------------------------------------------------
 	| Google analytics
 	|--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ return [
 	|
 	*/  
     
-        'google_analytics' => env('GOOGLE_ANALYTICS'),
+	'google_analytics' => env('GOOGLE_ANALYTICS'),
 
 
 	/*
@@ -263,10 +263,10 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-                'Utils'     => 'App\Services\Utils',
-                'Debugbar'  => 'Barryvdh\Debugbar\Facade',
-                'Form'      => 'Illuminate\Html\FormFacade',
-                'Html'      => 'Illuminate\Html\HtmlFacade',
+		'Utils'     => 'App\Services\Utils',
+		'Debugbar'  => 'Barryvdh\Debugbar\Facade',
+		'Form'      => 'Illuminate\Html\FormFacade',
+		'Html'      => 'Illuminate\Html\HtmlFacade',
 	],
 
 ];
