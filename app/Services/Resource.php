@@ -7,8 +7,10 @@
 
 namespace app\Services;
 use App\Services\ElasticSearch;
-use Config;
 
+use Config;
+use Request;
+use Utils;
 
 class Resource
 {
@@ -34,6 +36,80 @@ class Resource
      */
     public static function search($query) {
         return ElasticSearch::search($query, Config::get('app.elastic_search_catalog_index'), self::RESOURCE_TYPE);
+    }
+    
+    public static function getCurrentQuery(){
+        $query = ['aggregations' => Config::get('app.elastic_search_aggregations')];
+        
+        // add geogrid aggregation
+        $ghp = Request::has('ghp') ? Request::input('ghp') : 2;
+        $query['aggregations']['geogrid'] = ['geohash_grid' => [
+            'field' => 'spatial.location', 'precision' => intval($ghp) 
+        ]];
+
+        if (Request::has("start") && Request::has("end")) {
+            $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
+                    intval(Request::get("start")), intval(Request::get("end")), 6);
+        }
+        
+
+        $q = ['match_all' => []];
+
+        if (Request::has('q')) {
+            $field_groups = Config::get('app.elastic_search_field_groups');
+            
+            if(Request::has('fields') && array_key_exists(Request::get('fields'), $field_groups)){
+                foreach ($field_groups[Request::get('fields')] as $field){
+                    $q = ['match' => [$field => Request::get('q')]];
+                    $query['query']['bool']['should'][] = $q;
+                }
+            }else {
+                $q = ['query_string' => ['query' => Request::get('q')]];
+                $query['query']['bool']['must'][] = $q;
+            }
+        } else {
+            $query['query']['bool']['must'][] = ['query_string' => ['query' => '*']];
+        }
+
+        foreach ($query['aggregations'] as $key => $aggregation) {
+            if (Request::has($key)) {
+                $values = Utils::getArgumentValues($key);
+
+                $field = $aggregation['terms']['field'];
+
+                foreach ($values as $value) {
+                    $fieldQuery = [];
+                    $fieldQuery[$field] = $value;
+                    $query['query']['bool']['must'][] = ['match' => $fieldQuery];
+                }
+            }
+        }        
+        
+        
+        // TODO: refactor so that ES service takes care of bbox parsing
+        if (Request::has('bbox')) {
+            $bbox = explode(',', Request::input('bbox'));
+            $query['query'] = [
+                'filtered' => [
+                    'query' => $query['query'],
+                    'filter' => [
+                        'geo_bounding_box' => [
+                            'spatial.location' => [
+                                'top_left' => [
+                                    'lat' => floatval($bbox[3]),
+                                    'lon' => floatval($bbox[0])
+                                ],                                
+                                'bottom_right' => [
+                                    'lat' => floatval($bbox[1]),
+                                    'lon' => floatval($bbox[2])
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ];
+        }
+        return $query;
     }
 
     /**

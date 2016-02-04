@@ -46,3 +46,8 @@ Route::get('resource/{id}', [
     'as' => 'resource',
     'uses' => 'ResourceController@negotiate'
 ]);
+
+Route::get('aggregation/{id}', [
+    'as' => 'resource.data',
+    'uses' => 'AggregationController@getAggregation'
+]);
