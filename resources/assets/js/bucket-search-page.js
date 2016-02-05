@@ -15,15 +15,15 @@ $(document).ready(function () {
                             .parents('div.aggregation')
                             .attr('data-aggregation');
 
-        var vars = $.getUrlVars();
+        var vars = getUrlVars();
+
         vars.noPagination = 'true';
         vars.size = 0;
 
-        var params = jQuery.param(vars);
         $.ajax({
             type: "GET",
-            contentType: "application/json",
-            url: '/aggregation/'+aggregation+'/bucket?'+params,
+            url: '/aggregation/'+aggregation+'/bucket',
+            data: vars
         }).complete(function (data) {
             var elements = $(data.responseText);
             var content = $('.aggregation-items', elements).html();
@@ -64,7 +64,19 @@ function placeGetMoreLinkForAggregations(){
     });    
 }
 
+function getUrlVars(){
+    var vars = {}, hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++){
+        
+        hash = hashes[i].split('=');
 
+        vars[hash[0]] = hash[1].replace(/\+/g," ").replace(/\%7C/g,"|");
+    }
+    return vars;
+}
+
+/*
 $.extend({
   getUrlVars: function(){
     var vars = {}, hash;
@@ -79,3 +91,4 @@ $.extend({
     return $.getUrlVars()[name];
   }
 });
+*/
