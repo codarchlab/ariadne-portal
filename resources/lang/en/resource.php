@@ -30,6 +30,7 @@ return [
     'contributor.name' => 'Contributor',
     'archaeologicalResourceType.name' => 'Resource type',
     'archaeologicalResourceType.name.raw' => 'Resource type',
+    'temporal.periodName' => 'Period',
     'temporal.periodName.raw' => 'Period',
     'spatial.country' => 'Country',
     'spatial.placeName' => 'Place',
