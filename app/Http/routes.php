@@ -48,6 +48,6 @@ Route::get('resource/{id}', [
 ]);
 
 Route::get('aggregation/{id}/bucket', [
-    'as' => 'resource.data',
+    'as' => 'aggregation.bucket.html',
     'uses' => 'AggregationController@getAggregationBucketHtml'
 ]);
