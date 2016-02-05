@@ -7,12 +7,17 @@ use Illuminate\Support\Facades\Config;
 use App\Services\Resource;
 use App\Services\Utils;
 use Request;
-
 use stdClass;
+
 
 class AggregationController extends Controller {
 
-  public function getAggregation($aggregationId) {
+  /**
+   * Ajax callback for geting replacement html for aggregations filter
+   * @param string $aggregationId The aggregation to get html filter for
+   * @return rendered html for a fragment filter
+   */
+  public function getAggregationBucketHtml($aggregationId) {
     $query = Resource::getCurrentQuery();
     
     $aggregations = Config::get('app.elastic_search_aggregations');

@@ -10,41 +10,44 @@ $(document).ready(function () {
 
     $('.get-more').click(function () {
         var aggregationElement = $(this);
-        var aggregation = $(aggregationElement).parents('div.aggregation').attr('data-aggregation');
+        var aggregation = $(aggregationElement)
+                            .parents('div.aggregation')
+                            .attr('data-aggregation');
 
         var vars = $.getUrlVars();
         vars.noPagination = 'true';
         vars.size = 0;
-        //console.log(vars);
+
         var params = jQuery.param(vars);
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: '/aggregation/'+aggregation+'?'+params,
+            url: '/aggregation/'+aggregation+'/bucket?'+params,
         }).complete(function (data) {
-            console.log(data);
             var elements = $(data.responseText);
             var content = $('.aggregation-items', elements).html();
 
             $(aggregationElement).parents('div.aggregation-items').html(content);
+            placeGetMoreLinkForAggregations();
         });
-
+        
         return false;
     });
 });
 
 
 function placeGetMoreLinkForAggregations(){
+    var loadMoreLink = '<a href="#" class="list-group-item get-more">Load more</a>';
     $('.aggregation').each(function () {
-        var aggregation = $(this).attr('data-aggregation');
-        var size = $(this).find('.list-group a.value').length;
+        if($(this).find('.list-group a.get-more').length == 0){
+            var aggregation = $(this).attr('data-aggregation');
+            var size = $(this).find('.list-group a.value').length;
 
-        if (size % 10 == 0) {
-            console.log(aggregation + ' ' + size);
-            $(this).find('.list-group a.value').last().after('<a href="#" class="list-group-item get-more">Load more</a>');
-
-        } else {
-            console.log('NÖPE ' + aggregation + ' ' + size);
+            if (size % 10 == 0) {
+                $(this).find('.list-group a.value')
+                       .last()
+                       .after(loadMoreLink);
+            }
         }
     });    
 }
