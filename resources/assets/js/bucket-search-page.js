@@ -9,6 +9,7 @@ $(document).ready(function () {
     placeGetMoreLinkForAggregations();
 
     $('.get-more').click(function () {
+        $(this).button('loading');
         var aggregationElement = $(this);
         var aggregation = $(aggregationElement)
                             .parents('div.aggregation')
@@ -28,6 +29,7 @@ $(document).ready(function () {
             var content = $('.aggregation-items', elements).html();
 
             $(aggregationElement).parents('div.aggregation-items').html(content);
+            $(this).button('reset');
             placeGetMoreLinkForAggregations();
         });
         
@@ -47,7 +49,7 @@ $(document).ready(function () {
 
 
 function placeGetMoreLinkForAggregations(){
-    var loadMoreLink = '<a href="#" class="list-group-item get-more">Load more</a>';
+    var loadMoreLink = '<a href="#" class="list-group-item get-more"><span class="glyphicon glyphicon-plus"></span> Load more</a>';
     $('.aggregation').each(function () {
         if($(this).find('.list-group a.get-more').length == 0){
             var aggregation = $(this).attr('data-aggregation');
