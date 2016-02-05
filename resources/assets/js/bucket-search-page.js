@@ -33,6 +33,16 @@ $(document).ready(function () {
         
         return false;
     });
+    
+    $('div.aggregation div.panel-heading a').click(function(){
+        var iconElement = $(this).find('span.glyphicon');
+        if(iconElement.hasClass('glyphicon-menu-down')){
+            iconElement.addClass('glyphicon-menu-right').removeClass('glyphicon-menu-down');
+        }else{
+            iconElement.addClass('glyphicon-menu-down').removeClass('glyphicon-menu-right');
+        }
+    });
+    
 });
 
 

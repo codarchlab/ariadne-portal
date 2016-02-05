@@ -4,10 +4,19 @@
 
         <div class="panel-heading" role="tab" id="heading_{{$key}}">
             <h3 class="panel-title">
+                @if($key == 'archaeologicalResourceType')
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$key}}"
-                   aria-expanded="<?php echo($key == 'archaeologicalResourceType') ? 'true' : 'false' ?>" aria-controls="collapse_{{$key}}">
+                   aria-expanded="true" aria-controls="collapse_{{$key}}">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                     {{ trans('resource.'.$key) }}
                 </a>
+                @else
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$key}}"
+                   aria-expanded="false" aria-controls="collapse_{{$key}}">
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    {{ trans('resource.'.$key) }}
+                </a>
+                @endif
             </h3>
         </div>
 
