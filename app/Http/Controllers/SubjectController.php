@@ -20,4 +20,23 @@ class SubjectController extends Controller {
         return view('subject.index')->with('subjects', $subjects);
     }
 
+    /**
+     * Display the specified subject.
+     *
+     * @param  int  $id
+     * @return View
+     */
+    public function page($id) {
+
+        $subject = Subject::get($id);
+        $connected_resources = Subject::connectedResourcesQuery($subject);
+        $similar_subjects = Subject::similarSubjectsQuery($subject);
+        
+        return view('subject.page', [
+            'subject' => $subject,
+            'resources' => $connected_resources,
+            'similar_subjects' => $similar_subjects
+        ]);
+    }
+
 }

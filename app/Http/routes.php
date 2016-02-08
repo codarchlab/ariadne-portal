@@ -18,6 +18,10 @@ Route::get('robots.txt','PageController@robots' );
 Route::get('provider', 'ProviderController@index');
 
 Route::get('subject', 'SubjectController@index');
+Route::get('subject/{id}', [
+    'as' => 'subject.page',
+    'uses' => 'SubjectController@page'
+]);
 
 Route::get('browse/map', 'BrowseController@map');
 Route::get('browse/when', 'BrowseController@when');

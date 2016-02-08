@@ -1,0 +1,47 @@
+/* Subject metadata */
+
+.subject-metadata div {
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.subject-metadata .glyphicon-tag {
+    padding-right: 10px;
+}
+
+.subject-metadata .connected_concept h5{
+    font-size: 16px;
+    text-decoration: underline;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    .subject-metadata .connected_concept h5 {        
+        width: 160px;
+        clear: both;
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+/* Resources context */
+
+.subject-context #map {
+  height: 250px;
+}
+
+.subject-context .marker-label {
+  font-size: 12px;
+}
+
+.subject-context h4 {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.subject-context ul {
+    list-style: none;
+}

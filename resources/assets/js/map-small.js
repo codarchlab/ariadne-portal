@@ -119,9 +119,13 @@ function SmallMap(spatialItems,nearbySpatialItems) {
     // Main
 
     var markers = [];
-    markers = markers.concat(createMarkers(nearbySpatialItems, false, 'blue'));
-    markers = markers.concat(createMarkers(spatialItems, true, 'red'));
-
+    if(nearbySpatialItems !== null) {
+        markers = markers.concat(createMarkers(nearbySpatialItems, false, 'blue'));
+    }
+    if(spatialItems !== null) {
+        markers = markers.concat(createMarkers(spatialItems, true, 'red'));
+    }
+    
     var map = initializeMap();
     showMarkers(map,markers);
     fitViewportToMarkers(map,markers);
