@@ -74,7 +74,7 @@
 
             <div>
                 @if (isset($resource['_source']['landingPage']))
-                    <a href="{{ $resource['_source']['landingPage']}}" target="_blank" itemprop="sameAs">
+                    <a href="{{ $resource['_source']['landingPage']}}" target="_blank" itemprop="sameAs" class="landing-page">
                         <span class="glyphicon glyphicon-globe"></span> {{ trans('resource.landing_page') }}
                     </a>
                 @endif

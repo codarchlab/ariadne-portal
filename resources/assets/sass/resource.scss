@@ -20,6 +20,20 @@
   text-decoration: none;
 }
 
+.resource-metadata .landing-page {
+    font-size: 17px;
+    border: 1px solid #135c77;
+    padding: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    text-decoration: none;
+}
+
+.resource-metadata .landing-page:hover {    
+    background: lighten($blue, 65);    
+}
+
 /* Resources context */
 
 .resource-context #map {
