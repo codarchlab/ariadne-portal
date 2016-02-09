@@ -2,10 +2,9 @@
     <div class="box box-primary" id="dataresource_item" item_id="{{ $hit['_id'] }}">
         <div class="box-body">
             <div class="row">
+                
                 <div class="col-md-1">
-
-                    <img src="{{ asset("img/icons/")."/icon_".$hit['_source']['resourceType'].".png" }}" height="50" border="0">
-
+                    <img src="{{ asset("img/icons/")."/icon_".$hit['_source']['archaeologicalResourceType']['id'].".png" }}" height="50" border="0">
                 </div>
                 <div class="col-md-11">
 
