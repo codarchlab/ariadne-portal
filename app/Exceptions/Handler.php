@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Elasticsearch\Common\Exceptions\BadRequest400Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Mail;
 
 class Handler extends ExceptionHandler {
 
@@ -27,6 +29,13 @@ class Handler extends ExceptionHandler {
    * @return void
    */
   public function report(Exception $e) {
+    if ($e instanceof Exception) {
+        // page.email is the template of your email
+        // it will have access to the $error that we are passing below
+       Mail::send('page.email', ['error' => $e], function ($m) use ($e){           
+            $m->to('e.afiontzi@dcu.gr', 'Eleni Afiontzi')->subject('Error reporting');
+        });
+    }
     return parent::report($e);
   }
 
@@ -39,13 +48,21 @@ class Handler extends ExceptionHandler {
    */
   public function render($request, Exception $e) {
     switch($e){
-      case ($e instanceof NotFoundHttpException):
-        return response()->view('errors.404', [], 404);
-        break;
+        case ($e instanceof NotFoundHttpException):
+            return response()->view('errors.404', [], 404);
+            break;
       
-      case ($e instanceof BadRequest400Exception):
-        return response()->view('errors.badquery', [], 404);
-        break;
+        case ($e instanceof BadRequest400Exception):
+            return response()->view('errors.badquery', [], 404);
+            break;
+    
+        case ($e instanceof HttpException):        
+            return response()->view('errors.500', [], 500);
+            break;
+        
+        case ($e instanceof Exception):        
+            return response()->view('errors.default', [], 500);
+            break;
     }
     return parent::render($request, $e);
   }

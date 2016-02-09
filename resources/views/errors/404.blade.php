@@ -15,7 +15,7 @@ component of the archaeological research methodology.')
                 Sorry, we can't find that page
             </h1>
             <p>
-                Unfortunately we couldn't find the page you were looking for. Try searching the portal.
+                Unfortunately we couldn't find the page you were looking for. Try searching the portal. An email was sent to report the issue.
             </p>
         </div>
     </div>

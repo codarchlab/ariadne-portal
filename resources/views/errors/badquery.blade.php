@@ -13,7 +13,7 @@ component of the archaeological research methodology.')
         <div class="col-md-10 col-md-offset-1 text-center error-title">
             <h1>The query could not be parsed</h1>
             <p>
-                Unfortunately we couldn't parse your query. Try searching for the exact phrase:
+                Unfortunately we couldn't parse your query. An email was sent to report the issue. Try searching for the exact phrase:
             </p>
         </div>
     </div>
