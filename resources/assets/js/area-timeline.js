@@ -40,7 +40,6 @@ function AreaTimeline(container, queryUri, from, to) {
 
         brush = d3.svg.brush()
             .x(x)
-            .extent([0.4, 0.6])
             .on("brush", brushed);
 
         var gBrush = svg.append("g")
