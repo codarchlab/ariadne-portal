@@ -2,7 +2,7 @@ function AreaTimeline(containerId, queryUri, from, to) {
 
     var margin = 50,
         width  = 1200,
-        height = 700;
+        height = 650;
 
     var svg = d3.select("#"+containerId).append("svg")
         .attr("width", width)

@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid content">
 
 	<style>
 		.axis path,
