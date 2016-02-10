@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\Provider;
 use Illuminate\Support\Facades\Input;
 use App\Services\ElasticSearch;
+use Request;
 
 class Utils {
 
@@ -201,5 +202,38 @@ class Utils {
     }
     return $arguments;
   }
+  
+     
+    /**
+     * Redirect to search without parameters if parameters are empty
+     */
+    public static function redirectIfEmptySearch() {        
 
+        if(!empty(Request::input())) { 
+            if(self::emptyRecursive(Request::input())){
+                header('Location: ' . route('search'));
+                die();
+            }
+        }
+    }
+
+  /**
+   * Recursively check if an array is empty
+   * 
+   * @param array $value
+   * @return boolean
+   */
+  public static function emptyRecursive($value) {
+    if (is_array($value)) {
+        $empty = TRUE;
+        array_walk_recursive($value, function($item) use (&$empty) {
+            $empty = $empty && empty($item);
+        });
+    } else {
+        $empty = empty($value);
+    }
+    return $empty;
+}
+
+  
 }

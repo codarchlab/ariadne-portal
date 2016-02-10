@@ -159,6 +159,8 @@ class ResourceController extends Controller {
      */
     public function search() {
 
+        Utils::redirectIfEmptySearch();
+        
         $query = Resource::getCurrentQuery();
         
         $hits = Resource::search($query, 'resource');
