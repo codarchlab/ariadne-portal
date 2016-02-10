@@ -1,22 +1,33 @@
-function AreaTimeline(container, queryUri, from, to) {
+function AreaTimeline(containerId, queryUri, from, to) {
 
-    var margin = {top: 20, right: 55, bottom: 30, left: 40},
-          width  = 1000 - margin.left - margin.right,
-          height = 500  - margin.top  - margin.bottom;
+    var margin = 50,
+        width  = 1200,
+        height = 700;
 
-    var svg = d3.select("#"+container).append("svg")
-        .attr("width",  width  + margin.left + margin.right)
-        .attr("height", height + margin.top  + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg = d3.select("#"+containerId).append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", "0 0 " + width + " " + height)
+        .attr("preserveAspectRatio", "xMinYMid")
+        .append("g");
+
+    var chart = $("#"+containerId + " svg"),
+        aspect = chart.width() / chart.height(),
+        container = chart.parent();
+    $(window).on("resize", function() {
+        console.log(container.width());
+        var targetWidth = container.width();
+        chart.attr("width", targetWidth);
+        chart.attr("height", Math.round(targetWidth / aspect));
+    }).trigger("resize");
 
     var initialize = function() {
 
         x = d3.scale.linear()
-            .range([0, width]);
+            .range([0 + margin, width - margin]);
 
         y = d3.scale.linear()
-            .range([height, 0]);
+            .range([height - margin, 0]);
 
         area = d3.svg.area()
             .interpolate("basis")
@@ -35,7 +46,7 @@ function AreaTimeline(container, queryUri, from, to) {
 
         svg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
+            .attr("transform", "translate(0," + (height - margin) + ")")
             .call(xAxis);
 
         brush = d3.svg.brush()
