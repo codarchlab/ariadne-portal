@@ -6,11 +6,12 @@
  */
 
 namespace app\Services;
-use App\Services\ElasticSearch;
 
+use App\Services\ElasticSearch;
+use App\Services\Utils;
 use Config;
 use Request;
-use Utils;
+
 
 class Resource
 {
