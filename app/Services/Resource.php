@@ -50,7 +50,7 @@ class Resource
 
         if (Request::has("start") && Request::has("end")) {
             $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
-                    intval(Request::get("start")), intval(Request::get("end")), 6);
+                    intval(Request::get("start")), intval(Request::get("end")), 50);
         }
         
 
@@ -267,9 +267,19 @@ class Resource
         self::shiftRangeIfNecessary($startYear,$endYear);
         self::extendRangeIfNecessary($startYear,$endYear,$nrBuckets);
 
-        return ['filters' => [
-            'filters' => self::calculateRanges($startYear,$endYear,$nrBuckets)
-        ]];
+        return [
+            'nested' => [
+                'path' => 'temporal'
+            ],
+            'aggs' => [
+                'range_agg' => [
+                    'filters' => [
+                        'filters' => 
+                            self::calculateRanges($startYear,$endYear,$nrBuckets)
+                    ]
+                ]
+            ]
+        ];
 
     }
 

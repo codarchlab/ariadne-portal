@@ -20,39 +20,36 @@ class Handler extends ExceptionHandler {
     'Symfony\Component\HttpKernel\Exception\HttpException'
   ];
 
-  /**
-   * Report or log an exception.
-   *
-   * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-   *
-   * @param  \Exception  $e
-   * @return void
-   */
+    /**
+     * Report or log an exception.
+     *
+     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+     *
+     * @param  \Exception  $e
+     * @return void
+     */
     public function report(Exception $e) {
-
-        if(env('APP_ENV') != 'local') {
+        if (env('APP_ENV') != 'local') {
             if ($e instanceof Exception) {
                 // page.email is the template of your email
                 // it will have access to the $error that we are passing below
                 Mail::send('page.email', ['error' => $e], function ($m) use ($e) {
-                    $m->to('e.afiontzi@dcu.gr', 'Eleni Afiontzi')->subject('Error reporting');
+                    $m->to('ariadne.project.eu@gmail.com', 'Ariadne Project')->subject('Error reporting');
                 });
             }
         }
-
-        return parent::report($e);
     }
 
     /**
-   * Render an exception into an HTTP response.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \Exception  $e
-   * @return \Illuminate\Http\Response
-   */
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $e
+     * @return \Illuminate\Http\Response
+     */
     public function render($request, Exception $e) {
-      
-        if(env('APP_ENV') != 'local') {
+
+        if (env('APP_ENV') != 'local') {
             switch ($e) {
                 case ($e instanceof NotFoundHttpException):
                     return response()->view('errors.404', [], 404);
@@ -71,7 +68,7 @@ class Handler extends ExceptionHandler {
                     break;
             }
         }
-        
-        return parent::render($request, $e);        
+
+        return parent::render($request, $e);
     }
 }

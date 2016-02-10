@@ -9,8 +9,8 @@
  */
 function BucketTimeline(container) {
 
-    var bucketElWidth= 100; // in px
-    var bucketElHeight=400; // in px
+    var bucketElWidth = 10; // in px
+    var bucketElHeight = 400; // in px
 
     var addBoxElements = function(bucketElements) {
         bucketElements
