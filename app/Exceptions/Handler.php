@@ -33,7 +33,7 @@ class Handler extends ExceptionHandler {
         // page.email is the template of your email
         // it will have access to the $error that we are passing below
        Mail::send('page.email', ['error' => $e], function ($m) use ($e){           
-            $m->to('e.afiontzi@dcu.gr', 'Eleni Afiontzi')->subject('Error reporting');
+            $m->to('ariadne.project.eu@gmail.com', 'Ariadne Project')->subject('Error reporting');
         });
     }
     return parent::report($e);

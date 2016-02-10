@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'portal@ariadne-infrastructure.eu', 'name' => 'Ariadne'],
+	'from' => ['address' => 'ariadne.project.eu@gmail.com', 'name' => 'Ariadne'],
 
 	/*
 	|--------------------------------------------------------------------------
