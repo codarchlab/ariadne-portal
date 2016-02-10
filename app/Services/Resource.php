@@ -75,8 +75,9 @@ class Resource
         foreach ($query['aggregations'] as $key => $aggregation) {
             if (Request::has($key)) {
                 $values = Utils::getArgumentValues($key);
-
-                $field = $aggregation['terms']['field'];
+                
+                if ($key != 'temporal') $field = $aggregation['terms']['field'];
+                else $field = $aggregation['aggs']['temporal']['terms']['field'];
 
                 foreach ($values as $value) {
                     $fieldQuery = [];

@@ -34,11 +34,18 @@
 
             <div id="activeFilters">
                 @foreach($aggregations as $key => $aggregation)
-                    @if($key != 'geogrid')
+                    @if($key != 'geogrid' && $key != 'temporal')
                         @include('resource.search_active-filters', [
                             'key' => $key,
                             'aggregation' => $aggregation,
                             'buckets' => $hits->aggregations()[$key]['buckets']
+                        ])
+                    @endif
+                    @if($key == 'temporal')
+                        @include('resource.search_active-filters', [
+                            'key' => $key,
+                            'aggregation' => $aggregation,
+                            'buckets' => $hits->aggregations()[$key][$key]['buckets']
                         ])
                     @endif
                 @endforeach
@@ -49,11 +56,18 @@
             ])
 
             @foreach($aggregations as $key => $aggregation)
-                @if($key != 'geogrid')
+                @if($key != 'geogrid' && $key != 'temporal')
                     @include('resource.search_facet', [
                         'key' => $key,
                         'aggregation' => $aggregation,
                         'buckets' => $hits->aggregations()[$key]['buckets']
+                    ])
+                @endif
+                @if($key == 'temporal')
+                    @include('resource.search_facet', [
+                        'key' => $key,
+                        'aggregation' => $aggregation,
+                        'buckets' => $hits->aggregations()[$key][$key]['buckets']
                     ])
                 @endif
             @endforeach
