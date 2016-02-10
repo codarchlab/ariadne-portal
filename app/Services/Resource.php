@@ -50,7 +50,7 @@ class Resource
 
         if (Request::has("start") && Request::has("end")) {
             $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
-                    intval(Request::get("start")), intval(Request::get("end")), 6);
+                    intval(Request::get("start")), intval(Request::get("end")), 50);
         }
         
 
