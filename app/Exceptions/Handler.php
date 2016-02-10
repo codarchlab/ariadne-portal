@@ -28,43 +28,50 @@ class Handler extends ExceptionHandler {
    * @param  \Exception  $e
    * @return void
    */
-  public function report(Exception $e) {
-    if ($e instanceof Exception) {
-        // page.email is the template of your email
-        // it will have access to the $error that we are passing below
-       Mail::send('page.email', ['error' => $e], function ($m) use ($e){           
-            $m->to('e.afiontzi@dcu.gr', 'Eleni Afiontzi')->subject('Error reporting');
-        });
-    }
-    return parent::report($e);
-  }
+    public function report(Exception $e) {
 
-  /**
+        if(env('APP_ENV') != 'local') {
+            if ($e instanceof Exception) {
+                // page.email is the template of your email
+                // it will have access to the $error that we are passing below
+                Mail::send('page.email', ['error' => $e], function ($m) use ($e) {
+                    $m->to('e.afiontzi@dcu.gr', 'Eleni Afiontzi')->subject('Error reporting');
+                });
+            }
+        }
+
+        return parent::report($e);
+    }
+
+    /**
    * Render an exception into an HTTP response.
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  \Exception  $e
    * @return \Illuminate\Http\Response
    */
-  public function render($request, Exception $e) {
-    switch($e){
-        case ($e instanceof NotFoundHttpException):
-            return response()->view('errors.404', [], 404);
-            break;
+    public function render($request, Exception $e) {
       
-        case ($e instanceof BadRequest400Exception):
-            return response()->view('errors.badquery', [], 404);
-            break;
-    
-        case ($e instanceof HttpException):        
-            return response()->view('errors.500', [], 500);
-            break;
-        
-        case ($e instanceof Exception):        
-            return response()->view('errors.default', [], 500);
-            break;
-    }
-    return parent::render($request, $e);
-  }
+        if(env('APP_ENV') != 'local') {
+            switch ($e) {
+                case ($e instanceof NotFoundHttpException):
+                    return response()->view('errors.404', [], 404);
+                    break;
 
+                case ($e instanceof BadRequest400Exception):
+                    return response()->view('errors.badquery', [], 404);
+                    break;
+
+                case ($e instanceof HttpException):
+                    return response()->view('errors.500', [], 500);
+                    break;
+
+                case ($e instanceof Exception):
+                    return response()->view('errors.default', [], 500);
+                    break;
+            }
+        }
+        
+        return parent::render($request, $e);        
+    }
 }
