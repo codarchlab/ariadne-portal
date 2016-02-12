@@ -21,6 +21,11 @@ function AreaTimeline(containerId, queryUri, from, to) {
         chart.attr("height", Math.round(targetWidth / aspect));
     }).trigger("resize");
 
+    this.triggerSearch = function() {
+        var uri = query.toUri();
+        window.location.href = uri;
+    };
+
     var initialize = function() {
 
         x = d3.scale.linear()
@@ -116,10 +121,28 @@ function AreaTimeline(containerId, queryUri, from, to) {
     }
 
     var updateTimeline = function() {
+        showLoading();
         $.getJSON(query.toUri(), function(data) {
             buckets = data.aggregations.range_buckets.range_agg.buckets;
             redraw();
+            hideLoading();
+            updateResourceCount(data.total);
         });
+    };
+
+    var updateResourceCount = function(count) {
+        var formatted = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $(".timeline .controls .resource-count .count").text(formatted);
+    };
+
+    var showLoading = function() {
+        $(".timeline .controls .resource-count").hide();
+        $(".timeline .controls .loading").show();
+    }
+
+    var hideLoading = function() {
+        $(".timeline .controls .resource-count").show();
+        $(".timeline .controls .loading").hide();
     };
 
     var query = Query.fromUri(queryUri);

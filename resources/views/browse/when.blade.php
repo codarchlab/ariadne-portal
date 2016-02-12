@@ -3,23 +3,29 @@
 
 <div class="container-fluid content">
 
-	<style>
-		.axis path,
-	    .axis line {
-	        fill: none;
-	        stroke: #121401;
-	        stroke-width: 2px;
-	        shape-rendering: crispEdges;
-	    }
-	    .brush .extent {
-		  fill-opacity: .125;
-		  shape-rendering: crispEdges;
-		}
-	</style>
+	<div class="browse-container timeline">
 
-    <div id="chart">
+		<div class="controls panel panel-default">
+			<div class="list-group">
+				<div class="list-group-item">
+					<span class="loading">
+						<span class="glyphicon glyphicon-refresh spin"></span> <i>{{ trans('browse.loading') }}</i>
+					</span>
+					<span class="resource-count">
+						<b><span class="count"></span></b> {{ trans('browse.resources_in_section') }}
+					</span>
+				</div>
+				<button class="list-group-item btn-search" onclick="areaTimeline.triggerSearch()">
+					<span class="glyphicon glyphicon-search"></span> {{ trans('browse.trigger_search') }}
+				</button>
+			</div>
+		</div>
 
-    </div>
+	    <div id="chart">
+
+	    </div>
+
+	</div>
     <script>
         //var bucketTimeline = new BucketTimeline("chart").renderIntoDOM(-6000,2016);
         var areaTimeline = new AreaTimeline(

@@ -48,10 +48,9 @@ class Resource
             'field' => 'spatial.location', 'precision' => intval($ghp) 
         ]];
 
-        if (Request::has("start") && Request::has("end")) {
-            $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
-                    intval(Request::get("start")), intval(Request::get("end")), 50);
-        }
+        // add timespan bucket aggregation
+        $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
+                intval(Request::get("start")), intval(Request::get("end")), 50);
         
 
         $q = ['match_all' => []];
@@ -85,8 +84,24 @@ class Resource
                     $query['query']['bool']['must'][] = ['match' => $fieldQuery];
                 }
             }
+        }
+
+        if (Request::has('start') && Request::has('end')) {
+            $query['query'] = [
+                'filtered' => [
+                    'query' => $query['query'],
+                    'filter' => [
+                        'nested' => [
+                            'path' => 'temporal',
+                            'query' => Resource::buildRangeQuery(
+                                Request::input('start'),
+                                Request::input('end')
+                            )
+                        ]
+                    ]
+                ]
+            ];
         }        
-        
         
         // TODO: refactor so that ES service takes care of bbox parsing
         if (Request::has('bbox')) {
@@ -367,7 +382,7 @@ class Resource
      */
     private static function addRange(&$ranges,$rangeStartYear,$rangeEndYear) {
         $key=$rangeStartYear.":".$rangeEndYear;
-        $ranges[$key]=self::makeRangeAggPartial(
+        $ranges[$key]=self::buildRangeQuery(
             $rangeStartYear,
             $rangeEndYear);
     }
@@ -379,7 +394,7 @@ class Resource
      * @param $rangeEndYear
      * @return array
      */
-    private static function makeRangeAggPartial($rangeStartYear, $rangeEndYear) {
+    private static function buildRangeQuery($rangeStartYear, $rangeEndYear) {
         return
             [
                 'bool' => [

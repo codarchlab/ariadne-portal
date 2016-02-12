@@ -75,17 +75,17 @@ function GridMap(container, queryUri) {
 
 	this.updateResourceCount = function(count) {
 		var formatted = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		$(".map-controls .resource-count .count").text(formatted);
+		$(".map .controls .resource-count .count").text(formatted);
 	};
 
 	this.showLoading = function() {
-		$(".map-controls .resource-count").hide();
-		$(".map-controls .loading").show();
+		$(".map .controls .resource-count").hide();
+		$(".map .controls .loading").show();
 	}
 
 	this.hideLoading = function() {
-		$(".map-controls .resource-count").show();
-		$(".map-controls .loading").hide();
+		$(".map .controls .resource-count").show();
+		$(".map .controls .loading").hide();
 	};
 
 	this.refreshMap = function() {

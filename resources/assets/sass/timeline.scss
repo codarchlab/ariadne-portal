@@ -1,0 +1,15 @@
+.browse-container.timeline {
+
+	.axis path,
+	.axis line {
+	    fill: none;
+	    stroke: #121401;
+	    stroke-width: 2px;
+	    shape-rendering: crispEdges;
+	}
+	.brush .extent {
+	  fill-opacity: .125;
+	  shape-rendering: crispEdges;
+	}
+
+}

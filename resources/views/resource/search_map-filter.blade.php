@@ -6,9 +6,9 @@
             <h3 class="panel-title">Where</h3>
         </div>
 
-		<div class="filter-map-container">
+		<div class="filter-container map">
 
-			<div class="pull-right map-controls btn-toolbar">
+			<div class="pull-right controls btn-toolbar">
 				<button type="button" class="btn btn-default btn-xs loading">
 					<span class="glyphicon glyphicon-refresh spin"></span>
 				</button>
@@ -17,7 +17,7 @@
 				</button>
 			</div>
 
-			<div class="map" id="map"></div>
+			<div class="map-container" id="map"></div>
 
 		</div>
 
