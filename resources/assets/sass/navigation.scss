@@ -1,311 +1,143 @@
-/* Navbar defaults */
 
-#navbar-small {
-
-  background-color: #efefef;
+/* Menu bakground main block color etc */
+.navbar, .navbar-default, .collapse {
+    background-color: #efefef;
+    border: 0px;
 }
-
-.navbar .nav li {
-
-  width: 21%;
-  display: inline-block;
-  float: none;
+.navbar-brand {
+  padding-left: 30px;
+  padding-right: 0px;
+  // Padding-Top : One pixel to low in Chrome. Ok for Firefox!!???
+  padding-top: 16px;
 }
-
-.navbar .nav {
-
-  float: none;
-  text-align: center;
+.navbar-header {
+  min-height: 56px;
 }
 
 .navbar-toggle {
-
-  margin-top: 25px;
-  margin-right: 20px;
+  margin-right: 30px;
+  margin-top: 12px;
 }
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-
-  border-color: #000;
+.nav-justified > li > a {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
-.navbar-default {
-
-  background-color: #000;
-  border: none;
+#catalogSearch {
+  padding-top: 5.5px;
+  padding-bottom: 5.5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align:center;
 }
 
-#navCatalog a,
-#navServices a,
-#navExperiments a,
-#navAbout a {
+.collapsing {
+  border-width: 0px;
+}
 
+.navbar > .container-fluid {
+   padding-right: 0;
+   padding-left: 0;
+}
+
+/* Menu links colors etc */
+#navCatalog a,#navServices a,#navExperiments a,#navAbout a {
   color: #555;
 }
 
-#navCatalog, #navSearch {
-
-  border-bottom: 5px solid $yellow;
+#navCatalog {
+  border-bottom: 3px solid $yellow;
 }
 
-#navServices {
-
-  border-bottom: 5px solid $red;
-}
-
-#navExperiments {
-
-  border-bottom: 5px solid $green;
-}
-
-#navAbout {
-
-  border-bottom: 5px solid $blue;
+#navSearch {
+  border-bottom: 3px solid $yellow;
 }
 
 #navSearch.active {
-
   background-color: rgba($yellow, 0.2);
 }
 
 /* Search tab in navbar */
-#navSearch .input-group {
-
-  margin: 0 15px;
+#navSearch .input-group { 
+  //margin: 0 15px;
 }
 
 #navSearch .input-group .form-control {
-
   float: none;
 }
 
 #navSearch .btn-primary {
-
   border-color: darken($yellow, 5%);
   background-color: $yellow;
 }
 
 #navSearch .btn {
-
   height: 31px !important;
-  padding: 2px 3px 4px 9px;
+  padding: 3px 3px 4px 4px;
 }
 
 #navSearch .form-control {
-
   height: 31px;
 }
 
 #navSearch .form-control:focus {
-
   box-shadow: none;
   border-color: #D5A03A;
 }
 
-.navbar .nav li#navSearch {
-
+/*.navbar .nav li#navSearch {
   display: inline-block;
   float: none;
+}*/
+
+#navServices {
+  border-bottom: 3px solid $red;
 }
 
-#navCatalog > a:hover,
-#navCatalog > a:focus,
-#navCatalog.active > a {
+#navExperiments {
+   border-bottom: 3px solid $green;
+}
 
+#navAbout { 
+  border-bottom: 3px solid $blue;
+}
+
+#navCatalog > a:hover, #navCatalog > a:focus, #navCatalog.active > a {
   color: #fff;
   background-color: rgba($yellow, 0.2);
 }
 
-#navServices > a:hover,
-#navServices > a:focus,
-#navServices.active > a {
-
+#navServices > a:hover, #navServices > a:focus, #navServices.active > a {
   color: #fff;
   background-color: rgba($red, 0.2);
 }
 
-#navExperiments > a:hover,
-#navExperiments > a:focus,
-#navExperiments.active > a {
-
+#navExperiments > a:hover, #navExperiments > a:focus, #navExperiments.active > a {
   color: #fff;
   background-color: rgba($green, 0.2);
 }
 
-#navAbout > a:hover,
-#navAbout > a:focus,
-#navAbout.active > a {
-
+#navAbout > a:hover, #navAbout > a:focus, #navAbout.active > a {
   color: #fff;
   background-color: rgba($blue, 0.2);
 }
 
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-
-  background-color: transparent;
-}
-
-.navbar .navbar-inner {
-
-  padding: 0;
-}
-
-.navbar .nav {
-
-  margin: 0;
-  display: table;
-  width: 100%;
-}
-
-.navbar .nav > li {
-
-  display: table-cell;
-  width: 1%;
-  float: none;
-  text-align: center;
-}
-
-.navbar .nav li:first-child a {
-
-  border-left: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-.navbar .nav li:last-child a {
-
-  border-right: 0;
-  border-radius: 0 3px 3px 0;
-}
-
-#logo {
-
-  z-index: 1035;
-  position: fixed;
-}
-
-/**
-  Prevent stacking of list items in small screen resolutions
-*/
-.nav-justified > li {
-
-  display: table-cell;
-  width: 1%;
-}
-.nav-justified > li > a {
-
-  margin-bottom: 0;
-}
-
-.navbar-main {
-
-  background-color: rgba(239, 239, 239, 0.9);
-  border-bottom: 3px #ccc;
-}
-
-.navbar-main .glyphicon {
-
-  top: 7px;
-  font-size: 1.5em;
-  padding-right: 10px;
-}
-
-/* / Navbar defaults */
-
-/* Big navbar */
-
-#navbar-big .navbar-main {
-
-  min-height: 69px;
-  padding-left: 0;
-}
-
-#navbar-big #navCatalog a,
-#navbar-big #navServices a,
-#navbar-big #navExperiments a,
-#navbar-big #navAbout a {
-
-  color: #555;
-  padding: 15px 0 20px 0;
-  font-size: 1.3em;
-}
-
-#navbar-big #brand {
-
-  height: 55px;
-}
-
-#navbar-big .navbar-brand {
-
-  display: none;
-}
-
-#navbar-big #navSearch {
-
-  display: none;
-}
-
-/* / Big navbar */
-
-/* Small navbar */
-
-#navbar-small .navbar-main {
-
-  height: 50px;
-  padding-left: 69px;
-}
-
-#navbar-small .navbar-main > li {
-
-  border-bottom-width: 3px;
-}
-
-#navbar-small .navbar-main > li > a {
-
-  color: #555;
-  padding: 11px 0 11px 0;
-  font-size: 15px;
-  line-height: 25px;
-}
-
-#navbar-small .navbar-brand {
-
-  padding: 8px;
-}
-
-#navbar-small #brand {
-
-  height: 55px;
-}
-
-#navbar-small .navbar-main .glyphicon {
-
-  top: 3px;
-  font-size: 1.1em;
-  padding-right: 10px;
-}
-
-#navbar-small #logo {
-
-  top: 1px;
-}
-
-/* / Small navbar */
-
+// Logo in splash page
 #searchlogo {
-
   padding: 50px 0 50px 0;
   display: block;
   margin: 0 auto;
 }
 
-/**
-  Navigation Bar Elements
-*/
 
-/* About page */
-#aboutpage {
-
-  text-align: justify;
+@media screen and (max-width: 767px){
+  #navSearch {
+    border: 0;
+  }
+  #catalogSearch > .input-group {
+    margin-top: 15px;
+    margin-left: 50px;
+    margin-right: 60px;
+  }
 }
