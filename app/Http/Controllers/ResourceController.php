@@ -111,8 +111,15 @@ class ResourceController extends Controller {
           $partOf[] = $newThing;
         }
       }
+      
+      //Extract id from derived subjects
+      if (isset($resource['_source']['derivedSubject'])) {
+        foreach ($resource['_source']['derivedSubject'] as &$subject) {
+          $subject['id'] = explode("http://vocab.getty.edu/aat/", $subject['source'])[1];
+        }
+      }
 
-      return view('resource.page', [
+        return view('resource.page', [
         'resource' => $resource,
         'geo_items' => $spatial_items,
         'nearby_geo_items' => $nearby_spatial_items,
