@@ -21,7 +21,8 @@ class Subject {
      * @throws Exception if document is not found
      */
     public static function get($id) {
-        
+       
+        /*
         return array(
             '_index' => 'subject_v1',
             '_type' => 'subject',
@@ -56,10 +57,9 @@ class Subject {
                 ),
             )
         );
-        
-        
-        
-        //return ElasticSearch::get($id, Config::get('app.elastic_subject_index'), 'concept');
+        */
+                
+        return ElasticSearch::get($id, Config::get('app.elastic_search_subject_index'), 'terms');
     }
 
     /**
@@ -68,62 +68,21 @@ class Subject {
      */
     public static function connectedResourcesQuery($subject) {
      
-       return array(
-            array(          
-                "location" => array(
-                    "lon" => 15.176353,
-                    "lat" => 58.235996
-                ),
-                "placeName" => "Östergötland",
-                "coordinateSystem" => "WGS 84",
-                "country" => "Sweden"
-            ),
-            array (
-                "location" => array(
-                    "lon" => 15.276353,
-                    "lat" => 58.235996
-                ),
-                "placeName" => "Östergötlands län",
-                "coordinateSystem" => "WGS 84",
-                "country" => "Sweden",
-            ),
-            array (
-                "location" => array (
-                    "lon" => 15.076353,
-                    "lat" => 58.435996
-                ),
-                "placeName" => "Boxholm kommun",
-                "coordinateSystem" => "WGS 84",
-                "country" => "Sweden",
-            ),
-            array (
-                "location" => array (
-                    "lon" => 15.076353,
-                    "lat" => 58.635996
-                ),
-                "placeName" => "Ekeby socken",
-                "coordinateSystem" => "WGS 84",
-                "country" => "Sweden"
-            ),
-            array (
-                "location" => array (
-                    "lon" => 15.276353,
-                    "lat" => 58.735996
-                ),
-                "placeName" => "Norrköping kommun",
-                "coordinateSystem" => "WGS 84",
-                "country" => "Sweden"
-            ),
-            array (
-                "location" => array (
-                    "lon" => 15.876353,
-                    "lat" => 58.835996
-                ),
-                "placeName" => "Norrköping socken",
-                "coordinateSystem" => "WGS 84",
-                "country" => "Sweden"
-            )
-        );       
+        $json = '{ 
+                    "query": { "match": { "derivedSubject.prefLabel": "' . $subject['_source']['prefLabel'] . '" }},
+                    "filter": { "exists" : { "field": "lat" }} 
+                }'
+        ;
+
+        $params = [
+            'index' => Config::get('app.elastic_search_catalog_index'),
+            'type' => 'resource',
+            'body' => $json
+        ];
+
+        $result = ElasticSearch::getClient()->search($params);
+        
+        return $result['hits']['hits'];
     }
 
     /**

@@ -18,21 +18,22 @@ return [
     
 	'elastic_search_host' => env('ELASTIC_SEARCH_HOST'),
 	'elastic_search_catalog_index' => env('ELASTIC_SEARCH_CATALOG_INDEX'),
+        'elastic_search_subject_index' => env('ELASTIC_SEARCH_SUBJECT_INDEX'),
     
 	/* Aggregations used for filtering in the search */
 	'elastic_search_aggregations' => [
-    'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
-    'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']],
-    'derivedSubject' => ['terms' => ['field' => 'derivedSubject.prefLabel.raw']],
-    'keyword' => ['terms' => ['field' => 'keyword.raw']],
-    'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
-    'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
-    'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
-    //'temporal' => ['terms' => ['field' => 'temporal.periodName.raw']],
-    'temporal' => ['nested' => ['path' => 'temporal'],'aggs' => ['temporal' =>['terms' => ['field' => 'temporal.periodName.raw']]]],
-    'rights' => ['terms' => ['field' => 'rights']],
-    'language' => ['terms' => ['field' => 'language']],
-    'issued' => ['terms' => ['field' => 'issued.raw']]
+        'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
+        'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']],
+        'derivedSubject' => ['terms' => ['field' => 'derivedSubject.prefLabel.raw']],
+        'keyword' => ['terms' => ['field' => 'keyword.raw']],
+        'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
+        'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
+        'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
+        //'temporal' => ['terms' => ['field' => 'temporal.periodName.raw']],
+        'temporal' => ['nested' => ['path' => 'temporal'],'aggs' => ['temporal' =>['terms' => ['field' => 'temporal.periodName.raw']]]],
+        'rights' => ['terms' => ['field' => 'rights']],
+        'language' => ['terms' => ['field' => 'language']],
+        'issued' => ['terms' => ['field' => 'issued.raw']]
 	],
   
   /*List of posible sorts */

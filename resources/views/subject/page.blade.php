@@ -1,5 +1,5 @@
 @extends('app')
-@section('title', $subject['_source']['title'].' - Ariadne portal')
+@section('title', $subject['_source']['prefLabel'].' - Ariadne portal')
 
 @if (isset($subject['_source']['description']))
 
@@ -24,7 +24,7 @@
         <!-- subject metadata -->
         <div class="col-md-8 subject-metadata" itemscope itemtype="http://schema.org/Intangible">
 
-            <h3 itemprop="name"><span class="glyphicon glyphicon-tag"></span>{{ $subject['_source']['title'] }}</h3>
+            <h3 itemprop="name"><span class="glyphicon glyphicon-tag"></span>{{ $subject['_source']['prefLabel'] }}</h3>
  
             <dl class="dl-horizontal">
 
@@ -36,7 +36,12 @@
                 @if (isset($subject['_source']['description']))
                     <dt>{{ trans('subject.description') }}</dt>
                     <dd itemprop="description">{{ $subject['_source']['description'] }}</dd>                    
-                @endif                
+                @endif      
+                
+                @if (isset($subject['_source']['uri']))
+                    <dt>{{ trans('subject.uri') }}</dt>
+                    <dd itemprop="sameAs"><a href="{{ $subject['_source']['uri'] }}">{{ $subject['_source']['uri'] }}</a></dd>                    
+                @endif  
                                 
                 @if (isset($subject['_source']['terms']) && count($subject['_source']['terms']) > 0)
                     <dt>{{ trans('subject.terms') }}</dt>
@@ -83,10 +88,10 @@
         
         <!-- subject context -->
         <div class="col-md-4 subject-context">
-          
-            <h4>{{ trans('subject.connected_resources') }}</h4>
-
             @if(count($resources) > 0)
+
+                <h4>{{ trans('subject.connected_resources') }}</h4>
+
                 <div id="map"></div>
                 
                 <script>
