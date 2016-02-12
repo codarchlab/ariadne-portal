@@ -2,11 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+       
+        @yield('headers')
         <meta name="description" content="@yield('description')">
         <meta name="keywords" content="@yield('keywords')">
-
-        @yield('headers')
         
         <title>@yield('title')</title>
 
@@ -16,7 +17,7 @@
         
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
         <link rel="Shortcut icon" href="http://ariadne-infrastructure.eu/extension/mdr_site/design/ariadne/images/favicon.ico" type="image/x-icon" />
 
         <!--[if lt IE 9]>
@@ -26,14 +27,17 @@
     </head>
     <body {{ (Request::is('/') ? ' id=frontpage' : '') }} itemscope itemtype="http://schema.org/DataCatalog">
         
-        @include('shared._navigation')
-
         <!-- combined JS code -->
         <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
-
+               
+        
+        @include('shared._navigation')
+        
         @yield('content')
 
         @include('shared._footer')
+        
+              
 
     </body>
 </html>
