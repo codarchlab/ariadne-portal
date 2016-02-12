@@ -12,8 +12,8 @@
 				<button type="button" class="btn btn-default btn-xs loading">
 					<span class="glyphicon glyphicon-refresh spin"></span>
 				</button>
-				<button type="button" class="btn btn-default btn-xs btn-filter" onclick="gridMap.triggerSearch()" data-toggle="tooltip" data-placement="top" title="Search area" >
-					<span class="glyphicon glyphicon-filter"></span>
+				<button type="button" class="btn btn-default btn-xs btn-filter" onclick="gridMap.triggerSearch()" data-toggle="tooltip" data-placement="top" title="Show resources within area" >
+					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</div>
 
