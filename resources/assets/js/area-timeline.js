@@ -15,7 +15,6 @@ function AreaTimeline(containerId, queryUri, from, to) {
         aspect = chart.width() / chart.height(),
         container = chart.parent();
     $(window).on("resize", function() {
-        console.log(container.width());
         var targetWidth = container.width();
         chart.attr("width", targetWidth);
         chart.attr("height", Math.round(targetWidth / aspect));
@@ -25,6 +24,33 @@ function AreaTimeline(containerId, queryUri, from, to) {
         var uri = query.toUri();
         window.location.href = uri;
     };
+
+    this.zoomIn = function() {
+
+        queryHistory.push(query.toUri());
+
+        var fromKey = 20;
+        var toKey = 40;
+        var extent = brush.extent();
+        if (extent[0] != extent[1]) {
+            fromKey = Math.floor(extent[0]);
+            toKey = Math.ceil(extent[1]);
+        }
+        var bucketArray = d3.entries(buckets);
+        query.params.start = bucketArray[fromKey].key.split(":")[0];
+        query.params.end = bucketArray[toKey-1].key.split(":")[1];
+        updateTimeline();
+        d3.selectAll("#" + containerId + " .brush").call(brush.clear());
+    }
+
+    this.zoomOut = function() {
+
+        if (queryHistory.length > 0) {
+            query = Query.fromUri(queryHistory.pop());
+            updateTimeline();
+        }
+        d3.selectAll("#" + containerId + " .brush").call(brush.clear());
+    }
 
     var initialize = function() {
 
@@ -78,7 +104,7 @@ function AreaTimeline(containerId, queryUri, from, to) {
      * @returns {Array} the dataset for d3.
      */
     var convertESBuckets = function(buckets) {
-        var data=[];
+        data=[];
         var i=0;
         for (key in buckets) {
             data.push({
@@ -93,7 +119,6 @@ function AreaTimeline(containerId, queryUri, from, to) {
 
     var brushed = function() {
 
-        console.log(brush.extent());
         // TODO: calc selected objects, implement buttons for zooming and searching
     }
 
@@ -150,6 +175,7 @@ function AreaTimeline(containerId, queryUri, from, to) {
     query.params.end = to;
 
     var buckets, x, y, area, xAxis, brush;
+    var queryHistory = [];
 
     initialize();
     updateTimeline();

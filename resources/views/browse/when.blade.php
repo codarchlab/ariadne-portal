@@ -21,6 +21,15 @@
 			</div>
 		</div>
 
+		<div class="zoom-controls">
+			<button class="btn btn-default" onclick="areaTimeline.zoomOut()">
+				<span class="glyphicon glyphicon-zoom-out"></span>
+			</button>
+			<button class="btn btn-default" onclick="areaTimeline.zoomIn()">
+				<span class="glyphicon glyphicon-zoom-in"></span>
+			</button>
+		</div>
+
 	    <div id="chart">
 
 	    </div>
