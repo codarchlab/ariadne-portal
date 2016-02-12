@@ -52,6 +52,22 @@ class Resource
         $query['aggregations']['range_buckets'] = Resource::prepareRangeBucketsAggregation(
                 intval(Request::get("start")), intval(Request::get("end")), 50);
         
+        // handle sorting
+        if(Request::has('sort') && in_array(Request::input('sort'), Config::get('app.elastic_search_sort'))){
+          $sort_field = Request::input('sort');
+          $order = '';
+          switch(Request::input('order')){
+            case 'asc': 
+              $order = 'asc'; 
+              break;
+            case 'desc':
+              $order = 'desc'; 
+              break;
+            default:
+              $order = 'asc';
+          }
+          $query['sort'] = [$sort_field => ['order' => $order]];
+        }
 
         $q = ['match_all' => []];
 

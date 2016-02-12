@@ -16,17 +16,31 @@
 
                 <div class="input-group">
                     {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources...")) !!}
-
-                    @foreach($hits->aggregations() as $key => $aggregation)
-                        @if(Input::get($key))
-                            {!! Form::hidden($key, Input::get($key)) !!}
-                        @endif
-                    @endforeach
-
+                    
                     <span class="input-group-btn">
                         {!! Form::button('&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary", "data-toggle" => "tooltip", "data-placement" => "top", "title" => "Refresh search")) !!}   
                     </span>
                 </div>
+                <div class="input-group">
+                  <label for="sort">Order By</label>
+                  <select name="sort">
+                    <option value="">Score</option>
+                    @foreach(Config::get('app.elastic_search_sort') as $sort)
+                    <option value="issued" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
+                    @endforeach
+                  </select>
+
+                  <select name="order">
+                    <option value="" @if(Request::input('order') == 'asc') selected @endif>Ascending</option>
+                    <option value="desc" @if(Request::input('order') == 'desc') selected @endif>Descending</option>
+                  </select>              
+                </div>
+            
+                @foreach($hits->aggregations() as $key => $aggregation)
+                  @if(Input::get($key))
+                      {!! Form::hidden($key, Input::get($key)) !!}
+                  @endif
+                @endforeach
             {!! Form::close() !!}
 
             <!-- -->

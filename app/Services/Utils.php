@@ -213,6 +213,10 @@ class Utils {
             if(self::emptyRecursive(Request::input())){
                 header('Location: ' . route('search'));
                 die();
+            }elseif(count(Request::input()) != count(array_filter(Request::input()))){
+              $params = array_filter(Request::input());
+              header('Location: ' . route('search').'?'.http_build_query($params));
+              die();              
             }
         }
     }

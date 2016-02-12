@@ -34,6 +34,12 @@ return [
     'language' => ['terms' => ['field' => 'language']],
     'issued' => ['terms' => ['field' => 'issued.raw']]
 	],
+  
+  /*List of posible sorts */
+  'elastic_search_sort' => [
+    'issued',
+    'title'
+  ],
     
 	/* Fields to search in if a specific fieldgroup is selected in the frontpage search form */
 	'elastic_search_field_groups' =>[
