@@ -1,5 +1,19 @@
 .browse-container.timeline {
 
+	.zoom-controls {
+
+		position: absolute;
+		top: 60px;
+		left: 10px;
+		z-index: 500;
+		text-align: center;
+
+		.btn-sm.list-group-item {
+			padding: 5px 10px;
+		}
+		
+	}
+
 	.axis path,
 	.axis line {
 	    fill: none;
@@ -7,6 +21,7 @@
 	    stroke-width: 2px;
 	    shape-rendering: crispEdges;
 	}
+
 	.brush .extent {
 	  fill-opacity: .125;
 	  shape-rendering: crispEdges;

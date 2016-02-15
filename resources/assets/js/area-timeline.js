@@ -41,6 +41,8 @@ function AreaTimeline(containerId, queryUri, from, to) {
         query.params.end = bucketArray[toKey-1].key.split(":")[1];
         updateTimeline();
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
+
+        $(".timeline .btn-zoom-out").removeClass("disabled");
     }
 
     this.zoomOut = function() {
@@ -48,7 +50,11 @@ function AreaTimeline(containerId, queryUri, from, to) {
         if (queryHistory.length > 0) {
             query = Query.fromUri(queryHistory.pop());
             updateTimeline();
+            if (queryHistory.length == 0) {
+                $(".timeline .btn-zoom-out").addClass("disabled");
+            }
         }
+
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
     }
 
