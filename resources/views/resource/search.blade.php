@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="row">
-              <div class="input-group pull-right">
+              <div class="col-md-12 text-right">
                 <label for="sort">Order By</label>
                 <select id="sort-action">
                   <option value="">Score</option>
