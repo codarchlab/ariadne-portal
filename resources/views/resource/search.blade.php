@@ -12,7 +12,7 @@
 
             <h4>{{ trans('search.current_query') }}</h4>
 
-            {!! Form::open(array("action" => "ResourceController@search", "method" => "GET")) !!}
+            {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "id" => "searchPageForm")) !!}
 
                 <div class="input-group">
                     {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources...")) !!}
@@ -21,20 +21,9 @@
                         {!! Form::button('&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary", "data-toggle" => "tooltip", "data-placement" => "top", "title" => "Refresh search")) !!}   
                     </span>
                 </div>
-                <div class="input-group">
-                  <label for="sort">Order By</label>
-                  <select name="sort">
-                    <option value="">Score</option>
-                    @foreach(Config::get('app.elastic_search_sort') as $sort)
-                    <option value="issued" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
-                    @endforeach
-                  </select>
-
-                  <select name="order">
-                    <option value="" @if(Request::input('order') == 'asc') selected @endif>Ascending</option>
-                    <option value="desc" @if(Request::input('order') == 'desc') selected @endif>Descending</option>
-                  </select>              
-                </div>
+            
+                {!! Form::hidden('sort', Input::get('sort')) !!}
+                {!! Form::hidden('order', Input::get('order')) !!}
             
                 @foreach($hits->aggregations() as $key => $aggregation)
                   @if(Input::get($key))
@@ -98,6 +87,23 @@
                 <div class="col-md-9 text-right">
                     <small>{!! $hits->appends(Input::all())->render() !!}</small>
                 </div>
+            </div>
+            <div class="row">
+              <div class="input-group pull-right">
+                <label for="sort">Order By</label>
+                <select id="sort-action">
+                  <option value="">Score</option>
+                  @foreach(Config::get('app.elastic_search_sort') as $sort)
+                  <option value="{{ $sort }}" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
+                  @endforeach
+                </select>
+
+                @if(Request::has('order') == false || Request::input('order') == 'asc')
+                  <a href="{{ route('search', Utils::addKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes-alt" data-toggle="tooltip" data-placement="bottom" title="Descending"></span></a>
+                @else
+                  <a href="{{ route('search', Utils::removeKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes" data-toggle="tooltip" data-placement="bottom" title="Ascending "></span></a>
+                @endif
+              </div>              
             </div>
             <div class="row">
                 <div class="col-md-12"><hr/></div>

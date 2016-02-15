@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 $(document).ready(function () {
     placeGetMoreLinkForAggregations();
 
@@ -45,6 +44,10 @@ $(document).ready(function () {
         }
     });
     
+    $("#sort-action").on('change', function() {
+        $("input[name='sort']").val($("#sort-action").val());
+        $("#searchPageForm").submit();
+    });
 });
 
 
