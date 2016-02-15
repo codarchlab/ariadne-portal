@@ -14,17 +14,25 @@
 		
 	}
 
+	.area {
+		fill: $green;
+		stroke: darken($green, 30%);
+	}
+
 	.axis path,
 	.axis line {
 	    fill: none;
-	    stroke: #121401;
-	    stroke-width: 2px;
+	    stroke: #000;
+	    stroke-width: 1px;
 	    shape-rendering: crispEdges;
 	}
 
 	.brush .extent {
-	  fill-opacity: .125;
-	  shape-rendering: crispEdges;
+		stroke: darken($yellow, 30%);
+		stroke-opacity: .125;
+		fill-opacity: .125;
+		fill: $yellow;
+		shape-rendering: crispEdges;
 	}
 
 }

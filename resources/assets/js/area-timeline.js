@@ -78,8 +78,7 @@ function AreaTimeline(containerId, queryUri, from, to) {
             .tickFormat(getLabelForBucket);
 
         svg.append("path")
-            .attr("class", "area")
-            .style("fill", "#aad");
+            .attr("class", "area");
 
         svg.append("g")
             .attr("class", "x axis")
