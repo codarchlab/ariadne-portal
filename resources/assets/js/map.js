@@ -149,7 +149,7 @@ function GridMap(container, queryUri) {
 	var query = Query.fromUri(queryUri);
 	var bounds = null;
 	if (query.params['bbox']) {
-		bounds = query.params.bbox.split(",");
+		bounds = decodeURIComponent(query.params.bbox).split(",");		
 		map.fitBounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]]);
 	} else {
 		map.setView([50, 17], 3);
