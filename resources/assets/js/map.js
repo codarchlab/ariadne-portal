@@ -119,7 +119,12 @@ function GridMap(container, queryUri) {
 
 	function generateSearchUri() {
 		query.params['ghp'] = getGhprecFromZoom(map.getZoom());
-		query.params['bbox'] = map.getBounds().toBBoxString();
+		// ensure that bounds are within world limits
+		var bounds = new L.latLngBounds(
+			map.getBounds().getSouthWest().wrap(),
+			map.getBounds().getNorthEast().wrap()
+		);
+		query.params['bbox'] = bounds.toBBoxString();
 		return query.toUri();
 	}
 
@@ -143,7 +148,10 @@ function GridMap(container, queryUri) {
 		return gradient;
 	}
 
-	var map = L.map(container, { zoomControl: false });
+	var map = L.map(container, { 
+		zoomControl: false,
+		maxBounds: [ [-85.0, -180.0], [85.0, 180.0] ]
+	});
 	map.addControl( L.control.zoom({position: 'bottomright'}) );
 
 	var query = Query.fromUri(queryUri);
