@@ -100,8 +100,8 @@
             @if (isset($resource['_source']['nativeSubject']))
                 <div>
                     @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
-                        <a class="glyphicon glyphicon-tag" href="{{ route('subject.page', [ 'id' => $derivedSubject['id'] ]) }}"></a>
-                        <a class="tag" href="{{ route('search', [ 'nativeSubject' => $derivedSubject['prefLabel'] ]) }}">                            
+                        <a class="tag" href="{{ route('search', [ 'nativeSubject' => $derivedSubject['prefLabel'] ]) }}">
+                            <span class="glyphicon glyphicon-tag"></span>                  
                             <span itemprop="keywords">{{ $derivedSubject['prefLabel'] }}</span>
                         </a>
                     @endforeach
