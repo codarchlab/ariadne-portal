@@ -1,4 +1,4 @@
-function AreaTimeline(containerId, queryUri, from, to) {
+function AreaTimeline(containerId, queryUri) {
 
     var margin = 50,
         width  = 1200,
@@ -176,8 +176,8 @@ function AreaTimeline(containerId, queryUri, from, to) {
     };
 
     var query = Query.fromUri(queryUri);
-    query.params.start = from;
-    query.params.end = to;
+    if (!query.params['start']) query.params.start = -1000000; 
+    if (!query.params['end']) query.params.end = new Date().getFullYear();
 
     var buckets, x, y, area, xAxis, brush;
     var queryHistory = [];

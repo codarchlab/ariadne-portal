@@ -58,6 +58,11 @@
                 'buckets' => $hits->aggregations()['geogrid']['buckets']
             ])
 
+            @include('resource.search_timeline-filter', [
+                'buckets' => $hits->
+                    aggregations()['range_buckets']['range_agg']['buckets']
+            ])
+
             @foreach($aggregations as $key => $aggregation)
                 @if($key != 'geogrid' && $key != 'temporal'
                     && $key != 'range_buckets')

@@ -39,10 +39,8 @@
 
 	</div>
     <script>
-        //var bucketTimeline = new BucketTimeline("chart").renderIntoDOM(-6000,2016);
         var areaTimeline = new AreaTimeline(
-        	"chart", window.location.href,
-        	-1000000, 2016);
+        	"chart", window.location.href);
     </script>
 
 </div>

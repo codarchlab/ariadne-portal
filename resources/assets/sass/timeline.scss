@@ -1,34 +1,8 @@
-.browse-container.timeline {
-
-	text {
-		font-size: 13px;
-	}
-
-	.zoom-controls {
-
-		position: absolute;
-		top: 75px;
-		left: 10px;
-		z-index: 500;
-		text-align: center;
-
-		.btn-sm.list-group-item {
-			padding: 5px 10px;
-		}
-		
-	}
+.timeline {
 
 	.area {
 		fill: $green;
 		stroke: darken($green, 30%);
-	}
-
-	.axis path,
-	.axis line {
-	    fill: none;
-	    stroke: #000;
-	    stroke-width: 1px;
-	    shape-rendering: crispEdges;
 	}
 
 	.brush .extent {
@@ -39,4 +13,63 @@
 		shape-rendering: crispEdges;
 	}
 
+	.zoom-controls {
+		z-index: 500;
+		text-align: center;
+		position: absolute;
+
+		.btn-sm.list-group-item {
+			font: bold 18px "Lucida Console", Monaco, monospace;
+		}
+	}
+}
+
+.browse-container.timeline {
+
+	text {
+		font-size: 13px;
+	}
+
+	.zoom-controls {
+
+		top: 75px;
+		left: 10px;
+
+		.btn-sm.list-group-item {
+			padding: 5px 10px;
+		}		
+	}
+
+	.axis path,
+	.axis line {
+	    fill: none;
+	    stroke: #000;
+	    stroke-width: 1px;
+	    shape-rendering: crispEdges;
+	}
+}
+
+.filter-container.timeline {
+
+	text {
+		font-size: 25px;
+	}
+
+	.axis path,
+	.axis line {
+	    fill: none;
+	    stroke: #000;
+	    stroke-width: 3px;
+	    shape-rendering: crispEdges;
+	}
+
+	.zoom-controls {
+
+		top: 10px;
+		left: 10px;
+
+		.btn-sm.list-group-item {
+			padding: 1px 8px;
+		}		
+	}
 }
