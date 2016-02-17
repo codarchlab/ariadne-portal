@@ -97,7 +97,7 @@
                 </div>
             @endif
 
-            @if (isset($resource['_source']['nativeSubject']))
+            @if (isset($resource['_source']['derivedSubject']))
                 <div>
                     @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
                         <a class="tag" href="{{ route('search', [ 'nativeSubject' => $derivedSubject['prefLabel'] ]) }}">
