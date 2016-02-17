@@ -49,7 +49,10 @@ return [
     'title'
   ],
     
-	/* Fields to search in if a specific fieldgroup is selected in the frontpage search form */
+	/*
+	 * Fields to search in if a specific fieldgroup is selected in the frontpage search form
+	 * (same values should be configured in assets/views/pages/welcome.blade.php)
+	*/
 	'elastic_search_field_groups' =>[
 		'subject' => ['nativeSubject.prefLabel.raw'],
 		'time' => ['temporal.periodName'],
