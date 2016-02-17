@@ -11,6 +11,17 @@ component of the archaeological research methodology.')
 <script>
 
     /**
+     *  Set available query fields for dropdown menu
+     *  (see script element at the end of the template)
+     */
+    var queryFields = {
+        "All fields": "",
+        "Subject": "subject",
+        "Time period": "time",
+        "Location": "location"
+    };
+
+    /**
      * Randomize background image
      */
     var bgr = [
@@ -53,19 +64,26 @@ component of the archaeological research methodology.')
 
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="row">
-                            {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "class" => "form-inline")) !!}
-                                <div class="col-md-3 form-group">
-                                    {!! Form::select("fields", ["" => "All fields", "subject" => "Subject", "time" => "Time period", "location" => "Location"], null, ["class" => "form-control"]) !!}
-                                </div>
-                                <div class="col-md-9 input-group">
-                                    {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources in the Ariadne catalog ...")) !!}
-                                    <span class="submit-btn input-group-btn">
+
+                        {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "class" => "form-inline")) !!}
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="select-field-btn input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span id="query-field-label">All fields</span>
+                                        <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" id="query-fields-list">
+                                        </ul>
+                                    </div>
+                                    <input type="hidden" name="fields" id="query-field-input" value="">
+                                    {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources in the Ariadne catalog ...", "autofocus" => "autofocus")) !!}
+                                    <div class="submit-btn input-group-btn">
                                         {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
-                                    </span>
+                                    </div>
                                 </div>
-                            {!! Form::close() !!}
-                        </div>
+                            </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
 
@@ -114,5 +132,21 @@ component of the archaeological research methodology.')
     </div>
 
 </div>
+
+<script>
+
+    for (var key in queryFields) {
+        $('#query-fields-list').append('<li><a href="#" onclick="setQueryField(\'' + key + '\')">' + key + '</a></li>');
+    }
+
+    function setQueryField(key) {
+        $('#query-field-input').val(queryFields[key]);
+        $('#query-field-label').text(key);
+        $("input[autofocus]").focus();
+    }
+
+    $("input[autofocus]").focus();
+
+</script>
 
 @endsection

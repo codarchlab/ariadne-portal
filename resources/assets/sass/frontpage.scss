@@ -18,15 +18,20 @@ body#frontpage {
 #frontpage .form-control:focus {
 
   box-shadow: none !important;
-  border-color: $yellow !important;
+  border-color: rgb(204, 204, 204) !important;
 }
 
 #frontpage .search-form {
   margin-top: 70px;
 }
 
-#frontpage .search-form .submit-btn {
+#frontpage .search-form .submit-btn,
+#frontpage .search-form .select-field-btn {
   width: 1%;
+}
+
+#frontpage .search-form .select-field-btn .btn{
+  border-right: 0;
 }
 
 #welcomeSearch {
