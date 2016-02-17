@@ -97,7 +97,19 @@ class Resource
                 foreach ($values as $value) {
                     $fieldQuery = [];
                     $fieldQuery[$field] = $value;
-                    $query['query']['bool']['must'][] = ['match' => $fieldQuery];
+                    if ($key != 'temporal') $query['query']['bool']['must'][] = ['match' => $fieldQuery];
+  
+                    else $query['query'] = [
+                            'nested' => [
+                                        'path' => 'temporal',
+                                        'query' => [
+                                            'bool'=> [
+                                                'must' => ['match' => $fieldQuery]
+                                            ]
+                                        ]
+                                    ]
+                        ];
+                    //else $query['query']['nested']['temporal']['query']['bool']['must'][] = ['match' => $fieldQuery];
                 }
             }
         }
