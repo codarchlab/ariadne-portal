@@ -18,7 +18,7 @@
                     {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources...")) !!}
                     
                     <span class="input-group-btn">
-                        {!! Form::button('&nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary", "data-toggle" => "tooltip", "data-placement" => "top", "title" => "Refresh search")) !!}   
+                        {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary", "data-toggle" => "tooltip", "data-placement" => "top", "title" => "Refresh search")) !!}   
                     </span>
                 </div>
             
