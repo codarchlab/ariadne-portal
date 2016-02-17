@@ -94,37 +94,58 @@ component of the archaeological research methodology.')
     </div>
     <div class="row" id="welcomeDetails">
 
-        <div class="col-md-10 col-md-offset-1" id="welcomeDetails">
+        <div class="col-md-10 col-md-offset-1">
 
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-12">
 
-                    <div id="welcomeDescription">
+                    <div id="welcomebox">
 
-                        <h3>Welcome</h3>
+                        <h1>Welcome</h1>
                         <p>
                             ARIADNE brings together and integrates existing archaeological research data infrastructures
                             so that researchers can use the various distributed datasets and new and powerful technologies as an integral
                             component of the archaeological research methodology.
                         </p>
 
-                    </div>
-                </div>
+                        <div class="row">
 
-                <div class="col-md-6">
+                            <div class="col-md-4" id="where">
 
-                    <div id="welcomeLinks">
+                                <h2>Where</h2>
 
-                        <h3>Browse</h3>
+                                <div class="imageBox">
+                                    <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.png" class="img-responsive image"></a>
+                                </div>
 
-                        <div class="imageBox">
-                            <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.png" class="img-responsive image"></a>
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <h2>When</h2>
+
+                                <div class="imageBox">
+                                    <a href="{{ action('BrowseController@when') }}"><img src="img/when.png" class="img-responsive image"></a>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <h2>What</h2>
+
+                                <div class="imageBox">
+                                    <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.png" class="img-responsive image"></a>
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>
-
                 </div>
+
             </div>
 
         </div>

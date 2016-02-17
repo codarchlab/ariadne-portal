@@ -53,56 +53,51 @@ body#frontpage {
   margin-top: 27px;
 }
 
-#welcomeLinks img, #welcomeDescription p {
+#welcomebox img, #welcomeDescription p {
 
   border-radius: 5px;
 }
 
 #welcomeDetails h3 {
-
   font-size: 1.7em;
 }
 
-#welcomeDescription, #welcomeLinks {
-
+#welcomebox {
   background-color: rgba(239, 239, 239, 0.5);
   padding: 25px 25px 23px 25px;
-  color: #000;
-}
-
-#welcomeLinks {
-
+  color: #111;
+  font-size: 1.1em;
   border-radius: 10px;
+  text-align: justify;
 }
 
-#welcomeLinks .image {
+#welcomebox h1 {
+  color: #111;
+  font-size: 2em;
+}
+
+#welcomebox h2 {
+  color: #222;
+  font-size: 1.5em;
+}
+
+#where .image {
 
   transition: all 0.8s ease;
 }
-#welcomeLinks .image {
+#where .image {
 
   transform: scale(1.0); /* Standard Property */
   filter: drop-shadow(0px 0px 0px #333);
 }
-#welcomeLinks .image:hover {
+#where .image:hover {
 
   transform: scale(1.05); /* Standard Property */
   filter: drop-shadow(7px 7px 7px #333);
 }
 
-#welcomeLinks .imageBox {
+#where .imageBox {
 
   background-color: #b6d0d1;
   overflow:hidden;
-}
-
-#welcomeDescription {
-
-  border-radius: 10px;
-  margin-right: 5px;
-}
-
-#welcomeLinks {
-
-  margin-left: 5px;
 }
