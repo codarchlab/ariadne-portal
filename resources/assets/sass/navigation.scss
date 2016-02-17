@@ -127,9 +127,12 @@
 }
 
 @media screen and (max-width: 767px){
+
   #navSearch {
     border: 0;
+    display: none;
   }
+
   #catalogSearch > .input-group {
     margin-top: 15px;
     margin-left: 50px;
