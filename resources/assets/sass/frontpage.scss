@@ -15,6 +15,10 @@ body#frontpage {
   background-color: $yellow;
 }
 
+#frontpage .search-form .dropdown-toggle {
+  height: 37px;
+}
+
 #frontpage .form-control:focus {
 
   box-shadow: none !important;
