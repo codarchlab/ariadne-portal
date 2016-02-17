@@ -1,15 +1,21 @@
-
-/* Menu bakground main block color etc */
 .navbar, .navbar-default, .collapse {
-    background-color: #efefef;
-    border: 0px;
+  background-color: #efefef;
+  border: 0;
 }
+
+.navbar {
+  line-height: 0;
+  padding: 0;
+  margin: 0;
+  height: 56px;
+}
+
 .navbar-brand {
   padding-left: 30px;
-  padding-right: 0px;
-  // Padding-Top : One pixel to low in Chrome. Ok for Firefox!!???
+  padding-right: 0;
   padding-top: 16px;
 }
+
 .navbar-header {
   min-height: 56px;
 }
@@ -20,20 +26,20 @@
 }
 
 .nav-justified > li > a {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 19px;
+  padding-bottom: 21px;
 }
 
 #catalogSearch {
-  padding-top: 5.5px;
-  padding-bottom: 5.5px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding: 0 15px 6px 15px;
+  position: absolute;
+  top: 13px;
   text-align:center;
+  width: 100%;
 }
 
 .collapsing {
-  border-width: 0px;
+  border-width: 0;
 }
 
 .navbar > .container-fluid {
@@ -58,11 +64,6 @@
   background-color: rgba($yellow, 0.2);
 }
 
-/* Search tab in navbar */
-#navSearch .input-group { 
-  //margin: 0 15px;
-}
-
 #navSearch .input-group .form-control {
   float: none;
 }
@@ -85,11 +86,6 @@
   box-shadow: none;
   border-color: #D5A03A;
 }
-
-/*.navbar .nav li#navSearch {
-  display: inline-block;
-  float: none;
-}*/
 
 #navServices {
   border-bottom: 3px solid $red;
@@ -129,7 +125,6 @@
   display: block;
   margin: 0 auto;
 }
-
 
 @media screen and (max-width: 767px){
   #navSearch {
