@@ -3,10 +3,10 @@
         <div class="box-body">
             <div class="row">
                 
-                <div class="col-md-1">
+                <div class="col-md-1 col-sm-1 col-xs-2">
                     <img src="{{ asset("img/icons/")."/icon_".$hit['_source']['archaeologicalResourceType']['id'].".png" }}" height="50" border="0">
                 </div>
-                <div class="col-md-11">
+                <div class="col-md-11 col-sm-11 col-xs-10">
 
                     <h5>
                         <a href="{{ route('resource.page', $hit['_id']) }}">
