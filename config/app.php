@@ -30,7 +30,14 @@ return [
         'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
         'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
         //'temporal' => ['terms' => ['field' => 'temporal.periodName.raw']],
-        'temporal' => ['nested' => ['path' => 'temporal'],'aggs' => ['temporal' =>['terms' => ['field' => 'temporal.periodName.raw']]]],
+        'temporal' => [
+        	'nested' => ['path' => 'temporal'],
+        	'aggs' => [
+        		'temporal' =>[
+        			'terms' => ['field' => 'temporal.periodName.raw']
+        		]
+        	]
+        ],
         'rights' => ['terms' => ['field' => 'rights']],
         'language' => ['terms' => ['field' => 'language']],
         'issued' => ['terms' => ['field' => 'issued.raw']]

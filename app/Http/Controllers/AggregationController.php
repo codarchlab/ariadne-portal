@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DebugBar;
 use Illuminate\Support\Facades\Config;
 use App\Services\Resource;
 use App\Services\Utils;
@@ -23,17 +22,28 @@ class AggregationController extends Controller {
     $aggregations = Config::get('app.elastic_search_aggregations');
     if(key_exists($aggregationId, $aggregations)){
       $query['aggregations'] = [$aggregationId => $aggregations[$aggregationId]];
-      $query['aggregations'][$aggregationId]['terms']['size'] = 100;
+      if (array_key_exists('nested', $query['aggregations'][$aggregationId])) {
+        $query['aggregations'][$aggregationId]['aggs']
+          [$aggregationId]['terms']['size'] = 100;
+      } else {
+        $query['aggregations'][$aggregationId]['terms']['size'] = 100;
+      }
     }
     
     $hits = Resource::search($query, 'resource');
+
+    if (array_key_exists('nested', $query['aggregations'][$aggregationId])) {
+      $buckets = $hits['aggregations'][$aggregationId][$aggregationId]['buckets'];
+    } else {
+      $buckets = $hits['aggregations'][$aggregationId]['buckets'];
+    }
     
     if (Request::wantsJson()) {
       return response()->json($hits);
     } else {
       print view('resource.search_facet')
           ->with('key', $aggregationId)
-          ->with('buckets', $hits['aggregations'][$aggregationId]['buckets'])
+          ->with('buckets', $buckets)
           ->with('translateAggregations', Config::get('app.translate_aggregations'))
           ->with('hits', $hits);
       exit(0);
