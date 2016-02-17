@@ -82,3 +82,13 @@
 #backlink :before {
     content: '<< ';
 }
+
+.list-similar {
+  text-indent: -24px;
+  margin-left: 24px;
+}
+
+.list-similar li {  
+  line-height: 0.9em;
+  padding: 5px 0px;
+}

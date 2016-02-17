@@ -261,9 +261,10 @@
 
 
             <h4>{{ trans('resource.theme_similar') }}</h4>
-            <ul>
+            <ul class="list-unstyled list-similar">
             @foreach($similar_resources as $similar_resource)
                 <li>
+                    <img src="{{ asset("img/icons/")."/icon_".$similar_resource['_source']['archaeologicalResourceType']['id'].".png" }}" height="20" border="0">
                     <a href="{{ route('resource.page', [ $similar_resource['_id'] ]  ) }}">
                         {{ $similar_resource['_source']['title'] }}
                     </a>
