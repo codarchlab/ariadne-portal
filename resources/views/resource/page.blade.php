@@ -63,21 +63,27 @@
     </div>
 
     @if (str_contains(URL::previous(), URL::to('search')))
-        <div id="backlink"><a href="{{ URL::previous() }}">{{ trans('resource.backlink') }}</a></div>
-    @endif    
-    
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ URL::previous() }}" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-arrow-left"></span> {{ trans('resource.backlink') }}
+                </a>
+            </div>
+        </div>
+    @endif  
+
+    <div class="row">
+        <div class="col-md-12 resource-title">
+            <h1 itemprop="name">{{ $resource['_source']['title'] }}</h1>  
+        </div>
+    </div>
+
     <div class="row">
 
         <!-- resoure metadata -->
         <div class="col-md-8 resource-metadata" itemscope itemtype="http://schema.org/Dataset">
-            <h3 itemprop="name">{{ $resource['_source']['title'] }}</h3>
 
             <div>
-                @if (isset($resource['_source']['landingPage']))
-                    <a href="{{ $resource['_source']['landingPage']}}" target="_blank" itemprop="sameAs" class="landing-page">
-                        <span class="glyphicon glyphicon-globe"></span> {{ trans('resource.landing_page') }}
-                    </a>
-                @endif
 
                 <!-- TODO Add contact information when available in data. See mockups. -->
 
@@ -214,6 +220,13 @@
         </div>
         <!-- resource context -->
         <div class="col-md-4 resource-context">
+
+            @if (isset($resource['_source']['landingPage']))
+                <a href="{{ $resource['_source']['landingPage']}}" target="_blank" itemprop="sameAs" class="btn btn-primary form-control">
+                    <span class="glyphicon glyphicon-globe"></span> {{ trans('resource.landing_page') }}
+                    <span class="glyphicon glyphicon-new-window"></span>
+                </a>
+            @endif
 
             @if (isset($resource['_source']['isPartOf']))
                 <h4>{{ trans('resource.part_of') }}</h4>

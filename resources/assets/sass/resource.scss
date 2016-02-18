@@ -1,5 +1,19 @@
 /* Resources metadata */
 
+.resource-title h1 {
+  color: #111;
+  font-size: 1.8em;
+  border-bottom: 1px solid $red;
+}
+
+.resource-title h1:before {
+  @extend .glyphicon, .glyphicon-stop;
+  color: $red;
+  font-size: 0.5em;
+  top: 6px;
+  left: -2px;
+}
+
 .resource-metadata div {
   margin-bottom: 10px;
   text-align: justify;
@@ -18,20 +32,6 @@
 .resource-metadata .button {
   cursor: pointer;
   text-decoration: none;
-}
-
-.resource-metadata .landing-page {
-    font-size: 17px;
-    border: 1px solid #135c77;
-    padding: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    text-decoration: none;
-}
-
-.resource-metadata .landing-page:hover {    
-    background: lighten($blue, 65);    
 }
 
 /* Resources context */
