@@ -38,64 +38,89 @@ body#frontpage {
   border-right: 0;
 }
 
+#searchlogo {
+  padding: 40px 0 20px 0;
+  display: block;
+  margin: 0 auto;
+}
+
 #welcomeSearch {
 
+  border-radius: 3px;
   background-color: rgba(239, 239, 239, 0.5);
-  padding-bottom: 57px;
-
+  padding-bottom: 40px;
+  margin-bottom: 27px;
 }
 
 #welcomeDetails {
 
   color: #fff;
   font-size: 1.1em;
-  margin-top: 27px;
 }
 
-#welcomebox img, #welcomeDescription p {
-
-  border-radius: 5px;
-}
 
 #welcomeDetails h3 {
   font-size: 1.7em;
 }
 
-#welcomebox {
+.welcomebox {
   background-color: rgba(239, 239, 239, 0.5);
-  padding: 25px 25px 23px 25px;
+  padding: 25px;
+  margin-bottom: 27px;
   color: #111;
-  font-size: 1.1em;
+  border-radius: 3px;
   text-align: justify;
 }
 
-#welcomebox h1 {
+.welcomebox h1 {
   color: #111;
-  font-size: 2em;
-}
-
-#welcomebox h2 {
-  color: #222;
   font-size: 1.5em;
+  margin: 0px 0px 10px;
+  border-bottom: 1px solid $red;
 }
 
-#where .image {
-
-  transition: all 0.8s ease;
+.welcomebox h1:before {
+  @extend .glyphicon, .glyphicon-stop;
+  color: $red;
+  font-size: 0.5em;
+  top: 6px;
+  left: -2px;
 }
-#where .image {
 
-  transform: scale(1.0); /* Standard Property */
-  filter: drop-shadow(0px 0px 0px #333);
+.welcomebox h2 {
+  color: #222;
+  font-size: 1.1em;
+  margin: 0px 0px 5px;
 }
-#where .image:hover {
 
-  transform: scale(1.05); /* Standard Property */
-  filter: drop-shadow(7px 7px 7px #333);
+.welcomebox p {
+  line-height: 1.3em;
+  margin: 0px;
 }
 
 #where .imageBox {
 
   background-color: #b6d0d1;
+}
+
+.welcomebox.browse .imageBox {
+
+  background-color: lightgrey;
+  border-radius: 3px;
   overflow:hidden;
+}
+
+.welcomebox.browse .btn-primary {
+
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  background-color: transparent;
+  color: $brand-primary;
+}
+
+.welcomebox.browse .btn-primary:hover {
+
+  background-color: $brand-primary;
+  color: white;
 }

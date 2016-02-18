@@ -92,6 +92,7 @@ component of the archaeological research methodology.')
         </div>
 
     </div>
+
     <div class="row" id="welcomeDetails">
 
         <div class="col-md-10 col-md-offset-1">
@@ -100,7 +101,7 @@ component of the archaeological research methodology.')
 
                 <div class="col-md-12">
 
-                    <div id="welcomebox">
+                    <div class="welcomebox">
 
                         <h1>Welcome</h1>
                         <p>
@@ -109,38 +110,37 @@ component of the archaeological research methodology.')
                             component of the archaeological research methodology.
                         </p>
 
+                    </div>
+
+                    <div class="welcomebox browse">
+
+                        <h1>Browse the Catalog</h1>
+
                         <div class="row">
-
-                            <div class="col-md-4" id="where">
-
-                                <h2>Where</h2>
-
+                            <div class="col-md-4" id="where">                                
+                                <a href="{{ action('BrowseController@map') }}" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-globe"></span> Where
+                                </a>
                                 <div class="imageBox">
-                                    <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.png" class="img-responsive image"></a>
+                                    <a href="{{ action('BrowseController@map') }}"><img src="img/where.png" class="img-responsive image"></a>
                                 </div>
-
                             </div>
-
                             <div class="col-md-4">
-
-                                <h2>When</h2>
-
+                                <a href="{{ action('BrowseController@when') }}" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-stats"></span> When
+                                </a>
                                 <div class="imageBox">
                                     <a href="{{ action('BrowseController@when') }}"><img src="img/when.png" class="img-responsive image"></a>
                                 </div>
-
                             </div>
-
                             <div class="col-md-4">
-
-                                <h2>What</h2>
-
+                                <a class="btn btn-primary" disabled="disabled">
+                                    <span class="glyphicon glyphicon-list"></span> What
+                                </a>
                                 <div class="imageBox">
-                                    <a href="{{ action('BrowseController@map') }}"><img src="img/search-ariadne.png" class="img-responsive image"></a>
+                                    <img src="img/what.png" class="img-responsive image"></a>
                                 </div>
-
                             </div>
-
                         </div>
 
                     </div>
