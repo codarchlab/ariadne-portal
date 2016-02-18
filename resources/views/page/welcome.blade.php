@@ -118,11 +118,11 @@ component of the archaeological research methodology.')
 
                         <div class="row">
                             <div class="col-md-4" id="where">                                
-                                <a href="{{ action('BrowseController@map') }}" class="btn btn-primary">
+                                <a href="{{ action('BrowseController@where') }}" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-globe"></span> Where
                                 </a>
                                 <div class="imageBox">
-                                    <a href="{{ action('BrowseController@map') }}"><img src="img/where.png" class="img-responsive image"></a>
+                                    <a href="{{ action('BrowseController@where') }}"><img src="img/where.png" class="img-responsive image"></a>
                                 </div>
                             </div>
                             <div class="col-md-4">

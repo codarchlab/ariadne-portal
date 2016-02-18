@@ -16,8 +16,8 @@ class BrowseController extends Controller {
      *
      * @return View rendered pagination for search results
      */
-    public function map() {
-        return view('browse.map');
+    public function where() {
+        return view('browse.where');
     }  
 
 

@@ -23,7 +23,7 @@ Route::get('subject/{id}', [
     'uses' => 'SubjectController@page'
 ]);
 
-Route::get('browse/map', 'BrowseController@map');
+Route::get('browse/where', 'BrowseController@where');
 Route::get('browse/when', 'BrowseController@when');
 
 Route::get('search', [
