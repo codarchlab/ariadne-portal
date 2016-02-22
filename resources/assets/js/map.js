@@ -49,11 +49,13 @@ function GridMap(container, queryUri) {
 					var label = spatial.placeName ? spatial.placeName
 						: spatial.location.lat + ", " + spatial.location.lon;
 					marker.bindLabel(label, { className: "marker-label" });
-					marker.on('click', function(e) {
-						var q = "spatial.location.lon:\"" + spatial.location.lon
-							+ "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
-						window.location.href = new Query(q).toUri();
-                	});
+					marker.on('click', (function(spatial) {
+						return function(e) {
+							var q = "spatial.location.lon:\"" + spatial.location.lon
+								+ "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
+							window.location.href = new Query(q).toUri();
+	                	};
+					})(spatial));
 					marker.addTo(map);
 					markers.push(marker);
 					points.push(spatial.location);
