@@ -73,8 +73,7 @@ function getUrlVars(){
     for(var i = 0; i < hashes.length; i++){
         
         hash = hashes[i].split('=');
-
-        vars[hash[0]] = hash[1].replace(/\+/g," ").replace(/\%7C/g,"|");
+        if (hash.length>1)    vars[hash[0]] = hash[1].replace(/\+/g," ").replace(/\%7C/g,"|");
     }
     return vars;
 }
