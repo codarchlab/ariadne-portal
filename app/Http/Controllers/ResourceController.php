@@ -171,9 +171,11 @@ class ResourceController extends Controller {
         $query = Resource::getCurrentQuery();
         
         $hits = Resource::search($query, 'resource');
-        
+
         if (Request::wantsJson()) {
-            return response()->json($hits);
+            return response()
+                    ->json($hits)
+                    ->header("Vary", "Accept");
         } else {
             return view('resource.search')
                 ->with('type', null)
