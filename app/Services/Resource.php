@@ -182,7 +182,20 @@ class Resource
                       }
                   }
               }
-            }
+            },
+            "sort": [
+                {
+                    "_geo_distance": {
+                    "location": { 
+                        "lat" : '.$location['lat'].',
+                        "lon" : '.$location['lon'].'
+                    },
+                    "order":         "asc",
+                    "unit":          "km", 
+                    "distance_type": "plane" 
+                    }
+                }
+            ]
         }';
 
         $params = [
