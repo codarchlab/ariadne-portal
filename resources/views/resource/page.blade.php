@@ -83,7 +83,7 @@
         <!-- resoure metadata -->
         <div class="col-md-8 resource-metadata" itemscope itemtype="http://schema.org/Dataset">
 
-            <div>
+            <div class="clearfix">
 
                 <!-- TODO Add contact information when available in data. See mockups. -->
 
