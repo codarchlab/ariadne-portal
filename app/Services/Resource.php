@@ -174,7 +174,7 @@ class Resource
                   },
                   "filter" : {
                       "geo_distance" : {
-                          "distance" : "20km",
+                          "distance" : "50km",
                           "spatial.location" : {
                               "lat" : '.$location['lat'].',
                               "lon" : '.$location['lon'].'
