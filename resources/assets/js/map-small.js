@@ -110,23 +110,29 @@ function SmallMap(spatialItems,nearbySpatialItems) {
         }
     };
 
-    var fitViewportToMarkers = function(map,markers) {
+    var fitViewportToMarkers = function(map,markers,centerMarkers) {
         var group = L.featureGroup(markers);
-        map.fitBounds(group.getBounds());
+        var centerGroup = L.featureGroup(centerMarkers);
+        map.fitBounds(group.getBounds(), { animate: false });
+        map.zoomOut(1, { animate: false });
+        var center = centerGroup.getBounds().getCenter();      
+        map.panTo(center, { animate: false });
     };
 
 
     // Main
 
     var markers = [];
+    var centerMarkers = [];
     if(nearbySpatialItems !== null) {
         markers = markers.concat(createMarkers(nearbySpatialItems, false, 'blue'));
     }
     if(spatialItems !== null) {
-        markers = markers.concat(createMarkers(spatialItems, true, 'red'));
+        centerMarkers = createMarkers(spatialItems, true, 'red');
+        markers = markers.concat(centerMarkers);
     }
     
     var map = initializeMap();
     showMarkers(map,markers);
-    fitViewportToMarkers(map,markers);
+    fitViewportToMarkers(map,markers,centerMarkers);
 }
