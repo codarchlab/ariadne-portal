@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use App\Services\Subject;
+use Request;
 
 class SubjectController extends Controller {
 
@@ -24,7 +25,7 @@ class SubjectController extends Controller {
      * Display the specified subject.
      *
      * @param  int  $id
-     * @return View
+     * @return View or json
      */
     public function page($id) {
 
@@ -35,11 +36,17 @@ class SubjectController extends Controller {
                 
         $similar_subjects = Subject::similarSubjectsQuery($subject);
         
-        return view('subject.page', [
-            'subject' => $subject,
-            'resources' => $spatial_items,
-            'similar_subjects' => $similar_subjects
-        ]);
+        if (Request::wantsJson()) {
+            return response()
+                    ->json($subject)
+                    ->header("Vary", "Accept");
+        }else{
+          return view('subject.page', [
+              'subject' => $subject,
+              'resources' => $spatial_items,
+              'similar_subjects' => $similar_subjects
+          ]);
+        }
     }
 
     /**
