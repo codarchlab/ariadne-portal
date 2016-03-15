@@ -169,10 +169,21 @@ class Resource
             "query" : {
 
                 "filtered" : {
-                  "query" : {
-                      "match_all" : {}
-                  },
-                  "filter" : {
+                    "query" : {
+                        "bool" : {
+                            "must_not": {
+                                "match": {
+                                    "spatial.location.lat" : '.$location['lat'].'
+                                }
+                            },
+                            "must_not": {
+                                "match": {
+                                    "spatial.location.lon" : '.$location['lon'].'
+                                }
+                            }
+                        }
+                    },
+                    "filter" : {
                       "geo_distance" : {
                           "distance" : "50km",
                           "spatial.location" : {
@@ -180,7 +191,7 @@ class Resource
                               "lon" : '.$location['lon'].'
                           }
                       }
-                  }
+                    }
               }
             },
             "sort": [
