@@ -45,7 +45,7 @@ class Resource
         // add geogrid aggregation
         $ghp = Request::has('ghp') ? Request::input('ghp') : 2;
         $query['aggregations']['geogrid'] = ['geohash_grid' => [
-            'field' => 'spatial.location', 'precision' => intval($ghp) 
+            'field' => 'spatial.location', 'precision' => intval($ghp), 'size' => 20000
         ]];
 
         // add timespan bucket aggregation

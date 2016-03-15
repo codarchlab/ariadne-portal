@@ -22,10 +22,10 @@ function GridMap(container, queryUri) {
 		});
 
 		heatmap = L.heatLayer(heatPoints, { 
-			radius: 25,
+			radius: 10,
 			max: max,
-			gradient: generateGradient(0.5),
-			minOpacity: 0.1
+			gradient: generateGradient(0.7),
+			minOpacity: 0.3
 		}).addTo(map);
 
 	};
@@ -104,6 +104,7 @@ function GridMap(container, queryUri) {
 		requestInProgress = uri;
 		self.showLoading();
 		$.getJSON(uri, function(data) {
+			console.log(data.aggregations.geogrid.buckets.length);
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
 				self.updateResourceCount(data.total);
@@ -132,14 +133,15 @@ function GridMap(container, queryUri) {
 
 	function getGhprecFromZoom(zl) {
         var ghprecForZoomLevel =
-            [3,3,4,4,5,5,6,6,6,7,7,8,8,9,9,9,10,10,10];
+            [3,3,3,3,4,4,5,5,6,6,6,7,7,8,8,8,9,9,9];
         if (zl>18) zl=18;
+        console.log(zl, ghprecForZoomLevel[zl]);
         return ghprecForZoomLevel[zl];
     }
 
 	function heatMapColorForValue(value) {
 		var h = Math.round((1.0 - value) * 240);
-		return "hsl(" + h + ", 100%, 60%)";
+		return "hsl(" + h + ", 90%, 50%)";
 	}
 
 	function generateGradient(s) {
