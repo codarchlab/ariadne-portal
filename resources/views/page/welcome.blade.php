@@ -27,8 +27,8 @@ component of the archaeological research methodology.')
     var bgr = [
         'img/frontpage/sitebgr_01.jpg',
         'img/frontpage/sitebgr_02.jpg',
-        'img/frontpage/sitebgr_03.jpg',
-        'img/frontpage/sitebgr_04.jpg',
+        //'img/frontpage/sitebgr_03.jpg',
+        //'img/frontpage/sitebgr_04.jpg',
         'img/frontpage/sitebgr_05.jpg',
         'img/frontpage/sitebgr_06.jpg',
         'img/frontpage/sitebgr_07.jpg',
@@ -39,11 +39,11 @@ component of the archaeological research methodology.')
         'img/frontpage/sitebgr_12.jpg',
         'img/frontpage/sitebgr_13.jpg',
         'img/frontpage/sitebgr_14.jpg',
-        'img/frontpage/sitebgr_15.jpg',
+        //'img/frontpage/sitebgr_15.jpg',
         'img/frontpage/sitebgr_16.jpg',
         'img/frontpage/sitebgr_17.jpg',
         'img/frontpage/sitebgr_18.jpg',
-        'img/frontpage/sitebgr_19.jpg',
+        //'img/frontpage/sitebgr_19.jpg',
         'img/frontpage/sitebgr_20.jpg',
         'img/frontpage/sitebgr_21.jpg'
         ];
