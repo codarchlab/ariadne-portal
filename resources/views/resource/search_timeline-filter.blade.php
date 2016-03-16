@@ -34,7 +34,7 @@
 		</div>
 
 		<script>
-	        var areaTimeline = new AreaTimeline("timeline", window.location.href, -1000000, 2016);
+	        var areaTimeline = new AreaTimeline("timeline", window.location.href, false);
 	    </script>
 
 	</div>

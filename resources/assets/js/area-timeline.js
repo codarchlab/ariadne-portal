@@ -1,4 +1,4 @@
-function AreaTimeline(containerId, queryUri) {
+function AreaTimeline(containerId, queryUri, fullscreen) {
 
     var margin = 50,
         width  = 1200,
@@ -8,7 +8,7 @@ function AreaTimeline(containerId, queryUri) {
         .attr("width", width)
         .attr("height", height)
         .attr("viewBox", "0 0 " + width + " " + height)
-        .attr("preserveAspectRatio", "xMinYMid")
+        .attr("preserveAspectRatio", "xMidYMid")
         .append("g");
 
     var chart = $("#"+containerId + " svg"),
@@ -16,8 +16,11 @@ function AreaTimeline(containerId, queryUri) {
         container = chart.parent();
     $(window).on("resize", function() {
         var targetWidth = container.width();
+        var targetHeight;
+        if (fullscreen) targetHeight = container.height();
+        else targetHeight = Math.round(targetWidth / aspect);
         chart.attr("width", targetWidth);
-        chart.attr("height", Math.round(targetWidth / aspect));
+        chart.attr("height", targetHeight);
     }).trigger("resize");
 
     this.triggerSearch = function() {

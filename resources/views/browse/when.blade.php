@@ -33,14 +33,14 @@
 			</div>
 		</div>
 
-	    <div id="chart">
+	    <div id="chart" class="fullscreen" style="padding-top:50px;">
 
 	    </div>
 
 	</div>
     <script>
         var areaTimeline = new AreaTimeline(
-        	"chart", window.location.href);
+        	"chart", window.location.href, true);
     </script>
 
 </div>
