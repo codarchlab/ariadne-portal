@@ -175,14 +175,17 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         if (domain.length > 5) return domain;
         var start = domain[0];
         var end = domain[domain.length-1];
+        // calculate exact interval for 15 ticks
         var intervalExact = Math.abs(Math.round((start - end) / 15));
-        console.log("intervalExact", intervalExact);
+        // round interval to decimal
         var interval = Math.pow(10,intervalExact.toString().length);
-        console.log("interval", interval);
         var ticks = [];
-        for (var i = 1; i * interval < end; i++) ticks.push(i * interval);
-        for (var i = 0; i * interval > start; i--) ticks.push(i * interval);
-        console.log("ticks", ticks);
+        // add ticks for positive values
+        for (var i = 1; i * interval < end; i++)
+            if (i * interval > start) ticks.push(i * interval);
+        // add ticks for negative values
+        for (var i = 0; i * interval > start; i--)
+            if (i * interval < end) ticks.push(i * interval);
         return ticks;
     };
 
