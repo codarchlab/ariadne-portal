@@ -104,7 +104,6 @@ function GridMap(container, queryUri) {
 		requestInProgress = uri;
 		self.showLoading();
 		$.getJSON(uri, function(data) {
-			console.log(data.aggregations.geogrid.buckets.length);
 			if(requestInProgress == uri) { // only display last request sent
 				self.resetLayers();
 				self.updateResourceCount(data.total);
@@ -135,7 +134,6 @@ function GridMap(container, queryUri) {
         var ghprecForZoomLevel =
             [3,3,3,3,4,4,5,5,6,6,6,7,7,8,8,8,9,9,9];
         if (zl>18) zl=18;
-        console.log(zl, ghprecForZoomLevel[zl]);
         return ghprecForZoomLevel[zl];
     }
 
