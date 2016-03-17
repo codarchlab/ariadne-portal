@@ -5,31 +5,24 @@
 
 	<div class="browse-container timeline">
 
-		<div class="controls panel panel-default">
-			<div class="list-group">
-				<div class="list-group-item">
-					<span class="loading">
-						<span class="glyphicon glyphicon-refresh spin"></span> <i>{{ trans('browse.loading') }}</i>
-					</span>
-					<span class="resource-count">
-						<b><span class="count"></span></b> {{ trans('browse.resources_in_section') }}
-					</span>
-				</div>
-				<button class="list-group-item btn-search" onclick="areaTimeline.triggerSearch()">
-					<span class="glyphicon glyphicon-search"></span> {{ trans('browse.trigger_search') }}
+		<div class="zoom-controls btn-toolbar controls">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-home"></span>
 				</button>
 			</div>
-		</div>
-
-		<div class="zoom-controls panel panel-default">
-			<div class="list-group">
-				<button class="list-group-item btn btn-default btn-zoom-in btn-sm" onclick="areaTimeline.zoomIn()">
-					<span class="glyphicon glyphicon-plus"></span>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" onclick="areaTimeline.zoomOut()">
+					<span class="glyphicon glyphicon-zoom-out"></span>
 				</button>
-				<button class="list-group-item btn btn-default btn-zoom-out disabled btn-sm" 
-						onclick="areaTimeline.zoomOut()">
-					<span class="glyphicon glyphicon-minus"></span>
+				<button type="button" class="btn btn-default" onclick="areaTimeline.zoomIn()">
+					<span class="glyphicon glyphicon-zoom-in"></span>
 				</button>
+			</div>
+			<div class="btn-group">
+				<span class="btn btn-default loading">
+					<span class="glyphicon glyphicon-refresh spin"></span>
+				</span>
 			</div>
 		</div>
 

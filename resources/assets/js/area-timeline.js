@@ -2,6 +2,8 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
     var INITIAL_TICKS = [-1000000,-100000,-10000,-1000,0,1000,1500,new Date().getFullYear()];
 
+    var ZOOM_FACTOR = 4;
+
     var margin = 50,
         width  = 1200,
         height = 650;
@@ -32,16 +34,17 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
     this.zoomIn = function() {
 
-        queryHistory.push(query.toUri());
-
         var extent = brush.extent();
         if (extent[0] != extent[1]) {
             query.params.start = Math.floor(extent[0]);
             query.params.end = Math.ceil(extent[1]);
         } else {
-            var bucketArray = d3.entries(buckets);
-            query.params.start = bucketArray[20].key.split(":")[0];
-            query.params.end = bucketArray[40-1].key.split(":")[1];
+            var start = domain[0];
+            var end = domain[domain.length-1];
+            var center = x.invert(width / 2);
+            var zoomWidth = width / ZOOM_FACTOR / 2;
+            query.params.start = Math.round(x.invert(width / 2 - zoomWidth));
+            query.params.end = Math.round(x.invert(width / 2 + zoomWidth));
         }
         updateTimeline();
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
@@ -51,13 +54,23 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
     this.zoomOut = function() {
 
-        if (queryHistory.length > 0) {
-            query = Query.fromUri(queryHistory.pop());
-            updateTimeline();
-            if (queryHistory.length == 0) {
-                $(".timeline .btn-zoom-out").addClass("disabled");
-            }
+        var start = domain[0];
+        var end = domain[domain.length-1];
+
+        // go to initial zoom for larger areas
+        if (end - start > 5000) {
+            query.params.start = INITIAL_TICKS[0];
+            query.params.end = INITIAL_TICKS[INITIAL_TICKS.length-1];
+        } else {
+            var center = x.invert(width / 2);
+            var zoomWidth = width * ZOOM_FACTOR / 2;
+            var newStart = Math.round(x.invert(width / 2 - zoomWidth));
+            var newEnd = Math.round(x.invert(width / 2 + zoomWidth));
+            query.params.start = (newStart > INITIAL_TICKS[0]) ? newStart : INITIAL_TICKS[0];
+            query.params.end = (newEnd < INITIAL_TICKS[INITIAL_TICKS.length-1]) ? newEnd : INITIAL_TICKS[INITIAL_TICKS.length-1];
         }
+
+        updateTimeline();
 
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
     };
@@ -132,25 +145,19 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
     var brushed = function() {
 
-        console.log(brush.extent());
-
         // TODO: calc selected objects, implement buttons for zooming and searching
     }
 
-    var redraw = function() {
+    var redraw = function(buckets) {
 
         var data = convertESBuckets(buckets);
 
         var minYear = data[0].start;
         var maxYear = data[data.length-1].end;
 
-        console.log(minYear, maxYear);
-
-        var domain = getDomainForSpan(minYear, maxYear);
-        console.log("domain", domain);
+        domain = getDomainForSpan(minYear, maxYear);
         x.domain(domain);
         var range = getRangeForDomain(domain);
-        console.log("range", range);
         x.range(range);
 
         y.domain([0, d3.max(d3.entries(buckets), function(entry) {
@@ -207,15 +214,6 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             .call(brush);
         gBrush.selectAll("rect")
             .attr("height", height);
-    }
-
-    var getLabelForBucket = function(i) {
-        if (d3.entries(buckets)[i])
-            return d3.entries(buckets)[i].key.split(":")[0];
-        else if (d3.entries(buckets)[i-1])
-            return d3.entries(buckets)[i-1].key.split(":")[1];
-        else
-            return null;
     };
 
     var getDomainForSpan = function(start, end) {
@@ -238,16 +236,10 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
     var updateTimeline = function() {
         showLoading();
         $.getJSON(query.toUri(), function(data) {
-            buckets = data.aggregations.range_buckets.range_agg.buckets;
-            redraw();
+            var buckets = data.aggregations.range_buckets.range_agg.buckets;
+            redraw(buckets);
             hideLoading();
-            updateResourceCount(data.total);
         });
-    };
-
-    var updateResourceCount = function(count) {
-        var formatted = count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $(".timeline .controls .resource-count .count").text(formatted);
     };
 
     var showLoading = function() {
@@ -264,8 +256,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
     if (!query.params['start']) query.params.start = -1000000; 
     if (!query.params['end']) query.params.end = new Date().getFullYear();
 
-    var buckets, x, y, area, xAxis, brush;
-    var queryHistory = [];
+    var x, y, area, xAxis, brush, domain;
 
     initialize();
     updateTimeline();
