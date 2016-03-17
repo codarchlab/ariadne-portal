@@ -26,7 +26,15 @@
 			</div>
 		</div>
 
-	    <div id="chart" class="fullscreen" style="padding-top:50px;">
+		<div class="brush-controls-container">
+			<div class="brush-controls" style="display: none;">
+				<button type="button" class="btn btn-default" onclick="areaTimeline.zoomIn()">
+					<span class="glyphicon glyphicon-zoom-in"></span>
+				</button>
+			</div>
+		</div>
+
+	    <div id="chart" class="fullscreen" style="padding-top:80px;">
 
 	    </div>
 

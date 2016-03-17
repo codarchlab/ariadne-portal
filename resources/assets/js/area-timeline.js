@@ -12,12 +12,13 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         .attr("width", width)
         .attr("height", height)
         .attr("viewBox", "0 0 " + width + " " + height)
-        .attr("preserveAspectRatio", "xMidYMid")
+        .attr("preserveAspectRatio", "xMidYMin")
         .append("g");
 
     var chart = $("#"+containerId + " svg"),
         aspect = chart.width() / chart.height(),
         container = chart.parent();
+
     $(window).on("resize", function() {
         var targetWidth = container.width();
         var targetHeight;
@@ -25,6 +26,9 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         else targetHeight = Math.round(targetWidth / aspect);
         chart.attr("width", targetWidth);
         chart.attr("height", targetHeight);
+        if (brush) {
+            $(".timeline .brush-controls").css("left", Math.round(x(brush.extent()[1]) / width * targetWidth));
+        }
     }).trigger("resize");
 
     this.triggerSearch = function() {
@@ -33,6 +37,8 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
     };
 
     this.zoomIn = function() {
+
+        $(".timeline .brush-controls").hide();
 
         var extent = brush.extent();
         if (extent[0] != extent[1]) {
@@ -145,6 +151,16 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
     var brushed = function() {
 
+        var extent = brush.extent();
+
+        if (extent[0] != extent[1]) {
+            var controls = $(".timeline .brush-controls");
+            controls.css("left", Math.round(x(extent[1]) / width * container.width() ) );
+            controls.show();
+        } else {
+            $(".timeline .brush-controls").hide();
+        }
+
         // TODO: calc selected objects, implement buttons for zooming and searching
     }
 
@@ -191,10 +207,8 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         var end = domain[domain.length-1];
         // calculate exact interval for 25 ticks
         var intervalExact = Math.abs(Math.round((start - end) / 25));
-        console.log("intervalExact", intervalExact);
         // round interval to decimal
         var interval = Math.pow(10,intervalExact.toString().length);
-        console.log("interval", interval);
         var ticks = [];
         // add ticks for positive values
         for (var i = 1; i * interval < end; i++)

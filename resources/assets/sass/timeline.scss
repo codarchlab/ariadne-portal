@@ -22,6 +22,18 @@
 			font: bold 18px "Lucida Console", Monaco, monospace;
 		}
 	}
+
+	.brush-controls-container {
+		position: absolute;
+		left: 0;
+
+		.brush-controls {
+			position: relative;
+			top: 0;
+			left: 0;
+			z-index: 500;
+		}
+	}
 }
 
 .browse-container.timeline {
