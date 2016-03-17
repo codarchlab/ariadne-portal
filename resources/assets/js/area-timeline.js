@@ -175,10 +175,12 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         if (domain.length > 5) return domain;
         var start = domain[0];
         var end = domain[domain.length-1];
-        // calculate exact interval for 15 ticks
-        var intervalExact = Math.abs(Math.round((start - end) / 15));
+        // calculate exact interval for 25 ticks
+        var intervalExact = Math.abs(Math.round((start - end) / 25));
+        console.log("intervalExact", intervalExact);
         // round interval to decimal
         var interval = Math.pow(10,intervalExact.toString().length);
+        console.log("interval", interval);
         var ticks = [];
         // add ticks for positive values
         for (var i = 1; i * interval < end; i++)
@@ -210,12 +212,10 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
     };
 
     var getDomainForSpan = function(start, end) {
-        var domain = INITIAL_TICKS.filter(function(tick) {
-            return tick > start && tick < end;
-        });
-        domain.unshift(start);
-        domain.push(end);
-        return domain;
+        if (start == INITIAL_TICKS[0] && end == INITIAL_TICKS[INITIAL_TICKS.length-1])
+            return INITIAL_TICKS;
+        else
+            return [start, end];
     };
 
     var getRangeForDomain = function(domain) {
