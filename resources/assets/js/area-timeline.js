@@ -32,6 +32,11 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
     }).trigger("resize");
 
     this.triggerSearch = function() {
+        var extent = brush.extent();
+        if (extent[0] != extent[1]) {
+            query.params.start = Math.floor(extent[0]);
+            query.params.end = Math.ceil(extent[1]);
+        }
         var uri = query.toUri();
         window.location.href = uri;
     };
@@ -56,6 +61,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
 
         $(".timeline .btn-zoom-out").removeClass("disabled");
+        $(".timeline .brush-controls").hide();
     };
 
     this.zoomOut = function() {
@@ -79,6 +85,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         updateTimeline();
 
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
+        $(".timeline .brush-controls").hide();
     };
 
     var initialize = function() {
@@ -157,6 +164,10 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             var controls = $(".timeline .brush-controls");
             controls.css("left", Math.round(x(extent[1]) / width * container.width() ) );
             controls.show();
+            controls.find(".timespan")
+                .html(Math.floor(extent[0]).toString()
+                    + ', '
+                    + Math.ceil(extent[1]).toString());
         } else {
             $(".timeline .brush-controls").hide();
         }

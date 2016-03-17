@@ -28,9 +28,15 @@
 
 		<div class="brush-controls-container">
 			<div class="brush-controls" style="display: none;">
-				<button type="button" class="btn btn-default" onclick="areaTimeline.zoomIn()">
-					<span class="glyphicon glyphicon-zoom-in"></span>
-				</button>
+				<div><code class="timespan"></code></div>
+				<div class="btn-group-vertical">
+					<button type="button" class="btn btn-link" onclick="areaTimeline.zoomIn()">
+						<span class="glyphicon glyphicon-zoom-in"></span>
+					</button>
+					<button type="button" class="btn btn-link" onclick="areaTimeline.triggerSearch()">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</div>
 			</div>
 		</div>
 
