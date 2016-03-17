@@ -75,10 +75,17 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             .y0(function(d) { return y(d.y0); })
             .y1(function(d) { return y(d.y0 + d.y); });
 
+        var commaFormat = d3.format(',d');
+        var yearFormat = d3.format('d');
+
         xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
-            .tickValues(INITIAL_TICKS);
+            .tickValues(INITIAL_TICKS)
+            .tickFormat(function(d) {
+                if (Math.abs(d).toString().length > 4) return commaFormat(d);
+                else return yearFormat(d);
+            });
 
         svg.append("path")
             .attr("class", "area");
