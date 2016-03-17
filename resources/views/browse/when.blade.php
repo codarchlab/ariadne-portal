@@ -7,9 +7,9 @@
 
 		<div class="zoom-controls btn-toolbar controls">
 			<div class="btn-group">
-				<button type="button" class="btn btn-default">
+				<a class="btn btn-default" href="{{ action('PageController@welcome') }}">
 					<span class="glyphicon glyphicon-home"></span>
-				</button>
+				</a>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn btn-default" onclick="areaTimeline.zoomOut()">
