@@ -1,10 +1,10 @@
 @extends('app')
 @section('title', $subject['_source']['prefLabel'].' - Ariadne portal')
 
-@if (isset($subject['_source']['description']))
+@if (isset($subject['_source']['scopeNote']))
 
     <?php
-        $description = strip_tags($subject['_source']['description']);
+        $description = strip_tags($subject['_source']['scopeNote']);
         $length = 155;
         if (strlen($description) > $length) {
             $description = substr($description, 0, $length) . '...';
@@ -16,7 +16,7 @@
 @endif
 
 @section('content')
-
+<?php debug($subject);?>
 <div class="container-fluid content">
 
     <div class="row">
@@ -33,21 +33,28 @@
                     <dd>{{ $subject['_id'] }}</dd>
                 @endif
 
-                @if (isset($subject['_source']['description']))
-                    <dt>{{ trans('subject.description') }}</dt>
-                    <dd itemprop="description">{{ $subject['_source']['description'] }}</dd>                    
-                @endif      
+                @if (isset($subject['_source']['scopeNote']))
+                    <dt>{{ trans('subject.scopeNote') }}</dt>
+                    <dd itemprop="description">{{ $subject['_source']['scopeNote'] }}</dd>                    
+                @endif
                 
                 @if (isset($subject['_source']['uri']))
                     <dt>{{ trans('subject.uri') }}</dt>
-                    <dd itemprop="sameAs"><a href="{{ $subject['_source']['uri'] }}">{{ $subject['_source']['uri'] }}</a></dd>                    
+                    <dd itemprop="sameAs"><a href="{{ $subject['_source']['uri'] }}">{{ $subject['_source']['uri'] }}</a></dd>
                 @endif  
-                                
+                            
+                @if(count($subject['_source']['broader']) > 0)
+                    <dt>{{ trans('subject.broader') }}</dt>
+                    @foreach($subject['_source']['broader'] as $broader)
+                    <dd><a href="{{ route('subject.page', $broader['id']) }}">{{ $broader['prefLabel'] }}</a></dd>
+                    @endforeach
+                @endif
+                
                 @if (isset($subject['_source']['terms']) && count($subject['_source']['terms']) > 0)
                     <dt>{{ trans('subject.terms') }}</dt>
                     <dd>
                         <ul>
-                        @foreach ($subject['_source']['terms'] as $term)                        
+                        @foreach ($subject['_source']['terms'] as $term)
                             <li>{{ $term }}</li>
                         @endforeach
                         </ul>
@@ -56,6 +63,19 @@
                 
             </dl>
 
+            
+            <h4>Labels</h4>
+            <dl class="dl-horizontal">
+              @foreach ($pref_labels as $lang => $labels)
+                <dt>{{ trans('resource.language.'.$lang) }}</dt>
+                <dd lang="{{ $lang }}">
+                @foreach($labels as $label)
+                <span class="bg-primary label ">{{ $label }}</span>
+                @endforeach
+                </dd>
+              @endforeach
+            </dl>
+            
             <h4>{{ trans('subject.connected_concepts') }}</h4>
 
             <dl class="dl-horizontal">
@@ -72,13 +92,13 @@
 
                             @if (isset($concept['identifier']))
                                 <dt>{{ trans('subject.identifier') }}</dt>
-                                <dd>{{ $concept['identifier'] }}</dd>                    
+                                <dd>{{ $concept['identifier'] }}</dd>
                             @endif     
 
                             @if (isset($concept['relation']))
                                 <dt>{{ trans('subject.relation') }}</dt>
                                 <dd>{{ $concept['relation'] }}</dd>                    
-                            @endif     
+                            @endif
                         </div>
                     @endforeach                    
                 @endif

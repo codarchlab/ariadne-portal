@@ -41,10 +41,16 @@ class SubjectController extends Controller {
                     ->json($subject)
                     ->header("Vary", "Accept");
         }else{
+          $pref_labels = [];
+          foreach($subject['_source']['prefLabels'] as $prefLabel){
+            $pref_labels[$prefLabel['lang']][] = $prefLabel['label'];
+          }
+          ksort($pref_labels);
           return view('subject.page', [
               'subject' => $subject,
               'resources' => $spatial_items,
-              'similar_subjects' => $similar_subjects
+              'similar_subjects' => $similar_subjects,
+              'pref_labels' => $pref_labels
           ]);
         }
     }

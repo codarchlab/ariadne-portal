@@ -2,7 +2,8 @@
 
 return [
     'getty_identifier' => 'Getty AAT ID',
-    'description' => 'Note',
+    'scopeNote' => 'Note',
+    'broader' => 'Broader',
     'uri' => 'URI',
     'terms' => 'Terms',
     'connected_concepts' => 'Connected concepts',
