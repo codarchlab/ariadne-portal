@@ -51,8 +51,7 @@ class Resource
 
         // add timespan bucket aggregation
         $range = explode(",", Request::get("range"));
-        $query['aggregations']['range_buckets'] = Timeline::prepareRangeBucketsAggregation(
-                intval($range[0]), $range[sizeof($range)-1], 50);
+        $query['aggregations']['range_buckets'] = Timeline::prepareRangeBucketsAggregation($range);
         
         // handle sorting
         if(Request::has('sort') && in_array(Request::input('sort'), Config::get('app.elastic_search_sort'))){
