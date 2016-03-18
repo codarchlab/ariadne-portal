@@ -15,11 +15,11 @@
 			<div class="btn-group">
 				<button type="button" class="btn btn-default" onclick="areaTimeline.zoomOut()"
 						data-toggle="tooltip" data-placement="bottom" title="Zoom out">
-					<span class="glyphicon glyphicon-zoom-out"></span>
+					<span class="glyphicon glyphicon-minus"></span>
 				</button>
 				<button type="button" class="btn btn-default" onclick="areaTimeline.zoomIn()"
 						data-toggle="tooltip" data-placement="bottom" title="Zoom in">
-					<span class="glyphicon glyphicon-zoom-in"></span>
+					<span class="glyphicon glyphicon-plus"></span>
 				</button>
 			</div>
 			<div class="btn-group">
