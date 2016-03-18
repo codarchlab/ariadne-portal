@@ -115,9 +115,6 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         svg.append("path")
             .attr("class", "area");
 
-        svg.append("path")
-            .attr("class", "symbols");
-
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + (height - margin) + ")")
@@ -212,15 +209,6 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             .attr("d", area);
 
         svg.select("g.x.axis").call(xAxis);
-
-        svg.selectAll("path.symbol").remove();
-
-        svg.selectAll("path.symbols")
-            .data(data)        
-            .enter().append("path")
-                .attr("class", "symbol")
-                .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; })
-                .attr("d", d3.svg.symbol());
 
         createBrush();
 
