@@ -123,6 +123,21 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             .attr("transform", "translate(0," + (height - margin) + ")")
             .call(xAxis);
 
+        svg.append("linearGradient")
+            .attr("id", "timeline-gradient")
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", "0%").attr("y1", "0%")
+            .attr("x2", "0%").attr("y2", "100%")
+            .selectAll("stop")
+                .data([
+                    {offset: "0%", color: "#BB3921"},
+                    {offset: "50%", color: "#D5A03A"},
+                    {offset: "100%", color: "#75A99D"}
+                ])
+            .enter().append("stop")
+                .attr("offset", function(d) { return d.offset; })
+                .attr("stop-color", function(d) { return d.color; });
+
     };
 
     /**

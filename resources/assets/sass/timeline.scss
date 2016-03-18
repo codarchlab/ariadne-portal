@@ -1,8 +1,7 @@
 .timeline {
 
 	.area {
-		fill: $green;
-		stroke: darken($green, 30%);
+		fill: url(#timeline-gradient);
 	}
 
 	.brush .extent {
