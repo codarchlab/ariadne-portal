@@ -57,6 +57,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             query.params.start = Math.round(x.invert(width / 2 - zoomWidth));
             query.params.end = Math.round(x.invert(width / 2 + zoomWidth));
         }
+        updateLocation();
         updateTimeline();
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
 
@@ -82,6 +83,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             query.params.end = (newEnd < INITIAL_TICKS[INITIAL_TICKS.length-1]) ? newEnd : INITIAL_TICKS[INITIAL_TICKS.length-1];
         }
 
+        updateLocation();
         updateTimeline();
 
         d3.selectAll("#" + containerId + " .brush").call(brush.clear());
@@ -276,6 +278,27 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         $(".timeline .controls .resource-count").show();
         $(".timeline .controls .loading").hide();
     };
+
+    var updateLocation = function() {
+        if (window.history) {
+            var start = query.params.start;
+            var end = query.params.end;
+            var location = updateQueryStringParameter(window.location.href, 'start', start);
+            location = updateQueryStringParameter(location, 'end', end);
+            window.history.pushState('when', $('title').text, location);
+        }
+    };
+
+    var updateQueryStringParameter = function(uri, key, value) {
+      var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+      var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+      if (uri.match(re)) {
+        return uri.replace(re, '$1' + key + "=" + value + '$2');
+      }
+      else {
+        return uri + separator + key + "=" + value;
+      }
+    }
 
     var query = Query.fromUri(queryUri);
     if (!query.params['start']) query.params.start = -1000000; 
