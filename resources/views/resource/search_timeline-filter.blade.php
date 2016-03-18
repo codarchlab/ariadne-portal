@@ -16,11 +16,12 @@
 
 			<div class="zoom-controls panel">
 				<div class="btn-group">
-					<button class="btn btn-default btn-zoom-out btn-xs" 
-							onclick="areaTimeline.zoomOut()">
+					<button class="btn btn-default btn-zoom-out btn-xs" onclick="areaTimeline.zoomOut()"
+							data-toggle="tooltip" data-container="body" data-placement="bottom" title="Zoom out">
 						<span class="glyphicon glyphicon-minus"></span>
 					</button>
-					<button class="btn btn-default btn-zoom-in btn-xs" onclick="areaTimeline.zoomIn()">
+					<button class="btn btn-default btn-zoom-in btn-xs" onclick="areaTimeline.zoomIn()"
+							data-toggle="tooltip" data-container="body" data-placement="bottom" title="Zoom in">
 						<span class="glyphicon glyphicon-plus"></span>
 					</button>
 				</div>
@@ -31,11 +32,11 @@
 					<div><code class="timespan"></code></div>
 					<div class="btn-group-vertical">
 						<button type="button" class="btn btn-link btn-sm" onclick="areaTimeline.zoomIn()"
-							data-toggle="tooltip" data-placement="right" title="Zoom into selected area">
+							data-toggle="tooltip" data-container="body" data-placement="right" title="Zoom into selected area">
 							<span class="glyphicon glyphicon-zoom-in"></span>
 						</button>
 						<button type="button" class="btn btn-link btn-sm" onclick="areaTimeline.triggerSearch()"
-							data-toggle="tooltip" data-placement="right" title="Search for resources in the selected area">
+							data-toggle="tooltip" data-container="body" data-placement="right" title="Search for resources in the selected area">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>
