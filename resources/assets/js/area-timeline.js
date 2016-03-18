@@ -164,7 +164,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
         if (extent[0] != extent[1]) {
             var controls = $(".timeline .brush-controls");
-            controls.css("left", Math.round(x(extent[1]) / width * container.width() ) );
+            controls.css("left", Math.round(x(extent[1]) / width * container.width() ) + 5 );
             controls.show();
             controls.find(".timespan")
                 .html(Math.floor(extent[0]).toString()
