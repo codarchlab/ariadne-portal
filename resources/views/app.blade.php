@@ -14,6 +14,8 @@
         @if(env('APP_ENV') != 'production')
         <meta name="robots" content="noindex">
         @endif
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
         
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 

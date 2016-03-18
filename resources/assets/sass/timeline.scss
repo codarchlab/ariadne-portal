@@ -59,6 +59,10 @@
 	    stroke-width: 1px;
 	    shape-rendering: crispEdges;
 	}
+
+	.axis .tick text {
+		font-weight: bold;
+	}
 }
 
 .filter-container.timeline {
