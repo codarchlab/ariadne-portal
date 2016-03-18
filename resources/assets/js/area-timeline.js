@@ -34,8 +34,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
     this.triggerSearch = function() {
         var extent = brush.extent();
         if (extent[0] != extent[1]) {
-            query.params.start = Math.floor(extent[0]);
-            query.params.end = Math.ceil(extent[1]);
+            query.params.range = [Math.floor(extent[0]), Math.ceil(extent[1])].join();
         }
         var uri = query.toUri();
         window.location.href = uri;
@@ -47,15 +46,14 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
         var extent = brush.extent();
         if (extent[0] != extent[1]) {
-            query.params.start = Math.floor(extent[0]);
-            query.params.end = Math.ceil(extent[1]);
+            query.params.range = [Math.floor(extent[0]), Math.ceil(extent[1])].join();
         } else {
             var start = domain[0];
             var end = domain[domain.length-1];
             var center = x.invert(width / 2);
             var zoomWidth = width / ZOOM_FACTOR / 2;
-            query.params.start = Math.round(x.invert(width / 2 - zoomWidth));
-            query.params.end = Math.round(x.invert(width / 2 + zoomWidth));
+            query.params.range = [Math.round(x.invert(width / 2 - zoomWidth)),
+                Math.round(x.invert(width / 2 + zoomWidth))].join();
         }
         updateLocation();
         updateTimeline();
@@ -72,15 +70,14 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
         // go to initial zoom for larger areas
         if (end - start > 5000) {
-            query.params.start = INITIAL_TICKS[0];
-            query.params.end = INITIAL_TICKS[INITIAL_TICKS.length-1];
+            query.params.range = INITIAL_TICKS;
         } else {
             var center = x.invert(width / 2);
             var zoomWidth = width * ZOOM_FACTOR / 2;
             var newStart = Math.round(x.invert(width / 2 - zoomWidth));
             var newEnd = Math.round(x.invert(width / 2 + zoomWidth));
-            query.params.start = (newStart > INITIAL_TICKS[0]) ? newStart : INITIAL_TICKS[0];
-            query.params.end = (newEnd < INITIAL_TICKS[INITIAL_TICKS.length-1]) ? newEnd : INITIAL_TICKS[INITIAL_TICKS.length-1];
+            query.params.range = [ (newStart > INITIAL_TICKS[0]) ? newStart : INITIAL_TICKS[0],
+                (newEnd < INITIAL_TICKS[INITIAL_TICKS.length-1]) ? newEnd : INITIAL_TICKS[INITIAL_TICKS.length-1]  ].join();
         }
 
         updateLocation();
@@ -281,10 +278,8 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
     var updateLocation = function() {
         if (window.history) {
-            var start = query.params.start;
-            var end = query.params.end;
-            var location = updateQueryStringParameter(window.location.href, 'start', start);
-            location = updateQueryStringParameter(location, 'end', end);
+            var range = query.params.range;
+            var location = updateQueryStringParameter(window.location.href, 'range', range);
             window.history.pushState('when', $('title').text, location);
         }
     };
@@ -298,11 +293,10 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
       else {
         return uri + separator + key + "=" + value;
       }
-    }
+    };
 
     var query = Query.fromUri(queryUri);
-    if (!query.params['start']) query.params.start = -1000000; 
-    if (!query.params['end']) query.params.end = new Date().getFullYear();
+    if (!query.params['range']) query.params.range = INITIAL_TICKS.join();
 
     var x, y, area, xAxis, brush, domain;
 

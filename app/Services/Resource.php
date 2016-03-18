@@ -50,8 +50,9 @@ class Resource
         ]];
 
         // add timespan bucket aggregation
+        $range = explode(",", Request::get("range"));
         $query['aggregations']['range_buckets'] = Timeline::prepareRangeBucketsAggregation(
-                intval(Request::get("start")), intval(Request::get("end")), 50);
+                intval($range[0]), $range[sizeof($range)-1], 50);
         
         // handle sorting
         if(Request::has('sort') && in_array(Request::input('sort'), Config::get('app.elastic_search_sort'))){
@@ -116,21 +117,24 @@ class Resource
             }
         }
 
-        if (Request::has('start') && Request::has('end')) {
-            $query['query'] = [
-                'filtered' => [
-                    'query' => $query['query'],
-                    'filter' => [
-                        'nested' => [
-                            'path' => 'temporal',
-                            'query' => Timeline::buildRangeQuery(
-                                Request::input('start'),
-                                Request::input('end')
-                            )
+        if (Request::has('range')) {
+            $range = explode(",",Request::get("range"));
+            if (sizeof($range) > 1) {
+                $query['query'] = [
+                    'filtered' => [
+                        'query' => $query['query'],
+                        'filter' => [
+                            'nested' => [
+                                'path' => 'temporal',
+                                'query' => Timeline::buildRangeQuery(
+                                    $range[0],
+                                    $range[sizeof($range)-1]
+                                )
+                            ]
                         ]
                     ]
-                ]
-            ];
+                ];
+            }
         }        
         
         // TODO: refactor so that ES service takes care of bbox parsing
