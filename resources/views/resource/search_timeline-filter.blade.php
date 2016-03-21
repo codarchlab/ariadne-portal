@@ -43,12 +43,12 @@
 				</div>
 			</div>
 
-			<div class="timeline-container" id="timeline"></div>
+			<div class="timeline-container"></div>
 
 		</div>
 
 		<script>
-	        var areaTimeline = new AreaTimeline("timeline", window.location.href, false);
+	        var areaTimeline = new AreaTimeline(".timeline-container", window.location.href, false);
 	    </script>
 
 	</div>

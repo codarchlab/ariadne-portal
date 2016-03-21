@@ -45,14 +45,14 @@
 			</div>
 		</div>
 
-	    <div id="chart" class="fullscreen" style="padding-top:80px;">
+	    <div class="fullscreen timeline-container">
 
 	    </div>
 
 	</div>
     <script>
         var areaTimeline = new AreaTimeline(
-        	"chart", window.location.href, true);
+        	".timeline-container", window.location.href, true);
     </script>
 
 </div>

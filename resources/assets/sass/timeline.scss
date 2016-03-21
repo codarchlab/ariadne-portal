@@ -58,6 +58,10 @@
 
 .browse-container.timeline {
 
+	.timeline-container {
+		padding-top: 80px;
+	}
+
 	text {
 		font-size: 13px;
 	}
@@ -78,6 +82,10 @@
 }
 
 .filter-container.timeline {
+
+	.timeline-container {
+		padding-top: 12px;
+	}
 
 	text {
 		font-size: 25px;

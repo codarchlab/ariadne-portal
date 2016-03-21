@@ -1,4 +1,4 @@
-function AreaTimeline(containerId, queryUri, fullscreen) {
+function AreaTimeline(containerPath, queryUri, fullscreen) {
 
     var INITIAL_TICKS = [-1000000,-100000,-10000,-1000,0,1000,1250,1500,1750,new Date().getFullYear()];
 
@@ -8,14 +8,14 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         width  = 1200,
         height = 650;
 
-    var svg = d3.select("#"+containerId).append("svg")
+    var svg = d3.select(containerPath).append("svg")
         .attr("width", width)
         .attr("height", height)
         .attr("viewBox", "0 0 " + width + " " + height)
         .attr("preserveAspectRatio", "xMidYMin")
         .append("g");
 
-    var chart = $("#"+containerId + " svg"),
+    var chart = $(containerPath + " svg"),
         aspect = chart.width() / chart.height(),
         container = chart.parent();
 
@@ -57,7 +57,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         }
         updateLocation();
         updateTimeline();
-        d3.selectAll("#" + containerId + " .brush").call(brush.clear());
+        d3.selectAll(containerPath + " .brush").call(brush.clear());
 
         $(".timeline .btn-zoom-out").removeClass("disabled");
         $(".timeline .brush-controls").hide();
