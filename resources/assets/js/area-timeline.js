@@ -112,6 +112,11 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
                 else return yearFormat(d);
             });
 
+        yAxis = d3.svg.axis()
+            .scale(y)
+            .tickSize(width - margin * 3)
+            .orient("left");
+
         svg.append("path")
             .attr("class", "area");
 
@@ -119,6 +124,13 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             .attr("class", "x axis")
             .attr("transform", "translate(0," + (height - margin) + ")")
             .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(" + (width - margin) + ",0)")
+            .call(yAxis);
+        // hide tick at zero
+        d3.select(svg.selectAll(".y.axis .tick")[0][0]).attr("visibility","hidden");
 
         svg.append("linearGradient")
             .attr("id", "timeline-gradient")
@@ -205,17 +217,21 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         var range = getRangeForDomain(domain);
         x.range(range);
 
-        y.domain([0, d3.max(d3.entries(buckets), function(entry) {
+        var yMax = d3.max(d3.entries(buckets), function(entry) {
             return entry.value.doc_count;
-        })]);
+        });
+        y.domain([0, yMax]);
 
-        xAxis.tickValues(generateTickValues(domain));
+        if (domain.length > 5) {
+            xAxis.tickValues(generateTickValues(domain));
+        }
         
         svg.select("path.area")
             .data([data])
             .attr("d", area);
 
         svg.select("g.x.axis").call(xAxis);
+        svg.select("g.y.axis").call(yAxis);
 
         createBrush();
 

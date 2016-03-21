@@ -34,6 +34,18 @@
 			z-index: 500;
 		}
 	}
+
+	.y.axis path {
+		display: none;
+	}
+
+	.y.axis line {
+		stroke: rgba(0, 0, 0, 0.05);
+	}
+
+	.y.axis .tick text {
+		fill: rgba(0, 0, 0, 0.5);
+	}
 }
 
 .browse-container.timeline {
@@ -52,15 +64,15 @@
 		}		
 	}
 
-	.axis path,
-	.axis line {
+	.x.axis path,
+	.x.axis line {
 	    fill: none;
 	    stroke: #000;
 	    stroke-width: 1px;
 	    shape-rendering: crispEdges;
 	}
 
-	.axis .tick text {
+	.x.axis .tick text {
 		font-weight: bold;
 	}
 }
