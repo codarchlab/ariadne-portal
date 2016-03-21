@@ -1,6 +1,6 @@
 function AreaTimeline(containerId, queryUri, fullscreen) {
 
-    var INITIAL_TICKS = [-1000000,-100000,-10000,-1000,0,1000,1500,new Date().getFullYear()];
+    var INITIAL_TICKS = [-1000000,-100000,-10000,-1000,0,1000,1250,1500,1750,new Date().getFullYear()];
 
     var ZOOM_FACTOR = 4;
 
@@ -244,7 +244,7 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
     };
 
     var getDomainForSpan = function(start, end) {
-        if (start == INITIAL_TICKS[0] && end == INITIAL_TICKS[INITIAL_TICKS.length-1])
+        if (start <= INITIAL_TICKS[0] && end >= INITIAL_TICKS[INITIAL_TICKS.length-1])
             return INITIAL_TICKS;
         else
             return [start, end];
