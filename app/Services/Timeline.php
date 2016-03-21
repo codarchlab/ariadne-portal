@@ -34,6 +34,8 @@ class Timeline
 
         $ranges=array();
         for ($i=0;$i<$nrIntervals;$i++) {
+            // add intervals to last range to ensure that nrDefaultBuckets are returned
+            if ($i == $nrIntervals-1) $nrBucketsPerInterval += self::nrDefaultBuckets % $nrIntervals;
             self::buildAndAddAggRangePartial($ranges,$range[$i],$range[$i+1],$nrBucketsPerInterval);
         }
 
