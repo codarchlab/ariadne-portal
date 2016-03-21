@@ -8,29 +8,6 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
         width  = 1200,
         height = 650;
 
-    var svg = d3.select(containerPath).append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", "0 0 " + width + " " + height)
-        .attr("preserveAspectRatio", "xMidYMin")
-        .append("g");
-
-    var chart = $(containerPath + " svg"),
-        aspect = chart.width() / chart.height(),
-        container = chart.parent();
-
-    $(window).on("resize", function() {
-        var targetWidth = container.width();
-        var targetHeight;
-        if (fullscreen) targetHeight = container.height();
-        else targetHeight = Math.round(targetWidth / aspect);
-        chart.attr("width", targetWidth);
-        chart.attr("height", targetHeight);
-        if (brush) {
-            $(".timeline .brush-controls").css("left", Math.round(x(brush.extent()[1]) / width * targetWidth));
-        }
-    }).trigger("resize");
-
     this.triggerSearch = function() {
         var extent = brush.extent();
         if (extent[0] != extent[1]) {
@@ -83,7 +60,7 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
         updateLocation();
         updateTimeline();
 
-        d3.selectAll("#" + containerId + " .brush").call(brush.clear());
+        d3.selectAll(containerPath + " .brush").call(brush.clear());
         $(".timeline .brush-controls").hide();
     };
 
@@ -91,7 +68,7 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
 
         x = d3.scale.linear()
             .domain(INITIAL_TICKS)
-            .range(getRangeForDomain(INITIAL_TICKS));
+            .range(calculateRange(INITIAL_TICKS));
 
         y = d3.scale.linear()
             .domain([0,550000])
@@ -153,6 +130,27 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
 
     };
 
+    var updateTimeline = function() {
+        showLoading();
+        $.getJSON(query.toUri(), function(data) {
+            var buckets = data.aggregations.range_buckets.range_agg.buckets;
+            redraw(convertESBuckets(buckets));
+            hideLoading();
+        });
+    };
+
+    var onResize = function() {
+        var targetWidth = container.width();
+        var targetHeight;
+        if (fullscreen) targetHeight = container.height();
+        else targetHeight = Math.round(targetWidth / aspect);
+        chart.attr("width", targetWidth);
+        chart.attr("height", targetHeight);
+        if (brush) {
+            $(".timeline .brush-controls").css("left", Math.round(x(brush.extent()[1]) / width * targetWidth));
+        }
+    };
+
     /**
      * Takes date_buckets and
      * converts it into a dataset
@@ -209,20 +207,19 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
         // TODO: calc selected objects, implement buttons for zooming and searching
     }
 
-    var redraw = function(buckets) {
+    var redraw = function(data) {
 
-        var data = convertESBuckets(buckets);
+        console.log(data);
 
         var minYear = data[0].start;
         var maxYear = data[data.length-1].end;
 
-        domain = getDomainForSpan(minYear, maxYear);
+        domain = calculateDomain(minYear, maxYear);
         x.domain(domain);
-        var range = getRangeForDomain(domain);
-        x.range(range);
+        x.range(calculateRange(domain));
 
-        var yMax = d3.max(d3.entries(buckets), function(entry) {
-            return entry.value.doc_count;
+        var yMax = d3.max(data, function(entry) {
+            return entry.y;
         });
         y.domain([0, yMax]);
 
@@ -268,14 +265,14 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
             .attr("height", height);
     };
 
-    var getDomainForSpan = function(start, end) {
+    var calculateDomain = function(start, end) {
         if (start <= INITIAL_TICKS[0] && end >= INITIAL_TICKS[INITIAL_TICKS.length-1])
             return INITIAL_TICKS;
         else
             return [start, end];
     };
 
-    var getRangeForDomain = function(domain) {
+    var calculateRange = function(domain) {
         var range = [];
         var actualWidth = width - 2 * margin;
         var tickWidth = actualWidth / (domain.length-1);
@@ -283,15 +280,6 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
             range.push(i * tickWidth + margin);
         }
         return range;
-    };
-
-    var updateTimeline = function() {
-        showLoading();
-        $.getJSON(query.toUri(), function(data) {
-            var buckets = data.aggregations.range_buckets.range_agg.buckets;
-            redraw(buckets);
-            hideLoading();
-        });
     };
 
     var showLoading = function() {
@@ -322,6 +310,19 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
         return uri + separator + key + "=" + value;
       }
     };
+
+    var svg = d3.select(containerPath).append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", "0 0 " + width + " " + height)
+        .attr("preserveAspectRatio", "xMidYMin")
+        .append("g");
+
+    var chart = $(containerPath + " svg"),
+        aspect = chart.width() / chart.height(),
+        container = chart.parent();
+
+    $(window).on("resize", onResize).trigger("resize");
 
     var query = Query.fromUri(queryUri);
     if (!query.params['range']) query.params.range = INITIAL_TICKS.join();
