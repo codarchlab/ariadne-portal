@@ -1,8 +1,7 @@
 .timeline {
 
 	.area {
-		fill: $green;
-		stroke: darken($green, 30%);
+		fill: url(#timeline-gradient);
 	}
 
 	.brush .extent {
@@ -20,6 +19,19 @@
 
 		.btn-sm.list-group-item {
 			font: bold 18px "Lucida Console", Monaco, monospace;
+		}
+	}
+
+	.brush-controls-container {
+		position: absolute;
+		left: 0;
+		display: inline;
+
+		.brush-controls {
+			position: relative;
+			top: 0;
+			left: 0;
+			z-index: 500;
 		}
 	}
 }
@@ -46,6 +58,10 @@
 	    stroke: #000;
 	    stroke-width: 1px;
 	    shape-rendering: crispEdges;
+	}
+
+	.axis .tick text {
+		font-weight: bold;
 	}
 }
 
