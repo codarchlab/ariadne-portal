@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PageController@welcome');
+Route::get('services', 'PageController@services');
 Route::get('about', 'PageController@about');
 Route::get('robots.txt','PageController@robots' );
 
