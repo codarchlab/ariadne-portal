@@ -106,7 +106,6 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
-            .tickValues(INITIAL_TICKS)
             .tickFormat(function(d) {
                 if (Math.abs(d).toString().length > 4) return commaFormat(d);
                 else return yearFormat(d);
@@ -223,7 +222,9 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
         y.domain([0, yMax]);
 
         if (domain.length > 5) {
-            xAxis.tickValues(generateTickValues(domain));
+            xAxis.tickValues(domain);
+        } else {
+            xAxis.tickValues(null);
         }
         
         svg.select("path.area")
@@ -232,27 +233,12 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
 
         svg.select("g.x.axis").call(xAxis);
         svg.select("g.y.axis").call(yAxis);
+        // hide uppermost tick
+        var ticks = svg.selectAll(".y.axis .tick");
+        d3.select(ticks[0][ticks[0].length-1]).attr("visibility","hidden");
 
         createBrush();
 
-    };
-
-    var generateTickValues = function(domain) {
-        if (domain.length > 5) return domain;
-        var start = domain[0];
-        var end = domain[domain.length-1];
-        // calculate exact interval for 25 ticks
-        var intervalExact = Math.abs(Math.round((start - end) / 25));
-        // round interval to decimal
-        var interval = Math.pow(10,intervalExact.toString().length);
-        var ticks = [];
-        // add ticks for positive values
-        for (var i = 1; i * interval < end; i++)
-            if (i * interval > start) ticks.push(i * interval);
-        // add ticks for negative values
-        for (var i = 0; i * interval > start; i--)
-            if (i * interval < end) ticks.push(i * interval);
-        return ticks;
     };
 
     var createBrush = function() {
