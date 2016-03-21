@@ -35,6 +35,14 @@
 		}
 	}
 
+	.x.axis path,
+	.x.axis line {
+	    fill: none;
+	    stroke: #000;
+	    stroke-width: 1px;
+	    shape-rendering: crispEdges;
+	}
+
 	.y.axis path {
 		display: none;
 	}
@@ -64,14 +72,6 @@
 		}		
 	}
 
-	.x.axis path,
-	.x.axis line {
-	    fill: none;
-	    stroke: #000;
-	    stroke-width: 1px;
-	    shape-rendering: crispEdges;
-	}
-
 	.x.axis .tick text {
 		font-weight: bold;
 	}
@@ -85,8 +85,6 @@
 
 	.axis path,
 	.axis line {
-	    fill: none;
-	    stroke: #000;
 	    stroke-width: 3px;
 	    shape-rendering: crispEdges;
 	}
