@@ -154,9 +154,8 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             var keys = key.split(':');
             var start = parseInt(keys[0]);
             var end = parseInt(keys[1]);
-            var year = (start + end) / 2;
             data.push({
-                x: year,
+                x: start,
                 y: buckets[key].doc_count,
                 y0: 0,
                 start: start,
@@ -164,6 +163,14 @@ function AreaTimeline(containerId, queryUri, fullscreen) {
             });
             i++;
         }
+        // add bucket for last end year
+        data.push({
+            x: end,
+            y: buckets[key].doc_count,
+            y0: 0,
+            start: end,
+            end: end
+        });  
         return data;
     };
 
