@@ -89,9 +89,12 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
 
     var initialize = function() {
 
-        x = d3.scale.linear();
+        x = d3.scale.linear()
+            .domain(INITIAL_TICKS)
+            .range(getRangeForDomain(INITIAL_TICKS));
 
         y = d3.scale.linear()
+            .domain([0,550000])
             .range([height - margin, 0]);
 
         area = d3.svg.area()
@@ -231,13 +234,20 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
         
         svg.select("path.area")
             .data([data])
+            .transition()
+            .delay(500)
+            .duration(1000)
             .attr("d", area);
 
         svg.select("g.x.axis")
             .attr("visibility","visible")
+            .transition()
+            .duration(1000)
             .call(xAxis);
         svg.select("g.y.axis")
             .attr("visibility","visible")
+            .transition()
+            .duration(1000)
             .call(yAxis);
         // hide uppermost tick
         var ticks = svg.selectAll(".y.axis .tick");
