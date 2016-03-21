@@ -121,11 +121,13 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
 
         svg.append("g")
             .attr("class", "x axis")
+            .attr("visibility","hidden")
             .attr("transform", "translate(0," + (height - margin) + ")")
             .call(xAxis);
 
         svg.append("g")
             .attr("class", "y axis")
+            .attr("visibility","hidden")
             .attr("transform", "translate(" + (width - margin) + ",0)")
             .call(yAxis);
         // hide tick at zero
@@ -231,8 +233,12 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
             .data([data])
             .attr("d", area);
 
-        svg.select("g.x.axis").call(xAxis);
-        svg.select("g.y.axis").call(yAxis);
+        svg.select("g.x.axis")
+            .attr("visibility","visible")
+            .call(xAxis);
+        svg.select("g.y.axis")
+            .attr("visibility","visible")
+            .call(yAxis);
         // hide uppermost tick
         var ticks = svg.selectAll(".y.axis .tick");
         d3.select(ticks[0][ticks[0].length-1]).attr("visibility","hidden");
