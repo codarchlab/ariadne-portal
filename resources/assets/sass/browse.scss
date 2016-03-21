@@ -6,25 +6,28 @@
 	bottom: 0;
 }
 
-.browse-container .controls {
-	
-	position: absolute;
-	top: 75px;
-	right: 10px;
-	z-index: 500;
-	text-align: center;
+.browse-container {
 
-	.btn-search {	
-		border-color: darken($yellow, 5%);
-	 	background-color: $yellow;
-	 	color: #fff;
-	 	text-align: center;
-	}
+	.controls-right {
+		
+		position: absolute;
+		top: 75px;
+		right: 10px;
+		z-index: 500;
+		text-align: center;
 
-	.btn-search:hover {	
-		border-color: darken($yellow, 5%);
-	 	background-color: $yellow;
-	 	color: #fff;
+		.btn-search {	
+			border-color: darken($yellow, 5%);
+		 	background-color: $yellow;
+		 	color: #fff;
+		 	text-align: center;
+		}
+
+		.btn-search:hover {	
+			border-color: darken($yellow, 5%);
+		 	background-color: $yellow;
+		 	color: #fff;
+		}
 	}
 
 }

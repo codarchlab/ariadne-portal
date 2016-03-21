@@ -24,8 +24,14 @@ Route::get('subject/{id}', [
     'uses' => 'SubjectController@page'
 ]);
 
-Route::get('browse/where', 'BrowseController@where');
-Route::get('browse/when', 'BrowseController@when');
+Route::get('browse/where', [
+    'as' => 'browse.where',
+    'uses' =>  'BrowseController@where'
+]);
+Route::get('browse/when', [
+    'as' => 'browse.when',
+    'uses' => 'BrowseController@when'
+]);
 
 Route::get('search', [
     'as'=> 'search',

@@ -14,7 +14,7 @@
 				</button>
 			</div>
 
-			<div class="zoom-controls panel">
+			<div class="zoom-controls panel btn-toolbar">
 				<div class="btn-group">
 					<button class="btn btn-default btn-zoom-out btn-xs" onclick="areaTimeline.zoomOut()"
 							data-toggle="tooltip" data-container="body" data-placement="bottom" title="Zoom out">
@@ -24,6 +24,12 @@
 							data-toggle="tooltip" data-container="body" data-placement="bottom" title="Zoom in">
 						<span class="glyphicon glyphicon-plus"></span>
 					</button>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default btn-xs" href="{{ route('browse.when', Input::all()) }}"
+							data-toggle="tooltip" data-container="body" data-placement="bottom" title="Show in fullscreen">
+						<span class="glyphicon glyphicon-fullscreen"></span>
+					</a>
 				</div>
 			</div>
 

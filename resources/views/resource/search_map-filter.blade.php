@@ -8,7 +8,14 @@
 
 		<div class="filter-container map">
 
-			<div class="pull-right controls btn-toolbar">
+			<div class="pull-left controls-left btn-toolbar">
+				<a class="btn btn-default btn-xs" href="{{ route('browse.where', Input::all()) }}"
+						data-toggle="tooltip" data-container="body" data-placement="bottom" title="Show in fullscreen">
+					<span class="glyphicon glyphicon-fullscreen"></span>
+				</a>
+			</div>
+
+			<div class="pull-right controls-right btn-toolbar">
 				<button type="button" class="btn btn-default btn-xs loading">
 					<span class="glyphicon glyphicon-refresh spin"></span>
 				</button>
