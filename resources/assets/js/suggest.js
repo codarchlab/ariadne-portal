@@ -31,7 +31,7 @@ $(document).ready(function() {
 					template += highlights[i];
 				} 
 			}
-			var link = ' <a class="pull-right" href="/subject/' + subject._id +'"><span class="glyphicon glyphicon-info-sign"></span></a>';
+			var link = ' &nbsp; <a href="/subject/' + subject._id +'"><span class="glyphicon glyphicon-info-sign"></span></a>';
 			return '<div>' + template + link + '</div>';
 		},
 		'notFound' : function() {
