@@ -21,45 +21,17 @@ class Subject {
    * @throws Exception if document is not found
    */
   public static function get($id) {
-
-    /*
-      return array(
-      '_index' => 'subject_v1',
-      '_type' => 'subject',
-      '_id' => '123456789',
-      '_source' => array(
-      'title' => 'Shipwrecks',
-      'description' => 'Occations of the severe damage or loss of a boat or ship at sea',
-      'terms' => array(
-      'shipwrecks (preferred,C,U,LC,English-P,D,U,U)',
-      'shipwreck (C,U,English,AD,U,U)',
-      'wrecks (events) (C,U,English,UF,U,U)',
-      'schipbreuken (C,U,Dutch-P,D,U,U)',
-      'schipbreuk (C,U,Dutch,AD,U,U)',
-      'scheepsongelukken (C,U,Dutch,UF,U,U)',
-      'scheepsongeluk (C,U,Dutch,UF,U,U)',
-      'naufragios (C,U,Spanish-P,D,U,PN)',
-      'naufragio (C,U,Spanish,AD,U,U)',
-      ),
-      'connected_concept' => array(
-      array(
-      'concept' => 'Schiffswrack',
-      'source' => 'DAI Thesaurus',
-      'identifier' => 'http://thesauri.dainst.org/schemes/1/concepts/2004',
-      'relation' => 'Exact match',
-      ),
-      array(
-      'concept' => 'Vikingaskepp',
-      'source' => 'Swedish National Data Service',
-      'identifier' => '324525',
-      'relation' => 'Related match',
-      ),
-      ),
-      )
-      );
-     */
-
     return ElasticSearch::get($id, Config::get('app.elastic_search_subject_index'), 'terms');
+  }
+
+  /**
+   * Performs a paginated search against Elastic Search
+   *
+   * @param Array $query Array containing the elastic search query
+   * @return LengthAwarePaginator paginated result of the search
+   */
+  public static function search($query) {
+    return ElasticSearch::search($query, Config::get('app.elastic_search_subject_index'), 'terms');
   }
 
   /**

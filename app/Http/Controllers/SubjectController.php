@@ -69,4 +69,29 @@ class SubjectController extends Controller {
         }
         return $spatialItems;
     }
+
+    /**
+     * Performs a search for suggestions in the subject index
+     * Eg ?q=dig does a prefix search for "dig"
+     *
+     * @return JSON response with a list of subjects
+     */
+    public function suggest() {
+        
+        $query = ['query' => ['match_all' => []]];
+        if (Request::has('q')) {
+            $query = [
+                'query' => [
+                    'prefix' => [
+                        'prefLabels.label' => Request::get('q')
+                    ]
+                ]
+            ];
+        }
+        
+        $hits = Subject::search($query, 'resource');
+        return response()
+            ->json($hits)
+            ->header("Vary", "Accept");
+    }
 }

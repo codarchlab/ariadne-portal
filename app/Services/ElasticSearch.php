@@ -93,11 +93,16 @@ class ElasticSearch {
 
       $queryResponse = $client->search($searchParams);
 
+      $aggregations = null;
+      if (array_key_exists('aggregations', $queryResponse)) {
+        $aggregations = $queryResponse['aggregations'];
+      }
+
       $paginator = new ElasticSearchPaginator(
         $queryResponse['hits']['hits'], 
         $queryResponse['hits']['total'], 
         $perPage, 
-        $queryResponse['aggregations'], 
+        $aggregations, 
         Paginator::resolveCurrentPage(), 
         ['path' => Paginator::resolveCurrentPath()]
       );

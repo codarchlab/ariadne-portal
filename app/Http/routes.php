@@ -19,6 +19,7 @@ Route::get('robots.txt','PageController@robots' );
 Route::get('provider', 'ProviderController@index');
 
 Route::get('subject', 'SubjectController@index');
+Route::get('subject/suggest', 'SubjectController@suggest');
 Route::get('subject/{id}', [
     'as' => 'subject.page',
     'uses' => 'SubjectController@page'
