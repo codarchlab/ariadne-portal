@@ -15,9 +15,9 @@ function Query(q, params) {
 	this.params = typeof params !== 'undefined' ? params : {};
 
 	this.toUri = function() {
-		var uri = '/search?q=' + self.q;
+		var uri = '/search?q=' + encodeURIComponent(self.q);
 		for (var key in self.params) {
-			uri += "&" + key + "=" + self.params[key];
+			uri += "&" + key + "=" + encodeURIComponent(self.params[key]);
 		}
 		return uri;
 	}

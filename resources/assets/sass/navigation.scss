@@ -30,7 +30,7 @@
   padding-bottom: 21px;
 }
 
-#catalogSearch {
+#navSearch #catalogSearch {
   padding: 0 15px 6px 15px;
   position: absolute;
   top: 13px;
@@ -125,11 +125,11 @@
   #navSearch {
     border: 0;
     display: none;
-  }
 
-  #catalogSearch > .input-group {
-    margin-top: 15px;
-    margin-left: 50px;
-    margin-right: 60px;
+    #catalogSearch > .input-group {
+      margin-top: 15px;
+      margin-left: 50px;
+      margin-right: 60px;
+    }
   }
 }

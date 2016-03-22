@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Browse / when - Ariadne portal')
 @section('content')
 
 <div class="container-fluid content">
