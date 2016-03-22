@@ -5,7 +5,7 @@
 
 	<div class="browse-container map">
 
-		<div class="controls-right panel panel-default">
+		<div class="controls-right controls panel panel-default">
 			<div class="list-group">
 				<div class="list-group-item">
 					<span class="loading">
