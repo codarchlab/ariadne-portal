@@ -15,7 +15,7 @@
 				</a>
 			</div>
 
-			<div class="pull-right controls-right btn-toolbar">
+			<div class="pull-right controls controls-right btn-toolbar">
 				<button type="button" class="btn btn-default btn-xs loading">
 					<span class="glyphicon glyphicon-refresh spin"></span>
 				</button>
