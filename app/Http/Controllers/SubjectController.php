@@ -90,7 +90,7 @@ class SubjectController extends Controller {
             ];
         }
         
-        $hits = Subject::search($query, 'resource');
+        $hits = Subject::suggest($query, 'resource');
         return response()
             ->json($hits)
             ->header("Vary", "Accept");

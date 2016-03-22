@@ -14,7 +14,7 @@ use Config;
 class Subject {
 
   /**
-   * Get a document for a single resource from the catalog index
+   * Get a document for a single resource from the subject index
    *
    * @param type $id id of the document (e.g. dataset id)
    * @return Array all the values in _source from Elastic Search
@@ -25,13 +25,23 @@ class Subject {
   }
 
   /**
-   * Performs a paginated search against Elastic Search
+   * Performs a paginated search against the Elastic Search subject index
    *
    * @param Array $query Array containing the elastic search query
    * @return LengthAwarePaginator paginated result of the search
    */
   public static function search($query) {
     return ElasticSearch::search($query, Config::get('app.elastic_search_subject_index'), 'terms');
+  }
+
+  /**
+   * Performs a paginated search against the Elastic Search suggest index
+   *
+   * @param Array $query Array containing the elastic search query
+   * @return LengthAwarePaginator paginated result of the search
+   */
+  public static function suggest($query) {
+    return ElasticSearch::search($query, Config::get('app.elastic_search_subject_suggest_index'), 'terms');
   }
 
   /**

@@ -16,6 +16,7 @@
     "Leaflet.heat": "https://github.com/Leaflet/Leaflet.heat.git#~0.2.0",
     "Leaflet.label": "~0.2.1",
     "d3": "~3.5.10",
-    "readmore-js": "https://github.com/jedfoster/Readmore.js.git#~2.1.0"
+    "readmore-js": "https://github.com/jedfoster/Readmore.js.git#~2.1.0",
+    "typeahead.js": "^0.11.1"
   }
 }
