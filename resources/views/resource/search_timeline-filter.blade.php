@@ -1,4 +1,4 @@
-@if(count($buckets) > 0 || Input::has($key))
+@if(count($buckets) > 0 && $docCount > 0)
 
 	<div class="panel panel-default">
 
