@@ -42,8 +42,12 @@ class Subject {
 
     $body = [
       'query' => [
-        'match' => [
-          'derivedSubject.prefLabel' => $subject['_source']['prefLabel']
+        'bool' => [
+          'must' => [
+            'term' => [
+              'derivedSubject.source.raw' => $subject['_source']['uri']
+            ]
+          ]
         ]
       ],
       'filter' => [
@@ -60,6 +64,46 @@ class Subject {
     $result = ElasticSearch::getClient()->search($params);
 
     return $result['hits']['hits'];
+  }
+  
+  /**
+   * Get list of subjects where the id is in the list of broader subject
+   * @param type $id
+   * @return array list of narrower subjects
+   */
+  public static function getSubSubjects($id){
+    $body = [
+      'fields'=>['prefLabel'],
+      'size' => 100,
+      'query' => [
+        'bool' => [
+          'must' => [
+            'term' => [
+              'broader.id'=>[
+                'value' => $id
+              ]
+            ]
+          ]
+        ]
+      ]
+    ];
+
+    $params = [
+      'index' => Config::get('app.elastic_search_subject_index'),
+      'type' => 'terms',
+      'body' => $body
+    ];
+
+    $result = ElasticSearch::getClient()->search($params);
+
+    $subjects = [];
+    foreach ($result['hits']['hits'] as $subject){
+      $subjects[$subject['_id']] = $subject['fields']['prefLabel'][0];
+    }
+    
+    asort($subjects);
+    
+    return $subjects;    
   }
 
   /**

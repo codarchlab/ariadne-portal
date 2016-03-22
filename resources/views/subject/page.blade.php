@@ -16,7 +16,7 @@
 @endif
 
 @section('content')
-<?php debug($subject);?>
+
 <div class="container-fluid content">
 
     <div class="row">
@@ -46,25 +46,22 @@
                 @if(count($subject['_source']['broader']) > 0)
                     <dt>{{ trans('subject.broader') }}</dt>
                     @foreach($subject['_source']['broader'] as $broader)
-                    <dd><a href="{{ route('subject.page', $broader['id']) }}">{{ $broader['prefLabel'] }}</a></dd>
+                    <dd><a href="{{ route('subject.page', $broader['id']) }}"><span class="glyphicon glyphicon-tag"></span>{{ $broader['prefLabel'] }}</a></dd>
                     @endforeach
                 @endif
                 
-                @if (isset($subject['_source']['terms']) && count($subject['_source']['terms']) > 0)
-                    <dt>{{ trans('subject.terms') }}</dt>
+                @if(count($sub_subjects) > 0)
+                    <dt>{{ trans('subject.narrower') }}</dt>
                     <dd>
-                        <ul>
-                        @foreach ($subject['_source']['terms'] as $term)
-                            <li>{{ $term }}</li>
-                        @endforeach
-                        </ul>
+                    @foreach($sub_subjects as $id => $subject)
+                    <a href="{{ route('subject.page', $id) }}"><span class="glyphicon glyphicon-tag"></span>{{ $subject }}</a>
+                    @endforeach
                     </dd>
                 @endif
-                
             </dl>
 
             
-            <h4>Labels</h4>
+            <h4>{{ trans('subject.terms') }}</h4>
             <dl class="dl-horizontal">
               @foreach ($pref_labels as $lang => $labels)
                 <dt>{{ trans('resource.language.'.$lang) }}</dt>
