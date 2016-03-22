@@ -46,10 +46,12 @@
                 @if(count($subject['_source']['broader']) > 0)
                     <dt>{{ trans('subject.broader') }}</dt>
                     @foreach($subject['_source']['broader'] as $broader)
-                    <dd>
-                        <span class="glyphicon glyphicon-tag"></span>
-                        <a href="{{ route('subject.page', $broader['id']) }}">{{ $broader['prefLabel'] }}</a>
-                    </dd>
+                        @if (array_key_exists('id',$broader))
+                        <dd>
+                            <span class="glyphicon glyphicon-tag"></span>
+                            <a href="{{ route('subject.page', $broader['id']) }}">{{ $broader['prefLabel'] }}</a>
+                        </dd>
+                        @endif
                     @endforeach
                 @endif
                 
