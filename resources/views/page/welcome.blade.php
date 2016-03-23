@@ -22,7 +22,7 @@ component of the archaeological research methodology.')
         "Location": "location",
         "Title": "title",
         "Native subject": "nativeSubject",
-        "Ariadne Subject": "derivedSubject"
+        "ARIADNE subject": "derivedSubject"
     };
 
     /**
@@ -155,6 +155,8 @@ component of the archaeological research methodology.')
 
 <script>
 
+    var suggest = new Suggest('#catalogSearch .typeahead').create();
+
     for (var key in queryFields) {
         $('#query-fields-list').append('<li><a href="#" onclick="setQueryField(\'' + key + '\')">' + key + '</a></li>');
     }
@@ -163,6 +165,11 @@ component of the archaeological research methodology.')
         $('#query-field-input').val(queryFields[key]);
         $('#query-field-label').text(key);
         $("input[autofocus]").focus();
+        if ($.inArray(key, ['Subject', 'ARIADNE subject', 'All fields']) != -1) {
+            suggest.create();
+        } else {
+            suggest.destroy();
+        }
     }
 
     $("input[autofocus]").focus();
