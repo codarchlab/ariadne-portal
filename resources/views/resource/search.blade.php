@@ -25,6 +25,17 @@
                     </div>
                 @endif
 
+                @if(Input::get('subjectUri'))
+                    <div id="activeSubject">
+                        <a href="{{ route('search', Utils::removeKeyValue('subjectUri', Input::get('subjectUri'))) }}"
+                                class="list-group-item active">
+                            <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
+                            <b>{{ trans('search.fields.subjectUri') }}</b>: {{ Input::get('subjectLabel') }}
+                            {!! Form::hidden('subjectUri', Input::get('subjectUri')) !!}
+                        </a>
+                    </div>
+                @endif
+
                 <div class="input-group">
                     {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources...")) !!}
                     

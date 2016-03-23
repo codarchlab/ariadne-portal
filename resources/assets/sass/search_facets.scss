@@ -1,18 +1,21 @@
 #activeFilters,
-#activeFields {
+#activeFields,
+#activeSubject {
 
   margin-bottom: 25px;
 }
 
 #activeFilters .list-group-item.active,
-#activeFields .list-group-item.active {
+#activeFields .list-group-item.active,
+#activeSubject .list-group-item.active {
 
   text-align: center;
   margin-top: 2px;
 }
 
 #activeFilters .list-group-item.active:hover,
-#activeFields .list-group-item.active:hover {
+#activeFields .list-group-item.active:hover,
+#activeSubject .list-group-item.active:hover {
 
   transition: background-color 0.5s ease;
   background-color: #2e7792;

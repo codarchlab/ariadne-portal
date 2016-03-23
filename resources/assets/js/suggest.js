@@ -54,7 +54,7 @@ function Suggest(inputPath) {
 			limit: 7,
 			templates: templates
 		}).bind('typeahead:select', function(event, subject) {
-			var query = new Query(subject._source.uri, { fields: 'subjectUri' });
+			var query = new Query('*', { subjectUri: subject._id, subjectLabel: subject._source.prefLabel });
 			window.location.href = query.toUri();
 		});
 		active = true;

@@ -88,7 +88,9 @@ class Resource
         $filters = [];
 
         if (Request::has('subjectUri')) {
-
+            $filters[] = [
+                'term' => [ 'derivedSubject.source' => Request::get('subjectUri')]
+            ];
         }
 
         foreach ($query['aggregations'] as $key => $aggregation) {
