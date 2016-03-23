@@ -27,6 +27,16 @@ class PageController extends Controller {
     }
     
     /**
+     * Show the services page
+     *
+     * @return Response
+     */
+    public function services()
+    {
+        return view('page.services');
+    }       
+    
+    /**
      * Show the about page
      *
      * @return Response

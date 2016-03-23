@@ -1,11 +1,11 @@
 /* Subject metadata */
 
 .subject-metadata div {
-  margin-bottom: 10px;
-  text-align: justify;
+    margin-bottom: 10px;
+    text-align: justify;
 }
 
-.subject-metadata .glyphicon-tag {
+.subject-metadata h3 .glyphicon-tag {
     padding-right: 10px;
 }
 
@@ -30,16 +30,16 @@
 /* Resources context */
 
 .subject-context #map {
-  height: 250px;
+    height: 250px;
 }
 
 .subject-context .marker-label {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .subject-context h4 {
-	margin-top: 30px;
-	margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .subject-context ul {

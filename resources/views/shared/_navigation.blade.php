@@ -37,8 +37,8 @@
                     <a href="{{ action('PageController@welcome') }}"><span class="glyphicon glyphicon-globe"></span> Catalog</a>
                 </li>
 
-                <li id="navServices">
-                    <a href="#"><span class="glyphicon glyphicon-cog"></span> Services</a>
+                <li id="navServices" {{ (Request::is('services') ? ' class=active' : '') }}>
+                    <a href="{{ action('PageController@services') }}"><span class="glyphicon glyphicon-cog"></span> Services</a>
                 </li>
                 
                 <li id="navExperiments">

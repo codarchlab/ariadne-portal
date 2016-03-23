@@ -60,7 +60,8 @@
 
             @include('resource.search_timeline-filter', [
                 'buckets' => $hits->
-                    aggregations()['range_buckets']['range_agg']['buckets']
+                    aggregations()['range_buckets']['range_agg']['buckets'],
+                'docCount' => $hits->aggregations()['range_buckets']['doc_count']
             ])
 
             @foreach($aggregations as $key => $aggregation)

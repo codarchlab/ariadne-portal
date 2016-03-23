@@ -30,8 +30,8 @@ class SubjectController extends Controller {
     public function page($id) {
 
         $subject = Subject::get($id);
-        $connected_resources = Subject::connectedResourcesQuery($subject);
-        
+        $connected_resources = [];//Subject::connectedResourcesQuery($subject);
+        $sub_subjects = Subject::getSubSubjects($id);
         $spatial_items = self::getSpatialItems($connected_resources);
                 
         $similar_subjects = Subject::similarSubjectsQuery($subject);
@@ -41,10 +41,17 @@ class SubjectController extends Controller {
                     ->json($subject)
                     ->header("Vary", "Accept");
         }else{
+          $pref_labels = [];
+          foreach($subject['_source']['prefLabels'] as $prefLabel){
+            $pref_labels[$prefLabel['lang']][] = $prefLabel['label'];
+          }
+          ksort($pref_labels);
           return view('subject.page', [
               'subject' => $subject,
               'resources' => $spatial_items,
-              'similar_subjects' => $similar_subjects
+              'similar_subjects' => $similar_subjects,
+              'pref_labels' => $pref_labels,
+              'sub_subjects' => $sub_subjects
           ]);
         }
     }
@@ -62,5 +69,30 @@ class SubjectController extends Controller {
             $spatialItems[] = $resource['_source']['spatial'][0];
         }
         return $spatialItems;
+    }
+
+    /**
+     * Performs a search for suggestions in the subject index
+     * Eg ?q=dig does a prefix search for "dig"
+     *
+     * @return JSON response with a list of subjects
+     */
+    public function suggest() {
+        
+        $query = ['query' => ['match_all' => []]];
+        if (Request::has('q')) {
+            $query = [
+                'query' => [
+                    'prefix' => [
+                        'prefLabels.label' => Request::get('q')
+                    ]
+                ]
+            ];
+        }
+        
+        $hits = Subject::suggest($query, 'resource');
+        return response()
+            ->json($hits)
+            ->header("Vary", "Accept");
     }
 }

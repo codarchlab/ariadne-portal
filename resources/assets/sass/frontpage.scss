@@ -25,6 +25,11 @@ body#frontpage {
   border-color: rgb(204, 204, 204) !important;
 }
 
+#frontpage .form-control.tt-input,
+#frontpage .form-control.tt-hint {
+  width: inherit;
+}
+
 #frontpage .search-form {
   margin-top: 20px;
 }

@@ -1,8 +1,7 @@
 .timeline {
 
 	.area {
-		fill: $green;
-		stroke: darken($green, 30%);
+		fill: url(#timeline-gradient);
 	}
 
 	.brush .extent {
@@ -22,9 +21,46 @@
 			font: bold 18px "Lucida Console", Monaco, monospace;
 		}
 	}
+
+	.brush-controls-container {
+		position: absolute;
+		left: 0;
+		display: inline;
+
+		.brush-controls {
+			position: relative;
+			top: 0;
+			left: 0;
+			z-index: 500;
+		}
+	}
+
+	.x.axis path,
+	.x.axis line {
+	    fill: none;
+	    stroke: #000;
+	    stroke-width: 1px;
+	    shape-rendering: crispEdges;
+	}
+
+	.y.axis path {
+		display: none;
+	}
+
+	.y.axis line {
+		stroke: rgba(0, 0, 0, 0.05);
+	}
+
+	.y.axis .tick text {
+		fill: rgba(0, 0, 0, 0.5);
+	}
 }
 
 .browse-container.timeline {
+
+	.timeline-container {
+		padding-top: 80px;
+	}
 
 	text {
 		font-size: 13px;
@@ -40,16 +76,16 @@
 		}		
 	}
 
-	.axis path,
-	.axis line {
-	    fill: none;
-	    stroke: #000;
-	    stroke-width: 1px;
-	    shape-rendering: crispEdges;
+	.x.axis .tick text {
+		font-weight: bold;
 	}
 }
 
 .filter-container.timeline {
+
+	.timeline-container {
+		padding-top: 12px;
+	}
 
 	text {
 		font-size: 25px;
@@ -57,8 +93,6 @@
 
 	.axis path,
 	.axis line {
-	    fill: none;
-	    stroke: #000;
 	    stroke-width: 3px;
 	    shape-rendering: crispEdges;
 	}

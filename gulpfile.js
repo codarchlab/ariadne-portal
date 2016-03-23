@@ -13,7 +13,8 @@ var paths = {
     'leaflet_label': './bower_components/Leaflet.label/',
     'leaflet_heat': './bower_components/Leaflet.heat/',
     'd3' : './bower_components/d3/',
-    'readmore' : './bower_components/readmore-js/'
+    'readmore' : './bower_components/readmore-js/',
+    'typeahead' : './bower_components/typeahead.js/dist/'
 };
 
 gulp.task("dist", ["sass", "copy", "scripts"], function() {
@@ -64,6 +65,7 @@ elixir(function(mix) {
             paths.leaflet_heat + "dist/leaflet-heat.js",
             paths.d3 + "d3.js",
             paths.readmore + "readmore.js",
+            paths.typeahead + "typeahead.bundle.js",
             "*.js"
         ],
         'public/js/app.js'

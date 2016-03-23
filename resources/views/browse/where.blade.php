@@ -1,11 +1,12 @@
 @extends('app')
+@section('title', 'Browse / where - Ariadne portal')
 @section('content')
 
 <div class="container-fluid">
 
 	<div class="browse-container map">
 
-		<div class="controls panel panel-default">
+		<div class="controls-right controls panel panel-default">
 			<div class="list-group">
 				<div class="list-group-item">
 					<span class="loading">

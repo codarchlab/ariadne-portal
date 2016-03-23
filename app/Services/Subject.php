@@ -14,52 +14,34 @@ use Config;
 class Subject {
 
   /**
-   * Get a document for a single resource from the catalog index
+   * Get a document for a single resource from the subject index
    *
    * @param type $id id of the document (e.g. dataset id)
    * @return Array all the values in _source from Elastic Search
    * @throws Exception if document is not found
    */
   public static function get($id) {
-
-    /*
-      return array(
-      '_index' => 'subject_v1',
-      '_type' => 'subject',
-      '_id' => '123456789',
-      '_source' => array(
-      'title' => 'Shipwrecks',
-      'description' => 'Occations of the severe damage or loss of a boat or ship at sea',
-      'terms' => array(
-      'shipwrecks (preferred,C,U,LC,English-P,D,U,U)',
-      'shipwreck (C,U,English,AD,U,U)',
-      'wrecks (events) (C,U,English,UF,U,U)',
-      'schipbreuken (C,U,Dutch-P,D,U,U)',
-      'schipbreuk (C,U,Dutch,AD,U,U)',
-      'scheepsongelukken (C,U,Dutch,UF,U,U)',
-      'scheepsongeluk (C,U,Dutch,UF,U,U)',
-      'naufragios (C,U,Spanish-P,D,U,PN)',
-      'naufragio (C,U,Spanish,AD,U,U)',
-      ),
-      'connected_concept' => array(
-      array(
-      'concept' => 'Schiffswrack',
-      'source' => 'DAI Thesaurus',
-      'identifier' => 'http://thesauri.dainst.org/schemes/1/concepts/2004',
-      'relation' => 'Exact match',
-      ),
-      array(
-      'concept' => 'Vikingaskepp',
-      'source' => 'Swedish National Data Service',
-      'identifier' => '324525',
-      'relation' => 'Related match',
-      ),
-      ),
-      )
-      );
-     */
-
     return ElasticSearch::get($id, Config::get('app.elastic_search_subject_index'), 'terms');
+  }
+
+  /**
+   * Performs a paginated search against the Elastic Search subject index
+   *
+   * @param Array $query Array containing the elastic search query
+   * @return LengthAwarePaginator paginated result of the search
+   */
+  public static function search($query) {
+    return ElasticSearch::search($query, Config::get('app.elastic_search_subject_index'), 'terms');
+  }
+
+  /**
+   * Performs a paginated search against the Elastic Search suggest index
+   *
+   * @param Array $query Array containing the elastic search query
+   * @return LengthAwarePaginator paginated result of the search
+   */
+  public static function suggest($query) {
+    return ElasticSearch::search($query, Config::get('app.elastic_search_subject_suggest_index'), 'terms');
   }
 
   /**
@@ -70,8 +52,12 @@ class Subject {
 
     $body = [
       'query' => [
-        'match' => [
-          'derivedSubject.prefLabel' => $subject['_source']['prefLabel']
+        'bool' => [
+          'must' => [
+            'term' => [
+              'derivedSubject.source.raw' => $subject['_source']['uri']
+            ]
+          ]
         ]
       ],
       'filter' => [
@@ -88,6 +74,46 @@ class Subject {
     $result = ElasticSearch::getClient()->search($params);
 
     return $result['hits']['hits'];
+  }
+  
+  /**
+   * Get list of subjects where the id is in the list of broader subject
+   * @param type $id
+   * @return array list of narrower subjects
+   */
+  public static function getSubSubjects($id){
+    $body = [
+      'fields'=>['prefLabel'],
+      'size' => 100,
+      'query' => [
+        'bool' => [
+          'must' => [
+            'term' => [
+              'broader.id'=>[
+                'value' => $id
+              ]
+            ]
+          ]
+        ]
+      ]
+    ];
+
+    $params = [
+      'index' => Config::get('app.elastic_search_subject_index'),
+      'type' => 'terms',
+      'body' => $body
+    ];
+
+    $result = ElasticSearch::getClient()->search($params);
+
+    $subjects = [];
+    foreach ($result['hits']['hits'] as $subject){
+      $subjects[$subject['_id']] = $subject['fields']['prefLabel'][0];
+    }
+    
+    asort($subjects);
+    
+    return $subjects;    
   }
 
   /**

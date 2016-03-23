@@ -12,20 +12,28 @@
 */
 
 Route::get('/', 'PageController@welcome');
+Route::get('services', 'PageController@services');
 Route::get('about', 'PageController@about');
 Route::get('robots.txt','PageController@robots' );
 
 Route::get('provider', 'ProviderController@index');
 
-Route::get('subject', 'SubjectController@index');
+Route::get('subject/suggest', 'SubjectController@suggest');
 Route::get('subject/{id}', [
     'as' => 'subject.page',
     'uses' => 'SubjectController@page'
 ]);
 
+
 Route::get('browse/what', 'BrowseController@what');
-Route::get('browse/where', 'BrowseController@where');
-Route::get('browse/when', 'BrowseController@when');
+Route::get('browse/where', [
+    'as' => 'browse.where',
+    'uses' =>  'BrowseController@where'
+]);
+Route::get('browse/when', [
+    'as' => 'browse.when',
+    'uses' => 'BrowseController@when'
+]);
 
 Route::get('search', [
     'as'=> 'search',

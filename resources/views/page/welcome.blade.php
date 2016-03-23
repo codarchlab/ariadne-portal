@@ -17,8 +17,12 @@ component of the archaeological research methodology.')
     var queryFields = {
         "All fields": "",
         "Subject": "subject",
+        "Identifier": "identifier",
         "Time period": "time",
-        "Location": "location"
+        "Location": "location",
+        "Title": "title",
+        "Native subject": "nativeSubject",
+        "Ariadne Subject": "derivedSubject"
     };
 
     /**
@@ -65,7 +69,7 @@ component of the archaeological research methodology.')
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
 
-                        {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "class" => "form-inline")) !!}
+                        {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "class" => "form-inline", "id" => "catalogSearch")) !!}
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="select-field-btn input-group-btn">
@@ -77,7 +81,7 @@ component of the archaeological research methodology.')
                                         </ul>
                                     </div>
                                     <input type="hidden" name="fields" id="query-field-input" value="">
-                                    {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources in the Ariadne catalog ...", "autofocus" => "autofocus")) !!}
+                                    {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control typeahead", "placeholder" => "Search for resources in the Ariadne catalog ...", "autofocus" => "autofocus")) !!}
                                     <div class="submit-btn input-group-btn">
                                         {!! Form::button('&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;', array("type" => "submit", "class" => "btn btn-primary")) !!}
                                     </div>
