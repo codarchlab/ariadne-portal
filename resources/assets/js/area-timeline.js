@@ -203,13 +203,9 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
         } else {
             $(".timeline .brush-controls").hide();
         }
-
-        // TODO: calc selected objects, implement buttons for zooming and searching
     }
 
     var redraw = function(data) {
-
-        console.log(data);
 
         var minYear = data[0].start;
         var maxYear = data[data.length-1].end;
