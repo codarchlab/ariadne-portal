@@ -60,7 +60,8 @@ return [
 		'identifier' => ['identifier', 'originalId'],
 		'title' => ['title'],
 		'nativeSubject' => ['nativeSubject.prefLabel'],
-		'derivedSubject' => ['derivedSubject.prefLabel']
+		'derivedSubject' => ['derivedSubject.prefLabel'],
+		'subjectUri' => ['derivedSubject.source']
 	],
 
 	/* Aggregations whose values should be translated */
