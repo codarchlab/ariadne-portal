@@ -118,19 +118,21 @@
             </div>
             <div class="row">
               <div class="col-md-12 text-right">
-                <label for="sort">Order By</label>
-                <select id="sort-action">
-                  <option value="">Score</option>
-                  @foreach(Config::get('app.elastic_search_sort') as $sort)
-                  <option value="{{ $sort }}" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
-                  @endforeach
-                </select>
+                <form class="form-inline">
+                    <label for="sort">Order By</label>
+                    <select id="sort-action" class="form-control input-sm">
+                        <option value="">Score</option>
+                        @foreach(Config::get('app.elastic_search_sort') as $sort)
+                        <option value="{{ $sort }}" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
+                        @endforeach
+                    </select>
 
-                @if(Request::has('order') == false || Request::input('order') == 'asc')
-                  <a href="{{ route('search', Utils::addKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes-alt" data-toggle="tooltip" data-placement="bottom" title="Descending"></span></a>
-                @else
-                  <a href="{{ route('search', Utils::removeKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes" data-toggle="tooltip" data-placement="bottom" title="Ascending "></span></a>
-                @endif
+                    @if(Request::has('order') == false || Request::input('order') == 'asc')
+                      <a href="{{ route('search', Utils::addKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes-alt" data-toggle="tooltip" data-placement="bottom" title="Descending"></span></a>
+                    @else
+                      <a href="{{ route('search', Utils::removeKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes" data-toggle="tooltip" data-placement="bottom" title="Ascending "></span></a>
+                    @endif
+                </form>
               </div>              
             </div>
             <div class="row">
