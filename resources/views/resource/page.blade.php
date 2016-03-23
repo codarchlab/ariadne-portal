@@ -150,6 +150,11 @@
                     <dd>{{ $resource['_id'] }}</dd>
                 @endif
 
+                @if (isset($resource['_source']['originalId']))
+                    <dt>{{ trans('resource.originalId') }}</dt>
+                    <dd>{{ $resource['_source']['originalId'] }}</dd>
+                @endif
+
                 @if (isset($resource['_source']['language']))
                     <dt>{{ trans('resource.language') }}</dt>
                     <dd itemprop="inLanguage">{{ trans('resource.language.'.$resource['_source']['language']) }}</dd>
@@ -158,6 +163,51 @@
                 @if (isset($resource['_source']['archaeologicalResourceType']))
                     <dt>{{ trans('resource.archaeologicalResourceType') }}</dt>
                     <dd>{{ $resource['_source']['archaeologicalResourceType']['name'] }}</dd>
+                @endif
+
+                @if (isset($resource['_source']['temporal']))
+                    <dt>{{ trans('resource.temporal')}}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['temporal'] as $temporal)
+                            <li>
+                                @if(isset($temporal['from']))
+                                    {{ $temporal['from'] }}
+                                @endif
+                                @if(isset($temporal['until']) && $temporal['until'] != $temporal['from'])
+                                    &ndash; {{ $temporal['until'] }}
+                                @endif
+                                @if(isset($temporal['periodName']))
+                                    , {{ $temporal['periodName'] }}
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif
+
+                @if (isset($resource['_source']['spatial']))
+                    <dt>{{ trans('resource.spatial')}}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['spatial'] as $spatial)
+                            <li>
+                                <?php $parts = [] ?>
+                                @foreach(['address','postcode','placeName','country'] as $key)
+                                    @if(isset($spatial[$key]))
+                                        <?php $parts[] = $spatial[$key] ?>
+                                    @endif
+                                @endforeach
+                                @if(count($parts) > 0)
+                                    {{ implode($parts, ', ') }}
+                                @endif
+                                @if(isset($spatial['location']))
+                                    <em>[{{ implode($spatial['location'], ', ') }}]</em>
+                                @endif
+                            </li>
+                            @endforeach
+                        </ul>
+                    </dd>
                 @endif
 
                 @if (isset($resource['_source']['resourceType']))
@@ -177,8 +227,9 @@
                 @endif
 
                 @if (isset($resource['_source']['issued']))
+                    <?php $datetime = DateTime::createFromFormat('Y-m-d\TH:i:s+', $resource['_source']['issued']) ?>
                     <dt>{{ trans('resource.issued') }}</dt>
-                    <dd itemprop="datePublished">{{ $resource['_source']['issued'] }}</dd>
+                    <dd itemprop="datePublished">{{ $datetime->format('n M Y') }}</dd>
                 @endif
 
                 @if (isset($resource['_source']['contributor']))
