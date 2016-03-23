@@ -48,6 +48,7 @@ function Suggest(inputPath) {
 
 		if (active) return this;
 		$(inputPath).typeahead(null, {
+			display: 'prefLabel',
 			name: 'subjects',
 			source: subjects,
 			limit: 7,
