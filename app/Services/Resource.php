@@ -13,7 +13,6 @@ use App\Services\Timeline;
 use Config;
 use Request;
 
-
 class Resource
 {
 
@@ -70,22 +69,26 @@ class Resource
           $query['sort'] = [$sort_field => ['order' => $order]];
         }
 
-        $q = ['match_all' => []];
+        $innerQuery = null;
 
         if (Request::has('q')) {
             $field_groups = Config::get('app.elastic_search_field_groups');
             
             if(Request::has('fields') && array_key_exists(Request::get('fields'), $field_groups)){
                 foreach ($field_groups[Request::get('fields')] as $field){
-                    $q = ['match' => [$field => Request::get('q')]];
-                    $query['query']['bool']['should'][] = $q;
+                    $innerQuery['bool']['should'][] = ['match' => [$field => Request::get('q')]];
                 }
-            }else {
-                $q = ['query_string' => ['query' => Request::get('q')]];
-                $query['query']['bool']['must'][] = $q;
+            } else {
+                $innerQuery = ['query_string' => ['query' => Request::get('q')]];
             }
         } else {
-            $query['query']['bool']['must'][] = ['query_string' => ['query' => '*']];
+            $innerQuery = ['match_all' => []];
+        }
+
+        $filters = [];
+
+        if (Request::has('subjectUri')) {
+
         }
 
         foreach ($query['aggregations'] as $key => $aggregation) {
@@ -99,14 +102,13 @@ class Resource
                     $fieldQuery = [];
                     $fieldQuery[$field] = $value;
                     if ($key != 'temporal'){ 
-                      $query['query']['bool']['must'][] = ['match' => $fieldQuery];
-                    }
-                    else{ 
-                      $query['query']['bool']['must'][] = ['nested' => [
+                        $filters[] = ['term' => $fieldQuery];
+                    } else { 
+                        $filters[] = ['nested' => [
                                 'path' => 'temporal',
                                 'query' => [
                                     'bool'=> [
-                                        'must' => ['match' => $fieldQuery]
+                                        'must' => ['term' => $fieldQuery]
                                     ]
                                 ]
                             ]
@@ -119,18 +121,13 @@ class Resource
         if (Request::has('range')) {
             $range = explode(",",Request::get("range"));
             if (sizeof($range) > 1) {
-                $query['query'] = [
-                    'filtered' => [
-                        'query' => $query['query'],
-                        'filter' => [
-                            'nested' => [
-                                'path' => 'temporal',
-                                'query' => Timeline::buildRangeQuery(
-                                    $range[0],
-                                    $range[sizeof($range)-1]
-                                )
-                            ]
-                        ]
+                $filters[] =  [
+                    'nested' => [
+                        'path' => 'temporal',
+                        'query' => Timeline::buildRangeQuery(
+                            $range[0],
+                            $range[sizeof($range)-1]
+                        )
                     ]
                 ];
             }
@@ -139,26 +136,28 @@ class Resource
         // TODO: refactor so that ES service takes care of bbox parsing
         if (Request::has('bbox')) {
             $bbox = explode(',', Request::input('bbox'));
-            $query['query'] = [
-                'filtered' => [
-                    'query' => $query['query'],
-                    'filter' => [
-                        'geo_bounding_box' => [
-                            'spatial.location' => [
-                                'top_left' => [
-                                    'lat' => floatval($bbox[3]),
-                                    'lon' => floatval($bbox[0])
-                                ],                                
-                                'bottom_right' => [
-                                    'lat' => floatval($bbox[1]),
-                                    'lon' => floatval($bbox[2])
-                                ]
-                            ]
+            $filters[] = [
+                'geo_bounding_box' => [
+                    'spatial.location' => [
+                        'top_left' => [
+                            'lat' => floatval($bbox[3]),
+                            'lon' => floatval($bbox[0])
+                        ],                                
+                        'bottom_right' => [
+                            'lat' => floatval($bbox[1]),
+                            'lon' => floatval($bbox[2])
                         ]
                     ]
                 ]
             ];
         }
+
+        $query['query'] = ['filtered' => ['filter' => ['bool' => ['must' => []]]]];
+        foreach ($filters as $filter) {
+            $query['query']['filtered']['filter']['bool']['must'][] = $filter;
+        }
+        $query['query']['filtered']['query'] = $innerQuery;
+
         return $query;
     }
 
