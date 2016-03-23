@@ -1,9 +1,5 @@
 .timeline {
 
-	.area {
-		fill: url(#timeline-gradient);
-	}
-
 	.brush .extent {
 		stroke: darken($yellow, 30%);
 		stroke-opacity: .125;

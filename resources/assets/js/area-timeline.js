@@ -66,6 +66,21 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
 
     var initialize = function() {
 
+        svg.append("linearGradient")
+            .attr("id", "timeline-gradient")
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", "0%").attr("y1", "0%")
+            .attr("x2", "0%").attr("y2", "100%")
+            .selectAll("stop")
+                .data([
+                    {offset: "0%", color: "#BB3921"},
+                    {offset: "50%", color: "#D5A03A"},
+                    {offset: "100%", color: "#75A99D"}
+                ])
+            .enter().append("stop")
+                .attr("offset", function(d) { return d.offset; })
+                .attr("stop-color", function(d) { return d.color; });
+
         x = d3.scale.linear()
             .domain(INITIAL_TICKS)
             .range(calculateRange(INITIAL_TICKS));
@@ -97,7 +112,8 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
             .orient("left");
 
         svg.append("path")
-            .attr("class", "area");
+            .attr("class", "area")
+            .attr("fill", "url(#timeline-gradient)");
 
         svg.append("g")
             .attr("class", "x axis")
@@ -112,21 +128,6 @@ function AreaTimeline(containerPath, queryUri, fullscreen) {
             .call(yAxis);
         // hide tick at zero
         d3.select(svg.selectAll(".y.axis .tick")[0][0]).attr("visibility","hidden");
-
-        svg.append("linearGradient")
-            .attr("id", "timeline-gradient")
-            .attr("gradientUnits", "userSpaceOnUse")
-            .attr("x1", "0%").attr("y1", "0%")
-            .attr("x2", "0%").attr("y2", "100%")
-            .selectAll("stop")
-                .data([
-                    {offset: "0%", color: "#BB3921"},
-                    {offset: "50%", color: "#D5A03A"},
-                    {offset: "100%", color: "#75A99D"}
-                ])
-            .enter().append("stop")
-                .attr("offset", function(d) { return d.offset; })
-                .attr("stop-color", function(d) { return d.color; });
 
     };
 
