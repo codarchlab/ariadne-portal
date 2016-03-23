@@ -8,7 +8,7 @@ use Exception;
 class Timeline
 {
     const nrDefaultBuckets = 50;
-    const initialRange = [-1000000,-100000,-10000,-1000,0,1000,1250,1500,1750,2016];
+    public static $initialRange = [-1000000,-100000,-10000,-1000,0,1000,1250,1500,1750,2016];
 
     /**
      * Creates an elasticsearch aggregation query. Each of the intervals derived
@@ -26,7 +26,7 @@ class Timeline
     public static function prepareRangeBucketsAggregation($range) {
 
         if ($range==null || !(sizeOf($range)>1)) {
-            $range = self::initialRange;
+            $range = self::$initialRange;
         }
 
         $nrIntervals=sizeof($range)-1;
