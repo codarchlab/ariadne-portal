@@ -54,9 +54,13 @@ return [
 	 * (same values should be configured in assets/views/pages/welcome.blade.php)
 	*/
 	'elastic_search_field_groups' =>[
-		'subject' => ['nativeSubject.prefLabel.raw'],
+		'subject' => ['nativeSubject.prefLabel', 'aatSubjects.label', 'derivedSubject.prefLabel'],
 		'time' => ['temporal.periodName'],
-		'location' => ['spatial.placeName']
+		'location' => ['spatial.placeName'],
+		'identifier' => ['identifier', 'originalId'],
+		'title' => ['title'],
+		'nativeSubject' => ['nativeSubject.prefLabel'],
+		'derivedSubject' => ['derivedSubject.prefLabel']
 	],
 
 	/* Aggregations whose values should be translated */
