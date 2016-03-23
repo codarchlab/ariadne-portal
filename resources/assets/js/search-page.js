@@ -68,14 +68,7 @@ function placeGetMoreLinkForAggregations(){
 }
 
 function getUrlVars(){
-    var vars = {}, hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++){
-        
-        hash = hashes[i].split('=');
-        if (hash.length>1)    vars[hash[0]] = hash[1].replace(/\+/g," ").replace(/\%7C/g,"|");
-    }
-    return vars;
+    return new Query.fromUri(window.location.href).params;
 }
 
 /*
