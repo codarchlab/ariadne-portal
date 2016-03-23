@@ -14,6 +14,17 @@
 
             {!! Form::open(array("action" => "ResourceController@search", "method" => "GET", "id" => "searchPageForm")) !!}
 
+                @if(Input::get('fields'))
+                    <div id="activeFields">
+                        <a href="{{ route('search', Utils::removeKeyValue('fields', Input::get('fields'))) }}"
+                                class="list-group-item active">
+                            <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
+                            <b>{{ trans('search.fields') }}</b>: {{ trans('search.fields.'.Input::get('fields')) }}
+                            {!! Form::hidden('fields', Input::get('fields')) !!}
+                        </a>
+                    </div>
+                @endif
+
                 <div class="input-group">
                     {!! Form::text("q", Request::input("q"), array("id" => "q", "class" => "form-control", "placeholder" => "Search for resources...")) !!}
                     

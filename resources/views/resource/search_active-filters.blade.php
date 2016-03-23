@@ -7,7 +7,7 @@
 
                 <a href="{{ route('search', Utils::removeKeyValue($key, $value)) }}" class="list-group-item active">
                     <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
-                    {{ trans('resource.'.$key) }}: {{ $value }}
+                    <b>{{ trans('resource.'.$key) }}</b>: {{ $value }}
                 </a>
 
             @endif
