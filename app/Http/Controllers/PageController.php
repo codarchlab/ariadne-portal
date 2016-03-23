@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Services\Utils;
 
 class PageController extends Controller {
     /*
@@ -21,7 +22,8 @@ class PageController extends Controller {
      * @return Response
      */
     public function welcome() {
-        return view('page.welcome');
+        $cloudData = Utils::getWordCloudData();
+        return view('page.welcome') -> with('cloud_data', $cloudData);
     }
     
     /**

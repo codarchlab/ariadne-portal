@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\Provider;
 use Illuminate\Support\Facades\Input;
 use App\Services\ElasticSearch;
+use App\Services\Resource;
 use Request;
 
 class Utils {
@@ -239,5 +240,28 @@ class Utils {
     return $empty;
 }
 
-  
+
+ public static function getWordCloudData() {
+   
+    $query = [
+      'size' => 0,
+      'aggregations' => [
+        'nativeSubject' => [
+          'terms' => [
+            'field' => 'nativeSubject.prefLabel.raw',
+            'size' => 100
+          ]
+        ],
+        'keyword' => [
+          'terms' => [
+            'field' => 'keyword.raw',
+            'size' => 100
+          ]
+        ]
+      ]
+    ];
+    return Resource::search($query);
+    
+  }
+
 }

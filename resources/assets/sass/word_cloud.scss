@@ -1,0 +1,76 @@
+/*!
+ * jQCloud 2.0.1
+ * Copyright 2011 Luca Ongaro (http://www.lucaongaro.eu)
+ * Copyright 2013 Daniel White (http://www.developerdan.com)
+ * Copyright 2014 Damien "Mistic" Sorel (http://www.strangeplanet.fr)
+ * Licensed under MIT (http://opensource.org/licenses/MIT)
+ */
+/* layout */
+div.jqcloud {
+  overflow: hidden;
+  position: relative;
+}
+
+div.jqcloud span {
+  padding: 0;
+}
+
+/* fonts */
+div.jqcloud {
+  font-family: "Georgia", "Arial", sans-serif;
+  font-size: 6px;
+  line-height: normal;
+}
+
+div.jqcloud a {
+  font-size: inherit;
+  text-decoration: none;
+}
+
+.wordCloudContainerWelcome {
+  height: 177px;
+  max-width: 100%;
+  margin: 0;
+  padding: 5px;
+  background-color: #F0F0F0;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  
+} 
+
+.wordCloudContainerWhat {
+  height: 220px;
+  margin-bottom: 0;
+  margin-top: 0;
+  display: block;
+  background: white;
+}
+ 
+div.jqcloud span.w10 { font-size: 550%; }
+div.jqcloud span.w9  { font-size: 500%; }
+div.jqcloud span.w8  { font-size: 450%; }
+div.jqcloud span.w7  { font-size: 400%; }
+div.jqcloud span.w6  { font-size: 350%; }
+div.jqcloud span.w5  { font-size: 300%; }
+div.jqcloud span.w4  { font-size: 250%; }
+div.jqcloud span.w3  { font-size: 200%; }
+div.jqcloud span.w2  { font-size: 150%; }
+div.jqcloud span.w1  { font-size: 100%; }
+
+/* colors */
+div.jqcloud          { color: #09f; }
+div.jqcloud a        { color: inherit; }
+div.jqcloud a:hover  { color: #000000; }
+div.jqcloud a:hover  { color: #000000; }
+
+div.jqcloud span.w10 { color: #cc6600; }
+div.jqcloud span.w9  { color: #ff9900; }
+div.jqcloud span.w8  { color: #cc9900; }
+div.jqcloud span.w7  { color: #996633; }
+div.jqcloud span.w6  { color: #999966; }
+div.jqcloud span.w5  { color: #666633; }
+div.jqcloud span.w4  { color: #333300; }
+div.jqcloud span.w3  { color: #336600; }
+div.jqcloud span.w2  { color: #003300; }
+div.jqcloud span.w1  { color: #006600; }

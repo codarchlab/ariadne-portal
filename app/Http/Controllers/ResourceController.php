@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use DebugBar;
 
 use Illuminate\Support\Facades\Config;
 use App\Services\Resource;

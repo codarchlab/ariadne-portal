@@ -6,6 +6,7 @@ use Request;
 use Input;
 use App\Services\Map;
 use App\Services\ElasticSearch;
+use App\Services\Utils;
 
 class BrowseController extends Controller {
 
@@ -24,4 +25,11 @@ class BrowseController extends Controller {
     public function when() {
         return view('browse.when');
     }
+    
+    public function what() {
+      $cloudData = Utils::getWordCloudData();
+      return view('browse.what') 
+          ->with('cloud_data', $cloudData);
+    }
+    
 }

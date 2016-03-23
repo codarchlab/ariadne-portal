@@ -119,8 +119,11 @@ body#frontpage {
   color: $brand-primary;
 }
 
-.welcomebox.browse .btn-primary:hover {
+.welcomebox.browse .btn-primary.white-btn-primary {
+  background-color: white;
+}
 
+.welcomebox.browse .btn-primary:hover {
   background-color: $brand-primary;
   color: white;
 }

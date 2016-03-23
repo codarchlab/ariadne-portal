@@ -134,15 +134,10 @@ component of the archaeological research methodology.')
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <a class="btn btn-primary" disabled="disabled">
-                                    <span class="glyphicon glyphicon-list"></span> What
-                                </a>
-                                <div class="imageBox">
-                                    <img src="img/what.png" class="img-responsive image"></a>
-                                </div>
+                              <div id="wordCloud" class="wordCloudContainerWelcome">@include('shared._word_cloud')</div>
+                              <a href="{{ action('BrowseController@what') }}" class="btn btn-primary white-btn-primary"><span class="glyphicon glyphicon-list"></span> What</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
