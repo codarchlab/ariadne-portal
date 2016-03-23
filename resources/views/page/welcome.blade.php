@@ -122,7 +122,7 @@ component of the archaeological research methodology.')
 
                         <div class="row">
                             <div class="col-md-4" id="where">                                
-                                <a href="{{ action('BrowseController@where') }}" class="btn btn-primary">
+                                <a href="{{ action('BrowseController@where') }}" class="btn btn-primary white-btn-primary">
                                     <span class="glyphicon glyphicon-globe"></span> Where
                                 </a>
                                 <div class="imageBox">
@@ -130,7 +130,7 @@ component of the archaeological research methodology.')
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <a href="{{ action('BrowseController@when') }}" class="btn btn-primary">
+                                <a href="{{ action('BrowseController@when') }}" class="btn btn-primary white-btn-primary">
                                     <span class="glyphicon glyphicon-stats"></span> When
                                 </a>
                                 <div class="imageBox">
