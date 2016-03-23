@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function Suggest(inputPath) {
 
 	var subjects = new Bloodhound({
 		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('prefLabel'),
@@ -42,15 +42,29 @@ $(document).ready(function() {
 		}
 	};
 
-	$('#catalogSearch .typeahead').typeahead(null, {
-		name: 'subjects',
-		display: 'prefLabel',
-		source: subjects,
-		limit: 7,
-		templates: templates
-	}).bind('typeahead:select', function(event, subject) {
-		var query = new Query('derivedSubject.source:"' + subject._source.uri + '"');
-		window.location.href = query.toUri();
-	});
+	var active = false;
 
-});
+	this.create = function() {
+
+		if (active) return this;
+		$(inputPath).typeahead(null, {
+			name: 'subjects',
+			source: subjects,
+			limit: 7,
+			templates: templates
+		}).bind('typeahead:select', function(event, subject) {
+			var query = new Query('derivedSubject.source:"' + subject._source.uri + '"');
+			window.location.href = query.toUri();
+		});
+		active = true;
+		return this;
+
+	};
+
+	this.destroy = function() {
+		$(inputPath).typeahead('destroy');
+		active = false;
+		return this;
+	};
+
+}
