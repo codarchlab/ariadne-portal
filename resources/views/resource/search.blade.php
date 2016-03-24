@@ -113,28 +113,26 @@
                 <div class="col-md-3 total">
                     <strong>{{ trans('search.total') }}:</strong> <span class="badge">{{ number_format($hits->total()) }}</span>
                 </div>
-                <div class="col-md-9 text-right">
-                    <small>{!! $hits->appends(Input::all())->render() !!}</small>
+                <div class="col-md-6 text-center">
+                    @include('resource.search_pagination', ['paginator' => $hits->appends(Input::all())])
                 </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 text-right">
-                <form class="form-inline">
-                    <label for="sort">Order By</label>
-                    <select id="sort-action" class="form-control input-sm">
-                        <option value="">Score</option>
-                        @foreach(Config::get('app.elastic_search_sort') as $sort)
-                        <option value="{{ $sort }}" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
-                        @endforeach
-                    </select>
+                <div class="col-md-3 text-right">
+                    <form class="form-inline">
+                        <label for="sort">Order By</label>
+                        <select id="sort-action" class="form-control input-sm">
+                            <option value="">Score</option>
+                            @foreach(Config::get('app.elastic_search_sort') as $sort)
+                            <option value="{{ $sort }}" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
+                            @endforeach
+                        </select>
 
-                    @if(Request::has('order') == false || Request::input('order') == 'asc')
-                      <a href="{{ route('search', Utils::addKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes-alt" data-toggle="tooltip" data-placement="bottom" title="Descending"></span></a>
-                    @else
-                      <a href="{{ route('search', Utils::removeKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes" data-toggle="tooltip" data-placement="bottom" title="Ascending "></span></a>
-                    @endif
-                </form>
-              </div>              
+                        @if(Request::has('order') == false || Request::input('order') == 'asc')
+                          <a href="{{ route('search', Utils::addKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes-alt" data-toggle="tooltip" data-placement="bottom" title="Descending"></span></a>
+                        @else
+                          <a href="{{ route('search', Utils::removeKeyValue('order', 'desc')) }}"><span class="glyphicon glyphicon-sort-by-attributes" data-toggle="tooltip" data-placement="bottom" title="Ascending "></span></a>
+                        @endif
+                    </form>
+                </div>  
             </div>
             <div class="row">
                 <div class="col-md-12"><hr/></div>
@@ -148,8 +146,8 @@
                 <div class="col-md-12"><hr/></div>
             </div>
             <div class="row">
-                <div class="col-md-12 text-right">
-                    <small>{!! $hits->appends(Input::all())->render() !!}</small>
+                <div class="col-md-12 text-center">
+                    @include('resource.search_pagination', ['paginator' => $hits->appends(Input::all())])
                 </div>
             </div>
         </div>
