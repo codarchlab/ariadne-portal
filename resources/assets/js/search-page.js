@@ -23,8 +23,8 @@ $(document).ready(function () {
             type: "GET",
             url: '/aggregation/'+aggregation+'/bucket',
             data: vars
-        }).complete(function (data) {
-            var elements = $(data.responseText);
+        }).then(function (data) {
+            var elements = $(data);
             var content = $('.aggregation-items', elements).html();
 
             $(aggregationElement).parents('div.aggregation-items').html(content);
