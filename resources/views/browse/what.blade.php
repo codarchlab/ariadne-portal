@@ -16,10 +16,7 @@
     @include('shared._word_cloud')
   </div>
   <!-- END WORD CLOUD -->
-  
-  <h1>What...</h1>
-  <p>This is the What page</p>
-  
+    
 </div> 
 
 @endsection
