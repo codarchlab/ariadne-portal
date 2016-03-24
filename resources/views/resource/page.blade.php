@@ -236,13 +236,15 @@
 
                 @if (isset($resource['_source']['issued']))
                     <dt>{{ trans('resource.issued') }}</dt>
-                    <dd itemprop="datePublished">
-                    @if(is_numeric($resource['_source']['issued']))
-                      {{ $resource['_source']['issued'] }}
-                    @else
-                    <?php $datetime = new DateTime($resource['_source']['issued']) ?>
-                      {{ $datetime->format('n M Y') }}
-                    @endif
+                    <dd>
+                        <time itemprop="datePublished" datetime="{{ $resource['_source']['issued'] }}">
+                        @if(is_numeric($resource['_source']['issued']))
+                          {{ $resource['_source']['issued'] }}
+                        @else
+                        <?php $datetime = new DateTime($resource['_source']['issued']) ?>
+                          {{ $datetime->format('n M Y') }}
+                        @endif
+                        </time>
                     </dd>
                 @endif
 
