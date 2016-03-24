@@ -32,6 +32,7 @@
                             <span class="badge"><span class="glyphicon glyphicon-remove"></span></span>
                             <b>{{ trans('search.fields.subjectUri') }}</b>: {{ Input::get('subjectLabel') }}
                             {!! Form::hidden('subjectUri', Input::get('subjectUri')) !!}
+                            {!! Form::hidden('subjectLabel', Input::get('subjectLabel')) !!}
                         </a>
                     </div>
                 @endif
