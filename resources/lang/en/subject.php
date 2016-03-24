@@ -12,5 +12,6 @@ return [
     'identifier' => 'Identifier',
     'relation' => 'Relation',
     'connected_resources' => 'Connected resources',
+    'search_connected_resources' => 'Search connected resources',    
     'similar' => 'Similar concepts'
 ];

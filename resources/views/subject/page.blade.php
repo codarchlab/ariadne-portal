@@ -58,9 +58,9 @@
                 @if(count($sub_subjects) > 0)
                     <dt>{{ trans('subject.narrower') }}</dt>
                     <dd>
-                    @foreach($sub_subjects as $id => $subject)
+                    @foreach($sub_subjects as $id => $sub_subject)
                       <span class="glyphicon glyphicon-tag"></span>
-                      <a href="{{ route('subject.page', $id) }}">{{ $subject }}</a>
+                      <a href="{{ route('subject.page', $id) }}">{{ $sub_subject }}</a>
                     @endforeach
                     </dd>
                 @endif
@@ -114,19 +114,11 @@
             @if(count($resources) > 0)
 
                 <h4>{{ trans('subject.connected_resources') }}</h4>
+                                
+                <a href="{{ route('search', ['subjectUri'=> $subject['_source']['id'], 'subjectLabel' => $subject['_source']['prefLabel']]) }}" class="btn btn-primary form-control">
+                    <span class="glyphicon glyphicon-search"></span> {{ trans('subject.search_connected_resources') }} <span class="badge">{{ $resources['hits']['total'] }}</span>
+                </a>                
 
-                <div id="map"></div>
-                
-                <script>
-                    $("#description").readmore({
-                        moreLink: '<a href="#"><?php print trans('subject.readmore'); ?></a>',
-                        lessLink: '<a href="#"><?php print trans('subject.readless'); ?></a>'
-                    });
-                    var smallMap = new SmallMap(
-                        {!! json_encode($resources) !!},
-                        null
-                    );
-                </script>
             @endif
             
         </div>
@@ -134,5 +126,12 @@
     </div>
 
 </div>
+
+<script>
+    $("#description").readmore({
+        moreLink: '<a href="#"><?php print trans('subject.readmore'); ?></a>',
+        lessLink: '<a href="#"><?php print trans('subject.readless'); ?></a>'
+    });
+</script>
 
 @endsection

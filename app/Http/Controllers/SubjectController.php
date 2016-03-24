@@ -30,10 +30,12 @@ class SubjectController extends Controller {
     public function page($id) {
 
         $subject = Subject::get($id);
-        $connected_resources = [];//Subject::connectedResourcesQuery($subject);
+        $connected_resources = Subject::connectedResourcesQuery($subject);
         $sub_subjects = Subject::getSubSubjects($id);
-        $spatial_items = self::getSpatialItems($connected_resources);
-                
+        //$spatial_items = self::getSpatialItems($connected_resources);
+        
+        debug($connected_resources);
+        
         $similar_subjects = Subject::similarSubjectsQuery($subject);
         
         if (Request::wantsJson()) {
@@ -48,7 +50,7 @@ class SubjectController extends Controller {
           ksort($pref_labels);
           return view('subject.page', [
               'subject' => $subject,
-              'resources' => $spatial_items,
+              'resources' => $connected_resources,
               'similar_subjects' => $similar_subjects,
               'pref_labels' => $pref_labels,
               'sub_subjects' => $sub_subjects

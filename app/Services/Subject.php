@@ -55,7 +55,7 @@ class Subject {
         'bool' => [
           'must' => [
             'term' => [
-              'derivedSubject.source.raw' => $subject['_source']['uri']
+              'derivedSubject.source' => $subject['_id']
             ]
           ]
         ]
@@ -73,7 +73,7 @@ class Subject {
 
     $result = ElasticSearch::getClient()->search($params);
 
-    return $result['hits']['hits'];
+    return $result;
   }
   
   /**
