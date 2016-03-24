@@ -79,29 +79,25 @@
               @endforeach
             </dl>
             
-            <h4>{{ trans('subject.connected_concepts') }}</h4>
+            <h4>{{ trans('subject.provider_mapping') }}</h4>
 
             <dl class="dl-horizontal">
             
-                @if (isset($subject['_source']['connected_concept']) && count($subject['_source']['connected_concept']) > 0)
-                    @foreach ($subject['_source']['connected_concept'] as $concept)
+                @if (isset($subject['_source']['providerMappings']) && count($subject['_source']['providerMappings']) > 0)
+                    @foreach ($subject['_source']['providerMappings'] as $mapping)
                         <div class="connected_concept">
-                            <h5>{{ $concept['concept'] }}</h5>   
+                            <h5>{{ $mapping['sourceLabel'] }}</h5>   
 
-                            @if (isset($concept['source']))
-                                <dt>{{ trans('subject.source') }}</dt>
-                                <dd>{{ $concept['source'] }}</dd>
+                            @if (isset($mapping['matchURI']))
+                                <dt>{{ trans('subject.match_uri') }}</dt>
+                                <dd>{{ $mapping['matchURI'] }}</dd>
                             @endif
+                            
+                            @if (isset($mapping['sourceURI']))
+                                <dt>{{ trans('subject.source_uri') }}</dt>
+                                <dd>{{ $mapping['sourceURI'] }}</dd>
+                            @endif                            
 
-                            @if (isset($concept['identifier']))
-                                <dt>{{ trans('subject.identifier') }}</dt>
-                                <dd>{{ $concept['identifier'] }}</dd>
-                            @endif     
-
-                            @if (isset($concept['relation']))
-                                <dt>{{ trans('subject.relation') }}</dt>
-                                <dd>{{ $concept['relation'] }}</dd>                    
-                            @endif
                         </div>
                     @endforeach                    
                 @endif
