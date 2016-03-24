@@ -240,7 +240,7 @@
                     @if(is_numeric($resource['_source']['issued']))
                       {{ $resource['_source']['issued'] }}
                     @else
-                    <?php $datetime = DateTime::createFromFormat('Y-m-d\TH:i:s+', $resource['_source']['issued']) ?>
+                    <?php $datetime = new DateTime($resource['_source']['issued']) ?>
                       {{ $datetime->format('n M Y') }}
                     @endif
                     </dd>
