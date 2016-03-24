@@ -6,7 +6,7 @@
  *
  * Smaller results are displayed as markers.
  */
-function GridMap(container, queryUri) {
+function GridMap(container, queryUri, fullscreen) {
 
 	var self = this;
 
@@ -152,6 +152,8 @@ function GridMap(container, queryUri) {
 
 	var map = L.map(container, { 
 		zoomControl: false,
+		touchZoom: fullscreen,
+		scrollWheelZoom: fullscreen,
 		maxBounds: [ [-85.0, -180.0], [85.0, 180.0] ]
 	});
 	map.addControl( L.control.zoom({position: 'bottomright'}) );

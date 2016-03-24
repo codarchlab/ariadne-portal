@@ -28,7 +28,7 @@
 	</div>
 
 	<script>
-        var gridMap = new GridMap("map", window.location.href);
+        var gridMap = new GridMap("map", window.location.href, true);
     </script>
 
 </div>
