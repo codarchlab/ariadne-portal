@@ -233,9 +233,15 @@
                 @endif
 
                 @if (isset($resource['_source']['issued']))
-                    <?php $datetime = DateTime::createFromFormat('Y-m-d\TH:i:s+', $resource['_source']['issued']) ?>
                     <dt>{{ trans('resource.issued') }}</dt>
-                    <dd itemprop="datePublished">{{ $datetime->format('n M Y') }}</dd>
+                    <dd itemprop="datePublished">
+                    @if(is_numeric($resource['_source']['issued']))
+                      {{ $resource['_source']['issued'] }}
+                    @else
+                    <?php $datetime = DateTime::createFromFormat('Y-m-d\TH:i:s+', $resource['_source']['issued']) ?>
+                      {{ $datetime->format('n M Y') }}
+                    @endif
+                    </dd>
                 @endif
 
                 @if (isset($resource['_source']['contributor']))
