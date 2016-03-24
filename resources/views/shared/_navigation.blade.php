@@ -37,11 +37,11 @@
                     <a href="{{ action('PageController@welcome') }}"><span class="glyphicon glyphicon-globe"></span> Catalog</a>
                 </li>
 
-                <li id="navServices" {{ (Request::is('services') ? ' class=active' : '') }}>
+                <li id="navServices">
                     <a href="{{ action('PageController@services') }}"><span class="glyphicon glyphicon-cog"></span> Services</a>
                 </li>
 
-                <li id="navAbout" {{ (Request::is('about') ? ' class=active' : '') }}>
+                <li id="navAbout">
                     <a href="{{ action('PageController@about') }}"><span class="glyphicon glyphicon-question-sign"></span> About</a>
                 </li>      
                                 
