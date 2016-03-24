@@ -28,7 +28,7 @@ $(document).ready(function () {
             var content = $('.aggregation-items', elements).html();
 
             $(aggregationElement).parents('div.aggregation-items').html(content);
-            $(this).button('reset');
+
             placeGetMoreLinkForAggregations();
         });
         
