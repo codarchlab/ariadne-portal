@@ -8,7 +8,7 @@
     <div class="row">
         
         <!-- Facets -->
-        <div class="col-md-4">
+        <div class="col-md-4 facets">
 
             <h4>{{ trans('search.current_query') }}</h4>
 
