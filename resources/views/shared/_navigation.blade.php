@@ -40,11 +40,6 @@
                 <li id="navServices" {{ (Request::is('services') ? ' class=active' : '') }}>
                     <a href="{{ action('PageController@services') }}"><span class="glyphicon glyphicon-cog"></span> Services</a>
                 </li>
-                
-                <li id="navExperiments">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-grain"></span> Experiments</a>
-                </li>
 
                 <li id="navAbout" {{ (Request::is('about') ? ' class=active' : '') }}>
                     <a href="{{ action('PageController@about') }}"><span class="glyphicon glyphicon-question-sign"></span> About</a>
