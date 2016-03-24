@@ -54,7 +54,8 @@
 		</div>
 
 		<script>
-	        var areaTimeline = new AreaTimeline(".timeline-container", window.location.href, false);
+			var buckets = JSON.parse('{!! json_encode($buckets) !!}');
+	        var areaTimeline = new AreaTimeline(".timeline-container", window.location.href, false, buckets);
 	    </script>
 
 	</div>
