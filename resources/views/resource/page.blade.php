@@ -178,13 +178,15 @@
                             @foreach($resource['_source']['temporal'] as $temporal)
                             <li>
                                 @if(isset($temporal['from']))
-                                    {{ $temporal['from'] }}
+                                  {{ $temporal['from'] }}
                                 @endif
                                 @if(isset($temporal['until']) && $temporal['until'] != $temporal['from'])
-                                    &ndash; {{ $temporal['until'] }}
+                                  &ndash; {{ $temporal['until'] }}
                                 @endif
+                                
                                 @if(isset($temporal['periodName']))
-                                    , {{ $temporal['periodName'] }}
+                                  @if(isset($temporal['from']) || isset($temporal['until'])),@endif
+                                  {{ $temporal['periodName'] }}
                                 @endif
                             </li>
                             @endforeach
