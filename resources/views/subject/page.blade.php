@@ -129,19 +129,6 @@
                 </script>
             @endif
             
-            @if(isset($similar_subjects))
-                <h4>{{ trans('subject.similar') }}</h4>
-                <ul>
-                @foreach($similar_subjects as $similar)
-                    <li>
-                        <span class="glyphicon glyphicon-tag"></span>
-                        <a href="{{ route('subject.page', [ $similar['_id'] ]  ) }}">
-                            {{ $similar['_source']['title'] }}
-                        </a>
-                    </li>
-                @endforeach
-                </ul>
-            @endif
         </div>
 
     </div>
