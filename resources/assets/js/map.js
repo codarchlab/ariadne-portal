@@ -179,12 +179,12 @@ function GridMap(container, queryUri) {
 	query.params['ghp'] = getGhprecFromZoom(map.getZoom());
 	performQuery(query.toUri(), function() {
 		map.fitBounds(L.latLngBounds(points));
-		// refresh map if previous fitBounds changed geohash precision
-		if (getGhprecFromZoom(map.getZoom()) != query.params['ghp']) {
-			self.refreshMap();
-		}
 		// needed to prevent triggering refreshMap after fitBounds
 		setTimeout(function() {
+			// refresh map if previous fitBounds changed geohash precision
+			if (getGhprecFromZoom(map.getZoom()) != query.params['ghp']) {
+				self.refreshMap();
+			}
 			map.on('moveend', self.refreshMap);
 		}, 1000);
 	});
