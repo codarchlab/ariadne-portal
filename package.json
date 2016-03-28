@@ -1,6 +1,6 @@
 {
   "name": "ariadne-portal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "gulp": "^3.8.8",
     "gulp-gzip": "^1.2.0",
