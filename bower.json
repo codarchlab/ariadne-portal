@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
-    "jquery": "~3.0.0",
+    "jquery": "~2.2.2",
     "leaflet": "0.7.7",
     "Leaflet.heat": "https://github.com/Leaflet/Leaflet.heat.git#~0.2.0",
     "Leaflet.label": "~0.2.1",
