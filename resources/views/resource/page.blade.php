@@ -228,7 +228,7 @@
                     <dd>
                         <ul>
                             @foreach($resource['_source']['publisher'] as $publisher)
-                            <li><span itemprop="publisher" itemscope="" itemtype="http://schema.org/ {{ $publisher['type'] }}">{{ $publisher['name'] }}</span> <em>[{{ $publisher['type']}}]</em></li>
+                            <li><span itemprop="publisher" itemscope="" itemtype="http://schema.org/{{ $publisher['type'] }}">{{ $publisher['name'] }}</span> <em>[{{ $publisher['type']}}]</em></li>
                             @endforeach
                         </ul>
                     </dd>
@@ -241,7 +241,7 @@
                         @if(is_numeric($resource['_source']['issued']))
                           {{ $resource['_source']['issued'] }}
                         @else
-                        <?php $datetime = new DateTime($resource['_source']['issued']) ?>
+                          <?php $datetime = new DateTime($resource['_source']['issued']) ?>
                           {{ $datetime->format('n M Y') }}
                         @endif
                         </time>
@@ -253,7 +253,7 @@
                     <dd>
                         <ul>
                             @foreach($resource['_source']['contributor'] as $contributor)
-                            <li itemprop="contributor" itemscope="" itemtype="http://schema.org/ {{ $contributor['type'] }}"><span itemprop="name">{{ $contributor['name'] }}</span> <em>[{{ $contributor['type']}}]</em></li>
+                            <li itemprop="contributor" itemscope="" itemtype="http://schema.org/{{ $contributor['type'] }}"><span itemprop="name">{{ $contributor['name'] }}</span> <em>[{{ $contributor['type']}}]</em></li>
                             @endforeach
                         </ul>
                     </dd>
