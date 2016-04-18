@@ -107,7 +107,7 @@
                 <div>
                     @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
                         <span class="tag">
-                            <a href="{{ route('search', [ 'nativeSubject' => $derivedSubject['prefLabel'] ]) }}">
+                            <a href="{{ route('search', [ 'derivedSubject' => $derivedSubject['prefLabel'] ]) }}">
                                 <span class="glyphicon glyphicon-tag"></span>                  
                                 <span itemprop="keywords">{{ $derivedSubject['prefLabel'] }}</span>
                             </a>

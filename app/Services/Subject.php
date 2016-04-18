@@ -59,9 +59,6 @@ class Subject {
             ]
           ]
         ]
-      ],
-      'filter' => [
-        'exists' => ['field' => 'lat']
       ]
     ];
 
