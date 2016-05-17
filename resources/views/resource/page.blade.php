@@ -171,6 +171,23 @@
                     <dd>{{ $resource['_source']['archaeologicalResourceType']['name'] }}</dd>
                 @endif
 
+                @if (isset($resource['_source']['derivedSubject']))
+                    <dt>{{ trans('resource.subject') }}</dt>
+                    <dd>
+                        @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
+                        <span class="tag">
+                            <a href="{{ route('search', [ 'derivedSubject' => $derivedSubject['prefLabel'] ]) }}">                                               
+                                <span itemprop="keywords">{{ $derivedSubject['prefLabel'] }}</span>
+                            </a>
+                            <?php $uriComponents = explode('/', $derivedSubject['source']); ?>
+                            <a class="text-muted" href="{{ route('subject.page', [ array_pop($uriComponents) ] ) }}">
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                        </span>
+                    @endforeach
+                    </dd>                
+                @endif                
+                
                 @if (isset($resource['_source']['temporal']))
                     <dt>{{ trans('resource.temporal')}}</dt>
                     <dd>

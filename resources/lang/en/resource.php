@@ -65,6 +65,7 @@ return [
     'nativeSubject.prefLabel' => 'Native Subject',
     'derivedSubject' => 'Derived Subject',
     'derivedSubject.prefLabel' => 'Derived Subject',
+    'subject' => 'Subject',
     'accessRights' => 'Access Rights',
     'accessPolicy' => 'Access Policy',
     'resourceType' => 'Type',
