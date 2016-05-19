@@ -19,6 +19,10 @@
 				<button type="button" class="btn btn-default btn-xs loading">
 					<span class="glyphicon glyphicon-refresh spin"></span>
 				</button>
+				<button type="button" class="btn btn-default btn-xs btn-remove" onclick="gridMap.removeBbox()"
+				data-toggle="tooltip" data-placement="top" title="Remove filter" >
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
 				<button type="button" class="btn btn-default btn-xs btn-filter" onclick="gridMap.triggerSearch()" data-toggle="tooltip" data-placement="top" title="Show resources within area" >
 					<span class="glyphicon glyphicon-search"></span>
 				</button>

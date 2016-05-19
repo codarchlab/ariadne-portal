@@ -17,6 +17,11 @@ function AreaTimeline(containerPath, queryUri, fullscreen, buckets) {
         window.location.href = uri;
     };
 
+    this.removeRange = function() {
+        delete query.params.range;
+        window.location.href = query.toUri();
+    };
+
     this.zoomIn = function() {
 
         $(".timeline .brush-controls").hide();
@@ -322,7 +327,12 @@ function AreaTimeline(containerPath, queryUri, fullscreen, buckets) {
     $(window).on("resize", onResize).trigger("resize");
 
     var query = Query.fromUri(queryUri);
-    if (!query.params['range']) query.params.range = INITIAL_TICKS.join();
+    if (query.params['range']) {
+        $(".timeline .controls .btn-remove").show();
+    } else {
+        query.params.range = INITIAL_TICKS.join();
+        $(".timeline .controls .btn-remove").hide();
+    }
 
     var x, y, area, xAxis, brush, domain;
 

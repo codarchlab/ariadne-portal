@@ -100,6 +100,11 @@ function GridMap(container, queryUri, fullscreen) {
 		window.location.href = uri;
 	};
 
+	this.removeBbox = function() {
+		delete query.params.bbox;
+		window.location.href = query.toUri();
+	};
+
 	function performQuery(uri, callback) {
 		requestInProgress = uri;
 		self.showLoading();
@@ -163,8 +168,10 @@ function GridMap(container, queryUri, fullscreen) {
 	if (query.params['bbox']) {
 		bounds = decodeURIComponent(query.params.bbox).split(",");		
 		map.fitBounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]]);
+		$(".map .controls .btn-remove").show();
 	} else {
 		map.setView([50, 17], 3);
+		$(".map .controls .btn-remove").hide();
 	}
 
 	var heatmap;
