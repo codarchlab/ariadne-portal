@@ -176,7 +176,7 @@
                     <dd>
                         @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
                         <span class="tag">
-                            <a href="{{ route('search', [ 'derivedSubject' => $derivedSubject['prefLabel'] ]) }}">                                               
+                            <a href="{{ route('search', [ 'subjectUri' => $derivedSubject['id'], 'subjectLabel' => $derivedSubject['prefLabel'] ]) }}">                                               
                                 <span itemprop="keywords">{{ $derivedSubject['prefLabel'] }}</span>
                             </a>
                             <?php $uriComponents = explode('/', $derivedSubject['source']); ?>
