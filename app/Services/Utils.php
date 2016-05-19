@@ -250,7 +250,7 @@ class Utils {
       'aggregations' => [
         'nativeSubject' => [
           'terms' => [
-            'field' => 'derrivedSubject.prefLabel.raw',
+            'field' => 'derivedSubject.prefLabel.raw',
             'size' => 100
           ]
         ],
