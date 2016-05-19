@@ -262,8 +262,8 @@ class Utils {
         ]
       ]
     ];    
-
-    //Log::info( $query );
+    
+ //   Log::info( $query );
     return Resource::search($query);
     
   }
