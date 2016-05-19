@@ -18,15 +18,16 @@ class AggregationController extends Controller {
    */
   public function getAggregationBucketHtml($aggregationId) {
     $query = Resource::getCurrentQuery();
+    $size = Request::input('size', 100);
     
     $aggregations = Config::get('app.elastic_search_aggregations');
     if(key_exists($aggregationId, $aggregations)){
       $query['aggregations'] = [$aggregationId => $aggregations[$aggregationId]];
       if (array_key_exists('nested', $query['aggregations'][$aggregationId])) {
         $query['aggregations'][$aggregationId]['aggs']
-          [$aggregationId]['terms']['size'] = 100;
+          [$aggregationId]['terms']['size'] = $size;
       } else {
-        $query['aggregations'][$aggregationId]['terms']['size'] = 100;
+        $query['aggregations'][$aggregationId]['terms']['size'] = $size;
       }
     }
     

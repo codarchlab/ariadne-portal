@@ -7,33 +7,7 @@
 $(document).ready(function () {
     placeGetMoreLinkForAggregations();
 
-    $('.get-more').click(function () {
-        $(this).button('loading');
-        var aggregationElement = $(this);
-        var aggregation = $(aggregationElement)
-                            .parents('div.aggregation')
-                            .attr('data-aggregation');
-
-        var vars = getUrlVars();
-
-        vars.noPagination = 'true';
-        vars.size = 0;
-
-        $.ajax({
-            type: "GET",
-            url: '/aggregation/'+aggregation+'/bucket',
-            data: vars
-        }).then(function (data) {
-            var elements = $(data);
-            var content = $('.aggregation-items', elements).html();
-
-            $(aggregationElement).parents('div.aggregation-items').html(content);
-
-            placeGetMoreLinkForAggregations();
-        });
-        
-        return false;
-    });
+    $('.get-more').click(loadMoreAction);
     
     $('div.aggregation div.panel-heading a').click(function(){
         var iconElement = $(this).find('span.glyphicon');
@@ -50,6 +24,36 @@ $(document).ready(function () {
     });
 });
 
+function loadMoreAction(){
+    $(this).button('loading');
+    var aggregationElement = $(this);
+    var aggregation = $(aggregationElement)
+                        .parents('div.aggregation')
+                        .attr('data-aggregation');
+    console.log();
+    var vars = getUrlVars();
+
+    vars.noPagination = 'true';
+    vars.size = $(aggregationElement)
+                    .parents('div.aggregation')
+                    .find('a.value').length + 10;
+
+    $.ajax({
+        type: "GET",
+        url: '/aggregation/'+aggregation+'/bucket',
+        data: vars
+    }).then(function (data) {
+        var elements = $(data);
+        var content = $('.aggregation-items', elements).html();
+
+        $(aggregationElement).parents('div.aggregation-items').html(content);
+
+        placeGetMoreLinkForAggregations();
+    });
+
+    return false;    
+}
+
 
 function placeGetMoreLinkForAggregations(){
     var loadMoreLink = '<a href="#" class="list-group-item get-more"><span class="glyphicon glyphicon-plus"></span> Load more</a>';
@@ -65,6 +69,8 @@ function placeGetMoreLinkForAggregations(){
             }
         }
     });    
+    
+    $('.get-more').click(loadMoreAction);
 }
 
 function getUrlVars(){
