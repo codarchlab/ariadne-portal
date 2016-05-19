@@ -92,7 +92,7 @@ class ElasticSearch {
       $searchParams['from'] = $from;
 
       $queryResponse = $client->search($searchParams);
-
+      
       $aggregations = null;
       if (array_key_exists('aggregations', $queryResponse)) {
         $aggregations = $queryResponse['aggregations'];
