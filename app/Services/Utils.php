@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Services\ElasticSearch;
 use App\Services\Resource;
 use Request;
-//use Log;
+use Log;
 
 
 class Utils {
@@ -248,7 +248,7 @@ class Utils {
     $query = [
       'size' => 0,
       'aggregations' => [
-        'nativeSubject' => [
+        'derivedSubject' => [
           'terms' => [
             'field' => 'derivedSubject.prefLabel.raw',
             'size' => 100
@@ -263,7 +263,7 @@ class Utils {
       ]
     ];    
     
- //   Log::info( $query );
+    //Log::info( $query );
     return Resource::search($query);
     
   }
