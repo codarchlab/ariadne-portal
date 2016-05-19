@@ -1,4 +1,5 @@
 <?php
+// $cloud_data -> see Http/Controllers/BrowseController
 $aggs = $cloud_data->aggregations();
 foreach ($aggs as $aggKey => $aggVal) {
   //Debugbar::debug($aggVal);
@@ -6,7 +7,7 @@ foreach ($aggs as $aggKey => $aggVal) {
     $filteredAggs[] = array($aggKey, $bucket['key'], $bucket['doc_count']);
   }
 }
-//Debugbar::debug($filteredAggs);
+Debugbar::debug($filteredAggs);
 
 /*
  * .css and .js is automatically inluded to webroot when biult with gulp.

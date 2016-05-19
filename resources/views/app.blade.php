@@ -31,8 +31,7 @@
         
         <!-- combined JS code -->
         <script src="{{ asset('/js/app.js') }}" type="text/javascript"></script>
-               
-        
+             
         @include('shared._navigation')
         
         @yield('content')

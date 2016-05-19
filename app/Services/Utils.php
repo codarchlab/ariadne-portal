@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Input;
 use App\Services\ElasticSearch;
 use App\Services\Resource;
 use Request;
+//use Log;
+
 
 class Utils {
 
@@ -242,13 +244,13 @@ class Utils {
 
 
  public static function getWordCloudData() {
-   
+
     $query = [
       'size' => 0,
       'aggregations' => [
         'nativeSubject' => [
           'terms' => [
-            'field' => 'nativeSubject.prefLabel.raw',
+            'field' => 'derrivedSubject.prefLabel.raw',
             'size' => 100
           ]
         ],
@@ -259,7 +261,9 @@ class Utils {
           ]
         ]
       ]
-    ];
+    ];    
+
+    //Log::info( $query );
     return Resource::search($query);
     
   }
