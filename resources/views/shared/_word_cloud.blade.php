@@ -13,7 +13,7 @@ $aggsBuckets = array(
 );
 
 foreach ($aggsBuckets as $aggKey => $aggVal) {
-  Debugbar::debug( $aggVal['buckets'] );
+  //Debugbar::debug( $aggVal['buckets'] );
   foreach ($aggVal['buckets'] as $bucket) {
     $filteredAggs[] = array($aggKey, $bucket['key'], $bucket['doc_count']);
   }
