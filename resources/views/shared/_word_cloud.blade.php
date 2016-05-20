@@ -6,14 +6,14 @@ $aggs = $cloud_data->aggregations();
 // Known buckets...
 // See query in Services/Utils
 $aggsBuckets = array(
-  $aggs['period']['periodName'],
+  $aggs['derivedSubject'],
   $aggs['keyword'],
   $aggs['spatial'],
-  $aggs['derivedSubject']
+  $aggs['period']['periodName']
 );
 
 foreach ($aggsBuckets as $aggKey => $aggVal) {
-  //Debugbar::debug( $aggVal['buckets'] );
+  Debugbar::debug( $aggVal['buckets'] );
   foreach ($aggVal['buckets'] as $bucket) {
     $filteredAggs[] = array($aggKey, $bucket['key'], $bucket['doc_count']);
   }
