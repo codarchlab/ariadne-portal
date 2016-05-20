@@ -10,7 +10,6 @@ use App\Services\Resource;
 use Request;
 use Log;
 
-
 class Utils {
 
   public static function contains($string, array $array) {
@@ -259,10 +258,28 @@ class Utils {
             'field' => 'keyword.raw',
             'size' => 100
           ]
+        ],
+        "spatial" => [
+          "terms" => [
+            "field" => "spatial.placeName.raw",
+            "size" => 100
+          ]
+        ],
+        "period" => [
+          "nested" => [
+            "path" => "temporal"
+          ],
+          "aggs" => [
+            "periodName" => [
+              "terms" => [
+                "field" => "temporal.periodName.raw",
+                "size" => 100
+              ]
+            ]
+          ]
         ]
-      ]
-    ];    
-    
+      ],
+    ];
     //Log::info( $query );
     return Resource::search($query);
     

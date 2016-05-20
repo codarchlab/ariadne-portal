@@ -1,13 +1,23 @@
 <?php
 // $cloud_data -> see Http/Controllers/BrowseController
 $aggs = $cloud_data->aggregations();
-foreach ($aggs as $aggKey => $aggVal) {
-  //Debugbar::debug($aggVal);
+//Debugbar::debug($aggs);
+
+// Known buckets...
+// See query in Services/Utils
+$aggsBuckets = array(
+  $aggs['period']['periodName'],
+  $aggs['keyword'],
+  $aggs['spatial'],
+  $aggs['derivedSubject']
+);
+
+foreach ($aggsBuckets as $aggKey => $aggVal) {
+  //Debugbar::debug( $aggVal['buckets'] );
   foreach ($aggVal['buckets'] as $bucket) {
     $filteredAggs[] = array($aggKey, $bucket['key'], $bucket['doc_count']);
   }
 }
-Debugbar::debug($filteredAggs);
 
 /*
  * .css and .js is automatically inluded to webroot when biult with gulp.
