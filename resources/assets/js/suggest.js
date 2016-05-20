@@ -15,21 +15,20 @@ function Suggest(inputPath) {
 	var templates = {
 		'suggestion': function(subject) {
 			var template = "";
-			if (subject.highlight.prefLabel) {
-				template += '<b>' + subject.highlight.prefLabel + '</b>';
-			} else if (subject._source.prefLabel) {
+			if (subject._source.prefLabel) {
 				template += '<b>' + subject._source.prefLabel + '</b>';
 			}
-			if (subject.highlight['prefLabels.label']) {
-				var highlights = subject.highlight['prefLabels.label'];
-				for (var i = 0; i < highlights.length; i++) {
-				 	if (template.length + highlights[i].length > 100) {
-				 		template += '/ ...';
-				 		break;
-				 	}
-				 	if (template.length > 0) template += ' / ';
-					template += highlights[i];
-				} 
+			console.log(subject);
+			for (var i = 0; i < subject._source.prefLabels.length; i++) {
+				var label = subject._source.prefLabels[i];
+				if (label.lang == 'en') {
+					if (template.length + label.label.length > 100) {
+                    	template += '/ ...';
+                    	break;
+                	}
+                	if (template.length > 0) template += ' / ';
+					template += label.label;
+				}
 			}
 			var link = ' &nbsp; <a href="/subject/' + subject._id +'"><span class="glyphicon glyphicon-info-sign"></span></a>';
 			return '<div>' + template + link + '</div>';
@@ -47,7 +46,9 @@ function Suggest(inputPath) {
 	this.create = function() {
 
 		if (active) return this;
-		$(inputPath).typeahead(null, {
+		$(inputPath).typeahead({
+			highlight: true
+		}, {
 			display: 'prefLabel',
 			name: 'subjects',
 			source: subjects,

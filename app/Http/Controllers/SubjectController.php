@@ -85,8 +85,16 @@ class SubjectController extends Controller {
         if (Request::has('q')) {
             $query = [
                 'query' => [
-                    'prefix' => [
-                        'prefLabels.label' => Request::get('q')
+                    'nested' => [
+                        'path' => 'prefLabels',
+                        'query' => [
+                            'bool' => [
+                                'must' => [
+                                    [ 'prefix' => [ 'prefLabels.label' => Request::get('q') ] ],
+                                    [ 'match' => [ 'prefLabels.lang' => 'en' ] ]
+                                ]
+                            ]
+                        ]
                     ]
                 ]
             ];
