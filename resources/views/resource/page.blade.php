@@ -166,6 +166,17 @@
                     <dd itemprop="inLanguage">{{ trans('resource.language.'.$resource['_source']['language']) }}</dd>
                 @endif
 
+                @if (isset($resource['_source']['audience']))
+                    <dt>{{ trans('resource.audience') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach ($resource['_source']['audience'] as $audience)
+                            <li><span itemprop="audience" itemscope="" itemtype="http://schema.org/audience">{{ $audience }}</span></li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif    
+
                 @if (isset($resource['_source']['archaeologicalResourceType']))
                     <dt>{{ trans('resource.archaeologicalResourceType') }}</dt>
                     <dd>{{ $resource['_source']['archaeologicalResourceType']['name'] }}</dd>
@@ -186,7 +197,18 @@
                         </span>
                     @endforeach
                     </dd>                
-                @endif                
+                @endif    
+                
+                @if (isset($resource['_source']['keyword']))
+                    <dt>{{ trans('resource.keyword') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach ($resource['_source']['keyword'] as $keyword)
+                            <li>{{ $keyword }}</li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif 
                 
                 @if (isset($resource['_source']['temporal']))
                     <dt>{{ trans('resource.temporal')}}</dt>
@@ -264,6 +286,20 @@
                         </time>
                     </dd>
                 @endif
+                
+                @if (isset($resource['_source']['modified']))
+                    <dt>{{ trans('resource.modified') }}</dt>
+                    <dd>
+                        <time itemprop="dateModified" datetime="{{ $resource['_source']['modified'] }}">
+                        @if(is_numeric($resource['_source']['modified']))
+                          {{ $resource['_source']['modified'] }}
+                        @else
+                          <?php $datetime = new DateTime($resource['_source']['modified']) ?>
+                          {{ $datetime->format('n M Y') }}
+                        @endif
+                        </time>
+                    </dd>
+                @endif
 
                 @if (isset($resource['_source']['contributor']))
                     <dt>{{ trans('resource.contributor') }}</dt>
@@ -299,6 +335,11 @@
                     </dd>
                 @endif
 
+                @if (isset($resource['_source']['rights']))
+                    <dt>{{ trans('resource.rights') }}</dt>
+                    <dd>{{ $resource['_source']['rights'] }}</dd>
+                @endif                
+                
             </dl>
 
         </div>
