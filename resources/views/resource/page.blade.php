@@ -171,17 +171,28 @@
                     <dd>
                         <ul>
                             @foreach ($resource['_source']['audience'] as $audience)
-                            <li><span itemprop="audience" itemscope="" itemtype="http://schema.org/audience">{{ $audience }}</span></li>
+                            <li><span itemprop="audience" itemscope="" itemtype="http://schema.org/Audience">{{ $audience }}</span></li>
                             @endforeach
                         </ul>
                     </dd>
                 @endif    
-
+                
                 @if (isset($resource['_source']['archaeologicalResourceType']))
                     <dt>{{ trans('resource.archaeologicalResourceType') }}</dt>
                     <dd>{{ $resource['_source']['archaeologicalResourceType']['name'] }}</dd>
                 @endif
 
+                @if (isset($resource['_source']['extent']))
+                    <dt>{{ trans('resource.extent') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach ($resource['_source']['extent'] as $extent)
+                            <li>{{ $extent }}</li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif   
+                
                 @if (isset($resource['_source']['derivedSubject']))
                     <dt>{{ trans('resource.subject') }}</dt>
                     <dd>
@@ -301,6 +312,17 @@
                     </dd>
                 @endif
 
+                @if (isset($resource['_source']['creator']))
+                    <dt>{{ trans('resource.creator') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['creator'] as $creator)
+                            <li itemprop="creator" itemscope="" itemtype="http://schema.org/{{ $creator['type'] }}"><span itemprop="name">{{ $creator['name'] }}</span> <em>[{{ $creator['type']}}]</em></li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif                
+                
                 @if (isset($resource['_source']['contributor']))
                     <dt>{{ trans('resource.contributor') }}</dt>
                     <dd>
@@ -311,6 +333,50 @@
                         </ul>
                     </dd>
                 @endif
+                
+                @if (isset($resource['_source']['owner']))
+                    <dt>{{ trans('resource.owner') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['owner'] as $owner)
+                            <li itemprop="owner" itemscope="" itemtype="http://schema.org/{{ $owner['type'] }}"><span itemprop="name">{{ $owner['name'] }}</span> <em>[{{ $owner['type']}}]</em></li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif       
+                
+                @if (isset($resource['_source']['legalResponsible']))
+                    <dt>{{ trans('resource.legalResponsible') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['legalResponsible'] as $legalResponsible)
+                            <li itemprop="legalResponsible" itemscope="" itemtype="http://schema.org/{{ $legalResponsible['type'] }}"><span itemprop="name">{{ $legalResponsible['name'] }}</span> <em>[{{ $legalResponsible['type']}}]</em></li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif         
+                
+                @if (isset($resource['_source']['scientificResponsible']))
+                    <dt>{{ trans('resource.scientificResponsible') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['scientificResponsible'] as $scientificResponsible)
+                            <li itemprop="scientificResponsible" itemscope="" itemtype="http://schema.org/{{ $scientificResponsible['type'] }}"><span itemprop="name">{{ $scientificResponsible['name'] }}</span> <em>[{{ $scientificResponsible['type']}}]</em></li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif    
+                
+                @if (isset($resource['_source']['technicalResponsible']))
+                    <dt>{{ trans('resource.technicalResponsible') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['technicalResponsible'] as $technicalResponsible)
+                            <li itemprop="technicalResponsible" itemscope="" itemtype="http://schema.org/{{ $technicalResponsible['type'] }}"><span itemprop="name">{{ $technicalResponsible['name'] }}</span> <em>[{{ $technicalResponsible['type']}}]</em></li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif                  
             </dl>
 
             <h4>{{ trans('resource.license') }}</h4>
