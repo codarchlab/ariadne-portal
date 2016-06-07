@@ -28,12 +28,12 @@ div.jqcloud a {
 }
 
 html, body {
-  height: 100%;
+  //height: 100%;
   //border: black solid 2px;
 }
 .whatBlock {
   position: relative;
-  height: 100%;
+  //height: 100%;
   //border: green dotted 2px;
 }
 
@@ -50,12 +50,11 @@ html, body {
 
 .wordCloudContainerWhat {
   min-width: 100%;
-  height: 100%;
+  height: 400px;
   margin-bottom: 30px;
-  margin-top: 60px;
+  margin-top: 80px;
   display: block;
   background: white;
-  //border: blue dashed 2px;
   position: absolute;
 }
 
