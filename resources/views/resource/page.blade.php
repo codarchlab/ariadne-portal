@@ -288,12 +288,7 @@
                     <dt>{{ trans('resource.issued') }}</dt>
                     <dd>
                         <time itemprop="datePublished" datetime="{{ $resource['_source']['issued'] }}">
-                        @if(is_numeric($resource['_source']['issued']))
-                          {{ $resource['_source']['issued'] }}
-                        @else
-                          <?php $datetime = new DateTime($resource['_source']['issued']) ?>
-                          {{ $datetime->format('n M Y') }}
-                        @endif
+                            {{ $resource['_source']['issued'] }}
                         </time>
                     </dd>
                 @endif
@@ -302,12 +297,7 @@
                     <dt>{{ trans('resource.modified') }}</dt>
                     <dd>
                         <time itemprop="dateModified" datetime="{{ $resource['_source']['modified'] }}">
-                        @if(is_numeric($resource['_source']['modified']))
-                          {{ $resource['_source']['modified'] }}
-                        @else
-                          <?php $datetime = new DateTime($resource['_source']['modified']) ?>
-                          {{ $datetime->format('n M Y') }}
-                        @endif
+                            {{ $resource['_source']['modified'] }}
                         </time>
                     </dd>
                 @endif
