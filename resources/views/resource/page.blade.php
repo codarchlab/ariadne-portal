@@ -407,6 +407,48 @@
                 @endif                
                 
             </dl>
+            
+            @if (isset($resource['_source']['distribution']))            
+                @foreach($resource['_source']['distribution'] as $distribution)                
+                    <h4>{{ trans('resource.distribution') }}</h4>
+                    <dl class="dl-horizontal">                
+                                        
+                        @if (isset($distribution['title']))
+                            <dt>{{ trans('resource.distribution.title') }}</dt>
+                            <dd>{{ $distribution['title'] }}</dd>
+                        @endif   
+                        
+                        @if (isset($distribution['description']))
+                            <dt>{{ trans('resource.distribution.description') }}</dt>
+                            <dd>{{ $distribution['description'] }}</dd>
+                        @endif 
+                        
+                        @if (isset($distribution['accessURL']))
+                            <dt>{{ trans('resource.distribution.accessUrl') }}</dt>
+                            <dd>
+                                @if(filter_var($distribution['accessURL'], FILTER_VALIDATE_URL))
+                                <a href="{{ $distribution['accessURL'] }}">
+                                    {{ $distribution['accessURL'] }}
+                                </a>
+                                @else
+                                {{ $distribution['accessURL'] }}
+                                @endif
+                            </dd>
+                        @endif                         
+                        
+                        @if (isset($distribution['issued']))
+                            <dt>{{ trans('resource.distribution.issued') }}</dt>
+                            <dd>{{ $distribution['issued'] }}</dd>
+                        @endif 
+                        
+                        @if (isset($distribution['modified']))
+                            <dt>{{ trans('resource.distribution.modified') }}</dt>
+                            <dd>{{ $distribution['modified'] }}</dd>
+                        @endif                        
+                        
+                    </dl>
+                @endforeach            
+            @endif    
 
         </div>
         <!-- resource context -->

@@ -115,5 +115,11 @@ return [
     'children' => 'children',
     'readmore' => 'Read more',
     'readless' => 'Close',
-    'backlink' => 'Back to search results'
+    'backlink' => 'Back to search results',
+    'distribution' => 'Distribution',
+    'distribution.title' => 'Title',
+    'distribution.description' => 'Description',
+    'distribution.accessUrl' => 'Access URL',
+    'distribution.issued' => 'Issued',
+    'distribution.modified' => 'Modified'
 ];
