@@ -435,7 +435,20 @@
                             <dt>{{ trans('resource.distribution.modified') }}</dt>
                             <dd>{{ $distribution['modified'] }}</dd>
                         @endif                        
-                        
+                        @if (isset($distribution['publisher']))
+                            <dt>{{ trans('resource.publisher') }}</dt>
+                            <dd>
+                                <ul>
+                                    @foreach($distribution['publisher'] as $publisher)                                        
+                                            <li><span itemprop="publisher" itemscope="" itemtype="http://schema.org/{{ $publisher['type'] }}">
+                                                @if (isset($publisher['name']))
+                                                    {{ $publisher['name'] }}
+                                                @endif
+                                            </span> <em>[{{ $publisher['type']}}]</em></li>                                        
+                                    @endforeach
+                                </ul>
+                            </dd>
+                        @endif
                     </dl>
                 @endforeach            
             @endif    
