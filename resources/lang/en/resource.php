@@ -121,5 +121,8 @@ return [
     'distribution.description' => 'Description',
     'distribution.accessUrl' => 'Access URL',
     'distribution.issued' => 'Issued',
-    'distribution.modified' => 'Modified'
+    'distribution.modified' => 'Modified',
+    'responsible' => 'Responsible persons and organisations',
+    'hasMetadataRecord' => 'Metadata record',
+    'characterSet' => 'Character set'
 ];

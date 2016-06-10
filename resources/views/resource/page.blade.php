@@ -301,6 +301,47 @@
                         </time>
                     </dd>
                 @endif
+                
+                @if (isset($resource['_source']['hasMetadataRecord']))
+                    <dt>{{ trans('resource.hasMetadataRecord') }}</dt>
+                    <dd>
+                        <ul>
+                        @foreach ($resource['_source']['hasMetadataRecord'] as $hasMetadataRecord)
+                            <li>
+                                @if (isset($hasMetadataRecord['xmlDoc']))
+                                    @if(filter_var($hasMetadataRecord['xmlDoc'], FILTER_VALIDATE_URL))
+                                    <a href="{{ $hasMetadataRecord['xmlDoc'] }}">
+                                        {{ $hasMetadataRecord['xmlDoc'] }}
+                                    </a>
+                                    @else
+                                    {{ $hasMetadataRecord['xmlDoc'] }}
+                                    @endif                                
+                                @endif
+                                @if (isset($hasMetadataRecord['conformsTo']))
+                                    <br/>
+                                    <em>[
+                                        @if (isset($hasMetadataRecord['conformsTo'][0]['description']))
+                                            {{ $hasMetadataRecord['conformsTo'][0]['description'] }}
+                                        @endif
+                                    ]</em>
+                                    <em>[
+                                        @if (isset($hasMetadataRecord['conformsTo'][0]['characterSet']))
+                                            {{ trans('resource.characterSet') }}:
+                                            {{ $hasMetadataRecord['conformsTo'][0]['characterSet'] }}
+                                        @endif
+                                    ]</em>
+                                @endif
+                            </li>
+                        @endforeach
+                        </ul>
+                    </dd>
+                @endif
+                
+            </dl>
+                
+            <h4>{{ trans('resource.responsible') }}</h4>
+
+            <dl class="dl-horizontal">                
 
                 @if (isset($resource['_source']['creator']))
                     <dt>{{ trans('resource.creator') }}</dt>
