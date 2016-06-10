@@ -16,6 +16,9 @@
     @section('description', $description)
 
 @endif
+<?php
+Log::info( $resource['_source'] );
+?>
 
 @if (isset($resource['_source']['nativeSubject']))
 
@@ -38,7 +41,6 @@
 @section('content')
 
 <div class="container-fluid content">
-
     <div id="citationModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -108,13 +110,14 @@
                     @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
                         <span class="tag">
                             <a href="{{ route('search', [ 'derivedSubject' => $derivedSubject['prefLabel'] ]) }}">
-                                <span class="glyphicon glyphicon-tag"></span>                  
+                                <span class="glyphicon glyphicon-tag"></span>
                                 <span itemprop="keywords">{{ $derivedSubject['prefLabel'] }}</span>
                             </a>
                             <?php $uriComponents = explode('/', $derivedSubject['source']); ?>
                             <a class="text-muted" href="{{ route('subject.page', [ array_pop($uriComponents) ] ) }}">
                                 <span class="glyphicon glyphicon-info-sign"></span>
                             </a>
+                          
                         </span>
                     @endforeach
                 </div>
@@ -141,7 +144,7 @@
                                 <span class="glyphicon glyphicon-map-marker"></span>
                                 <span itemprop="spatial" itemscope="itemscope" itemtype="http://schema.org/Place" itemid="http://dbpedia.org/resource/{{ $spatial['placeName'] }}">{{ $spatial['placeName'] }}</span>
                             </a>
-                        @endif
+                        @endif                        
                     @endforeach
                 </div>
             @endif
@@ -195,9 +198,9 @@
                 
                 @if (isset($resource['_source']['derivedSubject']))
                     <dt>{{ trans('resource.subject') }}</dt>
-                    <dd>
-                        @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
-                        <span class="tag">
+                      @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
+                        <dd>
+                          <span class="tag">
                             <a href="{{ route('search', [ 'subjectUri' => $derivedSubject['id'], 'subjectLabel' => $derivedSubject['prefLabel'] ]) }}">                                               
                                 <span itemprop="keywords">{{ $derivedSubject['prefLabel'] }}</span>
                             </a>
@@ -205,9 +208,18 @@
                             <a class="text-muted" href="{{ route('subject.page', [ array_pop($uriComponents) ] ) }}">
                                 <span class="glyphicon glyphicon-info-sign"></span>
                             </a>
-                        </span>
-                    @endforeach
-                    </dd>                
+                          </span>
+                        </dd>
+                        @if (isset($derivedSubject['dc:language']))
+                          <dd><span itemprop="dc:language" itemscope="">{{trans('resource.dc:language') }}: {{ $derivedSubject['dc:language'] }}</span></dd>
+                        @endif
+                        @if (isset($derivedSubject['skopeNote']))
+                          <dd><span itemprop="skopeNote" itemscope="">{{trans('resource.skopeNote') }}: {{ $derivedSubject['skopeNote'] }}</span></dd>
+                        @endif
+                        @if (isset($derivedSubject['definition']))
+                          <dd><span itemprop="definition" itemscope="">{{trans('resource.definition') }}: {{ $derivedSubject['definition'] }}</span></dd>
+                        @endif                        
+                      @endforeach
                 @endif    
                 
                 @if (isset($resource['_source']['keyword']))
@@ -249,20 +261,20 @@
                     <dd>
                         <ul>
                             @foreach($resource['_source']['spatial'] as $spatial)
-                            <li>
-                                <?php $parts = [] ?>
-                                @foreach(['address','postcode','placeName','country'] as $key)
-                                    @if(isset($spatial[$key]))
-                                        <?php $parts[] = $spatial[$key] ?>
-                                    @endif
-                                @endforeach
-                                @if(count($parts) > 0)
-                                    {{ implode($parts, ', ') }}
+                              <li>
+                              <?php $parts = [] ?>
+                              @foreach(['address','numberInRoad','postcode','placeName','country'] as $key)
+                                @if(isset($spatial[$key]))
+                                  <?php $parts[] = $spatial[$key] ?>
                                 @endif
-                                @if(isset($spatial['location']))
-                                    <em>[{{ implode($spatial['location'], ', ') }}]</em>
-                                @endif
-                            </li>
+                              @endforeach
+                              @if(count($parts) > 0)
+                                  {{ implode($parts, ', ') }}
+                              @endif
+                              @if(isset($spatial['location']))
+                                <em>[{{ implode($spatial['location'], ', ') }}]</em>
+                              @endif
+                              </li>
                             @endforeach
                         </ul>
                     </dd>
@@ -279,6 +291,21 @@
                         <ul>
                             @foreach($resource['_source']['publisher'] as $publisher)
                             <li><span itemprop="publisher" itemscope="" itemtype="http://schema.org/{{ $publisher['type'] }}">{{ $publisher['name'] }}</span> <em>[{{ $publisher['type']}}]</em></li>
+                              @if (isset($publisher['email']))
+                                <li><span itemprop="publisher" itemscope="">{{trans('resource.email') }}:
+                                @if (preg_match('/@/',$publisher['email']))
+                                   <a href="mailto:{{ $publisher['email'] }}">{{ $publisher['email'] }}</a>
+                                @else
+                                  {{ $publisher['email'] }}
+                                @endif
+                                </span></li>
+                              @endif
+                              @if (isset($publisher['phone']))
+                                <li><span itemprop="publisher" itemscope="">{{trans('resource.phone') }}: {{ $publisher['phone'] }}</span></li>
+                              @endif  
+                              @if (isset($publisher['skypeID']))
+                                <li><span itemprop="publisher" itemscope="">{{trans('resource.skypeID') }}: {{ $publisher['skypeID'] }}</span></li>
+                              @endif
                             @endforeach
                         </ul>
                     </dd>
@@ -318,6 +345,21 @@
                         <ul>
                             @foreach($resource['_source']['creator'] as $creator)
                             <li itemprop="creator" itemscope="" itemtype="http://schema.org/{{ $creator['type'] }}"><span itemprop="name">{{ $creator['name'] }}</span> <em>[{{ $creator['type']}}]</em></li>
+                              @if (isset($creator['email']))
+                                <li><span itemprop="creator" itemscope="">{{trans('resource.email') }}:
+                                @if (preg_match('/@/',$creator['email']))
+                                   <a href="mailto:{{ $creator['email'] }}">{{ $creator['email'] }}</a>
+                                @else
+                                  {{ $creator['email'] }}
+                                @endif
+                                </span></li>
+                              @endif
+                              @if (isset($creator['phone']))
+                                <li><span itemprop="creator" itemscope="">{{trans('resource.phone') }}: {{ $creator['phone'] }}</span></li>
+                              @endif    
+                              @if (isset($creator['skypeID']))
+                                <li><span itemprop="creator" itemscope="">{{trans('resource.skypeID') }}: {{ $creator['skypeID'] }}</span></li>
+                              @endif
                             @endforeach
                         </ul>
                     </dd>
@@ -329,6 +371,21 @@
                         <ul>
                             @foreach($resource['_source']['contributor'] as $contributor)
                             <li itemprop="contributor" itemscope="" itemtype="http://schema.org/{{ $contributor['type'] }}"><span itemprop="name">{{ $contributor['name'] }}</span> <em>[{{ $contributor['type']}}]</em></li>
+                              @if (isset($contributor['email']))
+                                <li><span itemprop="contributor" itemscope="">{{trans('resource.email') }}:
+                                @if (preg_match('/@/',$contributor['email']))
+                                   <a href="mailto:{{ $contributor['email'] }}">{{ $contributor['email'] }}</a>
+                                @else
+                                  {{ $contributor['email'] }}
+                                @endif
+                                </span></li>
+                              @endif                              
+                              @if (isset($contributor['phone']))
+                                <li><span itemprop="contributor" itemscope="">{{trans('resource.phone') }}: {{ $contributor['phone'] }}</span></li>
+                              @endif    
+                              @if (isset($contributor['skypeID']))
+                                <li><span itemprop="contributor" itemscope="">{{trans('resource.skypeID') }}: {{ $contributor['skypeID'] }}</span></li>
+                              @endif
                             @endforeach
                         </ul>
                     </dd>
@@ -340,6 +397,21 @@
                         <ul>
                             @foreach($resource['_source']['owner'] as $owner)
                             <li itemprop="owner" itemscope="" itemtype="http://schema.org/{{ $owner['type'] }}"><span itemprop="name">{{ $owner['name'] }}</span> <em>[{{ $owner['type']}}]</em></li>
+                              @if (isset($owner['email']))
+                                <li><span itemprop="owner" itemscope="">{{trans('resource.email') }}:
+                                @if (preg_match('/@/',$owner['email']))
+                                   <a href="mailto:{{ $owner['email'] }}">{{ $owner['email'] }}</a>
+                                @else
+                                  {{ $owner['email'] }}
+                                @endif
+                                </span></li>
+                              @endif 
+                              @if (isset($owner['phone']))
+                                <li><span itemprop="owner" itemscope="">{{trans('resource.phone') }}: {{ $owner['phone'] }}</span></li>
+                              @endif    
+                              @if (isset($owner['skypeID']))
+                                <li><span itemprop="owner" itemscope="">{{trans('resource.skypeID') }}: {{ $owner['skypeID'] }}</span></li>
+                              @endif
                             @endforeach
                         </ul>
                     </dd>
@@ -351,6 +423,21 @@
                         <ul>
                             @foreach($resource['_source']['legalResponsible'] as $legalResponsible)
                             <li itemprop="legalResponsible" itemscope="" itemtype="http://schema.org/{{ $legalResponsible['type'] }}"><span itemprop="name">{{ $legalResponsible['name'] }}</span> <em>[{{ $legalResponsible['type']}}]</em></li>
+                              @if (isset($legalResponsible['email']))
+                                <li><span itemprop="legalResponsible" itemscope="">{{trans('resource.email') }}:
+                                @if (preg_match('/@/',$legalResponsible['email']))
+                                   <a href="mailto:{{ $legalResponsible['email'] }}">{{ $legalResponsible['email'] }}</a>
+                                @else
+                                  {{ $legalResponsible['email'] }}
+                                @endif
+                                </span></li>
+                              @endif 
+                              @if (isset($legalResponsible['phone']))
+                                <li><span itemprop="legalResponsibler" itemscope="">{{trans('resource.phone') }}: {{ $legalResponsible['phone'] }}</span></li>
+                              @endif    
+                              @if (isset($legalResponsible['skypeID']))
+                                <li><span itemprop="legalResponsible" itemscope="">{{trans('resource.skypeID') }}: {{ $legalResponsible['skypeID'] }}</span></li>
+                              @endif
                             @endforeach
                         </ul>
                     </dd>
@@ -362,6 +449,21 @@
                         <ul>
                             @foreach($resource['_source']['scientificResponsible'] as $scientificResponsible)
                             <li itemprop="scientificResponsible" itemscope="" itemtype="http://schema.org/{{ $scientificResponsible['type'] }}"><span itemprop="name">{{ $scientificResponsible['name'] }}</span> <em>[{{ $scientificResponsible['type']}}]</em></li>
+                              @if (isset($scientificResponsible['email']))
+                                <li><span itemprop="scientificResponsible" itemscope="">{{trans('resource.email') }}:
+                                @if (preg_match('/@/',$scientificResponsible['email']))
+                                   <a href="mailto:{{ $scientificResponsible['email'] }}">{{ $scientificResponsible['email'] }}</a>
+                                @else
+                                  {{ $scientificResponsible['email'] }}
+                                @endif
+                                </span></li>
+                              @endif                             
+                              @if (isset($scientificResponsible['phone']))
+                                <li><span itemprop="scientificResponsible" itemscope="">{{trans('resource.phone') }}: {{ $scientificResponsible['phone'] }}</span></li>
+                              @endif    
+                              @if (isset($scientificResponsible['skypeID']))
+                                <li><span itemprop="scientificResponsible" itemscope="">{{trans('resource.skypeID') }}: {{ $scientificResponsible['skypeID'] }}</span></li>
+                              @endif                              
                             @endforeach
                         </ul>
                     </dd>
@@ -373,10 +475,119 @@
                         <ul>
                             @foreach($resource['_source']['technicalResponsible'] as $technicalResponsible)
                             <li itemprop="technicalResponsible" itemscope="" itemtype="http://schema.org/{{ $technicalResponsible['type'] }}"><span itemprop="name">{{ $technicalResponsible['name'] }}</span> <em>[{{ $technicalResponsible['type']}}]</em></li>
+                              @if (isset($technicalResponsible['email']))
+                                <li><span itemprop="technicalResponsible" itemscope="">{{trans('resource.email') }}:
+                                @if (preg_match('/@/',$technicalResponsible['email']))
+                                   <a href="mailto:{{ $technicalResponsible['email'] }}">{{ $technicalResponsible['email'] }}</a>
+                                @else
+                                  {{ $technicalResponsible['email'] }}
+                                @endif
+                                </span></li>
+                              @endif
+                              @if (isset($technicalResponsible['phone']))
+                                <li><span itemprop="technicalResponsible" itemscope="">{{trans('resource.phone') }}: {{ $technicalResponsible['phone'] }}</span></li>
+                              @endif
+                              @if (isset($technicalResponsible['skypeID']))
+                                <li><span itemprop="technicalResponsible" itemscope="">{{trans('resource.skypeID') }}: {{ $technicalResponsible['skypeID'] }}</span></li>
+                              @endif                              
                             @endforeach
                         </ul>
                     </dd>
-                @endif                  
+                @endif   
+
+                @if (isset($resource['_source']['providedSubject']))
+                    <dt>{{ trans('resource.providedSubject') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['providedSubject'] as $providedSubject)
+                              @if (isset($providedSubject['prefLabel']))
+                                <li><span itemprop="providedSubject" itemscope="">{{trans('resource.providedSubject.prefLabel') }}: {{ $providedSubject['prefLabel'] }}</span></li>
+                              @endif
+                              @if (isset($providedSubject['skopeNote']))
+                                <li><span itemprop="providedSubject" itemscope="">{{trans('resource.skopeNote') }}: {{ $providedSubject['skopeNote'] }}</span></li>
+                              @endif
+                              @if (isset($providedSubject['definition']))
+                                <li><span itemprop="providedSubject" itemscope="">{{trans('resource.definition') }}: {{ $providedSubject['definition'] }}</span></li>
+                              @endif
+                              @if (isset($providedSubject['source']))
+                                <li><span itemprop="providedSubject" itemscope="">{{trans('resource.source') }}: {{ $providedSubject['source'] }}</span></li>
+                              @endif                              
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif   
+                
+                <!-- New Attributes -->
+                
+                @if (isset($resource['_source']['aatSubjects']))
+                    <dt>{{ trans('resource.aatSubjects') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['aatSubjects'] as $aatSubject)
+                            <li itemprop="aatSubject" itemscope="">
+                              <span itemprop="name">{{ $aatSubject['label'] }}</span> <em>[{{ $aatSubject['lang']}}]</em></li>
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif
+                
+                @if (isset($resource['_source']['accrualPeriodicity']))
+                    <dt>{{ trans('resource.accrualPeriodicity') }}</dt>
+                    <dd>{{ $resource['_source']['accrualPeriodicity'] }}</dd>
+                @endif
+                
+                @if (isset($resource['_source']['contactPoint']))
+                    <dt>{{ trans('resource.contactPoint') }}</dt>
+                    <dd>{{ $resource['_source']['contactPoint'] }}</dd>
+                @endif
+                
+                @if (isset($resource['_source']['identifier']))
+                    <dt>{{ trans('resource.metadata.identifier') }}</dt>
+                    <dd>{{ $resource['_source']['identifier'] }}</dd>
+                @endif
+                
+                @if (isset($resource['_source']['packageId']))
+                    <dt>{{ trans('resource.packageId') }}</dt>
+                    <dd>{{ $resource['_source']['packageId'] }}</dd>
+                @endif
+                
+                @if (isset($resource['_source']['providerId']))
+                    <dt>{{ trans('resource.providerId') }}</dt>
+                    <dd>{{ $resource['_source']['providerId'] }}</dd>
+                @endif
+                
+                @if (isset($resource['_source']['size']))
+                    <dt>{{ trans('resource.size') }}</dt>
+                    <dd>{{ $resource['_source']['size'] }}</dd>
+                @endif
+                
+                @if (isset($resource['_source']['hasItemMetadataStructure']))
+                    <dt>{{ trans('resource.hasItemMetadataStructure') }}</dt>
+                    <dd>
+                        <ul>
+                            @foreach($resource['_source']['hasItemMetadataStructure'] as $hasItemMetadataStructure)
+                              @if (isset($hasItemMetadataStructure['dc:description']))
+                                <li itemprop="hasItemMetadataStructure" itemscope="">
+                                  <span itemprop="dc:description">{{ $hasItemMetadataStructure['dc:description'] }}</span>
+                                </li>
+                              @endif  
+                              @if (isset($hasItemMetadataStructure['characterSet']))
+                                <li itemprop="hasItemMetadataStructure" itemscope="">
+                                  <span itemprop="characterSet">{{ $hasItemMetadataStructure['characterSet'] }}</span>
+                                </li>
+                              @endif  
+                              @if (isset($hasItemMetadataStructure['xsd']))  
+                                <li itemprop="hasItemMetadataStructure" itemscope="">
+                                  <span itemprop="xsd">{{ $hasItemMetadataStructure['xsd'] }}</span>
+                                </li>
+                              @endif
+                            @endforeach
+                        </ul>
+                    </dd>
+                @endif           
+                
+                <!-- END New Attributes -->
+                
             </dl>
 
             <h4>{{ trans('resource.license') }}</h4>

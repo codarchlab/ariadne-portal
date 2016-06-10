@@ -115,5 +115,24 @@ return [
     'children' => 'children',
     'readmore' => 'Read more',
     'readless' => 'Close',
-    'backlink' => 'Back to search results'
+    'backlink' => 'Back to search results',
+    'aatSubjects' => 'Getty AAT Subjects',
+    'accrualPeriodicity' => 'Accrual Periodicity',
+    'contactPoint' => 'Contact Point',
+    'metadata.identifier' => 'Identifier',
+    'packageId' => 'Package ID',
+    'providerId' => 'Provider ID',
+    'size' => 'Size',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'hasItemMetadataStructure' => 'Metadata structure',
+    'skypeID' => 'Skype ID',
+    'providedSubject' => 'Provided subject',
+    'providedSubject.prefLabel' => 'Pref. label',
+    'skopeNote' => 'Skope note',
+    'definition' => 'Definition',
+    'source' => 'Source',
+    'dc:language' => 'DC language'
+  
+  
 ];
