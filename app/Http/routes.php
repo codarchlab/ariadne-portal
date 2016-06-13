@@ -16,6 +16,15 @@ Route::get('services', 'PageController@services');
 Route::get('about', 'PageController@about');
 Route::get('robots.txt','PageController@robots' );
 
+Route::get('contact', [
+    'as' => 'contact.form',
+    'uses' => 'ContactController@form'
+]);
+Route::post('contact', [
+    'as' => 'contact.store',
+    'uses' => 'ContactController@store'
+]);
+
 Route::get('provider', 'ProviderController@index');
 
 Route::get('subject/suggest', 'SubjectController@suggest');
