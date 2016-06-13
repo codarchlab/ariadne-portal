@@ -88,11 +88,14 @@
                 <!-- TODO Add contact information when available in data. See mockups. -->
 
                 <div class="pull-right">
-                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource in json" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
+                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource metadata in JSON" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
                     <a class="button"  data-tooltip="true" data-placement="bottom" title="Cite resource" data-toggle="modal" data-target="#citationModal">
                         <span class="glyphicon glyphicon-link"></span>
+                    </a>
+                    <a class="button" data-toggle="tooltip" data-placement="right" title="Report data quality issue" href="{{ route('contact.form', ['subject' => 'Data quality issue resource #' . $resource['_id']]) }}">
+                        <span class="glyphicon glyphicon-envelope"></span>
                     </a>
                 </div>
             </div>

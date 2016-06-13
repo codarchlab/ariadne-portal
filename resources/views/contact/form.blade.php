@@ -41,7 +41,7 @@
 
       <div class="form-group">
           {!! Form::label('Subject') !!}
-          {!! Form::text('subject', null, 
+          {!! Form::text('subject', Request::input('subject'), 
               array('required', 
                     'class'=>'form-control', 
                     'placeholder'=>'Subject')) !!}
