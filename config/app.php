@@ -78,6 +78,17 @@ return [
     
 	'google_analytics' => env('GOOGLE_ANALYTICS'),
 
+	/*
+	|--------------------------------------------------------------------------
+	| Contact eMail addresses
+	|--------------------------------------------------------------------------
+	|
+	| The eMail addresses for reporting data quality issues
+	|
+	*/  
+    
+	'contact_email' => env('CONTACT_EMAIL'),
+
 
 	/*
 	|--------------------------------------------------------------------------

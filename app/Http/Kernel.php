@@ -10,7 +10,10 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $middleware = [
-		'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode'
+		'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
+		'Illuminate\Session\Middleware\StartSession',
+		'Illuminate\View\Middleware\ShareErrorsFromSession',
+		'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken'
 	];
 
 	/**

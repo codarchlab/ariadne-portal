@@ -133,6 +133,13 @@ return [
     'definition' => 'Definition',
     'source' => 'Source',
     'dc:language' => 'DC language'
-  
-  
+    'distribution' => 'Distribution',
+    'distribution.title' => 'Title',
+    'distribution.description' => 'Description',
+    'distribution.accessUrl' => 'Access URL',
+    'distribution.issued' => 'Issued',
+    'distribution.modified' => 'Modified',
+    'responsible' => 'Responsible persons and organisations',
+    'hasMetadataRecord' => 'Metadata record',
+    'characterSet' => 'Character set'
 ];

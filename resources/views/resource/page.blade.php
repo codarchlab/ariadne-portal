@@ -90,11 +90,14 @@ Log::info( $resource['_source'] );
                 <!-- TODO Add contact information when available in data. See mockups. -->
 
                 <div class="pull-right">
-                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource in json" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
+                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource metadata in JSON" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
                     <a class="button"  data-tooltip="true" data-placement="bottom" title="Cite resource" data-toggle="modal" data-target="#citationModal">
                         <span class="glyphicon glyphicon-link"></span>
+                    </a>
+                    <a class="button" data-toggle="tooltip" data-placement="right" title="Report data quality issue" href="{{ route('contact.form', ['subject' => 'Data quality issue resource #' . $resource['_id']]) }}">
+                        <span class="glyphicon glyphicon-envelope"></span>
                     </a>
                 </div>
             </div>
@@ -315,12 +318,7 @@ Log::info( $resource['_source'] );
                     <dt>{{ trans('resource.issued') }}</dt>
                     <dd>
                         <time itemprop="datePublished" datetime="{{ $resource['_source']['issued'] }}">
-                        @if(is_numeric($resource['_source']['issued']))
-                          {{ $resource['_source']['issued'] }}
-                        @else
-                          <?php $datetime = new DateTime($resource['_source']['issued']) ?>
-                          {{ $datetime->format('n M Y') }}
-                        @endif
+                            {{ $resource['_source']['issued'] }}
                         </time>
                     </dd>
                 @endif
@@ -329,15 +327,51 @@ Log::info( $resource['_source'] );
                     <dt>{{ trans('resource.modified') }}</dt>
                     <dd>
                         <time itemprop="dateModified" datetime="{{ $resource['_source']['modified'] }}">
-                        @if(is_numeric($resource['_source']['modified']))
-                          {{ $resource['_source']['modified'] }}
-                        @else
-                          <?php $datetime = new DateTime($resource['_source']['modified']) ?>
-                          {{ $datetime->format('n M Y') }}
-                        @endif
+                            {{ $resource['_source']['modified'] }}
                         </time>
                     </dd>
                 @endif
+                
+                @if (isset($resource['_source']['hasMetadataRecord']))
+                    <dt>{{ trans('resource.hasMetadataRecord') }}</dt>
+                    <dd>
+                        <ul>
+                        @foreach ($resource['_source']['hasMetadataRecord'] as $hasMetadataRecord)
+                            <li>
+                                @if (isset($hasMetadataRecord['xmlDoc']))
+                                    @if(filter_var($hasMetadataRecord['xmlDoc'], FILTER_VALIDATE_URL))
+                                    <a href="{{ $hasMetadataRecord['xmlDoc'] }}">
+                                        {{ $hasMetadataRecord['xmlDoc'] }}
+                                    </a>
+                                    @else
+                                    {{ $hasMetadataRecord['xmlDoc'] }}
+                                    @endif                                
+                                @endif
+                                @if (isset($hasMetadataRecord['conformsTo']))
+                                    <br/>
+                                    <em>[
+                                        @if (isset($hasMetadataRecord['conformsTo'][0]['description']))
+                                            {{ $hasMetadataRecord['conformsTo'][0]['description'] }}
+                                        @endif
+                                    ]</em>
+                                    <em>[
+                                        @if (isset($hasMetadataRecord['conformsTo'][0]['characterSet']))
+                                            {{ trans('resource.characterSet') }}:
+                                            {{ $hasMetadataRecord['conformsTo'][0]['characterSet'] }}
+                                        @endif
+                                    ]</em>
+                                @endif
+                            </li>
+                        @endforeach
+                        </ul>
+                    </dd>
+                @endif
+                
+            </dl>
+                
+            <h4>{{ trans('resource.responsible') }}</h4>
+
+            <dl class="dl-horizontal">                
 
                 @if (isset($resource['_source']['creator']))
                     <dt>{{ trans('resource.creator') }}</dt>
@@ -618,6 +652,61 @@ Log::info( $resource['_source'] );
                 @endif                
                 
             </dl>
+            
+            @if (isset($resource['_source']['distribution']))            
+                @foreach($resource['_source']['distribution'] as $distribution)                
+                    <h4>{{ trans('resource.distribution') }}</h4>
+                    <dl class="dl-horizontal">                
+                                        
+                        @if (isset($distribution['title']))
+                            <dt>{{ trans('resource.distribution.title') }}</dt>
+                            <dd>{{ $distribution['title'] }}</dd>
+                        @endif   
+                        
+                        @if (isset($distribution['description']))
+                            <dt>{{ trans('resource.distribution.description') }}</dt>
+                            <dd>{{ $distribution['description'] }}</dd>
+                        @endif 
+                        
+                        @if (isset($distribution['accessURL']))
+                            <dt>{{ trans('resource.distribution.accessUrl') }}</dt>
+                            <dd>
+                                @if(filter_var($distribution['accessURL'], FILTER_VALIDATE_URL))
+                                <a href="{{ $distribution['accessURL'] }}">
+                                    {{ $distribution['accessURL'] }}
+                                </a>
+                                @else
+                                {{ $distribution['accessURL'] }}
+                                @endif
+                            </dd>
+                        @endif                         
+                        
+                        @if (isset($distribution['issued']))
+                            <dt>{{ trans('resource.distribution.issued') }}</dt>
+                            <dd>{{ $distribution['issued'] }}</dd>
+                        @endif 
+                        
+                        @if (isset($distribution['modified']))
+                            <dt>{{ trans('resource.distribution.modified') }}</dt>
+                            <dd>{{ $distribution['modified'] }}</dd>
+                        @endif                        
+                        @if (isset($distribution['publisher']))
+                            <dt>{{ trans('resource.publisher') }}</dt>
+                            <dd>
+                                <ul>
+                                    @foreach($distribution['publisher'] as $publisher)                                        
+                                            <li><span itemprop="publisher" itemscope="" itemtype="http://schema.org/{{ $publisher['type'] }}">
+                                                @if (isset($publisher['name']))
+                                                    {{ $publisher['name'] }}
+                                                @endif
+                                            </span> <em>[{{ $publisher['type']}}]</em></li>                                        
+                                    @endforeach
+                                </ul>
+                            </dd>
+                        @endif
+                    </dl>
+                @endforeach            
+            @endif    
 
         </div>
         <!-- resource context -->
