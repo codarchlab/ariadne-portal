@@ -132,7 +132,7 @@ return [
     'skopeNote' => 'Skope note',
     'definition' => 'Definition',
     'source' => 'Source',
-    'dc:language' => 'DC language'
+    'dc:language' => 'DC language',
     'distribution' => 'Distribution',
     'distribution.title' => 'Title',
     'distribution.description' => 'Description',
