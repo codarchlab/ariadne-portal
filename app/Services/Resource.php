@@ -89,7 +89,7 @@ class Resource
 
         if (Request::has('subjectUri')) {
             $filters[] = [
-                'term' => [ 'derivedSubject.source' => Request::get('subjectUri')]
+                'term' => [ 'aatSubjects.id' => Request::get('subjectUri')]
             ];
         }
 
