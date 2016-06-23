@@ -197,9 +197,9 @@ Log::info( $resource['_source'] );
                             @endforeach
                         </ul>
                     </dd>
-                @endif   
+                @endif  
                 
-                @if (isset($resource['_source']['derivedSubject']))
+                 @if (isset($resource['_source']['derivedSubject']))
                     <dt>{{ trans('resource.subject') }}</dt>
                       @foreach ($resource['_source']['derivedSubject'] as $derivedSubject)
                         <dd>
@@ -222,6 +222,17 @@ Log::info( $resource['_source'] );
                         @if (isset($derivedSubject['definition']))
                           <dd><span itemprop="definition" itemscope="">{{trans('resource.definition') }}: {{ $derivedSubject['definition'] }}</span></dd>
                         @endif                        
+                      @endforeach
+                @endif 
+                
+                @if (isset($resource['_source']['nativeSubject']))
+                    <dt>{{ trans('resource.nativeSubject') }}</dt>
+                      @foreach ($resource['_source']['nativeSubject'] as $nativeSubject)
+                        <dd>  
+                            <ul>
+                                <li>{{ $nativeSubject['prefLabel'] }}</li>    
+                            </ul>
+                        </dd>                                            
                       @endforeach
                 @endif    
                 
