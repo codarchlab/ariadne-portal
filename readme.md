@@ -1,10 +1,14 @@
-#Before setup
+#ARIADNE Portal
+
+The ARIADNE Portal is a web application bases on [Laravel](https://laravel.com/). It's main purpose is to offer access to the ARIADNE catalog data provided through [Elasticsearch](https://www.elastic.co/products/elasticsearch).
+
+##Setup for development
 
 ###Install composer
 https://getcomposer.org
 Follow install instructions for your operating system
 
-###setup
+###Setup
 Clone this repo from GitHub
 Create local config file
 Make a copy of ``.env.example`` and name it ``.env``
@@ -47,18 +51,7 @@ To automatically recompile js and css files after changes
 
     gulp watch
 
-###Distribution
-
-In order to create a distribution package run:
-
-    gulp dist
-
-This tar.gz package contains all files needed to run the application on a web server.
-Before building the package make sure that the variables in `.env` are set up
-for the production environment.
-
-
-##Setup portal in apache
+###Development setup with apache
 
 Easiest way to do development is to create a virtual host (vhost).
 Example config:
@@ -82,11 +75,45 @@ Example config:
 
 
 Observe the path of the directory, DocumentRoot should be the folder named public inside the project folder.
-Place this file in apaches vhost directory, be sure the line for loading the module vhost_alias_module and “Include conf/extra/httpd-vhosts.conf” is uncommented. In httpd.conf
+Place this file in apaches vhost directory, be sure the line for loading the module vhost_alias_module and “Include conf/extra/httpd-vhosts.conf” is uncommented.
 
-###Add an entry to your host file:
+Next add an entry to your host file:
 (on windows C:\Windows\System32\Drivers\etc\hosts, mac: Open ``/Applications/Utilities/NetInfo Manager``, linux: ``sudo nano /etc/hosts``)
 ``ariadne.laravel.localhost 127.0.0.1``
 
-
 The portal should now be hosted via http://ariadne.laravel.localhost
+
+###Distribution
+
+In order to create a distribution package run:
+
+    gulp dist
+
+##Deployment
+
+The tar.gz package built with `gulp dist` - which can also be downloaded [here](https://github.com/dainst/ariadne-portal/releases) - contains all files needed to run the application on a web server.
+
+The contents of this package can be extracted and made available through any WebServer that supports PHP.
+
+After extracting make sure that the variables in `.env` are set up
+for the particular environment.
+
+### Example configuration for Apache
+
+        <VirtualHost *:80>
+                ServerName portal.ariadne-infrastructure.eu
+                ServerAlias ariadne-portal.dcu.gr
+                DocumentRoot /var/www/ariadne-portal/public
+                ServerAdmin webmaster@localhost
+                Alias / "/var/www/ariadne-portal/public/"
+                <Directory /var/www/ariadne-portal/public>
+                        Options Indexes FollowSymLinks MultiViews
+                        AllowOverride All
+                        Order allow,deny
+                        allow from all
+                        AddDefaultCharset UTF-8
+                </Directory>
+                ErrorLog ${APACHE_LOG_DIR}/ariadne-portal_error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+        </VirtualHost>
