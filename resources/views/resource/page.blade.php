@@ -561,7 +561,7 @@
                         <ul>
                             @foreach($resource['_source']['aatSubjects'] as $aatSubject)
                             <li itemprop="aatSubject" itemscope="">
-                              <span itemprop="name">{{ $aatSubject['label'] }}</span> <em>[{{ $aatSubject['lang']}}]</em></li>
+                              <span itemprop="name">{{ $aatSubject['label'] }}</span> <span class="badge">{{ $aatSubject['lang']}}</span></li>
                             @endforeach
                         </ul>
                     </dd>
