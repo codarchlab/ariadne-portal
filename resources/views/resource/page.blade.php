@@ -749,7 +749,7 @@
 
             @if (sizeof($geo_items)>0)
 
-                <h4>{{ trans('resource.geo_similar') }}</h4>
+                <h4 title="{{ trans('resource.geo_legend_similar_explanation') }}" data-tooltip="true">{{ trans('resource.geo_similar') }} <span class="glyphicon glyphicon-info-sign"></span></h4>
 
                 
                 <div id="map"></div>
@@ -772,9 +772,7 @@
                 </script>
             @endif
 
-
-
-            <h4>{{ trans('resource.theme_similar') }}</h4>
+            <h4 title="{{ trans('resource.theme_similar_explanation') }}" data-tooltip="true">{{ trans('resource.theme_similar') }} <span class="glyphicon glyphicon-info-sign"></span></h4>
             <ul class="list-unstyled list-similar">
             @foreach($similar_resources as $similar_resource)
                 <li>
