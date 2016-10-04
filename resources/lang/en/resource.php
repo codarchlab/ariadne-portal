@@ -116,6 +116,7 @@ return [
     'readmore' => 'Read more',
     'readless' => 'Close',
     'backlink' => 'Back to search results',
+    'aatSubjects.label' => 'Subject',
     'aatSubjects' => 'Getty AAT Subjects',
     'accrualPeriodicity' => 'Accrual Periodicity',
     'contactPoint' => 'Contact Point',

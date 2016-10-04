@@ -9,7 +9,7 @@
                 <div class="box box-warning">
                     <div class="box-header">
                         <i class='fa fa-tag'></i>
-                        <h3 class="box-title">Ariadne subjects</h3>
+                        <h3 class="box-title">ARIADNE subjects</h3>
                     </div><!-- /.box-header -->
 
                     <div class="box-body">

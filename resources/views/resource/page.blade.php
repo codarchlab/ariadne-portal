@@ -36,6 +36,7 @@ Log::info( $resource['_source'] );
 
 @section('headers')
 <link rel="meta" type="application/json" title="JSON" href="{{ route('resource.json', $resource['_id']) }}">
+<link rel="meta" type="application/xml" title="ACDM XML" href="{{ route('resource.xml', $resource['_id']) }}">
 @endsection
 
 @section('content')
@@ -90,9 +91,12 @@ Log::info( $resource['_source'] );
                 <!-- TODO Add contact information when available in data. See mockups. -->
 
                 <div class="pull-right">
-                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource metadata in JSON" href="{{ route('resource.data', [ $resource['_id'] ]  ) }}" target="_blank">
+                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource metadata in JSON" href="{{ route('resource.json', [ $resource['_id'] ]  ) }}" target="_blank">
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
+                    <a class="button" data-toggle="tooltip" data-placement="left" title="Resource metadata in ACDM XML" href="{{ route('resource.xml', [ $resource['_id'] ]  ) }}" target="_blank">
+                        <span class="glyphicon glyphicon-tasks"></span>
+                    </a>                    
                     <a class="button"  data-tooltip="true" data-placement="bottom" title="Cite resource" data-toggle="modal" data-target="#citationModal">
                         <span class="glyphicon glyphicon-link"></span>
                     </a>
