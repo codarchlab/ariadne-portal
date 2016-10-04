@@ -588,7 +588,15 @@ Log::info( $resource['_source'] );
                 
                 @if (isset($resource['_source']['identifier']))
                     <dt>{{ trans('resource.metadata.identifier') }}</dt>
-                    <dd>{{ $resource['_source']['identifier'] }}</dd>
+                    <dd>
+                    @if(filter_var($resource['_source']['identifier'], FILTER_VALIDATE_URL))
+                    <a href="{{ $resource['_source']['identifier'] }}">
+                        {{ $resource['_source']['identifier'] }}
+                    </a>
+                    @else
+                    {{ $resource['_source']['identifier'] }}
+                    @endif 
+                    </dd>                   
                 @endif
                 
                 @if (isset($resource['_source']['packageId']))
