@@ -22,8 +22,7 @@ return [
     
 	/* Aggregations used for filtering in the search */
 	'elastic_search_aggregations' => [
-        'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],
-        'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']],
+        'archaeologicalResourceType' => ['terms' => ['field' => 'archaeologicalResourceType.name.raw']],        
         'derivedSubject' => ['terms' => ['field' => 'derivedSubject.prefLabel.raw']],
         'keyword' => ['terms' => ['field' => 'keyword.raw']],
         'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
@@ -38,9 +37,8 @@ return [
         		]
         	]
         ],
-        'rights' => ['terms' => ['field' => 'rights']],
-        'language' => ['terms' => ['field' => 'language']],
-        'issued' => ['terms' => ['field' => 'issued.raw']]
+        'issued' => ['terms' => ['field' => 'issued.raw']],
+        'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']]
 	],
   
   /*List of posible sorts */
