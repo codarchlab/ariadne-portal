@@ -16,7 +16,7 @@ component of the archaeological research methodology.')
      */
     var queryFields = {
         "All fields": "",
-        "Subject": "derivedSubject"
+        "Subject": "derivedSubject",
         "Identifier": "identifier",
         "Time period": "time",
         "Place": "location",
