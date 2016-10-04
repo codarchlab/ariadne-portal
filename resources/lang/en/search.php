@@ -10,7 +10,7 @@ return [
     'fields.time' => 'Time period',
     'fields.location' => 'Location',
     'fields.title' => 'Title',
-    'fields.nativeSubject' => 'Native subject',
-    'fields.derivedSubject' => 'ARIADNE subject',
-    'fields.subjectUri' => 'ARIADNE subject'
+    'fields.nativeSubject' => 'Original subject',
+    'fields.derivedSubject' => 'Subject',
+    'fields.subjectUri' => 'Subject'
 ];
