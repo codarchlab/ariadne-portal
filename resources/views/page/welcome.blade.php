@@ -16,13 +16,12 @@ component of the archaeological research methodology.')
      */
     var queryFields = {
         "All fields": "",
-        "Subject": "subject",
+        "Subject": "derivedSubject"
         "Identifier": "identifier",
         "Time period": "time",
-        "Location": "location",
+        "Place": "location",
         "Title": "title",
-        "Native subject": "nativeSubject",
-        "ARIADNE subject": "derivedSubject"
+        "Original subject": "nativeSubject"
     };
 
     /**
