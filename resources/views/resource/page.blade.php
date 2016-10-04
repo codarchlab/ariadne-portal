@@ -16,9 +16,6 @@
     @section('description', $description)
 
 @endif
-<?php
-Log::info( $resource['_source'] );
-?>
 
 @if (isset($resource['_source']['nativeSubject']))
 
@@ -333,7 +330,7 @@ Log::info( $resource['_source'] );
                     <dt>{{ trans('resource.issued') }}</dt>
                     <dd>
                         <time itemprop="datePublished" datetime="{{ $resource['_source']['issued'] }}">
-                            {{ $resource['_source']['issued'] }}
+                            {{ date_format(date_create($resource['_source']['issued']), 'Y-m-d') }}
                         </time>
                     </dd>
                 @endif
@@ -342,7 +339,7 @@ Log::info( $resource['_source'] );
                     <dt>{{ trans('resource.modified') }}</dt>
                     <dd>
                         <time itemprop="dateModified" datetime="{{ $resource['_source']['modified'] }}">
-                            {{ $resource['_source']['modified'] }}
+                            {{ date_format(date_create($resource['_source']['modified']), 'Y-m-d') }}
                         </time>
                     </dd>
                 @endif
