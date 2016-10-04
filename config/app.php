@@ -41,11 +41,11 @@ return [
         'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']]
 	],
   
-  /*List of posible sorts */
-  'elastic_search_sort' => [
-    'issued',
-    'title'
-  ],
+        /*List of posible sorts */
+        'elastic_search_sort' => [
+          'issued',
+          'title'
+        ],
     
 	/*
 	 * Fields to search in if a specific fieldgroup is selected in the frontpage search form
@@ -64,6 +64,17 @@ return [
 
 	/* Aggregations whose values should be translated */
 	'translate_aggregations' => [ 'type', 'language' ],
+    
+	/*
+	|--------------------------------------------------------------------------
+	| MORe
+	|--------------------------------------------------------------------------
+	|
+	| The MORe host
+	|
+	*/  
+    
+	'more_host' => env('MORE_HOST'),    
     
 	/*
 	|--------------------------------------------------------------------------

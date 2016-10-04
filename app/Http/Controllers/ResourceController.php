@@ -130,15 +130,33 @@ class ResourceController extends Controller {
     }
 
   /**
-     * Serialize the specified resource.
+     * Serialize the specified resource as json.
      *
      * @param  int  $id
      * @return Response response object
      */
-    public function data($id) {
+    public function json($id) {
 
         $resource = Resource::get($id);
         return response()->json($resource['_source']);
+    }
+    
+    /**
+     * Serialize the specified resource as acdm xml.
+     *
+     * @param  int  $id
+     * @return Response response object
+     */
+    public function xml($id) {
+
+        $resource = Resource::get($id);
+        
+        $path = Config::get('app.more_host').'/objects/'.$resource['_source']['packageId'].'/'.$id.'/ACDM/content';        
+        $content = file_get_contents($path);
+        
+        header("Content-type: text/xml");
+        print($content);
+        exit(0);
     }
 
     /**
@@ -168,7 +186,7 @@ class ResourceController extends Controller {
         Utils::redirectIfEmptySearch();
         
         $query = Resource::getCurrentQuery();
-        
+                
         $hits = Resource::search($query, 'resource');
 
         if (Request::wantsJson()) {

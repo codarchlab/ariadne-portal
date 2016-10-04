@@ -57,13 +57,17 @@ Route::get('page/{id}', [
 ]);
 Route::get('data/{id}.json', [
     'as' => 'resource.json',
-    'uses' => 'ResourceController@data'
+    'uses' => 'ResourceController@json'
+]);
+Route::get('data/{id}.xml', [
+    'as' => 'resource.xml',
+    'uses' => 'ResourceController@xml'
 ]);
 Route::get('data/{id}', [
     'as' => 'resource.data',
-    'uses' => 'ResourceController@data'
+    'uses' => 'ResourceController@json'
 ]);
-Route::get('resource/{id}.json', 'ResourceController@data');
+Route::get('resource/{id}.json', 'ResourceController@json');
 Route::get('resource/{id}', [
     'as' => 'resource',
     'uses' => 'ResourceController@negotiate'
