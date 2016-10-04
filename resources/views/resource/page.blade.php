@@ -3,17 +3,7 @@
 
 @if (isset($resource['_source']['description']))
 
-    <?php
-        $description = strip_tags($resource['_source']['description']);
-        $length = 155;
-
-        if (strlen($description) > $length) {
-
-            $description = substr($description, 0, $length) . '...';
-        }
-    ?>
-
-    @section('description', $description)
+    @section('description', str_limit(strip_tags($resource['_source']['description']), 155))
 
 @endif
 
