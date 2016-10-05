@@ -241,6 +241,22 @@ class Utils {
     return $empty;
 }
 
+/**
+  * Reduce the highlight values to one key value based on the translated label
+  * 
+  * @param array $highlights
+  * @return array
+  */
+public static function reduceighlightValues($highlights){
+  $filtered = array();
+  foreach($highlights as $key => $highlight){
+    if($key != 'title' && $key != 'description'){
+      $filtered[trans('resource.'.$key)] = $highlight;
+    }
+  }
+
+  return $filtered;
+}
 
  public static function getWordCloudData() {
 

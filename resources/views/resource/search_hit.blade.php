@@ -45,15 +45,13 @@
                     @endif                    
 
                     @if(array_key_exists('highlight', $hit))
-                        @foreach($hit['highlight'] as $key => $values)
-                            @if($key != 'title' && $key != 'description')
-                                <p class="highlights">
-                                    <strong>{{ trans('resource.'.$key) }}</strong>:  
-                                    @foreach($values as $key => $value)
-                                        {!! $value !!}
-                                    @endforeach
-                                </p>
-                            @endif
+                        @foreach(Utils::reduceighlightValues($hit['highlight'] ) as $key => $values)
+                            <p class="highlights">
+                                <strong>{{ $key }}</strong>:  
+                                @foreach($values as $k => $value)
+                                    {!! $value !!}
+                                @endforeach
+                            </p>
                         @endforeach
                     @endif
 
