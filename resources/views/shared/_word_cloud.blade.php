@@ -5,12 +5,7 @@ $aggs = $cloud_data->aggregations();
 
 // Known buckets...
 // See query in Services/Utils
-$aggsBuckets = array(
-  $aggs['derivedSubject'],
-  $aggs['keyword'],
-  $aggs['spatial'],
-  $aggs['period']['periodName']
-);
+$aggsBuckets = array( $aggs['derivedSubject'] );
 
 foreach ($aggsBuckets as $aggKey => $aggVal) {
   //Debugbar::debug( $aggVal['buckets'] );

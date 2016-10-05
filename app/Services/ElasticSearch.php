@@ -63,7 +63,7 @@ class ElasticSearch {
    * @return LengthAwarePaginator paginated result of the search
    */
   public static function search($query, $index = null, $type = null) {
-
+    
     if ($index) {
       $searchParams['index'] = $index;
     }
@@ -149,7 +149,7 @@ class ElasticSearch {
     }
 
     $client = self::getClient();
-
+    
     $queryResponse = $client->search($searchParams);
 
     return $queryResponse['hits']['hits'];

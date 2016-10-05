@@ -258,8 +258,24 @@ public static function reduceHighlightValues($highlights){
   return $filtered;
 }
 
- public static function getWordCloudData() {
-
+  public static function getWordCloudData() {
+   
+      $query = [
+      'size' => 0,
+      'aggregations' => [
+        'derivedSubject' => [
+          'terms' => [
+            'field' => 'derivedSubject.prefLabel.raw',
+            'size' => 200
+          ]
+        ]
+      ],
+    ];
+    
+    /*
+     * I'm leaving this query as an example since it has been changed
+     * several times before. 
+     *
     $query = [
       'size' => 0,
       'aggregations' => [
@@ -296,6 +312,8 @@ public static function reduceHighlightValues($highlights){
         ]
       ],
     ];
+    */
+    
     //Log::info( $query );
     return Resource::search($query);
     
