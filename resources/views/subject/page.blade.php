@@ -90,12 +90,12 @@
 
                             @if (isset($mapping['matchURI']))
                                 <dt>{{ trans('subject.match_uri') }}</dt>
-                                <dd>{{ $mapping['matchURI'] }}</dd>
+                                <dd><a href="{{ $mapping['matchURI'] }}">{{ $mapping['matchURI'] }}</a></dd>
                             @endif
                             
                             @if (isset($mapping['sourceURI']))
                                 <dt>{{ trans('subject.source_uri') }}</dt>
-                                <dd>{{ $mapping['sourceURI'] }}</dd>
+                                <dd><a href="{{ $mapping['sourceURI'] }}">{{ $mapping['sourceURI'] }}</a></dd>
                             @endif                            
 
                         </div>
