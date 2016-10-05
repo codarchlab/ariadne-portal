@@ -242,12 +242,12 @@ class Utils {
 }
 
 /**
-  * Reduce the highlight values to one key value based on the translated label
+  * Reduce highlight values to one key value based on the translated label
   * 
   * @param array $highlights
   * @return array
   */
-public static function reduceighlightValues($highlights){
+public static function reduceHighlightValues($highlights){
   $filtered = array();
   foreach($highlights as $key => $highlight){
     if($key != 'title' && $key != 'description'){

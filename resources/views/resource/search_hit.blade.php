@@ -45,7 +45,7 @@
                     @endif                    
 
                     @if(array_key_exists('highlight', $hit))
-                        @foreach(Utils::reduceighlightValues($hit['highlight'] ) as $key => $values)
+                        @foreach(Utils::reduceHighlightValues($hit['highlight'] ) as $key => $values)
                             <p class="highlights">
                                 <strong>{{ $key }}</strong>:  
                                 @foreach($values as $k => $value)
