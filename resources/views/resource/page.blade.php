@@ -747,7 +747,7 @@
                 </p>
             @endif
 
-            @if (sizeof($geo_items)>0)
+            @if (sizeof($geo_items) > 0)
 
                 <h4 title="{{ trans('resource.geo_legend_similar_explanation') }}" data-tooltip="true" data-placement="left">{{ trans('resource.geo_similar') }} <span class="glyphicon glyphicon-info-sign"></span></h4>
 
@@ -772,17 +772,19 @@
                 </script>
             @endif
 
-            <h4 title="{{ trans('resource.theme_similar_explanation') }}" data-tooltip="true" data-placement="left">{{ trans('resource.theme_similar') }} <span class="glyphicon glyphicon-info-sign"></span></h4>
-            <ul class="list-unstyled list-similar">
-            @foreach($similar_resources as $similar_resource)
-                <li>
-                    <img src="{{ asset("img/icons/")."/icon_".$similar_resource['_source']['archaeologicalResourceType']['id'].".png" }}" data-toggle="tooltip" title="{{ $similar_resource['_source']['archaeologicalResourceType']['name'] }}" height="20" border="0">
-                    <a href="{{ route('resource.page', [ $similar_resource['_id'] ]  ) }}">
-                        {{ $similar_resource['_source']['title'] }}
-                    </a>
-                </li>
-            @endforeach
-            </ul>
+            @if (sizeof($similar_resources) > 0)
+                <h4 title="{{ trans('resource.theme_similar_explanation') }}" data-tooltip="true" data-placement="left">{{ trans('resource.theme_similar') }} <span class="glyphicon glyphicon-info-sign"></span></h4>
+                <ul class="list-unstyled list-similar">
+                @foreach($similar_resources as $similar_resource)
+                    <li>
+                        <img src="{{ asset("img/icons/")."/icon_".$similar_resource['_source']['archaeologicalResourceType']['id'].".png" }}" data-toggle="tooltip" title="{{ $similar_resource['_source']['archaeologicalResourceType']['name'] }}" height="20" border="0">
+                        <a href="{{ route('resource.page', [ $similar_resource['_id'] ]  ) }}">
+                            {{ $similar_resource['_source']['title'] }}
+                        </a>
+                    </li>
+                @endforeach
+                </ul>
+            @endif
 
         </div>
 
