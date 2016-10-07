@@ -151,12 +151,23 @@ class ResourceController extends Controller {
 
         $resource = Resource::get($id);
         
-        $path = Config::get('app.more_host').'/objects/'.$resource['_source']['packageId'].'/'.$id.'/ACDM/content';        
-        $content = file_get_contents($path);
+        $path = Config::get('app.more_host').'/objects/'.$resource['_source']['packageId'].'/'.$id.'/ACDM/content';       
         
-        header("Content-type: text/xml");
-        print($content);
-        exit(0);
+        try{
+            $content = file_get_contents($path);
+        }
+        catch(ErrorException $exception){
+            abort(500);
+        }
+        
+        if($content) {        
+            header("Content-type: text/xml");
+            print($content);
+            exit(0);
+        }
+        else{
+            abort(404);
+        }
     }
 
     /**
