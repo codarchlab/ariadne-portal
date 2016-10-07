@@ -144,5 +144,6 @@ return [
     'distribution.modified' => 'Modified',
     'responsible' => 'Responsible persons and organisations',
     'hasMetadataRecord' => 'Metadata record',
-    'characterSet' => 'Character set'
+    'characterSet' => 'Character set',
+    'isPartOf' => 'Resource is part of'
 ];
