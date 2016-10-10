@@ -27,7 +27,7 @@ return [
         'keyword' => ['terms' => ['field' => 'keyword.raw']],
         'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
         'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
-        'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
+        //'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
         //'temporal' => ['terms' => ['field' => 'temporal.periodName.raw']],
         'temporal' => [
         	'nested' => ['path' => 'temporal'],
