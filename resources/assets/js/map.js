@@ -54,7 +54,7 @@ function GridMap(container, queryUri, fullscreen) {
 							var q = "spatial.location.lon:\"" + spatial.location.lon
 								+ "\" AND spatial.location.lat:\"" + spatial.location.lat + "\"";
 							window.location.href = new Query(q).toUri();
-	                	};
+                                                };
 					})(spatial));
 					marker.addTo(map);
 					markers.push(marker);
@@ -109,15 +109,16 @@ function GridMap(container, queryUri, fullscreen) {
 		requestInProgress = uri;
 		self.showLoading();
 		$.getJSON(uri, function(data) {
-			if(requestInProgress == uri) { // only display last request sent
+			if(requestInProgress === uri) { // only display last request sent
 				self.resetLayers();
 				self.updateResourceCount(data.total);
 				points = [];
-				if (data.total > 100) {
-					self.drawHeatmap(data.aggregations.geogrid.buckets);
-				} else {
-					self.drawMarkers(data.data);
-				}
+                                if(map.getZoom() === 18 || data.total < 100){
+                                    self.drawMarkers(data.data);
+                                }
+				else {
+                                    self.drawHeatmap(data.aggregations.geogrid.buckets);
+				} 
 				self.hideLoading();				
 				if (callback) callback();
 			}
