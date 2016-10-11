@@ -3,25 +3,25 @@
       {
          "title":"Visual Media Service",
          "description":"The ARIADNE Visual Media Service provides easy publication and presentation on the web of complex visual media assets. It is an automatic service that allows to upload visual media files on an ARIADNE server and to transform them into an efficient web format, making them ready for web-based visualization.",
-         "url":"http:\/\/visual.ariadne-infrastructure.eu\/",
+         "url":"http:\/\/visual.ariadne-infrastructure.eu",
          "image":"visual_media_service.png"
       },
       {
          "title":"Landscape Factory",
          "description":"Landscape Services for ARIADNE are a set of responsive web services that include large terrain dataset generation, 3D landscape composing and 3D model processing, leveraging powerful open-source frameworks and toolkits such as GDAL, OSGjs, OpenSceneGraph and ownCloud. The main components include: the cloud service, the terrain generation service, the terrain gallery and the front-end web component for interactive visualization.",
-         "url":"http:\/\/landscape.ariadne-infrastructure.eu\/",
+         "url":"http:\/\/landscape.ariadne-infrastructure.eu",
          "image":"landscape_services.png"
       },
       {
          "title":"DCCD: Digital Collaboratory for Cultural Dendrochronology",
          "description":"To improve European integration of dendrochronological data, DANS has now made it possible for others to use the same software as the DCCD-repository of DANS, and use existing components to create their own dendrochronological archive that is also ARIADNE compatible. This open source software is available from the following GitHub repository: https:\/\/github.com\/DANS-KNAW\/dccd-webui\r\nThe DCCD software is an online digital archiving system for dendrochronological data. A recent version of this software (system) is deployed as 'Digital Collaboratory for Cultural Dendrochronology' (DCCD) at http:\/\/dendro.dans.knaw.nl. \r\nMore information about the Digital Collaboratory for Cultural Dendrochronology (DCCD) project can be found here: http:\/\/vkc.library.uu.nl\/vkc\/dendrochronology.\r\nThe DCCD is the primary archaeological\/historical tree-ring (meta)data network existing in Europe. It became operational in 2011. Within the DCCD Belgian, Danish, Dutch, German, Latvian, Polish, and Spanish laboratories have joined data in a manner that suits their shared and individual research agendas. In its present state the DCCD contains measurement series of different wood species derived from objects and sites dating between 6000 BC and present. All data sets are described with very detailed metadata according to the newly developed international dendrochronological data standard TRiDaS (Jansma et al. 2010). The collection is derived by research from archaeological sites (including old landscapes), shipwrecks, historical architecture and mobile heritage (e.g. paintings, furniture).",
-         "url":"http:\/\/dendro.dans.knaw.nl\/",
+         "url":"http:\/\/dendro.dans.knaw.nl",
          "image":"dendro_service.png"
       },
       {
          "title":"IDAI.vocab",
          "description":"The new DAI Thesaurus of Archaeological Concepts was designed from the onset as a thesaurus of German words and phrases with significant multilingual support. The core of the thesaurus is a list of concepts related to the domain of archaeology (nouns, verbs, less frequently adjectives, but also complex phrases that point to a specific object, such as \u201ccarrarischer Marmor\u201d) all linked to corresponding translations in a wide spectrum of different languages; we also  established a minimal set of relations between the German terms (synonyms, direct hyper- and hyponyms), and grouped the equivalent terms together; whenever it is possible, we also resolved equivalent terms by selecting one preferred concept. In addition we connect terms and concepts by SKOS links to external thesauri, like the Arts & Architecture Thesaurus of the Getty Institution.",
-         "url":"http:\/\/archwort.dainst.org\/thesaurus\/de\/vocab\/index.php",
+         "url":"http:\/\/archwort.dainst.org\/thesaurus\/de\/vocab",
          "image":"idai_vocab_service.png"
       },
       {
@@ -33,13 +33,13 @@
       {
          "title":"Heritage Data: Linked Data Vocabularies for Cultural Heritage",
          "description":"National cultural heritage thesauri and vocabularies have acted as standards for use by both national organizations and local authority Historic Environment Records but until now have lacked the persistent Linked Open Data (LOD) URIs that would allow them to act as vocabulary hubs for the Web of Data. The AHRC funded SENESCHAL project aims to make such vocabularies available online as Semantic Web resources. SENESCHAL will start with major vocabularies as exemplars and project partners will continue to make other vocabularies available. Other organizations are welcome to make use of the data and services which will be open licensed.",
-         "url":"http:\/\/www.heritagedata.org\/blog\/services\/",
+         "url":"http:\/\/www.heritagedata.org\/blog\/services",
          "image":"heritage_data_service.png"
       },
       {
          "title":"Heritage Data: Vocabulary matching tool",
          "description":"The Vocabulary Matching Tool was developed for aligning Linked Data vocabulary terms with Getty Art & Architecture Thesaurus concepts. The source code for the Vocabulary Matching Tool is also available for local download and installation (https:\/\/github.com\/cbinding\/VocabularyMatchingTool) - in which case it might then be classed as \u201cstand alone services\u201d (tools to be downloaded and installed on one\u2019s machine).",
-         "url":"http:\/\/heritagedata.org\/vocabularyMatchingTool\/",
+         "url":"http:\/\/heritagedata.org\/vocabularyMatchingTool",
          "image":"vocabulary_matching_tool_service.png"
       }
    ],
@@ -47,7 +47,7 @@
       {
          "title":"MeshLab",
          "description":"MeshLab is an open source, portable, and extensible system for the processing and editing of unstructured 3D triangular meshes.\r\nThe system is aimed to help the processing of the typical not-so-small unstructured models arising in 3D scanning, providing a set of tools for editing, cleaning, healing, inspecting, rendering and converting this kind of meshes. In the archeoleogical field, MeshLab is strongly used by the community in the context of 3D reconstruction from scanning, mesh cleaning, mesh comparison and data presentation.",
-         "url":"http:\/\/meshlab.sourceforge.net\/",
+         "url":"http:\/\/meshlab.sourceforge.net",
          "image":"meshlab_service.png"
       }
    ],
@@ -75,7 +75,7 @@
       {
          "title":"Thesaurus RA - Strumenti terminologici Scheda RA Reperti Archeologici",
          "description":"The RA terminological tool, curated by ICCU and VAST-LAB, constitutes a reworked version of the RA Thesaurus issued by the ICCD. The RA Thesaurus provides all the necessary terminological facilities for an efficent and well structured recording of the object coming from archaeological excavations.The vocabulary has been implemented by ICCD to support the encoding of two specific fields (OGTD - CLS). These two fields describe the definition of the object and its class and production.",
-         "url":"http:\/\/vast-lab.org\/thesaurus\/ra\/vocab\/index.php",
+         "url":"http:\/\/vast-lab.org\/thesaurus\/ra\/vocab",
          "image":"thesaurus_ra_service.png"
       }
    ]
