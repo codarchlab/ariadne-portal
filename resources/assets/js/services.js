@@ -4,10 +4,12 @@
  */
 $(document).ready(function () {
     $('.service-search').keyup(function(){
-        var search = $('input.service-search').val();
+        var search = $('input.service-search').val().toLowerCase();
         
         $('#services div').show(); 
-        $('div.service:not(:contains('+ search +'))').hide(); 
+        $('div.service').filter( function (){
+            return $( this ).text().toLowerCase().indexOf(search) < 0;
+        }).hide();
 
         $('div.service_divider').each(function(e){
             var service_type = $(this).attr('data-type');
