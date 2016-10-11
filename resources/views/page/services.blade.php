@@ -8,9 +8,16 @@ component of the archaeological research methodology.')
 
 @section('content')
 
+<script>
+    
+    function updateServices(){
+
+    }
+    
+</script>
+
 <div id="servicespage" class="container content">
 
-    <!-- Main content -->
     <div class="row">
 
         <div class="col-md-12">
@@ -19,7 +26,16 @@ component of the archaeological research methodology.')
 
     </div>
     
+    <!-- Search bar -->
+    
     <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <input class="service-search" type="text" name="service_search" placeholder="{{ trans('service.search') }}" onkeypress="updateServices()">
+        </div>
+    </div>
+
+    
+    <div class="first-row row">
 
         <div class="col-md-12">
             <h2>Web Services</h2>
@@ -66,6 +82,8 @@ component of the archaeological research methodology.')
     @foreach($services['human_services'] as $service)
         @include('page.service', ['service' => $service])
     @endforeach     
+    
+    </div>
     
 </div>
 
