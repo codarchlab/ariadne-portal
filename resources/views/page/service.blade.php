@@ -1,4 +1,4 @@
-<div class="row service">
+<div class="row service {{ $type }}">
     <div class="col-md-4">
         <a href="{{ $service['url'] }}">
             <img class="img-thumbnail" src="{{ asset("img/services/" . $service['image']) }}" alt="{{ $service['title'] }}" />
