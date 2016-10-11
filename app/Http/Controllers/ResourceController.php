@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Config;
 use App\Services\Resource;
 use App\Services\Utils;
+use Log;
 use Request;
 use stdClass;
 
@@ -197,7 +198,6 @@ class ResourceController extends Controller {
         Utils::redirectIfEmptySearch();
         
         $query = Resource::getCurrentQuery();
-                
         $hits = Resource::search($query, 'resource');
 
         if (Request::wantsJson()) {

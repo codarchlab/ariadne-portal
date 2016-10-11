@@ -76,7 +76,22 @@ class Resource
             
             if(Request::has('fields') && array_key_exists(Request::get('fields'), $field_groups)){
                 foreach ($field_groups[Request::get('fields')] as $field){
-                    $innerQuery['bool']['should'][] = ['match' => [$field => Request::get('q')]];
+                    if(Request::get('fields') === 'time'){
+                        $innerQuery['bool']['should'][] = ['nested' => [
+                            'path' => 'temporal',
+                            'query' => [
+                                'bool' => [
+                                    'must' => [
+                                        'match' => [
+                                            $field =>  Request::get('q')
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]];
+                    }else{
+                        $innerQuery['bool']['should'][] = ['match' => [$field => Request::get('q')]];
+                    }
                 }
             } else {
                 $innerQuery = ['query_string' => ['query' => Request::get('q')]];

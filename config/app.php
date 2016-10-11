@@ -18,7 +18,7 @@ return [
     
 	'elastic_search_host' => env('ELASTIC_SEARCH_HOST'),
 	'elastic_search_catalog_index' => env('ELASTIC_SEARCH_CATALOG_INDEX'),
-        'elastic_search_subject_index' => env('ELASTIC_SEARCH_SUBJECT_INDEX'),
+    'elastic_search_subject_index' => env('ELASTIC_SEARCH_SUBJECT_INDEX'),
     
 	/* Aggregations used for filtering in the search */
 	'elastic_search_aggregations' => [
@@ -27,8 +27,6 @@ return [
         'keyword' => ['terms' => ['field' => 'keyword.raw']],
         'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
         'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
-        //'spatial' => ['terms' => ['field' => 'spatial.placeName.raw']],
-        //'temporal' => ['terms' => ['field' => 'temporal.periodName.raw']],
         'temporal' => [
         	'nested' => ['path' => 'temporal'],
         	'aggs' => [
@@ -41,11 +39,11 @@ return [
         'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']]
 	],
   
-        /*List of posible sorts */
-        'elastic_search_sort' => [
-          'issued',
-          'title'
-        ],
+	/*List of posible sorts */
+	'elastic_search_sort' => [
+		'issued',
+		'title'
+	],
     
 	/*
 	 * Fields to search in if a specific fieldgroup is selected in the frontpage search form
