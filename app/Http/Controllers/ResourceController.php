@@ -198,6 +198,7 @@ class ResourceController extends Controller {
         Utils::redirectIfEmptySearch();
         
         $query = Resource::getCurrentQuery();
+
         $hits = Resource::search($query, 'resource');
 
         if (Request::wantsJson()) {
