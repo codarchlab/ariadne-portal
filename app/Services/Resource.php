@@ -83,18 +83,18 @@ class Resource
                                 'bool' => [
                                     'must' => [
                                         'match' => [
-                                            $field =>  Request::get('q')
+                                            $field =>  Utils::escapeLuceneValue(Request::get('q'))
                                         ]
                                     ]
                                 ]
                             ]
                         ]];
                     }else{
-                        $innerQuery['bool']['should'][] = ['match' => [$field => Request::get('q')]];
+                        $innerQuery['bool']['should'][] = ['match' => [$field => Utils::escapeLuceneValue(Request::get('q'))]];
                     }
                 }
             } else {
-                $innerQuery = ['query_string' => ['query' => Request::get('q')]];
+                $innerQuery = ['query_string' => ['query' => Utils::escapeLuceneValue(Request::get('q'))]];
             }
         } else {
             $innerQuery = ['match_all' => []];
