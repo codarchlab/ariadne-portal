@@ -1,6 +1,6 @@
 /**
  * Filter for the service page
- * hide divs mot matching the filter text
+ * hide divs not matching the filter text
  */
 $(document).ready(function () {
     $('.service-search').keyup(function(){
@@ -8,7 +8,7 @@ $(document).ready(function () {
         
         $('#services div').show(); 
         $('div.service').filter( function (){
-            return $( this ).text().toLowerCase().indexOf(search) < 0;
+            return $(this).text().toLowerCase().indexOf(search) < 0;
         }).hide();
 
         $('div.service_divider').each(function(e){
