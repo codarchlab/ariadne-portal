@@ -34,6 +34,8 @@ component of the archaeological research methodology.')
         </div>
     </div>
 
+    <!-- Services -->  
+    <div id="services">
     
     <div class="first-row row">
 
