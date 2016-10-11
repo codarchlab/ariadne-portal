@@ -239,24 +239,24 @@ class Utils {
         $empty = empty($value);
     }
     return $empty;
-}
-
-/**
-  * Reduce highlight values to one key value based on the translated label
-  * 
-  * @param array $highlights
-  * @return array
-  */
-public static function reduceHighlightValues($highlights){
-  $filtered = array();
-  foreach($highlights as $key => $highlight){
-    if($key != 'title' && $key != 'description'){
-      $filtered[trans('resource.'.$key)] = $highlight;
-    }
   }
 
-  return $filtered;
-}
+  /**
+    * Reduce highlight values to one key value based on the translated label
+    * 
+    * @param array $highlights
+    * @return array
+    */
+  public static function reduceHighlightValues($highlights){
+    $filtered = array();
+    foreach($highlights as $key => $highlight){
+      if($key != 'title' && $key != 'description'){
+        $filtered[trans('resource.'.$key)] = $highlight;
+      }
+    }
+
+    return $filtered;
+  }
 
   public static function getWordCloudData() {
    
@@ -271,52 +271,23 @@ public static function reduceHighlightValues($highlights){
         ]
       ],
     ];
-    
-    /*
-     * I'm leaving this query as an example since it has been changed
-     * several times before. 
-     *
-    $query = [
-      'size' => 0,
-      'aggregations' => [
-        'derivedSubject' => [
-          'terms' => [
-            'field' => 'derivedSubject.prefLabel.raw',
-            'size' => 100
-          ]
-        ],
-        'keyword' => [
-          'terms' => [
-            'field' => 'keyword.raw',
-            'size' => 100
-          ]
-        ],
-        "spatial" => [
-          "terms" => [
-            "field" => "spatial.placeName.raw",
-            "size" => 100
-          ]
-        ],
-        "period" => [
-          "nested" => [
-            "path" => "temporal"
-          ],
-          "aggs" => [
-            "periodName" => [
-              "terms" => [
-                "field" => "temporal.periodName.raw",
-                "size" => 100
-              ]
-            ]
-          ]
-        ]
-      ],
-    ];
-    */
-    
-    //Log::info( $query );
+
     return Resource::search($query);
-    
+  }
+
+
+  /**
+    * Escape lucene special chars
+    * 
+    * @param string $string
+    * @return string 
+    */
+  public static function escapeLuceneValue($string) {
+    $match = array('/', '\\');
+    $replace = array(' ', '\\\\');
+    $string = str_replace($match, $replace, $string);
+
+    return $string;
   }
 
 }
