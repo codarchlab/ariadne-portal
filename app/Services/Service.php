@@ -16,7 +16,7 @@ class Service {
   public static function services() {
     
       $services = array();
-      $services = json_decode(file_get_contents(public_path().'/resources/services.json'));
+      $services = json_decode(file_get_contents(public_path().'/resources/services.json'), true);
 
       return $services;
   }
