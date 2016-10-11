@@ -290,4 +290,15 @@ class Utils {
     return $string;
   }
 
+  /**
+    * Replace url:s with clickable links
+    * 
+    * @param string $string
+    * @return string 
+    */
+  public static function makeClickableLinks($string){
+    $url = '@(http)?(s)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@';
+    return preg_replace($url, '<a href="http$2://$4" title="$0">$0</a>', $string);
+  }
+
 }

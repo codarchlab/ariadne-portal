@@ -8,7 +8,7 @@
     <div class="col-md-8">
         <h4>{{ $service['title'] }}</h4>
         <p>
-          {{ $service['description'] }}
+          {!! Utils::makeClickableLinks($service['description']) !!}
         </p>
 
         <p>
