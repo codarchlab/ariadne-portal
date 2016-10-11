@@ -12,7 +12,7 @@
         </p>
 
         <p>
-            <a href="{{ $service['url'] }}">{{ $service['url'] }} <span class="glyphicon glyphicon-new-window" data-toggle="tooltip" data-placement="bottom" title="{{ $service['title'] }}"></span></a>
+            <a href="{{ $service['url'] }}" title="{{ $service['title'] }}">{{ $service['url'] }} <span class="glyphicon glyphicon-new-window" data-toggle="tooltip" data-placement="bottom" title="{{ $service['title'] }}"></span></a>
         </p>            
     </div>
 </div>
