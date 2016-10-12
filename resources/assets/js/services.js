@@ -6,7 +6,9 @@ $(document).ready(function () {
     $('.service-search').keyup(function(){
         var search = $('input.service-search').val().toLowerCase();
         
-        $('#services div').show(); 
+        $('#services div').show();
+        $('#no-services').hide();
+
         $('div.service').filter( function (){
             return $(this).text().toLowerCase().indexOf(search) < 0;
         }).hide();
@@ -17,6 +19,12 @@ $(document).ready(function () {
             if($('div.'+service_type+':visible').length === 0){
                 $(this).hide();
             }
-        })
+        });
+
+        if($('div.service:visible').length === 0){ 
+            $('#match-phrase').text(search);
+            $('#no-services').show();
+        }
+
     });
 });

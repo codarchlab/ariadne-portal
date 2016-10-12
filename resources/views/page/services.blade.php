@@ -85,6 +85,14 @@ component of the archaeological research methodology.')
             @include('page.service', ['service' => $service, 'type' => 'human_services'])
         @endforeach     
     
+        <div class="row" id="no-services" style="display:none;">
+
+            <div class="col-md-12">
+                <h2>No services matching &quot;<span id="match-phrase">katt</span>&quot;</h2>
+            </div>
+
+        </div> 
+    
     </div>
     
 </div>
