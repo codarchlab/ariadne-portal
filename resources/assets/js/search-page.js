@@ -30,9 +30,9 @@ function loadMoreAction(){
     var aggregation = $(aggregationElement)
                         .parents('div.aggregation')
                         .attr('data-aggregation');
-    console.log();
+    
     var vars = getUrlVars();
-
+    
     vars.noPagination = 'true';
     vars.size = $(aggregationElement)
                     .parents('div.aggregation')
@@ -74,7 +74,18 @@ function placeGetMoreLinkForAggregations(){
 }
 
 function getUrlVars(){
-    return new Query.fromUri(window.location.href).params;
+    var params = new Query.fromUri(window.location.href).params
+    for (var index in params) {
+        if (!params.hasOwnProperty(index)) {
+            continue;
+        }
+        if(typeof params[index] === 'string'){
+            params[index] = params[index].replace(/\+/g, ' ')
+        }
+    }
+
+    return params;
+    
 }
 
 /*
