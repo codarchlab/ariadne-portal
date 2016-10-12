@@ -8,14 +8,6 @@ component of the archaeological research methodology.')
 
 @section('content')
 
-<script>
-    
-    function updateServices(){
-
-    }
-    
-</script>
-
 <div id="servicespage" class="container content">
 
     <div class="row">
@@ -30,7 +22,7 @@ component of the archaeological research methodology.')
     
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <input class="service-search" type="text" name="service_search" placeholder="{{ trans('service.search') }}" onkeypress="updateServices()">
+            <input class="service-search" type="text" name="service_search" placeholder="{{ trans('service.search') }}" autofocus>
         </div>
     </div>
 
