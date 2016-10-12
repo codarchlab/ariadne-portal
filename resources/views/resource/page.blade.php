@@ -155,7 +155,16 @@
 
                 @if (isset($resource['_source']['originalId']))
                     <dt>{{ trans('resource.originalId') }}</dt>
-                    <dd>{{ $resource['_source']['originalId'] }}</dd>
+                    <dd>
+                    @if(filter_var(trim($resource['_source']['originalId']), FILTER_VALIDATE_URL))
+                        <a href="{{ trim($resource['_source']['originalId']) }}">
+                            {{ trim($resource['_source']['originalId']) }}
+                        </a>
+                    @else
+                        {{ $resource['_source']['originalId']}}
+                    @endif
+                    </dd> 
+
                 @endif
 
                 @if (isset($resource['_source']['language']))
