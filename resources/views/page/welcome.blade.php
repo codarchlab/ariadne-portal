@@ -104,9 +104,7 @@ component of the archaeological research methodology.')
 
                         <h1>Welcome</h1>
                         <p>
-                            ARIADNE brings together and integrates existing archaeological research data infrastructures
-                            so that researchers can use the various distributed datasets and new and powerful technologies as an integral
-                            component of the archaeological research methodology.
+                            Explore the digital resources and services that ARIADNE has brought together from across Europe for archaeological research, learning and teaching.
                         </p>
 
                     </div>
