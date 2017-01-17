@@ -52,7 +52,7 @@ function Suggest(inputPath) {
 			display: 'prefLabel',
 			name: 'subjects',
 			source: subjects,
-			limit: 7,
+			limit: Infinity, // needed to circumvent https://github.com/twitter/typeahead.js/issues/1232
 			templates: templates
 		}).bind('typeahead:select', function(event, subject) {
 			var query = new Query('*', { subjectUri: subject._id, subjectLabel: subject._source.prefLabel });
