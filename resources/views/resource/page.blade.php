@@ -261,8 +261,13 @@
                                 @endif
                                 
                                 @if(isset($temporal['periodName']))
-                                  @if(isset($temporal['from']) || isset($temporal['until'])),@endif
-                                  {{ $temporal['periodName'] }}
+                                  @if(isset($temporal['from']) || isset($temporal['until'])),@endif                                   
+                                        {{ $temporal['periodName'] }}
+                                    @if(isset($temporal['uri']))
+                                        <a class="text-muted" href="{{ $temporal['uri'] }}" target="_blank">
+                                            <span class="glyphicon glyphicon-info-sign"></span>
+                                        </a>
+                                    @endif
                                 @endif
                             </li>
                             @endforeach
