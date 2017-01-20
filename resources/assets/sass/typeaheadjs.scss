@@ -38,6 +38,9 @@ span.twitter-typeahead .tt-suggestion:focus {
   outline: 0;
   background-color: #337ab7;
 }
+span.twitter-typeahead .tt-suggestion:hover .tt-highlight {
+  color: #000000;
+}
 .input-group.input-group-lg span.twitter-typeahead .form-control {
   height: 46px;
   padding: 10px 16px;
