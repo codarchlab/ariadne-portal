@@ -32,14 +32,14 @@
       },
       {
          "title":"Heritage Data: Linked Data Vocabularies for Cultural Heritage",
-         "description":"National cultural heritage thesauri and vocabularies have acted as standards for use by both national organizations and local authority Historic Environment Records but until now have lacked the persistent Linked Open Data (LOD) URIs that would allow them to act as vocabulary hubs for the Web of Data. The AHRC funded SENESCHAL project aims to make such vocabularies available online as Semantic Web resources. SENESCHAL will start with major vocabularies as exemplars and project partners will continue to make other vocabularies available. Other organizations are welcome to make use of the data and services which will be open licensed.",
+         "description":"National cultural heritage thesauri and vocabularies have acted as standards for use by both national organizations and local authority Historic Environment Records, but lacked the persistent Linked Open Data (LOD) URIs that would allow them to act as vocabulary hubs for the Web of Data. The AHRC funded SENESCHAL project made such vocabularies available online as Semantic Web resources with persistent URIs. Web services were developed by University of South Wales to make the vocabulary resources programmatically accessible and searchable.",
          "url":"http:\/\/www.heritagedata.org\/blog\/services",
          "image":"heritage_data_service.png"
       },
       {
-         "title":"Heritage Data: Vocabulary matching tool",
-         "description":"The Vocabulary Matching Tool was developed for aligning Linked Data vocabulary terms with Getty Art & Architecture Thesaurus concepts. The source code for the Vocabulary Matching Tool is also available for local download and installation https:\/\/github.com\/cbinding\/VocabularyMatchingTool - in which case it might then be classed as \u201cstand alone services\u201d (tools to be downloaded and installed on one\u2019s machine).",
-         "url":"http:\/\/heritagedata.org\/vocabularyMatchingTool",
+         "title":"Vocabulary matching tool",
+         "description":"The Vocabulary Matching Tool developed by University of South Wales allows users to align Linked Data vocabulary concepts with Getty Art & Architecture Thesaurus concepts. The tool is a browser based application that presents concepts from chosen source and target vocabularies side by side, exposing additional contextual evidence to allow the user to make an informed choice when deciding on potential mappings (expressed as SKOS mapping relationships). The tool is intended for vocabularies already expressed in RDF/SKOS and can work directly with the data – querying external SPARQL endpoints rather than storing any local copies of complete vocabularies. The set of mappings developed can be saved locally, reloaded and exported to a number of different output formats. The tool is available for use at http:\/\/heritagedata.org\/vocabularyMatchingTool and the source code is also available (open source) for local download and installation.",
+         "url":"https:\/\/github.com\/cbinding\/VocabularyMatchingTool",
          "image":"vocabulary_matching_tool_service.png"
       }
    ],
@@ -49,7 +49,31 @@
          "description":"MeshLab is an open source, portable, and extensible system for the processing and editing of unstructured 3D triangular meshes.\r\nThe system is aimed to help the processing of the typical not-so-small unstructured models arising in 3D scanning, providing a set of tools for editing, cleaning, healing, inspecting, rendering and converting this kind of meshes. In the archeoleogical field, MeshLab is strongly used by the community in the context of 3D reconstruction from scanning, mesh cleaning, mesh comparison and data presentation.",
          "url":"http:\/\/meshlab.sourceforge.net",
          "image":"meshlab_service.png"
-      }
+      },
+      {
+         "title":"ARIADNE subject mappings: Spreadsheet template and conversion tool",
+         "description":"The spreadsheet template used in ARIADNE for collating mappings from local vocabularies to Getty AAT, together with the XSLT conversion of the spreadsheet data to JSON and NTriples formats for upload to ARIADNE. This is an alternate vocabulary mapping approach to the interactive Vocabulary Matching Tool, developed by University of South Wales for source vocabularies (including term lists) not yet expressed in RDF but available in tabular form. The tool comprises a spreadsheet template with example mappings, together with a corresponding XSLT transformation. The user completes the spreadsheet with the set of source and target (AAT) concepts. The XSLT transformation expresses the mappings in JSON and NTriples formats.",
+         "url":"https:\/\/github.com\/cbinding\/ARIADNE-subject-mappings",
+         "image":"ARIADNE-subject-mapping-spreadsheet-template.png"
+      },
+      {
+         "title":"STELETO data conversion tool",
+         "description":"STELETO is an open source, cross-platform application developed by University of South Wales to convert tabular data into other textual formats, via a custom template. It takes a delimited text file as input, applies the specified template and creates a text file as output. It was used in ARIADNE to convert the data used in the Wood/Dendrochronology data integration case study to a CIDOC CRM compatible RDF format. The source code is available (open source) for download and installation.",
+         "url":"http:\/\/github.com\/cbinding\/STELETO\/",
+         "image":"STELETO-data-conversion-tool.png"
+      },
+      {
+         "title":"Demonstrator for ARIADNE Dendrochronology Data/NLP Integration Case Study",
+         "description":"The Demonstrator is a SPARQL query builder for the Wood/Dendrochronology Case Study, developed by University of South Wales that seeks to hide the complexity of the underlying ontology. As the user selects from the interface, an underlying SPARQL query is automatically constructed in terms of the corresponding ontological entities. A set of interactive controls offer search and browsing of the extracted archaeological data. The controls are designed to be browser agnostic and the Demonstrator will run in most modern browsers. The experimental Web application cross searches over information extracted from datasets and text reports and expressed as CRM/AAT based RDF. Information from Dutch, English, Swedish archaeological reports was extracted by Natural Language Processing pipelines. Hierarchical expansion has been implemented over the Getty AAT and results from narrower concepts are included when available. The Demonstrator is available for use at http:\/\/ariadne2.isti.cnr.it\/usw and the source code is also available (open source) for local download and installation.",
+         "url":"https:\/\/github.com\/cbinding\/ARIADNE-data-integration",
+         "image":"ARIADNE-data-integration-case-study-demonstrator.png"
+      },      
+      {
+         "title":"English, Dutch, Swedish rule-based Natural Language Processing pipelines",
+         "description":"Seven Named Entity Recognition (NER) pipelines for the text mining of English, Dutch and Swedish archaeological reports developed by University of South Wales. The pipelines run on the GATE (gate.ac.uk) open source platform and match a range of entities of archaeological interest such as Physical Objects, Materials, Structure Elements, Dates, etc. The pipelines have been used in ARIADNE data integration case studies. There are Dutch, English, Swedish general archaeological pipelines (for the above entities), experimental Dutch, English, Swedish specific pipelines for entities of dendrochronology interest, such as architectural elements, wood materials and dates, and a specific pipeline targeted at English entities of numismatic interest, such as coins, denomination, material and date. The English language pipelines build on previous work, while the Dutch and Swedish pipelines are more exploratory (see ARIADNE Deliverable D16.4 for details).",
+         "url":"https:\/\/github.com\/avlachid\/Multilingual-NLP-for-Archaeological-Reports-Ariadne-Infrastructure",
+         "image":"English etc NLP.png"
+      }      
    ],
    "institutional_services":[
       {
