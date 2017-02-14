@@ -27,14 +27,28 @@ return [
         'keyword' => ['terms' => ['field' => 'keyword.raw']],
         'contributor' => ['terms' => ['field' => 'contributor.name.raw']],
         'publisher' => ['terms' => ['field' => 'publisher.name.raw']],
-        'temporal' => [
+        /*'temporal' => [
         	'nested' => ['path' => 'temporal'],
         	'aggs' => [
         		'temporal' =>[
         			'terms' => ['field' => 'temporal.periodName.raw']
         		]
         	]
-        ],
+        ],*/
+        'temporal' => [
+        	'nested' => ['path' => 'temporal'],
+        	'aggs' => [
+        		'temporal' =>[
+        			'terms' => ['field' => 'temporal.periodName.raw'],
+                                'aggs' =>[
+                                    'top_reverse_nested'=>[
+                                        'reverse_nested'=>new \stdClass()
+                                    ]
+                                ]
+                                
+        		]
+        	]
+        ],    
         'issued' => ['terms' => ['field' => 'issued.raw']],
         'nativeSubject' => ['terms' => ['field' => 'nativeSubject.prefLabel.raw']]
 	],

@@ -37,14 +37,25 @@
 
                 @foreach($buckets as $bucket)
                     @if(Utils::keyValueActive($key, $bucket['key']) == false)
-                        <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item value">
-                            <span class="badge">{{ number_format($bucket['doc_count']) }}</span>
-                            @if(in_array($key, $translateAggregations))
-                                {{ trans('resource.' . $key . '.' . $bucket['key']) }}
-                            @else
-                                {{ $bucket['key'] }}
-                            @endif
-                        </a>
+                        @if($key=='temporal')
+                            <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item value">
+                                <span class="badge">{{ number_format($bucket['top_reverse_nested']['doc_count']) }}</span>
+                                @if(in_array($key, $translateAggregations))
+                                    {{ trans('resource.' . $key . '.' . $bucket['key']) }}
+                                @else
+                                    {{ $bucket['key'] }}
+                                @endif
+                            </a>
+                        @else
+                            <a href="{{ route('search', Utils::addKeyValue($key, $bucket['key'])) }}" class="list-group-item value">
+                                <span class="badge">{{ number_format($bucket['doc_count']) }}</span>
+                                @if(in_array($key, $translateAggregations))
+                                    {{ trans('resource.' . $key . '.' . $bucket['key']) }}
+                                @else
+                                    {{ $bucket['key'] }}
+                                @endif
+                            </a>
+                        @endif
                     @endif
                 @endforeach
             </div>
