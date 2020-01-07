@@ -25,6 +25,7 @@ function Query(q, params) {
 }
 
 Query.fromUri = function(uri) {
+
 	var q = '*';
 	var params = {};
 	var re = /[\?&]([^&#]*)=([^&#]*)/g;
@@ -33,5 +34,6 @@ Query.fromUri = function(uri) {
 		if (result[1] == 'q') q = result[2];
 		else params[result[1]] = result[2];
 	}
-	return new Query(q, params);
+  return new Query(q, params);
+  
 };

@@ -12,7 +12,7 @@ function GridMap(container, queryUri, fullscreen) {
 
 	this.drawHeatmap = function(grid) {
 
-		var max = grid[0]['doc_count'];
+    var max = grid[0]['doc_count'];
 		var heatPoints = [];
 
 		grid.forEach(function(bucket) {
@@ -106,18 +106,19 @@ function GridMap(container, queryUri, fullscreen) {
 	};
 
 	function performQuery(uri, callback) {
+    
 		requestInProgress = uri;
 		self.showLoading();
 		$.getJSON(uri, function(data) {
 			if(requestInProgress === uri) { // only display last request sent
 				self.resetLayers();
 				self.updateResourceCount(data.total);
-				points = [];
-                                if(map.getZoom() === 18 || data.total < 100){
-                                    self.drawMarkers(data.data);
-                                }
-				else {
-                                    self.drawHeatmap(data.aggregations.geogrid.buckets);
+        points = [];
+        
+        if(map.getZoom() === 18 || data.total < 100){
+            self.drawMarkers(data.data);
+        } else {
+          self.drawHeatmap(data.aggregations.geogrid.buckets);
 				} 
 				self.hideLoading();				
 				if (callback) callback();
@@ -164,8 +165,8 @@ function GridMap(container, queryUri, fullscreen) {
 	});
 	map.addControl( L.control.zoom({position: 'bottomright'}) );
 
-	var query = Query.fromUri(queryUri);
-	var bounds = null;
+  var query = Query.fromUri(queryUri);
+  var bounds = null;
 	if (query.params['bbox']) {
 		bounds = decodeURIComponent(query.params.bbox).split(",");		
 		map.fitBounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]]);
@@ -186,7 +187,7 @@ function GridMap(container, queryUri, fullscreen) {
 	}).addTo(map);
 	L.Icon.Default.imagePath = '/img/leaflet/default';
 
-	query.params['ghp'] = getGhprecFromZoom(map.getZoom());
+  query.params['ghp'] = getGhprecFromZoom(map.getZoom());
 	performQuery(query.toUri(), function() {
 		map.fitBounds(L.latLngBounds(points));
 		// needed to prevent triggering refreshMap after fitBounds

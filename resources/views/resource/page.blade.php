@@ -743,7 +743,8 @@
                 </a>
             @endif
 
-            @if (isset($resource['_source']['isPartOf']))
+            {{-- @if (isset($resource['_source']['isPartOf'])) --}}
+            @if (count($partOf)))
                 <h4>{{ trans('resource.part_of') }}</h4>
                 @foreach($partOf as $isPartOf)
                     <a href="{{ route('resource.page', $isPartOf->id  ) }}" target="_blank">
@@ -752,11 +753,12 @@
                 @endforeach
             @endif
 
-            @if (isset($parts_count) && $parts_count != 0)
+            @if (isset($parts_count) && $parts_count['value'] != 0)
                 <h4>{{ trans('resource.has_parts') }}</h4>
                 <p>
                     <a href="{{ route('search', [ 'q' => 'isPartOf:' . $resource['_id'] ]) }}">
                         {{ trans('resource.children') .' (' . $parts_count . ')' }}
+                        {{-- print_r($parts_count, true) --}}
                     </a>
                 </p>
             @endif
@@ -785,7 +787,7 @@
 
                 </script>
             @endif
-
+                    
             @if (sizeof($similar_resources) > 0)
                 <h4 title="{{ trans('resource.theme_similar_explanation') }}" data-tooltip="true" data-placement="left">{{ trans('resource.theme_similar') }} <span class="glyphicon glyphicon-info-sign"></span></h4>
                 <ul class="list-unstyled list-similar">

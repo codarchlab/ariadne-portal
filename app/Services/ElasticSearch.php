@@ -7,6 +7,9 @@ use Request;
 use Illuminate\Pagination\Paginator;
 use App\Pagination\ElasticSearchPaginator;
 use App\Exceptions\ElasticSearchQueryException;
+use Illuminate\Support\Facades\Input;
+
+use Elasticsearch\ClientBuilder;
 
 class ElasticSearch {
 
@@ -18,13 +21,19 @@ class ElasticSearch {
    * @return Object Elastic Search client
    */
   public static function getClient() {
-    if (is_null(self::$client)) {
-      $params = array();
-      $params['hosts'] = array(Config::get('app.elastic_search_host'));
 
-      self::$client = new \Elasticsearch\Client($params);
+    if (is_null(self::$client)) {
+      
+      $hosts = [ Config::get('app.elastic_search_host') ];
+      
+      $params['host'] = array(Config::get('app.elastic_search_host'));
+      self::$client = ClientBuilder::create() // Instantiate a new ClientBuilder
+                      ->setHosts($hosts)      // Set the hosts
+                      ->build();              // Build the client object
     }
+
     return self::$client;
+
   }
 
   /**
@@ -37,21 +46,23 @@ class ElasticSearch {
    * @throws Exception if document is not found
    */
   public static function get($id, $index, $type) {
-    $getParams = array(
+    $getParams = [
       'id' => $id,
-      'index' => $index,
-      'type' => $type
-    );
+      'index' => $index
+      //'type' => $type
+    ];
+  
+    //$getParams['type'] = '_doc';
 
     $client = self::getClient();
-
     $result = $client->get($getParams);
-
+    //dd( $result['_source'] );
     if ($result['found']) {
       return $result;
     } else {
       throw new Exception('No document found by id: ' . $id);
     }
+
   }
 
   /**
@@ -63,25 +74,27 @@ class ElasticSearch {
    * @return LengthAwarePaginator paginated result of the search
    */
   public static function search($query, $index = null, $type = null) {
-    
+
     if ($index) {
       $searchParams['index'] = $index;
     }
 
-    if ($type) {
+    if (!$type) {
       $searchParams['type'] = $type;
     }
 
-    $client = self::getClient();
 
-    if(Request::has('noPagination')){
+    $client = self::getClient();
+    
+    if(Request::has('noPagination')) {
+
       $searchParams['body'] = $query;
       $searchParams['size'] = Request::input('size', 10);
 
-      
       return $client->search($searchParams);
       
-    }else{      
+    } else {  
+
       $perPage = Request::input('perPage', 10);
       $from = $perPage * (Request::input('page', 1) - 1);
 
@@ -98,6 +111,15 @@ class ElasticSearch {
         $aggregations = $queryResponse['aggregations'];
       }
 
+      //dd( $queryResponse );
+      /*
+      dd( $queryResponse );
+      dd( $queryResponse['hits']['hits'] );
+      dd( $queryResponse['hits']['total'] );
+      dd( $perPage );
+      dd( $aggregations );
+      */
+
       $paginator = new ElasticSearchPaginator(
         $queryResponse['hits']['hits'], 
         $queryResponse['hits']['total'], 
@@ -106,7 +128,7 @@ class ElasticSearch {
         Paginator::resolveCurrentPage(), 
         ['path' => Paginator::resolveCurrentPath()]
       );
-
+      
       return $paginator;      
       
     }

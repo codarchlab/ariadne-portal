@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use App\Services\Provider;
 use Illuminate\Support\Facades\Input;
@@ -85,7 +86,8 @@ class Utils {
     $query = ['query' =>
       ['match' => ['_id' => $resourceId]]
     ];
-    $provider = ElasticSearch::allHits($query, 'catalog', 'resource');
+    $provider = ElasticSearch::allHits($query, Config::get('app.elastic_search_catalog_index'), 'resource');
+    //$provider = ElasticSearch::allHits($query, Config::get('app.elastic_search_catalog_index'));
     if (count($provider) > 0) {
       return $provider[0]['_source']['title'];
     } else {

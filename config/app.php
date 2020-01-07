@@ -197,10 +197,12 @@ return [
 	| will not be safe. Please do this before deploying an application!
 	|
 	*/
+  
+  //'key' => env('FUPLHxyTjM8lruacFwSFvSWBApTxwg05'),
+  'key' => env('APP_KEY', 'PEwiWvytWAQPJY8ygKbz1EifS5Uv1lOl'),
 
-	'key' => env('APP_KEY', 'SomeRandomString'),
-
-	'cipher' => MCRYPT_RIJNDAEL_128,
+  //'cipher' => MCRYPT_RIJNDAEL_128,
+  'cipher' => 'AES-256-CBC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -271,8 +273,8 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
-	],
-
+  ],
+  
 	/*
 	|--------------------------------------------------------------------------
 	| Class Aliases
@@ -283,7 +285,6 @@ return [
 	| the aliases are "lazy" loaded so they don't hinder performance.
 	|
 	*/
-
 	'aliases' => [
                 
 		'App'       => 'Illuminate\Support\Facades\App',
@@ -322,6 +323,6 @@ return [
 		'Debugbar'  => 'Barryvdh\Debugbar\Facade',
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
-	],
+  ],
 
 ];

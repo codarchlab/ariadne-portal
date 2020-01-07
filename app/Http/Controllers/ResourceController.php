@@ -24,6 +24,7 @@ class ResourceController extends Controller {
      *   a location property.
      */
     private function getValidGeoItems($resource) {
+
         $spatialItems = array();
 
         if (!array_key_exists('spatial',$resource['_source']))
@@ -41,16 +42,12 @@ class ResourceController extends Controller {
     private function getNearbySpatialItems($spatialItem) {
 
         $nearbySpatialItems = array();
-
-        foreach (Resource::geoDistanceQuery($spatialItem['location'])
-                 as $nearbyResource) {
-
+        foreach (Resource::geoDistanceQuery($spatialItem['location']) as $nearbyResource) {
             foreach ($this->getValidGeoItems($nearbyResource)
                      as $validNearbySpatialItem) {
                 array_push($nearbySpatialItems,$validNearbySpatialItem);
             }
         }
-
         return $nearbySpatialItems;
     }
 
@@ -61,7 +58,6 @@ class ResourceController extends Controller {
 
         if (array_key_exists('originalId', $resource['_source'])) {
             $originalId = $resource['_source']['originalId'];
-
             foreach ($identifiers as $identifier) {
                 if (substr($originalId, 0, strlen($identifier)) === $identifier)
                     return $originalId;
@@ -83,9 +79,7 @@ class ResourceController extends Controller {
      * @return View
      */
     public function page($id) {
-   
       $resource = Resource::get($id);
-
       $spatial_items = $this->getValidGeoItems($resource);
       $nearby_spatial_items = null;
       if (!empty($spatial_items)) {
@@ -108,7 +102,9 @@ class ResourceController extends Controller {
           $newThing = new stdClass;
           $newThing->id = end($isPartOfParts);
           $newThing->name = Utils::getResourceTitle(end($isPartOfParts));
-          $partOf[] = $newThing;
+          if($newThing->name !== '') {
+            $partOf[] = $newThing;
+          }
         }
       }
       
@@ -198,8 +194,6 @@ class ResourceController extends Controller {
         Utils::redirectIfEmptySearch();
         
         $query = Resource::getCurrentQuery();
-//print json_encode($query['query']);
-//exit(0);
         $hits = Resource::search($query, 'resource');
 
         if (Request::wantsJson()) {

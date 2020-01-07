@@ -111,7 +111,7 @@
         <div class="col-md-8" id="search_results_box">            
             <div class="row">
                 <div class="col-md-3 total">
-                    <strong>{{ trans('search.total') }}:</strong> <span class="badge">{{ number_format($hits->total()) }}</span>
+                    <strong>{{ trans('search.total') }}:</strong> <span class="badge">{{ number_format($hits->total()['value']) }}</span>
                 </div>
                 <div class="col-md-6 text-center">
                     @include('resource.search_pagination', ['paginator' => $hits->appends(Input::all())])
@@ -121,9 +121,9 @@
                         <label for="sort">Order By</label>
                         <select id="sort-action" class="form-control input-sm">
                             <option value="">Score</option>
-                            @foreach(Config::get('app.elastic_search_sort') as $sort)
+                            {{-- @foreach(Config::get('app.elastic_search_sort') as $sort)
                             <option value="{{ $sort }}" @if(Request::input('sort') == $sort) selected @endif>{{ ucfirst($sort) }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
 
                         @if(Request::has('order') == false || Request::input('order') == 'asc')

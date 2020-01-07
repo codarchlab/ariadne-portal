@@ -25,8 +25,9 @@ class Resource
      * @return Array all the values in _source from Elastic Search
      * @throws Exception if document is not found
      */
-    public static function get($id){
-        return ElasticSearch::get($id, Config::get('app.elastic_search_catalog_index'), self::RESOURCE_TYPE);
+    public static function get($id) {
+        $r = ElasticSearch::get($id, Config::get('app.elastic_search_catalog_index'), self::RESOURCE_TYPE);
+        return $r;
     }
 
     /**
@@ -94,10 +95,18 @@ class Resource
                     }
                 }
             } else {
-                $innerQuery = ['query_string' => ['query' => Utils::escapeLuceneValue(Request::get('q'))]];
+
+                if(Request::get('q') == '*') {
+                  $innerQuery = array('match_all'=> (object) array());
+                } else {
+                  $innerQuery =  ['multi_match' => ['query' => Utils::escapeLuceneValue(Request::get('q')) ]];
+                }
+                
             }
         } else {
-            $innerQuery = ['match_all' => []];
+            //$innerQuery = ['match_all' => []];
+            $innerQuery = array('match_all'=> (object) array());
+
         }
 
         $filters = [];
@@ -169,11 +178,11 @@ class Resource
             ];
         }
 
-        $query['query'] = ['filtered' => ['filter' => ['bool' => ['must' => []]]]];
         foreach ($filters as $filter) {
-            $query['query']['filtered']['filter']['bool']['must'][] = $filter;
+          $query['query']['bool']['filter'][] = $filter;
         }
-        $query['query']['filtered']['query'] = $innerQuery;
+
+        $query['query']['bool']['must'] = $innerQuery;
 
         return $query;
     }
@@ -185,54 +194,54 @@ class Resource
      * @return resources within a range of x km of $location.
      */
     public static function geoDistanceQuery($location) {
+        //dd($location);
 
-        $json = '{
-            "query" : {
-
-                "filtered" : {
-                    "query" : {
-                        "bool" : {
-                            "must_not": {
-                                "match": {
-                                    "spatial.location.lat" : '.$location['lat'].'
-                                }
-                            },
-                            "must_not": {
-                                "match": {
-                                    "spatial.location.lon" : '.$location['lon'].'
-                                }
-                            }
-                        }
-                    },
-                    "filter" : {
-                      "geo_distance" : {
-                          "distance" : "50km",
-                          "spatial.location" : {
-                              "lat" : '.$location['lat'].',
-                              "lon" : '.$location['lon'].'
-                          }
-                      }
-                    }
-              }
-            },
-            "sort": [
+        $json ='
+        {
+          "query": {
+            "bool": {
+              "must_not": [
                 {
-                    "_geo_distance": {
-                    "location": { 
-                        "lat" : '.$location['lat'].',
-                        "lon" : '.$location['lon'].'
-                    },
-                    "order":         "asc",
-                    "unit":          "km", 
-                    "distance_type": "plane" 
-                    }
+                  "match": {
+                    "spatial.location.lon": '.$location['lon'].'
+                  }
+                },
+                {
+                  "match": {
+                    "spatial.location.lat": '.$location['lat'].'
+                  }
                 }
-            ]
+              ],
+              "filter": {
+                "geo_distance": {
+                  "distance": "50km",
+                  "spatial.location": {
+                    "lat": '.$location['lat'].',
+                    "lon": '.$location['lon'].'
+                  }
+                }
+              }
+            }
+          },
+          "sort": [
+            {
+              "_geo_distance": {
+                "spatial.location": {
+                  "lat": '.$location['lat'].',
+                  "lon": '.$location['lon'].'
+                },
+                "order": "asc",
+                "unit": "km",
+                "distance_type": "plane"
+              }
+            }
+          ]
         }';
+
 
         $params = [
             'index' => Config::get('app.elastic_search_catalog_index'),
-            'type' => self::RESOURCE_TYPE,
+            //'type' => self::RESOURCE_TYPE,
             'body' => $json
         ];
 
