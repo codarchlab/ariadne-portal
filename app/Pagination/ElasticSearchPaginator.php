@@ -26,7 +26,7 @@ class ElasticSearchPaginator extends LengthAwarePaginator {
    */
   public function __construct($items, $total, $perPage, $aggregations, $currentPage = null, array $options = []) {
     $this->aggregations = $aggregations;
-    parent::__construct($items, $total, $perPage, $currentPage, $options);
+    parent::__construct($items, $total['value'], $perPage, $currentPage, $options);
   }
 
   /**

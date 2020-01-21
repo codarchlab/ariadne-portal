@@ -111,7 +111,7 @@
         <div class="col-md-8" id="search_results_box">            
             <div class="row">
                 <div class="col-md-3 total">
-                    <strong>{{ trans('search.total') }}:</strong> <span class="badge">{{ number_format($hits->total()['value']) }}</span>
+                    <strong>{{ trans('search.total') }}:</strong> <span class="badge">{{ number_format($hits->total()) }}</span>
                 </div>
                 <div class="col-md-6 text-center">
                     @include('resource.search_pagination', ['paginator' => $hits->appends(Input::all())])

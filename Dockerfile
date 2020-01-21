@@ -38,9 +38,15 @@ RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 # Add xdebug configuration.
-COPY docker/xdebug/xdebug.ini /usr/local/etc/php/conf.d/
+# COPY docker/xdebug/xdebug.ini /usr/local/etc/php/conf.d/
+
+# Doesn't float!  :-(
+#WORKDIR /var/www/html
+#COPY composer.json composer.lock ./
+#RUN composer install --no-scripts --no-autoloader
 
 EXPOSE 80
+
 
 # Attach shell:
 # docker exec -it ariadne-portal_www_1 bash
