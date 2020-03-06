@@ -5,6 +5,9 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+COPY . /var/www/html
+RUN rm -rf vendor
+
 # Enable Apache SSL module
 RUN a2enmod rewrite
 RUN a2enmod ssl
@@ -30,7 +33,6 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 #RUN npm install -g gulp
 
 # Additional 'nice to have'
-#RUN echo 'alias ll="ls -la"' >> ~/.bashrc
 RUN apt-get install -y vim
 
 # Install xdebug.
@@ -40,13 +42,12 @@ RUN pecl install xdebug \
 # Add xdebug configuration.
 # COPY docker/xdebug/xdebug.ini /usr/local/etc/php/conf.d/
 
-# Doesn't float!  :-(
-#WORKDIR /var/www/html
-#COPY composer.json composer.lock ./
-#RUN composer install --no-scripts --no-autoloader
+COPY composer.json /var/www/html/
+RUN composer install --no-scripts;
+
+RUN php artisan config:clear 
+RUN php artisan cache:clear
+
+RUN echo 'alias ll="ls -la"' >> ~/.bashrc
 
 EXPOSE 80
-
-
-# Attach shell:
-# docker exec -it ariadne-portal_www_1 bash
