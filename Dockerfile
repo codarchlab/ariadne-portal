@@ -2,6 +2,10 @@ FROM php:7.1-apache
 
 # Setup Apache and point to Ariadne docroot
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+
+# Setup log directory
+ENV APACHE_LOG_DIR /var/www/html/storage/logs
+
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
@@ -40,13 +44,21 @@ RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 # Add xdebug configuration.
-# COPY docker/xdebug/xdebug.ini /usr/local/etc/php/conf.d/
+COPY docker/xdebug/xdebug.ini /usr/local/etc/php/conf.d/
 
 COPY composer.json /var/www/html/
 RUN composer install --no-scripts;
 
+# Clear cache
 RUN php artisan config:clear 
 RUN php artisan cache:clear
+RUN php artisan route:clear
+RUN php artisan view:clear 
+
+# Set www-data to folders
+RUN chown -R www-data:www-data /var/www/html/storage/framework/views
+RUN chown -R www-data:www-data /var/www/html/storage/framework/sessions
+RUN chown -R www-data:www-data /var/www/html/storage/logs
 
 RUN echo 'alias ll="ls -la"' >> ~/.bashrc
 

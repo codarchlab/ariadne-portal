@@ -11,7 +11,6 @@ function Suggest(inputPath) {
 			}
 		}
 	});
-
 	var templates = {
 		'suggestion': function(subject) {
 			var template = "";

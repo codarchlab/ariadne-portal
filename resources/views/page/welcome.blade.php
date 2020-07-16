@@ -131,7 +131,7 @@ component of the archaeological research methodology.')
                                 </div>
                             </div>
                             <div class="col-md-4">
-                              <div id="wordCloud" class="wordCloudContainerWelcome">@include('shared._word_cloud')</div>
+                              <div id="wordCloud" class="wordCloudContainerWelcome">"@include('shared._word_cloud')"</div>
                               <a href="{{ action('BrowseController@what') }}" class="btn btn-primary white-btn-primary"><span class="glyphicon glyphicon-list"></span> What</a>
                             </div>
                         </div>
@@ -145,7 +145,6 @@ component of the archaeological research methodology.')
     </div>
 
 </div>
-
 <script>
 
     var suggest = new Suggest('#catalogSearch .typeahead').create();

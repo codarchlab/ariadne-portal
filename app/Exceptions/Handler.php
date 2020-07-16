@@ -9,6 +9,8 @@ use Elasticsearch\Common\Exceptions\BadRequest400Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Mail;
 
+use Log;
+
 class Handler extends ExceptionHandler {
 
   /**
@@ -29,15 +31,21 @@ class Handler extends ExceptionHandler {
      * @return void
      */
     public function report(Exception $e) {
-        if (env('APP_ENV') != 'local') {
-            if ($e instanceof Exception) {
-                // page.email is the template of your email
-                // it will have access to the $error that we are passing below
-                Mail::send('page.email', ['error' => $e], function ($m) use ($e) {
-                    $m->to('ariadne.project.eu@gmail.com', 'Ariadne Project')->subject('Error reporting');
-                });
+        
+        Log::error($e);
+
+        //if (env('APP_ENV') != 'local') {
+        if(false) {
+          if ($e instanceof Exception) {
+              // page.email is the template of your email
+              // it will have access to the $error that we are passing below
+              Mail::send('page.email', ['error' => $e], function ($m) use ($e) {
+                  $m->to('ariadne.project.eu@gmail.com', 'Ariadne Project')->subject('Error reporting');
+              });
             }
         }
+        
+
     }
 
     /**

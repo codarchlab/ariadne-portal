@@ -743,22 +743,23 @@
                 </a>
             @endif
 
-            {{-- @if (isset($resource['_source']['isPartOf'])) --}}
-            @if (count($partOf)))
-                <h4>{{ trans('resource.part_of') }}</h4>
-                @foreach($partOf as $isPartOf)
-                    <a href="{{ route('resource.page', $isPartOf->id  ) }}" target="_blank">
-                        <p>{{ $isPartOf->name }}</p>
-                    </a>
-                @endforeach
-            @endif
+            @if ( !empty($partOf) )
+              <h4>{{ trans('resource.part_of') }}</h4>
+              @foreach($partOf as $isPartOf)
+                <a href="{{ route('resource.page', $isPartOf->id  ) }}" target="_blank">
+                  <p>{{ $isPartOf->name }}</p>
+                </a>
+              @endforeach
+            @elseif(isset($resource['_source']['isPartOf']))
+              <h4>{{ trans('resource.part_of') }}</h4>
+              <p>{{ $resource['_source']['isPartOf'][0] }}</p>
+            @endif          
 
             @if (isset($parts_count) && $parts_count['value'] != 0)
-                <h4>{{ trans('resource.has_parts') }}</h4>
+                <h4>{{trans('resource.has_parts')}}</h4>
                 <p>
                     <a href="{{ route('search', [ 'q' => 'isPartOf:' . $resource['_id'] ]) }}">
-                        {{ trans('resource.children') .' (' . $parts_count . ')' }}
-                        {{-- print_r($parts_count, true) --}}
+                        {{ trans('resource.children') .' (' . $parts_count['value'] . ')' }}
                     </a>
                 </p>
             @endif
@@ -787,13 +788,14 @@
 
                 </script>
             @endif
-                    
+
             @if (sizeof($similar_resources) > 0)
                 <h4 title="{{ trans('resource.theme_similar_explanation') }}" data-tooltip="true" data-placement="left">{{ trans('resource.theme_similar') }} <span class="glyphicon glyphicon-info-sign"></span></h4>
                 <ul class="list-unstyled list-similar">
                 @foreach($similar_resources as $similar_resource)
-                    <li>
-                        <img src="{{ asset("img/icons/")."/icon_".$similar_resource['_source']['archaeologicalResourceType']['id'].".png" }}" data-toggle="tooltip" title="{{ $similar_resource['_source']['archaeologicalResourceType']['name'] }}" height="20" border="0">
+                
+                    <li>         
+                        <img src="{{ "/img/icons/icon_".$similar_resource['_source']['archaeologicalResourceType']['id'].".png" }}" data-toggle="tooltip" title="{{ $similar_resource['_source']['archaeologicalResourceType']['name'] }}" height="20" border="0">
                         <a href="{{ route('resource.page', [ $similar_resource['_id'] ]  ) }}">
                             {{ $similar_resource['_source']['title'] }}
                         </a>

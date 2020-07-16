@@ -12,6 +12,7 @@ use App\Services\Utils;
 use App\Services\Timeline;
 use Config;
 use Request;
+use Log;
 
 class Resource
 {
@@ -42,7 +43,6 @@ class Resource
     
     public static function getCurrentQuery(){
         $query = ['aggregations' => Config::get('app.elastic_search_aggregations')];
-        
         // add geogrid aggregation
         $ghp = Request::has('ghp') ? Request::input('ghp') : 2;
         $query['aggregations']['geogrid'] = ['geohash_grid' => [
@@ -183,7 +183,6 @@ class Resource
         }
 
         $query['query']['bool']['must'] = $innerQuery;
-
         return $query;
     }
 
@@ -312,7 +311,7 @@ class Resource
 
         $params = [
             'index' => Config::get('app.elastic_search_catalog_index'),
-            'type' => self::RESOURCE_TYPE,
+            //'type' => self::RESOURCE_TYPE,
             'size' => 7,
             'body' => $json
         ];
@@ -327,11 +326,11 @@ class Resource
      */
     public static function getPartsCountQuery($resource) {
 
-        $json = '{ "query": { "match" : { "isPartOf": ' . $resource['_id'] . ' } } }';
+        $json = '{ "query": { "match" : { "isPartOf": "' . $resource['_id'] . '" } } }';
 
         $params = [
             'index' => Config::get('app.elastic_search_catalog_index'),
-            'type' => self::RESOURCE_TYPE,
+            //'type' => self::RESOURCE_TYPE,
             'body' => $json
         ];
 

@@ -10,8 +10,8 @@
                 <span class="icon-bar"></span>
             </button>
             @if( !Request::is('/') ) 
-            <a class="navbar-brand" href="http://www.ariadne-infrastructure.eu">
-              <img id="brand" src="{{ asset("img/logo-symbol.png") }}">
+            <a class="navbar-brand" href="https://www.ariadne-infrastructure.eu">
+              <img id="brand" src="/img/logo-symbol.png">
             </a>
             @endif
         </div>

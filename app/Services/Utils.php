@@ -87,7 +87,7 @@ class Utils {
       ['match' => ['_id' => $resourceId]]
     ];
     $provider = ElasticSearch::allHits($query, Config::get('app.elastic_search_catalog_index'), 'resource');
-    //$provider = ElasticSearch::allHits($query, Config::get('app.elastic_search_catalog_index'));
+    //$provider = ElasticSearch::get($resourceId, Config::get('app.elastic_search_catalog_index'),null);
     if (count($provider) > 0) {
       return $provider[0]['_source']['title'];
     } else {

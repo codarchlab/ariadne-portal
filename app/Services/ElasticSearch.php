@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Config;
 use Request;
+use Log;
 use Illuminate\Pagination\Paginator;
 use App\Pagination\ElasticSearchPaginator;
 use App\Exceptions\ElasticSearchQueryException;
@@ -30,6 +31,7 @@ class ElasticSearch {
       self::$client = ClientBuilder::create() // Instantiate a new ClientBuilder
                       ->setHosts($hosts)      // Set the hosts
                       ->build();              // Build the client object
+                    
     }
 
     return self::$client;
@@ -56,6 +58,9 @@ class ElasticSearch {
 
     $client = self::getClient();
     $result = $client->get($getParams);
+    $last = $client->transport->getLastConnection()->getLastRequestInfo();
+    $body = $last['request']['body'];
+
     //dd( $result['_source'] );
     if ($result['found']) {
       return $result;
@@ -75,6 +80,9 @@ class ElasticSearch {
    */
   public static function search($query, $index = null, $type = null) {
 
+    //Log::info('Searching index: ' . $index);
+    //Log::INFO( get_class());
+
     if ($index) {
       $searchParams['index'] = $index;
     }
@@ -83,17 +91,19 @@ class ElasticSearch {
       $searchParams['type'] = $type;
     }
 
-
     $client = self::getClient();
-    
+
     if(Request::has('noPagination')) {
+      Log::INFO( 'NO PAGINATION' );
 
       $searchParams['body'] = $query;
       $searchParams['size'] = Request::input('size', 10);
-
-      return $client->search($searchParams);
+      $resp = $client->search($searchParams); 
+      return $resp;
       
     } else {  
+
+      Log::INFO( 'HAS PAGINATION' );
 
       $perPage = Request::input('perPage', 10);
       $from = $perPage * (Request::input('page', 1) - 1);
@@ -103,6 +113,9 @@ class ElasticSearch {
       $searchParams['body'] = $query;
       $searchParams['size'] = $perPage;
       $searchParams['from'] = $from;
+      
+      //print( json_encode($searchParams) );
+      //exit;
 
       $queryResponse = $client->search($searchParams);
       
@@ -129,8 +142,14 @@ class ElasticSearch {
         ['path' => Paginator::resolveCurrentPath()]
       );
       
+      //$last = $client::connection('default')->transport->lastConnection->getLastRequestInfo();
+      $last = $client->transport->getLastConnection()->getLastRequestInfo();
+      $body = $last['request']['body'];
+      Log::INFO( $last );
+
       return $paginator;      
       
+
     }
   }
   
@@ -166,9 +185,9 @@ class ElasticSearch {
     );
 
     $searchParams['index'] = $index;
-    if ($type){
-      $searchParams['type'] = $type;
-    }
+    //if ($type){
+    //  $searchParams['type'] = $type;
+    //}
 
     $client = self::getClient();
     

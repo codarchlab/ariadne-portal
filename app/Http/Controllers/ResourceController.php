@@ -79,6 +79,7 @@ class ResourceController extends Controller {
      * @return View
      */
     public function page($id) {
+
       $resource = Resource::get($id);
       $spatial_items = $this->getValidGeoItems($resource);
       $nearby_spatial_items = null;
@@ -191,21 +192,23 @@ class ResourceController extends Controller {
      */
     public function search() {
 
-        Utils::redirectIfEmptySearch();
-        
-        $query = Resource::getCurrentQuery();
-        $hits = Resource::search($query, 'resource');
+      //Log::INFO( 'SEARCH' );
+      Utils::redirectIfEmptySearch();
+      
+      $query = Resource::getCurrentQuery();
+      $hits = Resource::search($query, 'resource');
 
-        if (Request::wantsJson()) {
-            return response()
-                    ->json($hits)
-                    ->header("Vary", "Accept");
-        } else {
-            return view('resource.search')
-                ->with('type', null)
-                ->with('aggregations', $query['aggregations'])
-                ->with('translateAggregations', Config::get('app.translate_aggregations'))
-                ->with('hits', $hits);
-        }
+      if (Request::wantsJson()) {
+          return response()
+                  ->json($hits)
+                  ->header("Vary", "Accept");
+      } else {
+          return view('resource.search')
+              ->with('type', null)
+              ->with('aggregations', $query['aggregations'])
+              ->with('translateAggregations', Config::get('app.translate_aggregations'))
+              ->with('hits', $hits);
+      }
     }
+
 }

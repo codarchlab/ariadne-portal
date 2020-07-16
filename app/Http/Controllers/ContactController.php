@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactFormRequest;
 use Config;
 use Mail;
+use Log;
 
 class ContactController extends Controller
 {
@@ -18,7 +19,7 @@ class ContactController extends Controller
     }
 
     public function store(ContactFormRequest $request) {
-
+      Log::info( 'Contact email: ' . Config::get('app.contact_email') );
     	\Mail::send('contact.email',
 	        array(
 	            'name' => $request->get('name'),
@@ -30,9 +31,10 @@ class ContactController extends Controller
 	        $message->to(Config::get('app.contact_email'), 'Admin')
 	        	->subject('ARIADNE Portal Contact Form - ' . $request->get('subject'));
 	    });
+      
 
-    	return \Redirect::route('contact.form')
-    		->with('message', 'Thanks for your feedback!');
+    	return \Redirect::route('contact.form') -> with('message', 'Thanks for your feedback!');
+
 	}
 
 }

@@ -31,7 +31,9 @@ class Subject {
    * @return LengthAwarePaginator paginated result of the search
    */
   public static function search($query) {
-    return ElasticSearch::search($query, Config::get('app.elastic_search_subject_index'), 'terms');
+    $index = Config::get('app.elastic_search_subject_index');
+    $type = 'terms';
+    return ElasticSearch::search($query, $index, $type); 
   }
 
   /**
@@ -41,7 +43,9 @@ class Subject {
    * @return LengthAwarePaginator paginated result of the search
    */
   public static function suggest($query) {
-    return ElasticSearch::search($query, Config::get('app.elastic_search_subject_suggest_index'), 'terms');
+    $index = Config::get('app.elastic_search_subject_index');
+    $type = 'terms';
+    return ElasticSearch::search($query, $index, $type); 
   }
 
   /**

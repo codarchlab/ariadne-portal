@@ -1,4 +1,4 @@
-function AreaTimeline(containerPath, queryUri, fullscreen, buckets) {
+function AreaTimeline(containerPath, queryUri, fullscreen, buckets) {  
 
     var INITIAL_TICKS = [-1000000,-100000,-10000,-1000,0,1000,1250,1500,1750,new Date().getFullYear()];
 
@@ -190,7 +190,9 @@ function AreaTimeline(containerPath, queryUri, fullscreen, buckets) {
             y0: 0,
             start: end,
             end: end
-        });  
+        });
+        
+        data.sort((a, b) => (a.start > b.start) ? 1 : -1);
         return data;
     };
 

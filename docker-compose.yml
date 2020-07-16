@@ -8,9 +8,9 @@ services:
         - .:/var/www/html/
       networks:
         - default
-#      environment:
+      environment:
         #XDEBUG_CONFIG: remote_host=docker.for.win.localhost #for windows
-#        XDEBUG_CONFIG: remote_host=docker.for.mac.localhost #for mac
+        XDEBUG_CONFIG: remote_host=docker.for.mac.localhost #for mac
         #XDEBUG_CONFIG: remote_connect_back=1 #for linux
 #        ENV_IS_LOCAL: 1        
 #  elasticsearch:

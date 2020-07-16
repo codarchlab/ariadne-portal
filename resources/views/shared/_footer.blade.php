@@ -3,16 +3,16 @@
 	    <div class="container-fluid">
 	    	<div class="row">
 		        <div class="col-md-12">
-		            <img src="{{ asset("img/euflag_footer.jpg") }}" alt="European Commission" id="eulogo">
+		            <img src="img/euflag_footer.jpg" alt="European Commission" id="eulogo">
 		            @if(Config::get("app.version") != '')
 						v{{Config::get("app.version")}} -
 					@endif
 					Copyright &copy; {{date('Y')}} Ariadne. All rights reserved. 
-					<a href="{{ route('contact.form') }}">
+					<a href="mailto:webmaster@snd.gu.se?subject=Ariadne-Portal">
 		        		<span class="glyphicon glyphicon-envelope"></span> Contact
 		        	</a>
 		        	<br>
-		            Ariadne is funded by the <a href="http://ec.europa.eu/research/fp7/index_en.cfm">European Commission's 7th Framework Programme</a>.
+		            Ariadne is funded by the <a href="https://ec.europa.eu/research/fp7/index_en.cfm">European Commission's 7th Framework Programme</a>.
 		        </div>
 		    </div>
 	    </div>

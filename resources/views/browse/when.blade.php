@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="container-fluid content">
-
 	<div class="browse-container timeline">
 
 		<div class="zoom-controls btn-toolbar controls">

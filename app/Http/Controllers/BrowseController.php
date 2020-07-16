@@ -28,6 +28,7 @@ class BrowseController extends Controller {
     
     public function what() {
       $cloudData = Utils::getWordCloudData();
+      //dd( $cloudData );
       return view('browse.what') 
           ->with('cloud_data', $cloudData);
     }

@@ -2,10 +2,10 @@
   "name": "ariadne-portal",
   "version": "1.2.0",
   "devDependencies": {
-    "gulp": "^3.8.8",
+    "gulp": "^3.9.1",
     "gulp-gzip": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-tar": "^1.7.0",
-    "laravel-elixir": "*"
+    "laravel-elixir": "^5.0.0"
   }
 }

@@ -4,7 +4,7 @@
             <div class="row">
                 
                 <div class="col-md-1 col-sm-1 col-xs-2">
-                    <img src="{{ asset("img/icons/")."/icon_".$hit['_source']['archaeologicalResourceType']['id'].".png" }}" data-toggle="tooltip" title="{{ $hit['_source']['archaeologicalResourceType']['name'] }}" height="50" border="0">
+                    <img src="{{ "/img/icons/icon_".$hit['_source']['archaeologicalResourceType']['id'].".png" }}" data-toggle="tooltip" title="{{ $hit['_source']['archaeologicalResourceType']['name'] }}" height="50" border="0">
                 </div>
                 <div class="col-md-11 col-sm-11 col-xs-10">
 

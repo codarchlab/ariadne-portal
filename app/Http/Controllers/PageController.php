@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Services\Utils;
 use App\Services\Service;
+use Log;
 
 class PageController extends Controller {
     /*

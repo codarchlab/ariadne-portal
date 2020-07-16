@@ -1,6 +1,5 @@
 <?php
  //phpinfo();
- //exit;
 
 /**
  * Laravel - A PHP Framework For Web Artisans
@@ -34,7 +33,9 @@ require __DIR__.'/../bootstrap/autoload.php';
 | the responses back to the browser and delight our users.
 |
 */
-
+ini_set('log_errors', 1);
+ini_set('display_errors', 1);
+ini_set('error_log', '/var/www/html/storage/logs/php.log');
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 /*

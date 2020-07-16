@@ -1,7 +1,7 @@
 <div class="row service {{ $type }}" itemscope="" itemtype="https://schema.org/SoftwareApplication">
     <div class="col-md-4">
         <a href="{{ $service['url'] }}">
-            <img class="img-thumbnail" src="{{ asset("img/services/" . $service['image']) }}" alt="{{ $service['title'] }}" itemprop="image" />
+            <img class="img-thumbnail" src="/img/services/{{$service['image']}}" alt="{{ $service['title'] }}" itemprop="image" />
         </a>                      
     </div>
 
